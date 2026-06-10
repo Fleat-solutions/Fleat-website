@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /
+
+# FLEAT — site vitrine
+# Décommenter la ligne ci-dessus et la ligne ci-dessous une fois le site en production
+
+# Allow: /
+# Sitemap: https://www.fleat.fr/sitemap.xml
