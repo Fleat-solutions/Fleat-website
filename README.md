@@ -5,6 +5,7 @@ Site vitrine pour **FLEAT**, une solution de supervision drone intégrée aux sy
 ## À propos
 
 FLEAT aide les entreprises à renforcer la surveillance de leurs sites grâce à :
+
 - **Levée de doute** rapide après alerte (< 60s)
 - **Rondes automatiques** sur des zones définies
 - **Supervision multi-sites** centralisée
@@ -13,6 +14,7 @@ FLEAT aide les entreprises à renforcer la surveillance de leurs sites grâce à
 ## Démarrage rapide
 
 ### Prérequis
+
 - Python 3.x (ou un autre serveur HTTP)
 - Un navigateur web moderne
 
@@ -21,23 +23,27 @@ FLEAT aide les entreprises à renforcer la surveillance de leurs sites grâce à
 1. **Clonez ou téléchargez** le projet
 2. **Naviguez** dans le répertoire :
    ```bash
-   cd C:\Users\romai\Desktop\Fleat-website
+   cd C:\..\Fleat-website
    ```
 
 ### Lancer le site
 
 #### Avec Python (recommandé)
+
 ```bash
 python -m http.server 8000
 ```
+
 Puis ouvrez : **http://localhost:8000**
 
 #### Avec Node.js
+
 ```bash
 npx http-server -p 8000
 ```
 
 #### Directement dans le navigateur
+
 Double-cliquez sur `index.html`
 
 ## Structure du projet
@@ -74,6 +80,7 @@ Fleat-website/
 ## Design System
 
 Le site utilise un système de design cohérent :
+
 - **Couleurs** : Bleu nuit (#0a1a3d) + Accent bleu (#2f62ea)
 - **Typographie** : Archivo (display) + Hanken Grotesk (texte)
 - **Espacements** : Système de variables CSS fluides
@@ -87,16 +94,16 @@ Le site utilise un système de design cohérent :
 
 ## Pages incluses
 
-| Page | Description |
-|------|-------------|
-| `index.html` | Accueil avec hero, bénéfices, cas d'usage |
-| `solution.html` | Détails techniques de la solution |
-| `cas-usage.html` | 6 scénarios concrets d'utilisation |
-| `secteurs.html` | Industries cibles + modales |
-| `integrations.html` | Partenaires et intégrations |
-| `faq.html` | Questions fréquentes avec accordéon |
-| `contact.html` | Formulaire de contact |
-| `rappel.html` | Demande de rappel téléphonique |
+| Page                  | Description                                 |
+| --------------------- | ------------------------------------------- |
+| `index.html`        | Accueil avec hero, bénéfices, cas d'usage |
+| `solution.html`     | Détails techniques de la solution          |
+| `cas-usage.html`    | 6 scénarios concrets d'utilisation         |
+| `secteurs.html`     | Industries cibles + modales                 |
+| `integrations.html` | Partenaires et intégrations                |
+| `faq.html`          | Questions fréquentes avec accordéon       |
+| `contact.html`      | Formulaire de contact                       |
+| `rappel.html`       | Demande de rappel téléphonique            |
 
 ## Responsive
 
@@ -117,4 +124,4 @@ Le site utilise un système de design cohérent :
 
 ---
 
-**Questions ?** Contactez-nous : contact@fleat.fr
+**Questions ?** Contactez-nous : contact@fleat-solutions.fr

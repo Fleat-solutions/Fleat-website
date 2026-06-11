@@ -94,7 +94,7 @@
       setTimeout(function () {
         form.style.display = 'none';
         var ok = form.parentElement.querySelector('[data-success]');
-        if (ok) { ok.classList.add('show'); ok.scrollTop = 0; }
+        if (ok) ok.classList.add('show');
       }, 700);
     });
   });
