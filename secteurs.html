@@ -3,271 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLEAT — Secteurs d'activité</title>
-<meta name="description" content="FLEAT s'adapte à vos enjeux sectoriels : santé, énergie, data centers, industrie, logistique, et plus. Supervision drone pensée pour chaque environnement professionnel.">
+<title>Secteurs — FLEAT · Supervision drone par secteur d'activité</title>
+<meta name="description" content="Santé, énergie, data centers, industrie, logistique, transports, parcs solaires, mines &amp; carrières : découvrez comment FLEAT répond aux enjeux de sûreté de votre secteur.">
+<link rel="canonical" href="https://www.fleat.fr/secteurs.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FLEAT">
+<meta property="og:title" content="Secteurs — FLEAT · Supervision drone par secteur d'activité">
+<meta property="og:description" content="Santé, énergie, data centers, industrie, logistique, transports, parcs solaires, mines &amp; carrières : FLEAT s'adapte aux contraintes de votre secteur.">
+<meta property="og:url" content="https://www.fleat.fr/secteurs.html">
+<meta property="og:locale" content="fr_FR">
+<meta name="robots" content="index, follow">
+<meta name="author" content="FLEAT">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/png" href="assets/fleat-mark.png">
 <link rel="stylesheet" href="styles.css">
 <style>
   /* ============================================================
-     PAGE SECTEURS — Design cartes + modale
+     PAGE SECTEURS — Hero tuiles + sections ancrées
      ============================================================ */
 
-  /* —— Grille —— */
-  .sectors-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(16px, 2vw, 22px);
-    margin-top: clamp(40px, 5vw, 56px);
-  }
-  @media (max-width: 980px) { .sectors-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .sectors-grid { grid-template-columns: 1fr; } }
+  /* —— Hero —— */
+  .sectors-hero { padding-top: clamp(56px, 7vw, 96px); padding-bottom: clamp(48px, 6vw, 80px); }
+  .sectors-hero h1 { margin-top: 18px; }
+  .sectors-hero .lead { margin-top: 20px; max-width: 58ch; }
 
-  /* —— Carte secteur (générée par site.js) —— */
-  .sector-card {
+  /* —— Tuiles secteurs dans le hero —— */
+  .hx-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: clamp(36px, 4.5vw, 52px);
+  }
+  .hx-tile {
+    position: relative;
     display: flex;
     flex-direction: column;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--r-lg);
-    overflow: hidden;
-    cursor: pointer;
-    text-align: left;
-    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    gap: 14px;
+    padding: 22px 22px 20px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--dark-line);
+    border-radius: var(--r);
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
   }
-  .sector-card:hover {
-    border-color: var(--line-2);
-    box-shadow: var(--sh);
+  .hx-tile:hover {
+    background: rgba(91,141,239,.10);
+    border-color: rgba(91,141,239,.45);
     transform: translateY(-3px);
   }
-  .sector-card:hover .sc-more { color: var(--accent-600); }
-  .sector-card:hover .sc-more svg { transform: translateX(3px); }
-  .sector-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-  /* En-tête teinté + icône */
-  .sc-head {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    padding: 20px 22px;
-    background: linear-gradient(180deg, var(--accent-soft), transparent);
-    border-bottom: 1px solid var(--line);
-  }
-  .sc-head .ico {
+  .hx-ico {
     width: 42px; height: 42px;
     border-radius: 10px;
-    background: var(--paper);
-    border: 1px solid #d3defb;
-    color: var(--accent-600);
     display: grid; place-items: center;
-    flex-shrink: 0;
+    background: rgba(91,141,239,.14);
+    border: 1px solid rgba(91,141,239,.28);
+    color: var(--accent-400);
   }
-  .sc-head .ico svg { width: 21px; height: 21px; }
-  .sc-head h3 {
-    font-size: 1.08rem;
+  .hx-ico svg { width: 21px; height: 21px; }
+  .hx-name {
+    font-family: var(--f-display);
     font-weight: 700;
-    color: var(--ink);
+    font-size: 1.04rem;
     letter-spacing: -0.015em;
-    line-height: 1.2;
+    color: var(--on-dark);
   }
-
-  /* Corps */
-  .sc-body {
-    padding: 20px 22px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    flex: 1;
-  }
-  .sc-problem {
-    font-size: 14.5px;
-    color: var(--ink-2);
-    line-height: 1.5;
-  }
-  .sc-benefits {
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
-  }
-  .sc-benefits li {
+  .hx-sub {
     font-size: 13.5px;
-    color: var(--ink-3);
-    display: flex;
-    align-items: flex-start;
-    gap: 9px;
     line-height: 1.45;
+    color: var(--on-dark-2);
   }
-  .sc-benefits li svg {
-    width: 15px; height: 15px;
-    color: var(--accent);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  /* Pied : stat + lien */
-  .sc-foot {
+  .hx-go {
     margin-top: auto;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .sc-stat {
-    font-family: var(--f-mono);
-    font-size: 11.5px;
-    line-height: 1.45;
-    color: var(--ink-3);
-    display: flex;
-    gap: 8px;
-  }
-  .sc-stat::before {
-    content: "";
-    width: 3px;
-    border-radius: 2px;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
-  .sc-more {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 600;
-    color: var(--accent);
-    transition: color .15s ease;
-  }
-  .sc-more svg { width: 15px; height: 15px; transition: transform .18s ease; }
-
-  /* ============================================================
-     Modale secteur
-     ============================================================ */
-  .sector-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 120;
-    display: grid;
-    place-items: center;
-    padding: clamp(16px, 4vw, 48px);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .24s ease, visibility .24s;
-  }
-  .sector-modal.open { opacity: 1; visibility: visible; }
-
-  .sector-modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(10, 26, 61, 0.55);
-    backdrop-filter: blur(4px);
-  }
-  .sector-modal-card {
-    position: relative;
-    z-index: 1;
-    width: min(560px, 100%);
-    max-height: calc(100vh - 64px);
-    overflow-y: auto;
-    background: var(--paper);
-    border-radius: var(--r-xl);
-    box-shadow: var(--sh-lg);
-    transform: translateY(16px) scale(.98);
-    transition: transform .26s cubic-bezier(.16,.84,.44,1);
-  }
-  .sector-modal.open .sector-modal-card { transform: none; }
-
-  .modal-hero {
-    padding: 30px 32px 24px;
-    background: var(--dark);
-    color: var(--on-dark);
-    position: relative;
-    overflow: hidden;
-  }
-  .modal-hero::before {
-    content: "";
-    position: absolute; inset: 0;
-    background: radial-gradient(120% 120% at 85% -10%, rgba(91,141,239,.30), transparent 58%);
-    pointer-events: none;
-  }
-  .modal-icon {
-    position: relative;
-    width: 52px; height: 52px;
-    border-radius: 12px;
-    background: rgba(91,141,239,.16);
-    border: 1px solid rgba(91,141,239,.32);
     color: var(--accent-400);
-    display: grid; place-items: center;
-    margin-bottom: 16px;
   }
-  .modal-icon svg { width: 26px; height: 26px; }
-  .modal-title {
-    position: relative;
-    font-family: var(--f-display);
-    font-weight: 700;
-    font-size: 1.5rem;
-    letter-spacing: -0.02em;
-    color: var(--on-dark);
-  }
+  .hx-go svg { width: 15px; height: 15px; transition: transform .18s ease; }
+  .hx-tile:hover .hx-go svg { transform: translateY(3px); }
 
-  .sector-modal-close {
-    position: absolute;
-    top: 18px; right: 18px;
-    z-index: 2;
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.1);
-    border: 1px solid rgba(255,255,255,.18);
-    color: var(--on-dark);
-    display: grid; place-items: center;
-    transition: background .15s ease;
-  }
-  .sector-modal-close:hover { background: rgba(255,255,255,.2); }
-  .sector-modal-close svg { width: 18px; height: 18px; }
+  @media (max-width: 1020px) { .hx-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px)  { .hx-grid { grid-template-columns: 1fr; } .hx-tile { flex-direction: row; align-items: center; gap: 16px; padding: 16px 18px; } .hx-tile .hx-sub, .hx-tile .hx-go { display: none; } .hx-ico { flex-shrink: 0; } }
 
-  .modal-content { padding: 28px 32px 32px; }
-  .modal-description {
-    font-size: 16px;
-    color: var(--ink-2);
-    line-height: 1.6;
+  /* —— Sous-navigation collante —— */
+  .sector-subnav {
+    position: sticky;
+    top: 72px;
+    z-index: 50;
+    background: rgba(255,255,255,.88);
+    backdrop-filter: saturate(150%) blur(12px);
+    border-bottom: 1px solid var(--line);
   }
-  .modal-section-label {
-    font-family: var(--f-mono);
-    font-size: 11.5px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent-600);
-    margin: 26px 0 14px;
-  }
-  .modal-benefits { display: grid; gap: 11px; }
-  .modal-benefits li {
+  .sector-subnav-inner {
     display: flex;
-    align-items: flex-start;
-    gap: 11px;
-    font-size: 15px;
-    color: var(--ink-2);
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    height: 54px;
   }
-  .modal-benefits li svg {
-    width: 19px; height: 19px;
-    color: var(--accent);
-    flex-shrink: 0;
-    margin-top: 2px;
+  .sector-subnav-inner::-webkit-scrollbar { display: none; }
+  .subnav-link {
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    letter-spacing: .03em;
+    white-space: nowrap;
+    color: var(--ink-3);
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: color .15s ease, background .15s ease, border-color .15s ease;
   }
-  .modal-usecase {
-    font-size: 14.5px;
-    color: var(--ink-2);
-    line-height: 1.6;
-    background: var(--paper-2);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
-    border-radius: var(--r-sm);
-    padding: 16px 18px;
-  }
-  .modal-cta { margin-top: 28px; }
-  .modal-cta .btn { width: 100%; }
+  .subnav-link:hover { color: var(--ink); background: var(--paper-2); }
+  .subnav-link.active { color: var(--accent-600); background: var(--accent-soft); border-color: #d3defb; }
 
-  @media (max-width: 520px) {
-    .modal-hero { padding: 26px 22px 20px; }
-    .modal-content { padding: 24px 22px 26px; }
-    .modal-title { font-size: 1.3rem; }
+  /* —— Sections secteur —— */
+  .sector-sec { scroll-margin-top: 140px; }
+  .sec-grid {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: clamp(36px, 5vw, 80px);
+    align-items: center;
+  }
+  .sector-sec.flip .sec-main { order: 2; }
+  .sector-sec.flip .sec-side { order: 1; }
+
+  .sec-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sec-kicker .sec-ico {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: grid; place-items: center;
+    background: var(--accent-soft);
+    border: 1px solid #d3defb;
+    color: var(--accent-600);
+  }
+  .sec-kicker .sec-ico svg { width: 22px; height: 22px; }
+  .sec-kicker .step-num { font-size: 13px; }
+  .sec-main .h2 { margin-top: 18px; max-width: 22ch; }
+  .sec-main .lead { margin-top: 18px; max-width: 56ch; }
+  .sec-main .checklist { margin-top: 26px; }
+  .sec-main .sec-cta { margin-top: 30px; }
+
+  /* —— Colonne preuve : KPI + visuel —— */
+  .sec-side { display: flex; flex-direction: column; gap: 18px; }
+  .kpi-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 26px 28px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    box-shadow: var(--sh-sm);
+  }
+  .bg-paper-2 .kpi-card { box-shadow: none; }
+  .kpi-big {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--accent-600);
+    white-space: nowrap;
+  }
+  .kpi-desc { font-size: 14.5px; line-height: 1.45; color: var(--ink-2); }
+  .kpi-desc strong { color: var(--ink); }
+
+  @media (max-width: 980px) {
+    .sec-grid { grid-template-columns: 1fr; gap: 32px; }
+    .sector-sec.flip .sec-main { order: 1; }
+    .sector-sec.flip .sec-side { order: 2; }
+    .sec-side { flex-direction: column-reverse; }
   }
 </style>
 </head>
@@ -298,7 +210,7 @@
     <a class="m-link" href="secteurs.html">Secteurs</a>
     <a class="m-link" href="integrations.html">Intégrations</a>
     <a class="m-link" href="faq.html">FAQ</a>
-    <a class="m-link" href="contact.html">Contact</a>
+    <a class="m-link active" href="contact.html">Contact</a>
     <div class="m-cta">
       <a class="btn btn-ghost btn-block" href="rappel.html">Être rappelé</a>
       <a class="btn btn-primary btn-block" href="contact.html">Étudier mon site</a>
@@ -308,77 +220,346 @@
 
 <main>
 
-<!-- ===================== HERO ===================== -->
-<section class="hero section">
+<!-- ===================== HERO : TOUS LES SECTEURS ===================== -->
+<section class="hero sectors-hero" data-screen-label="Hero — Secteurs">
   <div class="hero-grid-bg" aria-hidden="true"></div>
   <div class="container" style="position:relative;">
-    <div class="page-hero-inner" style="max-width:780px;">
-      <span class="pill"><span class="dot"></span>Une réponse par environnement</span>
-      <h1 class="display" style="margin-top:22px;">Une solution drone pensée pour <span class="hl">votre secteur</span>.</h1>
-      <p class="lead" style="margin-top:24px; max-width:62ch;">Chaque secteur a ses contraintes : surfaces étendues, zones isolées, conformité réglementaire. FLEAT adapte la supervision drone à la réalité de votre site.</p>
+    <div class="page-hero-inner">
+      <span class="eyebrow">Secteurs d'activité</span>
+      <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); max-width:20ch;">Votre secteur a ses contraintes. FLEAT s'y adapte.</h1>
+      <p class="lead">Réglementation, étendue des sites, horaires critiques&nbsp;: chaque environnement impose ses propres exigences de sûreté. Choisissez le vôtre pour voir comment nous y répondons.</p>
+      <nav class="hx-grid" aria-label="Accès rapide aux secteurs">
+        <a class="hx-tile" href="#sante">
+          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v10M7 12h10"/><circle cx="12" cy="12" r="9.5"/></svg></span>
+          <span class="hx-name">Santé</span>
+          <span class="hx-sub">Hôpitaux, cliniques, laboratoires</span>
+          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+        </a>
+        <a class="hx-tile" href="#energie">
+          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg></span>
+          <span class="hx-name">Énergie &amp; Infra</span>
+          <span class="hx-sub">Centrales, sous-stations, réseaux</span>
+          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+        </a>
+        <a class="hx-tile" href="#datacenter">
+          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M2 17h20M6 6h.01M6 11h.01M11 6h.01M11 11h.01M16 6h.01M16 11h.01"/></svg></span>
+          <span class="hx-name">Data Centers</span>
+          <span class="hx-sub">Sites 24/7, périmètres critiques</span>
+          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+        </a>
+        <a class="hx-tile" href="#industrie">
+          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 5V3h20v2M8 19v2M16 19v2"/></svg></span>
+          <span class="hx-name">Industrie</span>
+          <span class="hx-sub">Usines, zones techniques étendues</span>
+          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+        </a>
+        <a class="hx-tile" href="#logistique">
+          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 0 1 6 0M3 7.5v7.5a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5V7.5"/><path d="M3 7.5h18M8 7.5v-3a1.5 1.5 0 0 1 1.5-1.5h5a1.5 1.5 0 0 1 1.5 1.5v3"/></svg></span>
+          <span class="hx-name">Logistique</span>
+          <span class="hx-sub">Entrepôts de 20&nbsp;000&nbsp;m² et plus</span>
+          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+        </a>
+        <a class="hx-tile" href="#transports">
+          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 0-2 2v2h22v-2a2 2 0 0 0-2-2h-2M8 4h8v8H8z"/><path d="M2 15h20"/></svg></span>
+          <span class="hx-name">Transports</span>
+          <span class="hx-sub">Réseaux linéaires, dépôts</span>
+          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+        </a>
+        <a class="hx-tile" href="#solaire">
+          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
+          <span class="hx-name">Parcs solaires</span>
+          <span class="hx-sub">Champs photovoltaïques isolés</span>
+          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+        </a>
+        <a class="hx-tile" href="#carrieres">
+          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 16l4-10h8l4 10"/></svg></span>
+          <span class="hx-name">Mines &amp; Carrières</span>
+          <span class="hx-sub">Terrains accidentés, zones de dépôt</span>
+          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+        </a>
+      </nav>
     </div>
   </div>
 </section>
 
-<!-- ===================== SECTEURS ===================== -->
-<section class="section">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">Secteurs d'activité</span>
-      <h2 class="h2" style="margin-top:16px;">Sélectionnez votre secteur pour découvrir comment FLEAT s'y applique.</h2>
-    </div>
+<!-- ===================== SOUS-NAV COLLANTE ===================== -->
+<div class="sector-subnav" aria-label="Navigation des secteurs">
+  <div class="container sector-subnav-inner" id="sector-subnav">
+    <a class="subnav-link" href="#sante">Santé</a>
+    <a class="subnav-link" href="#energie">Énergie</a>
+    <a class="subnav-link" href="#datacenter">Data Centers</a>
+    <a class="subnav-link" href="#industrie">Industrie</a>
+    <a class="subnav-link" href="#logistique">Logistique</a>
+    <a class="subnav-link" href="#transports">Transports</a>
+    <a class="subnav-link" href="#solaire">Solaire</a>
+    <a class="subnav-link" href="#carrieres">Carrières</a>
+  </div>
+</div>
 
-    <!-- Grille remplie par site.js -->
-    <div class="sectors-grid"></div>
+<!-- ===================== 01 · SANTÉ ===================== -->
+<section id="sante" class="section sector-sec" data-screen-label="Secteur — Santé">
+  <div class="container">
+    <div class="sec-grid">
+      <div class="sec-main reveal">
+        <span class="sec-kicker">
+          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v10M7 12h10"/><circle cx="12" cy="12" r="9.5"/></svg></span>
+          <span class="step-num">SECTEUR 01 · SANTÉ</span>
+        </span>
+        <h2 class="h2">Sécuriser les zones critiques sans alourdir vos équipes.</h2>
+        <p class="lead">Urgences, pharmacies, zones techniques, parkings&nbsp;: un établissement de santé fonctionne jour et nuit, avec des effectifs de sûreté limités. Le drone apporte une capacité de vérification immédiate, sans détourner un agent de son poste.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Couverture 24/7 des zones critiques et des accès</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute en moins de 60 secondes après alarme</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Traçabilité complète pour vos obligations réglementaires</li>
+        </ul>
+        <div class="sec-cta">
+          <a class="btn btn-link" href="contact.html">Étudier mon établissement <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <aside class="sec-side reveal" data-d="1">
+        <div class="kpi-card">
+          <span class="kpi-big">95&nbsp;%</span>
+          <p class="kpi-desc">des intrusions en établissement de santé ont lieu <strong>la nuit</strong>, quand les effectifs sont au plus bas.</p>
+        </div>
+        <div class="ph ph-4x3"><span class="ph-tag">// photo — campus hospitalier, vue aérienne</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 · ÉNERGIE ===================== -->
+<section id="energie" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur — Énergie">
+  <div class="container">
+    <div class="sec-grid">
+      <div class="sec-main reveal">
+        <span class="sec-kicker">
+          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg></span>
+          <span class="step-num">SECTEUR 02 · ÉNERGIE &amp; INFRASTRUCTURES</span>
+        </span>
+        <h2 class="h2">Répondre aux obligations OIV, preuves à l'appui.</h2>
+        <p class="lead">Centrales, sous-stations, réseaux de distribution&nbsp;: les opérateurs d'importance vitale doivent démontrer la robustesse de leur dispositif de sûreté. FLEAT documente chaque mission et chaque levée de doute.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Dispositif aligné sur les exigences réglementaires OIV</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Inspection régulière des périmètres et clôtures</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Documentation horodatée, exploitable en cas d'audit</li>
+        </ul>
+        <div class="sec-cta">
+          <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <aside class="sec-side reveal" data-d="1">
+        <div class="kpi-card">
+          <span class="kpi-big">100&nbsp;%</span>
+          <p class="kpi-desc">des sites classés OIV sont soumis à des <strong>obligations renforcées</strong> de protection périmétrique.</p>
+        </div>
+        <div class="ph ph-4x3"><span class="ph-tag">// photo — poste électrique / infrastructure énergétique</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 · DATA CENTERS ===================== -->
+<section id="datacenter" class="section sector-sec" data-screen-label="Secteur — Data Centers">
+  <div class="container">
+    <div class="sec-grid">
+      <div class="sec-main reveal">
+        <span class="sec-kicker">
+          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M2 17h20M6 6h.01M6 11h.01M11 6h.01M11 11h.01M16 6h.01M16 11h.01"/></svg></span>
+          <span class="step-num">SECTEUR 03 · DATA CENTERS</span>
+        </span>
+        <h2 class="h2">Une sûreté périmétrique à la hauteur de vos SLA.</h2>
+        <p class="lead">Vos clients exigent une disponibilité sans faille — votre périmètre physique aussi. FLEAT complète vos caméras fixes par une observation mobile, intégrée à vos outils de supervision existants.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance ininterrompue, alignée sur un fonctionnement 24/7</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Intégration à vos systèmes de supervision et SIEM</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Traçabilité continue, exploitable pour vos certifications</li>
+        </ul>
+        <div class="sec-cta">
+          <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <aside class="sec-side reveal" data-d="1">
+        <div class="kpi-card">
+          <span class="kpi-big">&lt;&nbsp;15&nbsp;%</span>
+          <p class="kpi-desc">le coût annuel du dispositif représente <strong>moins de 15&nbsp;%</strong> du coût moyen d'une seule intrusion réussie.</p>
+        </div>
+        <div class="ph ph-4x3"><span class="ph-tag">// photo — data center, périmètre extérieur de nuit</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 · INDUSTRIE ===================== -->
+<section id="industrie" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur — Industrie">
+  <div class="container">
+    <div class="sec-grid">
+      <div class="sec-main reveal">
+        <span class="sec-kicker">
+          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 5V3h20v2M8 19v2M16 19v2"/></svg></span>
+          <span class="step-num">SECTEUR 04 · INDUSTRIE</span>
+        </span>
+        <h2 class="h2">Couvrir de grandes emprises, sans angle mort.</h2>
+        <p class="lead">Usines, zones techniques, stockages extérieurs&nbsp;: multiplier les caméras fixes sur une grande emprise coûte cher et laisse toujours des zones aveugles. Un drone couvre l'ensemble du site et se déplace là où l'alerte se déclenche.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Couverture complète du site, y compris les zones aveugles</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute immédiate sur chaque alerte</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Inspection visuelle rapide après incident</li>
+        </ul>
+        <div class="sec-cta">
+          <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <aside class="sec-side reveal" data-d="1">
+        <div class="kpi-card">
+          <span class="kpi-big">68&nbsp;%</span>
+          <p class="kpi-desc">des intrusions sur sites industriels ont lieu <strong>en dehors des heures d'activité</strong>.</p>
+        </div>
+        <div class="ph ph-4x3"><span class="ph-tag">// photo — site industriel, vue d'ensemble</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 · LOGISTIQUE ===================== -->
+<section id="logistique" class="section sector-sec" data-screen-label="Secteur — Logistique">
+  <div class="container">
+    <div class="sec-grid">
+      <div class="sec-main reveal">
+        <span class="sec-kicker">
+          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 0 1 6 0M3 7.5v7.5a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5V7.5"/><path d="M3 7.5h18M8 7.5v-3a1.5 1.5 0 0 1 1.5-1.5h5a1.5 1.5 0 0 1 1.5 1.5v3"/></svg></span>
+          <span class="step-num">SECTEUR 05 · LOGISTIQUE</span>
+        </span>
+        <h2 class="h2">Dissuader avant que le préjudice n'existe.</h2>
+        <p class="lead">Quais de chargement, parkings poids lourds, stocks de valeur&nbsp;: sur un entrepôt de 20&nbsp;000&nbsp;m² et plus, la présence visible d'un drone change le calcul de l'intrus — et réduit les fausses alarmes qui épuisent vos équipes.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Couverture des grandes surfaces sans angle mort</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Dissuasion visible sur les quais et parkings</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Réduction des fausses alarmes et des déplacements inutiles</li>
+        </ul>
+        <div class="sec-cta">
+          <a class="btn btn-link" href="contact.html">Étudier mon entrepôt <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <aside class="sec-side reveal" data-d="1">
+        <div class="kpi-card">
+          <span class="kpi-big">4&nbsp;Md€</span>
+          <p class="kpi-desc">de pertes annuelles liées au <strong>vol en entreposage</strong> et sur la chaîne logistique en Europe.</p>
+        </div>
+        <div class="ph ph-4x3"><span class="ph-tag">// photo — plateforme logistique, quais de chargement</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 06 · TRANSPORTS ===================== -->
+<section id="transports" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur — Transports">
+  <div class="container">
+    <div class="sec-grid">
+      <div class="sec-main reveal">
+        <span class="sec-kicker">
+          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 0-2 2v2h22v-2a2 2 0 0 0-2-2h-2M8 4h8v8H8z"/><path d="M2 15h20"/></svg></span>
+          <span class="step-num">SECTEUR 06 · TRANSPORTS</span>
+        </span>
+        <h2 class="h2">Surveiller des emprises qu'aucune clôture ne couvre.</h2>
+        <p class="lead">Voies, dépôts, emprises linéaires de plusieurs kilomètres&nbsp;: les réseaux de transport sont impossibles à surveiller exhaustivement depuis le sol. Le drone parcourt l'emprise en quelques minutes et détecte tôt ce qui deviendrait un incident.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Inspection rapide des emprises linéaires</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance des dépôts et du matériel roulant</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Détection précoce d'anomalies sur les voies</li>
+        </ul>
+        <div class="sec-cta">
+          <a class="btn btn-link" href="contact.html">Étudier mon réseau <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <aside class="sec-side reveal" data-d="1">
+        <div class="kpi-card">
+          <span class="kpi-big">+30&nbsp;%</span>
+          <p class="kpi-desc">de temps gagné sur les <strong>inspections de maintenance</strong> grâce à l'observation aérienne.</p>
+        </div>
+        <div class="ph ph-4x3"><span class="ph-tag">// photo — dépôt ferroviaire / emprise de voies</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 · PARCS SOLAIRES ===================== -->
+<section id="solaire" class="section sector-sec" data-screen-label="Secteur — Parcs solaires">
+  <div class="container">
+    <div class="sec-grid">
+      <div class="sec-main reveal">
+        <span class="sec-kicker">
+          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
+          <span class="step-num">SECTEUR 07 · PARCS SOLAIRES</span>
+        </span>
+        <h2 class="h2">Des hectares de panneaux, une seule supervision.</h2>
+        <p class="lead">Des dizaines d'hectares isolés, sans présence humaine permanente, avec du matériel convoité&nbsp;: les parcs photovoltaïques cumulent les facteurs de risque. Le drone surveille, vérifie et inspecte — y compris en thermique.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance des rangées de panneaux et des onduleurs</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute à distance, sans déplacement terrain</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Inspection thermique pour détecter les panneaux défaillants</li>
+        </ul>
+        <div class="sec-cta">
+          <a class="btn btn-link" href="contact.html">Étudier mon parc <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <aside class="sec-side reveal" data-d="1">
+        <div class="kpi-card">
+          <span class="kpi-big">5:1</span>
+          <p class="kpi-desc">retour sur investissement comparé à une <strong>équipe d'intervention terrain</strong> équivalente.</p>
+        </div>
+        <div class="ph ph-4x3"><span class="ph-tag">// photo — parc photovoltaïque, vue aérienne</span></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 08 · MINES & CARRIÈRES ===================== -->
+<section id="carrieres" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur — Mines et carrières">
+  <div class="container">
+    <div class="sec-grid">
+      <div class="sec-main reveal">
+        <span class="sec-kicker">
+          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 16l4-10h8l4 10"/></svg></span>
+          <span class="step-num">SECTEUR 08 · MINES &amp; CARRIÈRES</span>
+        </span>
+        <h2 class="h2">Garder l'œil sur des terrains impraticables de nuit.</h2>
+        <p class="lead">Fronts de taille, zones de dépôt, engins stationnés&nbsp;: un terrain accidenté rend les rondes au sol lentes et dangereuses. Le drone survole l'ensemble de l'exploitation en quelques minutes, de jour comme de nuit.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Inspection des terrains accidentés sans exposer un agent</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance des zones de dépôt et du matériel</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute immédiate sur toute l'emprise</li>
+        </ul>
+        <div class="sec-cta">
+          <a class="btn btn-link" href="contact.html">Étudier mon exploitation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <aside class="sec-side reveal" data-d="1">
+        <div class="kpi-card">
+          <span class="kpi-big">−40&nbsp;%</span>
+          <p class="kpi-desc">de <strong>vols de matériel</strong> constatés dès la première année d'exploitation du dispositif.</p>
+        </div>
+        <div class="ph ph-4x3"><span class="ph-tag">// photo — carrière en exploitation, vue aérienne</span></div>
+      </aside>
+    </div>
   </div>
 </section>
 
 <!-- ===================== CTA FINAL ===================== -->
-<section class="section-sm bg-dark cta-band radar-bg">
-  <div class="container text-center" style="position:relative; max-width:760px;">
+<section class="section bg-dark cta-band" data-screen-label="CTA final — Secteurs">
+  <div class="container text-center" style="position:relative; max-width:760px; text-align:center;">
     <div class="reveal">
-      <span class="eyebrow" style="justify-content:center;">Votre secteur n'est pas listé&nbsp;?</span>
-      <h2 class="h2 mt-s">Chaque site est unique. Parlons du vôtre.</h2>
-      <p class="lead mt-s mx-auto" style="max-width:54ch; color:var(--on-dark-2);">Décrivez-nous votre contexte : contraintes terrain, réglementation, existant technique. Nous étudions la faisabilité d'un dispositif adapté.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:28px;">
-        <a class="btn btn-primary btn-lg" href="contact.html">Étudier mon site
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
+      <span class="eyebrow" style="justify-content:center;">Et votre site&nbsp;?</span>
+      <h2 class="h2" style="margin-top:14px;">Votre secteur n'est pas listé&nbsp;?</h2>
+      <p class="lead" style="margin-top:16px; margin-inline:auto; max-width:52ch;">Chaque site est unique. Décrivez-nous votre contexte&nbsp;: nous étudions la faisabilité d'un dispositif adapté à vos contraintes.</p>
+      <div class="cta-row" style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:34px;">
+        <a class="btn btn-primary btn-lg" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost-light btn-lg" href="rappel.html">Être rappelé</a>
       </div>
     </div>
   </div>
 </section>
 
 </main>
-
-<!-- ===================== MODALE SECTEUR ===================== -->
-<div class="sector-modal" id="sector-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-el">
-  <div class="sector-modal-backdrop"></div>
-  <div class="sector-modal-card">
-    <button class="sector-modal-close" aria-label="Fermer">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="modal-hero">
-      <div class="modal-icon" aria-hidden="true"></div>
-      <h2 class="modal-title" id="modal-title-el"></h2>
-    </div>
-    <div class="modal-content">
-      <p class="modal-description"></p>
-
-      <p class="modal-section-label">Ce que FLEAT apporte</p>
-      <ul class="modal-benefits"></ul>
-
-      <p class="modal-section-label">Exemple concret</p>
-      <p class="modal-usecase"></p>
-
-      <div class="modal-cta">
-        <a class="btn btn-primary" href="contact.html">Étudier mon site
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ===================== FOOTER ===================== -->
 <footer class="site-footer">
@@ -431,5 +612,44 @@
 </div>
 
 <script src="site.js"></script>
+<script>
+/* —— Scrollspy : met en évidence le secteur visible dans la sous-nav —— */
+(function () {
+  'use strict';
+  var links = Array.prototype.slice.call(document.querySelectorAll('#sector-subnav .subnav-link'));
+  var sections = links.map(function (l) {
+    return document.getElementById(l.getAttribute('href').slice(1));
+  }).filter(Boolean);
+  if (!sections.length) return;
+
+  function setActive(id) {
+    links.forEach(function (l) {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var current = null;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          current = e.target.id;
+          setActive(current);
+          /* garde le lien actif visible dans la barre (mobile) */
+          var active = document.querySelector('#sector-subnav .subnav-link.active');
+          if (active && active.parentElement) {
+            var bar = active.parentElement;
+            var aLeft = active.offsetLeft, aRight = aLeft + active.offsetWidth;
+            if (aLeft < bar.scrollLeft || aRight > bar.scrollLeft + bar.clientWidth) {
+              bar.scrollTo({ left: aLeft - 24, behavior: 'smooth' });
+            }
+          }
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
 </body>
 </html>
