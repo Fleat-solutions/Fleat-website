@@ -3,7 +3,7 @@
    Sobre · premium · B2B sécurité / supervision drone
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap') (prefers-reduced-data: no-preference);
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
   /* — Light / paper — */
@@ -642,6 +642,10 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   .ck-actions { width: 100%; }
   .ck-btn { flex: 1; }
 }
+
+/* Split formulaire + aside (contact / rappel) */
+.form-split { grid-template-columns: 1.5fr 1fr; align-items: start; }
+@media (max-width: 880px) { .form-split { grid-template-columns: 1fr; } }
 
 /* Stats band responsive */
 .stats-grid { grid-template-columns: repeat(4, 1fr); }

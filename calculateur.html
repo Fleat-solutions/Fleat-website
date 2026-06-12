@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur — FLEAT · Estimez votre exposition au risque et vos économies</title>
+<meta name="description" content="Estimez en 2 minutes ce que la surveillance de votre site vous coûte vraiment : couverture réelle, exposition annuelle au risque de vol, et économies potentielles avec une supervision drone FLEAT.">
+<link rel="canonical" href="https://www.fleat.fr/calculateur.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FLEAT">
+<meta property="og:title" content="Calculateur — FLEAT · Estimez votre exposition au risque">
+<meta property="og:description" content="Couverture réelle de votre site, exposition annuelle au vol, économies estimées : faites le calcul.">
+<meta property="og:url" content="https://www.fleat.fr/calculateur.html">
+<meta property="og:locale" content="fr_FR">
+<meta name="robots" content="index, follow">
+<meta name="author" content="FLEAT">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/png" href="assets/fleat-mark.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ============================================================
+     CALCULATEUR ROI — styles dédiés
+     ============================================================ */
+  .calc-hero { padding-top: clamp(48px,6vw,72px); border-bottom: 1px solid var(--line); }
+  .calc-hero .lead { max-width: 60ch; }
+  .calc-steps { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 26px; }
+  .calc-step { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; color: var(--ink-3); }
+  .calc-step b { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-600); font-family: var(--f-mono); font-size: 12px; font-weight: 600; }
+
+  /* —— Layout calculateur —— */
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,3.5vw,40px); align-items: start; }
+  @media (max-width: 920px) { .calc-grid { grid-template-columns: 1fr; } }
+
+  .calc-panel { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(22px,3vw,32px); }
+  .calc-panel + .calc-panel { margin-top: 20px; }
+  .calc-results { position: sticky; top: 90px; }
+  @media (max-width: 920px) { .calc-results { position: static; } }
+
+  .field-block { margin-bottom: 26px; }
+  .field-block:last-child { margin-bottom: 0; }
+  .field-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .field-head label { font-size: 14.5px; font-weight: 600; color: var(--ink-2); }
+  .field-val { font-family: var(--f-mono); font-size: 14px; font-weight: 500; color: var(--accent-600); white-space: nowrap; }
+
+  /* Segmented control */
+  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 6px; background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 5px; }
+  .seg button { padding: 9px 8px; border-radius: 6px; font-size: 13.5px; font-weight: 600; color: var(--ink-3); transition: background .15s ease, color .15s ease, box-shadow .15s ease; line-height: 1.2; }
+  .seg button:hover { color: var(--ink); }
+  .seg button.active { background: var(--paper); color: var(--accent-600); box-shadow: var(--sh-sm); }
+  @media (max-width: 460px) { .seg { grid-auto-flow: row; grid-auto-columns: auto; } }
+
+  /* Range */
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px; background: var(--paper-3); outline: none; margin: 6px 0; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); border: 3px solid #fff; box-shadow: var(--sh-sm); cursor: pointer; transition: transform .12s ease; }
+  input[type=range]::-webkit-slider-thumb:active { transform: scale(1.12); }
+  input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 3px solid #fff; box-shadow: var(--sh-sm); cursor: pointer; }
+  .range-scale { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: 11px; color: var(--ink-4); margin-top: 2px; }
+
+  /* —— Résultats —— */
+  .res-eyebrow { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .gauge { margin-top: 8px; }
+  .gauge-row { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+  .gauge-lbl { width: 92px; flex-shrink: 0; font-size: 13px; color: var(--ink-2); }
+  .gauge-track { flex: 1; height: 12px; background: var(--paper-3); border-radius: 999px; overflow: hidden; }
+  .gauge-fill { height: 100%; border-radius: 999px; transition: width .5s cubic-bezier(.16,.84,.44,1); }
+  .gauge-fill.now { background: linear-gradient(90deg, var(--warn), #e0a44e); }
+  .gauge-fill.fleat { background: linear-gradient(90deg, var(--accent), var(--accent-400)); }
+  .gauge-pct { width: 46px; flex-shrink: 0; text-align: right; font-family: var(--f-mono); font-size: 14px; font-weight: 600; color: var(--ink); }
+
+  .res-exposure { margin-top: 28px; padding-top: 26px; border-top: 1px solid var(--line); }
+  .res-big { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--crit-600); font-size: clamp(1.9rem,4.2vw,2.7rem); margin-top: 8px; }
+  .res-sub { font-size: 13.5px; color: var(--ink-3); margin-top: 10px; line-height: 1.5; }
+
+  /* Gated */
+  .gated-wrap { position: relative; margin-top: 22px; }
+  .gated-content { transition: filter .3s ease, opacity .3s ease; }
+  .gated-wrap.locked .gated-content { filter: blur(7px); opacity: .5; pointer-events: none; user-select: none; }
+  .gate-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px; padding: 18px; }
+  .gated-wrap:not(.locked) .gate-overlay { display: none; }
+  .gate-overlay .lockico { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-600); border: 1px solid #d3defb; }
+  .gate-form { display: flex; gap: 8px; width: 100%; max-width: 340px; }
+  .gate-form input { flex: 1; min-width: 0; font-family: var(--f-text); font-size: 15px; padding: 11px 13px; border: 1px solid var(--line-2); border-radius: var(--r-sm); }
+  .gate-form input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .gate-form.err input { border-color: var(--crit); }
+  .gate-note { font-size: 12px; color: var(--ink-4); max-width: 320px; }
+
+  .res-save { font-family: var(--f-display); font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--ok-600); font-size: clamp(1.7rem,3.6vw,2.4rem); }
+  .res-line { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+  .res-line:last-child { border-bottom: 0; }
+  .res-line span:first-child { color: var(--ink-2); }
+  .res-line span:last-child { font-family: var(--f-mono); font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+  .disclaimer { font-family: var(--f-mono); font-size: 11px; color: var(--ink-4); line-height: 1.5; margin-top: 18px; }
+
+  /* —— Bande risque (fear) —— */
+  .risk-band { background: var(--dark); color: var(--on-dark); position: relative; overflow: hidden; }
+  .risk-band::before { content: ""; position: absolute; inset: 0; background: radial-gradient(80% 120% at 90% 0%, rgba(207,73,73,.22), transparent 55%); pointer-events: none; }
+  .risk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+  @media (max-width: 820px) { .risk-grid { grid-template-columns: 1fr; } }
+  .risk-card { background: rgba(255,255,255,.04); border: 1px solid var(--dark-line); border-radius: var(--r-lg); padding: 26px; }
+  .risk-card .rk-ico { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; background: rgba(207,73,73,.14); border: 1px solid rgba(207,73,73,.3); color: #e98080; margin-bottom: 16px; }
+  .risk-card .rk-ico svg { width: 21px; height: 21px; }
+  .risk-card h3 { color: var(--on-dark); font-size: 1.12rem; }
+  .risk-card p { color: var(--on-dark-2); font-size: 15px; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="FLEAT — accueil">
+      <img class="brand-logo" src="assets/fleat-logo.png" alt="fleat">
+    </a>
+    <nav class="nav-main" aria-label="Navigation principale">
+      <a href="solution.html">Solution</a>
+      <a href="cas-usage.html">Cas d'usage</a>
+      <a href="secteurs.html">Secteurs</a>
+      <a href="integrations.html">Intégrations</a>
+      <a href="calculateur.html" class="active">Calculateur</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn btn-ghost" href="rappel.html">Être rappelé</a>
+      <a class="btn btn-primary" href="contact.html">Étudier mon site</a>
+    </div>
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false"><span></span></button>
+  </div>
+  <div class="mobile-menu">
+    <a class="m-link" href="solution.html">Solution</a>
+    <a class="m-link" href="cas-usage.html">Cas d'usage</a>
+    <a class="m-link" href="secteurs.html">Secteurs</a>
+    <a class="m-link" href="integrations.html">Intégrations</a>
+    <a class="m-link active" href="calculateur.html">Calculateur</a>
+    <a class="m-link" href="faq.html">FAQ</a>
+    <a class="m-link" href="contact.html">Contact</a>
+    <div class="m-cta">
+      <a class="btn btn-ghost btn-block" href="rappel.html">Être rappelé</a>
+      <a class="btn btn-primary btn-block" href="contact.html">Étudier mon site</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== HERO ===================== -->
+<section class="section-sm bg-paper-2 calc-hero" data-screen-label="Calculateur — Hero">
+  <div class="container">
+    <div class="page-hero-inner" style="max-width:820px;">
+      <span class="eyebrow">Calculateur</span>
+      <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); margin-top:18px;">Que vous coûte vraiment la sécurité de votre site&nbsp;?</h1>
+      <p class="lead" style="margin-top:20px;">La plupart des sites ne sont couverts qu'en partie — et le coût des zones laissées sans surveillance n'apparaît nulle part. Renseignez votre site pour estimer votre couverture réelle, votre exposition au risque et vos économies potentielles.</p>
+      <div class="calc-steps">
+        <span class="calc-step"><b>1</b> Décrivez votre site</span>
+        <span class="calc-step"><b>2</b> Visualisez votre exposition</span>
+        <span class="calc-step"><b>3</b> Recevez l'estimation détaillée</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CALCULATEUR ===================== -->
+<section class="section" data-screen-label="Calculateur — Outil">
+  <div class="container">
+    <div class="calc-grid">
+
+      <!-- ENTRÉES -->
+      <div>
+        <div class="calc-panel">
+          <h2 class="h3" style="margin-bottom:24px;">Votre site</h2>
+
+          <div class="field-block">
+            <div class="field-head"><label>Type de site</label></div>
+            <div class="seg" data-key="type" role="group" aria-label="Type de site">
+              <button type="button" data-val="bati">Bâtiments</button>
+              <button type="button" data-val="terrain">Terrain ouvert</button>
+              <button type="button" data-val="mixte">Mixte</button>
+            </div>
+          </div>
+
+          <div class="field-block">
+            <div class="field-head"><label for="in-surface">Surface à surveiller</label><span class="field-val" id="val-surface">8 ha</span></div>
+            <input type="range" id="in-surface" min="0.5" max="80" step="0.5" value="8" aria-label="Surface en hectares">
+            <div class="range-scale"><span>0,5 ha</span><span>80 ha</span></div>
+          </div>
+
+          <div class="field-block">
+            <div class="field-head"><label for="in-sites">Nombre de sites</label><span class="field-val" id="val-sites">1 site</span></div>
+            <input type="range" id="in-sites" min="1" max="25" step="1" value="1" aria-label="Nombre de sites">
+            <div class="range-scale"><span>1</span><span>25+</span></div>
+          </div>
+
+          <div class="field-block">
+            <div class="field-head"><label>Dispositif de sécurité actuel</label></div>
+            <div class="seg" data-key="dispositif" role="group" aria-label="Dispositif actuel">
+              <button type="button" data-val="aucun">Aucun</button>
+              <button type="button" data-val="rondes">Rondes / gardiennage</button>
+              <button type="button" data-val="cameras">Caméras + alarme</button>
+            </div>
+          </div>
+
+          <div class="field-block">
+            <div class="field-head"><label for="in-valeur">Valeur du matériel / stock exposé</label><span class="field-val" id="val-valeur">250 000 €</span></div>
+            <input type="range" id="in-valeur" min="20000" max="3000000" step="10000" value="250000" aria-label="Valeur exposée par site">
+            <div class="range-scale"><span>20 k€</span><span>3 M€</span></div>
+          </div>
+
+          <div class="field-block">
+            <div class="field-head"><label for="in-cout">Coût actuel de surveillance (par mois)</label><span class="field-val" id="val-cout">3 000 €</span></div>
+            <input type="range" id="in-cout" min="0" max="40000" step="500" value="3000" aria-label="Coût mensuel actuel">
+            <div class="range-scale"><span>0 €</span><span>40 k€</span></div>
+          </div>
+
+          <div class="field-block" style="margin-bottom:0;">
+            <div class="field-head"><label>Niveau de risque de votre zone</label></div>
+            <div class="seg" data-key="risque" role="group" aria-label="Niveau de risque">
+              <button type="button" data-val="faible">Faible</button>
+              <button type="button" data-val="moyen">Moyen</button>
+              <button type="button" data-val="eleve">Élevé</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RÉSULTATS -->
+      <div class="calc-results">
+        <div class="calc-panel">
+          <span class="res-eyebrow">Couverture estimée de votre site</span>
+          <div class="gauge">
+            <div class="gauge-row">
+              <span class="gauge-lbl">Aujourd'hui</span>
+              <span class="gauge-track"><span class="gauge-fill now" id="bar-now" style="width:40%;"></span></span>
+              <span class="gauge-pct" id="pct-now">40 %</span>
+            </div>
+            <div class="gauge-row">
+              <span class="gauge-lbl" style="color:var(--accent-600); font-weight:600;">Avec FLEAT</span>
+              <span class="gauge-track"><span class="gauge-fill fleat" id="bar-fleat" style="width:92%;"></span></span>
+              <span class="gauge-pct" id="pct-fleat" style="color:var(--accent-600);">92 %</span>
+            </div>
+          </div>
+
+          <div class="res-exposure">
+            <span class="res-eyebrow" style="color:var(--crit-600);">Exposition annuelle estimée sur vos zones non couvertes</span>
+            <div class="res-big" id="exposure">35 000 – 65 000 €</div>
+            <p class="res-sub" id="exposure-sub">Estimation du préjudice potentiel (vol, intrusion, dégradation) concentré sur la part de votre site aujourd'hui mal surveillée.</p>
+          </div>
+        </div>
+
+        <div class="calc-panel">
+          <span class="res-eyebrow" style="color:var(--ok-600);">Ce que FLEAT pourrait vous faire gagner</span>
+          <div class="gated-wrap locked" id="gate">
+            <div class="gated-content">
+              <div class="res-save" id="save-range" style="margin-top:10px;">18 000 – 34 000 € / an</div>
+              <div style="margin-top:18px;">
+                <div class="res-line"><span>Risque évité (meilleure couverture)</span><span id="r-risk">12 000 €</span></div>
+                <div class="res-line"><span>Optimisation des rondes / déplacements</span><span id="r-patrol">8 000 €</span></div>
+                <div class="res-line"><span>Couverture gagnée</span><span id="r-cov">+52 pts</span></div>
+              </div>
+            </div>
+            <div class="gate-overlay">
+              <span class="lockico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+              <p style="font-weight:600; color:var(--ink); max-width:300px;">Recevez votre estimation détaillée et un comparatif adapté à votre secteur.</p>
+              <form class="gate-form" id="gate-form" novalidate>
+                <input type="email" id="gate-email" placeholder="Votre e-mail professionnel" aria-label="E-mail professionnel" required>
+                <button class="btn btn-primary" type="submit">Débloquer</button>
+              </form>
+              <span class="gate-note">Sans engagement. Pas de spam — un seul e-mail avec votre estimation.</span>
+            </div>
+          </div>
+          <p class="disclaimer">Estimation indicative, fondée sur les paramètres saisis et des hypothèses sectorielles moyennes (sécurité / drone, 2024–2025). Elle ne constitue pas un devis : les performances et économies réelles dépendent de l'étude de votre site.</p>
+        </div>
+
+        <a class="btn btn-primary btn-block btn-lg" href="contact.html" style="margin-top:20px;">Obtenir un chiffrage précis
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BANDE RISQUE (fear) ===================== -->
+<section class="section risk-band" data-screen-label="Calculateur — Risque">
+  <div class="container" style="position:relative;">
+    <div class="section-head reveal">
+      <span class="eyebrow">Le risque que l'on ne voit pas</span>
+      <h2 class="h2">Une zone non surveillée, c'est une opportunité offerte.</h2>
+      <p class="lead">Le vol et l'intrusion sur sites professionnels ne reculent pas. Et ils ne frappent jamais là où vous regardez — mais là où personne ne regarde.</p>
+    </div>
+    <div class="risk-grid">
+      <div class="risk-card reveal">
+        <span class="rk-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <h3>L'intrus choisit l'heure creuse</h3>
+        <p>Une large part des intrusions survient la nuit et le week-end, quand les effectifs sont réduits et les zones les moins regardées deviennent des cibles.</p>
+      </div>
+      <div class="risk-card reveal" data-d="1">
+        <span class="rk-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21"/></svg></span>
+        <h3>Détecter ne suffit pas</h3>
+        <p>Une alarme se déclenche, une caméra filme — mais entre l'alerte et la vérification, le préjudice a souvent déjà eu lieu. La levée de doute, elle, doit se déplacer.</p>
+      </div>
+      <div class="risk-card reveal" data-d="2">
+        <span class="rk-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg></span>
+        <h3>Les angles morts sont la règle</h3>
+        <p>Toitures, terrains ouverts, grandes emprises : sur un site étendu, les zones hors champ ne sont pas l'exception. Ce sont elles qui portent l'essentiel du risque.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA FINAL ===================== -->
+<section class="section bg-dark cta-band radar-bg" data-screen-label="Calculateur — CTA">
+  <div class="container text-center" style="position:relative; max-width:760px; text-align:center;">
+    <div class="reveal">
+      <span class="eyebrow" style="justify-content:center;">Passons du chiffre au terrain</span>
+      <h2 class="h2 mt-s">Transformons cette estimation en dispositif réel.</h2>
+      <p class="lead mt-s mx-auto" style="max-width:54ch;">Le calcul vous donne un ordre d'idée. L'étude de votre site vous donne un chiffrage précis et un plan de couverture adapté à vos contraintes.</p>
+      <div class="cta-row" style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:34px;">
+        <a class="btn btn-primary btn-lg" href="contact.html">Étudier mon site
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost-light btn-lg" href="rappel.html">Être rappelé</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="FLEAT — accueil">
+          <img class="brand-logo" src="assets/fleat-logo-white.png" alt="fleat">
+        </a>
+        <p>Supervision drone connectée à vos systèmes de sécurité, pour les environnements professionnels exigeants.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Produit</h4>
+        <a href="solution.html">Solution</a>
+        <a href="cas-usage.html">Cas d'usage</a>
+        <a href="integrations.html">Intégrations</a>
+        <a href="secteurs.html">Secteurs</a>
+        <a href="calculateur.html">Calculateur</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html">Demander une démonstration</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:contact@fleat.fr">contact@fleat.fr</a>
+        <a href="tel:+33000000000">+33 (0)0 00 00 00 00</a>
+        <a href="rappel.html">Être rappelé</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> FLEAT. Tous droits réservés.</span>
+      <span class="f-legal">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="confidentialite.html">Politique de confidentialité</a>
+        <button onclick="window.resetCookieConsent&&window.resetCookieConsent()" style="background:none;border:none;padding:0;font:inherit;font-size:13.5px;color:var(--on-dark-3);cursor:pointer;transition:color .15s;" onmouseover="this.style.color='var(--on-dark)'" onmouseout="this.style.color='var(--on-dark-3)'">Cookies</button>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- Cookie banner RGPD -->
+<div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
+  <p class="ck-text">Nous utilisons des cookies de mesure d'audience pour améliorer votre expérience. <a href="confidentialite.html">En savoir plus</a>.</p>
+  <div class="ck-actions">
+    <button id="cookie-refuse" class="ck-btn ck-refuse">Refuser</button>
+    <button id="cookie-accept" class="ck-btn ck-accept">Accepter</button>
+  </div>
+</div>
+
+<script src="site.js"></script>
+<script>
+/* ============================================================
+   CALCULATEUR ROI — logique
+   ============================================================ */
+(function () {
+  'use strict';
+  var KEY_STATE = 'fleat_roi_state';
+  var KEY_UNLOCK = 'fleat_roi_unlocked';
+
+  var defaults = { type:'mixte', dispositif:'cameras', risque:'moyen', surface:8, sites:1, valeur:250000, cout:3000 };
+  var state = defaults;
+  try { var saved = JSON.parse(localStorage.getItem(KEY_STATE)); if (saved) state = Object.assign({}, defaults, saved); } catch(e){}
+
+  /* —— Constantes du modèle (indicatives) —— */
+  var BASE_COV = { aucun:4, rondes:24, cameras:58 };
+  var TYPE_FACTOR = {
+    bati:    { aucun:1, rondes:1.0,  cameras:1.0 },
+    terrain: { aucun:1, rondes:0.80, cameras:0.55 },
+    mixte:   { aucun:1, rondes:0.92, cameras:0.82 }
+  };
+  var RISK_RATE = { faible:0.05, moyen:0.10, eleve:0.18 };
+  var PATROL_EFF = { aucun:0, rondes:0.22, cameras:0.08 };
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function roundTo(n, step) { return Math.round(n/step)*step; }
+  function niceRound(n) {
+    if (n <= 0) return 0;
+    if (n < 5000) return roundTo(n, 500);
+    if (n < 50000) return roundTo(n, 1000);
+    return roundTo(n, 5000);
+  }
+  function eur(n) { return new Intl.NumberFormat('fr-FR').format(Math.round(n)) + ' €'; }
+
+  function compute() {
+    var base = BASE_COV[state.dispositif] || 4;
+    var tf = (TYPE_FACTOR[state.type] || {})[state.dispositif];
+    if (tf == null) tf = 1;
+    var surfaceFactor = clamp(1 - (state.surface - 5) / 320, 0.6, 1);
+    var covNow = clamp(Math.round(base * tf * surfaceFactor), 2, 86);
+    var covFleat = clamp(Math.max(88, covNow + 24), 88, 97);
+
+    var rate = RISK_RATE[state.risque] || 0.10;
+    var totalValue = state.valeur * state.sites;
+    var gapNow = (100 - covNow) / 100;
+    var exposure = totalValue * rate * gapNow;
+
+    var riskAvoided = totalValue * rate * ((covFleat - covNow) / 100);
+    var patrolSave = (state.cout * 12) * (PATROL_EFF[state.dispositif] || 0);
+    var saveBase = riskAvoided + patrolSave;
+
+    return {
+      covNow: covNow,
+      covFleat: covFleat,
+      expLow: niceRound(exposure * 0.7),
+      expHigh: niceRound(exposure * 1.3),
+      riskAvoided: niceRound(riskAvoided),
+      patrolSave: niceRound(patrolSave),
+      saveLow: niceRound(saveBase * 0.65),
+      saveHigh: niceRound(saveBase * 1.25),
+      covGain: covFleat - covNow
+    };
+  }
+
+  function $(id) { return document.getElementById(id); }
+
+  function render() {
+    var r = compute();
+    $('bar-now').style.width = r.covNow + '%';
+    $('pct-now').textContent = r.covNow + ' %';
+    $('bar-fleat').style.width = r.covFleat + '%';
+    $('pct-fleat').textContent = r.covFleat + ' %';
+
+    $('exposure').textContent = r.expLow === r.expHigh ? eur(r.expLow) : (new Intl.NumberFormat('fr-FR').format(r.expLow) + ' – ' + eur(r.expHigh));
+
+    $('save-range').textContent = (new Intl.NumberFormat('fr-FR').format(r.saveLow) + ' – ' + eur(r.saveHigh) + ' / an');
+    $('r-risk').textContent = eur(r.riskAvoided);
+    $('r-patrol').textContent = r.patrolSave > 0 ? eur(r.patrolSave) : '—';
+    $('r-cov').textContent = '+' + r.covGain + ' pts';
+
+    // libellé contextuel d'exposition
+    var sub = $('exposure-sub');
+    if (state.dispositif === 'aucun') {
+      sub.textContent = "Sans dispositif en place, la quasi-totalité de votre site est exposée. Ce montant représente le préjudice potentiel que rien ne vient aujourd'hui contenir.";
+    } else if (state.type === 'terrain') {
+      sub.textContent = "Sur un terrain ouvert, les caméras fixes laissent de larges zones hors champ. Ce montant correspond au risque concentré sur ces angles morts.";
+    } else {
+      sub.textContent = "Estimation du préjudice potentiel (vol, intrusion, dégradation) concentré sur la part de votre site aujourd'hui mal surveillée.";
+    }
+
+    try { localStorage.setItem(KEY_STATE, JSON.stringify(state)); } catch(e){}
+  }
+
+  /* —— Liaison des segmented controls —— */
+  document.querySelectorAll('.seg').forEach(function (seg) {
+    var key = seg.getAttribute('data-key');
+    seg.querySelectorAll('button').forEach(function (b) {
+      if (b.getAttribute('data-val') === state[key]) b.classList.add('active');
+      b.addEventListener('click', function () {
+        seg.querySelectorAll('button').forEach(function (x) { x.classList.remove('active'); });
+        b.classList.add('active');
+        state[key] = b.getAttribute('data-val');
+        // ajuste le coût par défaut si on passe à "aucun"
+        render();
+      });
+    });
+  });
+
+  /* —— Liaison des sliders —— */
+  function bindSlider(key, fmt) {
+    var el = $('in-' + key);
+    var out = $('val-' + key);
+    if (!el) return;
+    el.value = state[key];
+    function upd() { out.textContent = fmt(+el.value); }
+    el.addEventListener('input', function () { state[key] = +el.value; upd(); render(); });
+    upd();
+  }
+  bindSlider('surface', function (v) { return (v % 1 === 0 ? v : v.toFixed(1).replace('.', ',')) + ' ha'; });
+  bindSlider('sites', function (v) { return v + (v >= 25 ? '+ sites' : (v > 1 ? ' sites' : ' site')); });
+  bindSlider('valeur', function (v) { return new Intl.NumberFormat('fr-FR').format(v) + ' €'; });
+  bindSlider('cout', function (v) { return new Intl.NumberFormat('fr-FR').format(v) + ' €'; });
+
+  /* —— Déblocage e-mail —— */
+  var gate = $('gate');
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (localStorage.getItem(KEY_UNLOCK) === '1') gate.classList.remove('locked');
+  $('gate-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var input = $('gate-email');
+    var form = $('gate-form');
+    if (!emailRe.test(input.value.trim())) {
+      form.classList.add('err');
+      input.focus();
+      return;
+    }
+    form.classList.remove('err');
+    try { localStorage.setItem(KEY_UNLOCK, '1'); } catch(e){}
+    gate.classList.remove('locked');
+  });
+  $('gate-email').addEventListener('input', function () { $('gate-form').classList.remove('err'); });
+
+  render();
+})();
+</script>
+</body>
+</html>

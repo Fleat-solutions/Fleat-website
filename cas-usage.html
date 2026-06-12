@@ -22,6 +22,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/png" href="assets/fleat-mark.png">
 <link rel="stylesheet" href="styles.css">
+<style>
+  .scenario-chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 9px 15px; border-radius: var(--r-sm);
+    background: var(--paper); border: 1px solid var(--line-2);
+    font-size: 14px; font-weight: 600; color: var(--ink-2);
+    transition: color .15s, border-color .15s, background .15s;
+    text-decoration: none;
+  }
+  .scenario-chip:hover { color: var(--accent-600); border-color: var(--accent); background: var(--accent-soft); }
+  .scenario-chip svg { flex-shrink: 0; opacity: .5; transition: opacity .15s; }
+  .scenario-chip:hover svg { opacity: 1; }
+</style>
 </head>
 <body>
 
@@ -35,6 +48,7 @@
       <a class="active" href="cas-usage.html">Cas d'usage</a>
       <a href="secteurs.html">Secteurs</a>
       <a href="integrations.html">Intégrations</a>
+      <a href="calculateur.html">Calculateur</a>
       <a href="faq.html">FAQ</a>
     </nav>
     <div class="header-cta">
@@ -48,6 +62,7 @@
     <a class="m-link active" href="cas-usage.html">Cas d'usage</a>
     <a class="m-link" href="secteurs.html">Secteurs</a>
     <a class="m-link" href="integrations.html">Intégrations</a>
+    <a class="m-link" href="calculateur.html">Calculateur</a>
     <a class="m-link" href="faq.html">FAQ</a>
     <a class="m-link" href="contact.html">Contact</a>
     <div class="m-cta">
@@ -58,16 +73,23 @@
 </header>
 
 <main>
-<section class="section-sm bg-paper-2" style="padding-top:clamp(48px,6vw,72px); border-bottom:1px solid var(--line);">
+<section id="scenario-ronde" class="section-sm bg-paper-2" style="padding-top:clamp(48px,6vw,72px); border-bottom:1px solid var(--line);">
   <div class="container">
-    <div class="page-hero-inner" style="max-width:780px;">
+    <div class="page-hero-inner" style="max-width:820px;">
       <span class="eyebrow">Cas d'usage</span>
-      <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); margin-top:18px;">Des scénarios concrets pour sécuriser vos sites.</h1>
-      <p class="lead" style="margin-top:20px; max-width:62ch;">De la levée de doute ponctuelle à la supervision d'un parc de sites, FLEAT s'adapte à des besoins opérationnels réels. Voici comment.</p>
-      <div class="cta-row" style="margin-top:30px;"><a class="btn btn-primary" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="solution.html">Voir la solution</a></div>
+      <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); margin-top:18px;">FLEAT en situation — six scénarios réels.</h1>
+      <p class="lead" style="margin-top:20px; max-width:62ch;">De la levée de doute ponctuelle à la supervision d'un parc multi-sites, chaque dispositif répond à un besoin opérationnel précis. Identifiez le vôtre.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:28px;" role="navigation" aria-label="Scénarios">
+        <a href="#scenario-levee" class="scenario-chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Levée de doute</a>
+        <a href="#scenario-ronde" class="scenario-chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Ronde de surveillance</a>
+        <a href="#scenario-nuit" class="scenario-chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Surveillance de nuit</a>
+        <a href="#scenario-industrie" class="scenario-chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Sites industriels</a>
+        <a href="#scenario-chantier" class="scenario-chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Chantiers</a>
+        <a href="#scenario-multi" class="scenario-chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Multi-sites</a>
+      </div>
     </div>
   </div>
-</section><section class="section">
+</section><section id="scenario-levee" class="section">
     <div class="container"><div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);"><div class="reveal" style="order:1;">
         <span class="step-num">CAS 01</span>
         <h2 class="h2" style="margin-top:12px;">Levée de doute après intrusion</h2>
@@ -81,28 +103,28 @@
         <p class="lead mt-s">Définissez des parcours de surveillance récurrents sur votre site pour couvrir régulièrement les périmètres, y compris les zones difficiles d'accès.</p>
         <ul class="checklist" style="margin-top:26px;"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Couverture régulière du périmètre</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Meilleure traçabilité des passages</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance des zones difficiles d'accès</li></ul>
       </div><div class="reveal" data-d="1" style="order:1;"><div class="ph ph-4x3"><span class="ph-tag">// carte — parcours de ronde programmé</span></div></div></div></div>
-  </section><section class="section">
+  </section><section id="scenario-nuit" class="section">
     <div class="container"><div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);"><div class="reveal" style="order:1;">
         <span class="step-num">CAS 03</span>
         <h2 class="h2" style="margin-top:12px;">Surveillance de nuit</h2>
         <p class="lead mt-s">Sur les sites peu occupés ou sensibles en dehors des horaires d'activité, le drone maintient une capacité d'observation et appuie les agents.</p>
         <ul class="checklist" style="margin-top:26px;"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Réaction plus rapide hors présence</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Appui aux agents de nuit</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Meilleure visibilité sur le site</li></ul>
       </div><div class="reveal" data-d="1" style="order:2;"><div class="ph ph-4x3"><span class="ph-tag">// vue nocturne — survol de site</span></div></div></div></div>
-  </section><section class="section bg-paper-2">
+  </section><section id="scenario-industrie" class="section bg-paper-2">
     <div class="container"><div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);"><div class="reveal" style="order:2;">
         <span class="step-num">CAS 04</span>
         <h2 class="h2" style="margin-top:12px;">Sites industriels et logistiques</h2>
         <p class="lead mt-s">Grandes surfaces, zones de stockage, circulation de véhicules et périmètres étendus : autant d'enjeux où l'observation aérienne complète les dispositifs au sol.</p>
         <ul class="checklist" style="margin-top:26px;"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Couverture des grandes surfaces</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance des zones de stockage</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Réduction des angles morts</li></ul>
       </div><div class="reveal" data-d="1" style="order:1;"><div class="ph ph-4x3"><span class="ph-tag">// plan — site logistique &amp; périmètre</span></div></div></div></div>
-  </section><section class="section">
+  </section><section id="scenario-chantier" class="section">
     <div class="container"><div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);"><div class="reveal" style="order:1;">
         <span class="step-num">CAS 05</span>
         <h2 class="h2" style="margin-top:12px;">Chantiers et sites temporaires</h2>
         <p class="lead mt-s">Sur les zones évolutives où les dispositifs fixes ne sont pas toujours adaptés, le drone offre une surveillance flexible et reconfigurable.</p>
         <ul class="checklist" style="margin-top:26px;"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Déploiement adapté aux zones évolutives</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance flexible et reconfigurable</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Suivi de l'avancement et des accès</li></ul>
       </div><div class="reveal" data-d="1" style="order:2;"><div class="ph ph-4x3"><span class="ph-tag">// vue — chantier en cours</span></div></div></div></div>
-  </section><section class="section bg-paper-2">
+  </section><section id="scenario-multi" class="section bg-paper-2">
     <div class="container"><div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);"><div class="reveal" style="order:2;">
         <span class="step-num">CAS 06</span>
         <h2 class="h2" style="margin-top:12px;">Supervision multi-sites</h2>
@@ -117,7 +139,7 @@
       <p class="lead mt-s mx-auto" style="max-width:52ch;">Décrivez-nous votre besoin : nous évaluons la faisabilité d'un dispositif drone adapté à vos contraintes.</p>
       <div class="cta-row" style="justify-content:center; margin-top:34px;">
         <a class="btn btn-primary btn-lg" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost-light btn-lg" href="contact.html">Planifier un échange</a>
+        <a class="btn btn-ghost-light btn-lg" href="rappel.html">Être rappelé</a>
       </div>
     </div>
   </div>
@@ -139,6 +161,7 @@
         <a href="cas-usage.html">Cas d'usage</a>
         <a href="integrations.html">Intégrations</a>
         <a href="secteurs.html">Secteurs</a>
+        <a href="calculateur.html">Calculateur</a>
       </div>
       <div class="footer-col">
         <h4>Ressources</h4>
@@ -164,22 +187,6 @@
   </div>
 </footer>
 
-
-
-</div>
-  <div class="ck-actions">
-    <button id="cookie-refuse" class="ck-btn ck-refuse">Refuser</button>
-    <button id="cookie-accept" class="ck-btn ck-accept">Accepter</button>
-  </div>
-</div>
-  <p class="ck-body">Ce site utilise des cookies de mesure d'audience pour comprendre comment les visiteurs interagissent avec nos contenus. Aucune donnée n'est partagée à des fins publicitaires.</p>
-  <a href="confidentialite.html" class="ck-link">Politique de confidentialité →</a>
-  <div class="ck-actions">
-    <button class="ck-btn ck-refuse" id="cookie-refuse">Refuser</button>
-    <button class="ck-btn ck-accept" id="cookie-accept">Accepter les cookies</button>
-  </div>
-  <p class="ck-rgpd">Conformément au RGPD, vous pouvez modifier votre choix à tout moment.</p>
-</div>
 <!-- Cookie banner RGPD -->
 <div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
   <p class="ck-text">Nous utilisons des cookies de mesure d'audience pour améliorer votre expérience. <a href="confidentialite.html">En savoir plus</a>.</p>

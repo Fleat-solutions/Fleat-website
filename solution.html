@@ -22,6 +22,35 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/png" href="assets/fleat-mark.png">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* —— Comparatif caméras vs FLEAT —— */
+  .cmp { width: 100%; border-collapse: collapse; margin-top: 44px; }
+  .cmp th, .cmp td { text-align: left; padding: 16px 18px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  .cmp thead th { font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+  .cmp thead th.col-fleat { color: var(--accent-600); }
+  .cmp td.crit-name { font-weight: 600; color: var(--ink); font-size: 15px; }
+  .cmp td.cell { text-align: center; width: 26%; }
+  .cmp .col-fleat { background: var(--accent-soft); }
+  .cmp tbody tr:hover td { background: var(--paper-2); }
+  .cmp tbody tr:hover td.col-fleat { background: #dfe8fc; }
+  .cmp-ico { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 7px; }
+  .cmp-ico svg { width: 16px; height: 16px; }
+  .cmp-ico.yes { background: var(--ok-soft); color: var(--ok-600); }
+  .cmp-ico.no { background: var(--crit-soft); color: var(--crit-600); }
+  .cmp-ico.mid { background: var(--warn-soft); color: var(--warn-600); }
+  .cmp-cap { font-family: var(--f-mono); font-size: 11px; color: var(--ink-4); margin-top: 14px; }
+  @media (max-width: 720px) {
+    .cmp thead { display: none; }
+    .cmp, .cmp tbody, .cmp tr, .cmp td { display: block; width: auto; }
+    .cmp tr { border: 1px solid var(--line); border-radius: var(--r); margin-bottom: 12px; padding: 6px 4px; }
+    .cmp td { border: 0; padding: 10px 16px; }
+    .cmp td.crit-name { padding-bottom: 4px; }
+    .cmp td.cell { text-align: left; display: flex; align-items: center; gap: 12px; }
+    .cmp td.cell::before { content: attr(data-lbl); font-family: var(--f-mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); width: 130px; }
+    .cmp .col-fleat { background: transparent; border-radius: 0; }
+    .cmp td.col-fleat::before { color: var(--accent-600); }
+  }
+</style>
 </head>
 <body>
 
@@ -35,6 +64,7 @@
       <a href="cas-usage.html">Cas d'usage</a>
       <a href="secteurs.html">Secteurs</a>
       <a href="integrations.html">Intégrations</a>
+      <a href="calculateur.html">Calculateur</a>
       <a href="faq.html">FAQ</a>
     </nav>
     <div class="header-cta">
@@ -48,6 +78,7 @@
     <a class="m-link" href="cas-usage.html">Cas d'usage</a>
     <a class="m-link" href="secteurs.html">Secteurs</a>
     <a class="m-link" href="integrations.html">Intégrations</a>
+    <a class="m-link" href="calculateur.html">Calculateur</a>
     <a class="m-link" href="faq.html">FAQ</a>
     <a class="m-link" href="contact.html">Contact</a>
     <div class="m-cta">
@@ -60,11 +91,43 @@
 <main>
 <section class="section-sm bg-paper-2" style="padding-top:clamp(48px,6vw,72px); border-bottom:1px solid var(--line);">
   <div class="container">
-    <div class="page-hero-inner" style="max-width:780px;">
-      <span class="eyebrow">La solution</span>
-      <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); margin-top:18px;">La couche de supervision qui orchestre vos missions drone.</h1>
-      <p class="lead" style="margin-top:20px; max-width:62ch;">FLEAT centralise la gestion, le déclenchement et le suivi des missions drone dans un contexte de sécurité — en s'intégrant progressivement aux systèmes déjà en place sur votre site.</p>
-      <div class="cta-row" style="margin-top:30px;"><a class="btn btn-primary" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="cas-usage.html">Voir les cas d'usage</a></div>
+    <div class="grid g-2" style="align-items:center; gap:clamp(36px,5vw,72px); padding-bottom:8px;">
+
+      <!-- Texte -->
+      <div class="page-hero-inner">
+        <span class="eyebrow">La solution</span>
+        <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); margin-top:18px;">La couche de supervision qui orchestre vos missions drone.</h1>
+        <p class="lead" style="margin-top:20px; max-width:56ch;">FLEAT centralise la gestion, le déclenchement et le suivi des missions drone dans un contexte de sécurité — en s'intégrant aux systèmes déjà en place sur votre site.</p>
+        <div class="cta-row" style="margin-top:30px;">
+          <a class="btn btn-primary" href="contact.html">Implémenter FLEAT <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="cas-usage.html">Voir les cas d'usage</a>
+        </div>
+      </div>
+
+      <!-- 4 modules en aperçu -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;" aria-label="Les 4 modules FLEAT">
+        <div class="card" style="padding:18px 16px;">
+          <span class="step-num" style="display:block; margin-bottom:10px;">01</span>
+          <strong style="font-size:15px; color:var(--ink); display:block;">Supervision</strong>
+          <p class="muted" style="font-size:13px; margin-top:5px; line-height:1.45;">Carte, suivi vol, missions en temps réel</p>
+        </div>
+        <div class="card" style="padding:18px 16px;">
+          <span class="step-num" style="display:block; margin-bottom:10px;">02</span>
+          <strong style="font-size:15px; color:var(--ink); display:block;">Alertes</strong>
+          <p class="muted" style="font-size:13px; margin-top:5px; line-height:1.45;">Levée de doute et vérification visuelle</p>
+        </div>
+        <div class="card" style="padding:18px 16px;">
+          <span class="step-num" style="display:block; margin-bottom:10px;">03</span>
+          <strong style="font-size:15px; color:var(--ink); display:block;">Intégrations</strong>
+          <p class="muted" style="font-size:13px; margin-top:5px; line-height:1.45;">Connexion aux caméras, alarmes et VMS</p>
+        </div>
+        <div class="card" style="padding:18px 16px;">
+          <span class="step-num" style="display:block; margin-bottom:10px;">04</span>
+          <strong style="font-size:15px; color:var(--ink); display:block;">Sécurité</strong>
+          <p class="muted" style="font-size:13px; margin-top:5px; line-height:1.45;">Gestion des accès, rôles et historique</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -141,6 +204,80 @@
   </div>
 </section>
 
+<!-- ===================== COMPARAISON CAMÉRAS vs FLEAT ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Caméras &amp; alarmes seules</span>
+      <h2 class="h2">Pourquoi un dispositif fixe laisse toujours une faille.</h2>
+      <p class="lead">Les caméras et alarmes détectent — mais ne se déplacent pas, ne couvrent pas tout, et restent vulnérables. FLEAT ne les remplace pas : il comble ce qu'elles ne peuvent pas faire.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:16px; margin-top:32px;">
+        <div style="padding:16px; background:var(--paper-2); border-radius:var(--r); border-left:3px solid var(--accent);">
+          <div style="font-size:1.6rem; font-weight:700; color:var(--accent-600);">6 000 m²</div>
+          <p style="font-size:13px; color:var(--ink-3); margin-top:6px;">Couverture maximale drone en 1 jour (vs nacelle : plusieurs semaines)</p>
+        </div>
+        <div style="padding:16px; background:var(--paper-2); border-radius:var(--r); border-left:3px solid var(--accent);">
+          <div style="font-size:1.6rem; font-weight:700; color:var(--accent-600);">&lt; 5 sec</div>
+          <p style="font-size:13px; color:var(--ink-3); margin-top:6px;">Temps d'arrivée drone après alerte pour levée de doute</p>
+        </div>
+        <div style="padding:16px; background:var(--paper-2); border-radius:var(--r); border-left:3px solid var(--accent);">
+          <div style="font-size:1.6rem; font-weight:700; color:var(--accent-600);">-25 %</div>
+          <p style="font-size:13px; color:var(--ink-3); margin-top:6px;">Réduction des frais d'inspection et arrêts techniques</p>
+        </div>
+      </div>faire.</p>
+    </div>
+    <div class="reveal" style="overflow-x:auto;">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th>Sur le terrain</th>
+            <th class="cell">Caméras / alarme</th>
+            <th class="cell col-fleat">FLEAT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="crit-name">Couvre les angles morts &amp; zones hors champ</td>
+            <td class="cell" data-lbl="Caméras / alarme"><span class="cmp-ico no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span></td>
+            <td class="cell col-fleat" data-lbl="FLEAT"><span class="cmp-ico yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></td>
+          </tr>
+          <tr>
+            <td class="crit-name">Surveille toitures &amp; points en hauteur</td>
+            <td class="cell" data-lbl="Caméras / alarme"><span class="cmp-ico no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span></td>
+            <td class="cell col-fleat" data-lbl="FLEAT"><span class="cmp-ico yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></td>
+          </tr>
+          <tr>
+            <td class="crit-name">Efficace sur terrain ouvert sans bâti</td>
+            <td class="cell" data-lbl="Caméras / alarme"><span class="cmp-ico mid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span></td>
+            <td class="cell col-fleat" data-lbl="FLEAT"><span class="cmp-ico yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></td>
+          </tr>
+          <tr>
+            <td class="crit-name">Se déplace vers l'alerte (levée de doute active)</td>
+            <td class="cell" data-lbl="Caméras / alarme"><span class="cmp-ico no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span></td>
+            <td class="cell col-fleat" data-lbl="FLEAT"><span class="cmp-ico yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></td>
+          </tr>
+          <tr>
+            <td class="crit-name">Difficile à neutraliser (point non fixe)</td>
+            <td class="cell" data-lbl="Caméras / alarme"><span class="cmp-ico no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span></td>
+            <td class="cell col-fleat" data-lbl="FLEAT"><span class="cmp-ico yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></td>
+          </tr>
+          <tr>
+            <td class="crit-name">Vue d'ensemble d'une grande emprise</td>
+            <td class="cell" data-lbl="Caméras / alarme"><span class="cmp-ico mid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></span></td>
+            <td class="cell col-fleat" data-lbl="FLEAT"><span class="cmp-ico yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></td>
+          </tr>
+          <tr>
+            <td class="crit-name">S'intègre à vos caméras &amp; alarmes</td>
+            <td class="cell" data-lbl="Caméras / alarme"><span class="cmp-ico yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></td>
+            <td class="cell col-fleat" data-lbl="FLEAT"><span class="cmp-ico yes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-cap">FLEAT s'intègre à vos caméras et alarmes existantes — il les complète, il ne les remplace pas.</p>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">Module 04</span><h2 class="h2">Sécurité et gestion des accès</h2><p class="lead">Une solution pensée pour des environnements où le contrôle des accès et des données est essentiel.</p></div>
@@ -163,7 +300,7 @@
       <p class="lead mt-s mx-auto" style="max-width:52ch;">Décrivez-nous votre site et vos enjeux : nous évaluons la faisabilité d'un dispositif adapté à vos contraintes.</p>
       <div class="cta-row" style="justify-content:center; margin-top:34px;">
         <a class="btn btn-primary btn-lg" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost-light btn-lg" href="contact.html">Planifier un échange</a>
+        <a class="btn btn-ghost-light btn-lg" href="rappel.html">Être rappelé</a>
       </div>
     </div>
   </div>
@@ -185,6 +322,7 @@
         <a href="cas-usage.html">Cas d'usage</a>
         <a href="integrations.html">Intégrations</a>
         <a href="secteurs.html">Secteurs</a>
+        <a href="calculateur.html">Calculateur</a>
       </div>
       <div class="footer-col">
         <h4>Ressources</h4>
@@ -210,22 +348,6 @@
   </div>
 </footer>
 
-
-
-</div>
-  <div class="ck-actions">
-    <button id="cookie-refuse" class="ck-btn ck-refuse">Refuser</button>
-    <button id="cookie-accept" class="ck-btn ck-accept">Accepter</button>
-  </div>
-</div>
-  <p class="ck-body">Ce site utilise des cookies de mesure d'audience pour comprendre comment les visiteurs interagissent avec nos contenus. Aucune donnée n'est partagée à des fins publicitaires.</p>
-  <a href="confidentialite.html" class="ck-link">Politique de confidentialité →</a>
-  <div class="ck-actions">
-    <button class="ck-btn ck-refuse" id="cookie-refuse">Refuser</button>
-    <button class="ck-btn ck-accept" id="cookie-accept">Accepter les cookies</button>
-  </div>
-  <p class="ck-rgpd">Conformément au RGPD, vous pouvez modifier votre choix à tout moment.</p>
-</div>
 <!-- Cookie banner RGPD -->
 <div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
   <p class="ck-text">Nous utilisons des cookies de mesure d'audience pour améliorer votre expérience. <a href="confidentialite.html">En savoir plus</a>.</p>

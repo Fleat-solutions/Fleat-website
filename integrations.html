@@ -22,6 +22,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/png" href="assets/fleat-mark.png">
 <link rel="stylesheet" href="styles.css">
+<style>
+  .pilier-strip { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:10px; margin-top:26px; }
+  .pilier { padding:16px 18px; background:var(--paper); border:1px solid var(--line-2); border-radius:var(--r); }
+  .pilier strong { font-size:14.5px; color:var(--ink); display:block; margin-bottom:5px; }
+  .pilier p { font-size:13px; color:var(--ink-3); line-height:1.45; margin:0; }
+</style>
 </head>
 <body>
 
@@ -35,6 +41,7 @@
       <a href="cas-usage.html">Cas d'usage</a>
       <a href="secteurs.html">Secteurs</a>
       <a class="active" href="integrations.html">Intégrations</a>
+      <a href="calculateur.html">Calculateur</a>
       <a href="faq.html">FAQ</a>
     </nav>
     <div class="header-cta">
@@ -48,6 +55,7 @@
     <a class="m-link" href="cas-usage.html">Cas d'usage</a>
     <a class="m-link" href="secteurs.html">Secteurs</a>
     <a class="m-link active" href="integrations.html">Intégrations</a>
+    <a class="m-link" href="calculateur.html">Calculateur</a>
     <a class="m-link" href="faq.html">FAQ</a>
     <a class="m-link" href="contact.html">Contact</a>
     <div class="m-cta">
@@ -59,11 +67,27 @@
 
 <main>
 <section class="section-sm bg-paper-2" style="padding-top:clamp(48px,6vw,72px); border-bottom:1px solid var(--line);">
-  <div class="container"><div class="page-hero-inner" style="max-width:780px;">
-      <span class="eyebrow">Intégrations</span>
-      <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); margin-top:18px;">Une couche de supervision, pas une solution fermée.</h1>
-      <p class="lead" style="margin-top:20px; max-width:62ch;">FLEAT est pensé pour s'interfacer avec les principaux outils utilisés dans les environnements de sécurité professionnelle — progressivement, selon les besoins du client.</p>
-      <div class="cta-row" style="margin-top:30px;"><a class="btn btn-primary" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  <div class="container"><div class="page-hero-inner" style="max-width:820px;">
+    <span class="eyebrow">Intégrations</span>
+    <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); margin-top:18px;">Une couche de supervision, pas une solution fermée.</h1>
+    <p class="lead" style="margin-top:20px; max-width:62ch;">FLEAT s'intègre progressivement aux outils déjà en place sur votre site — caméras, alarmes, VMS, contrôle d'accès — sans remplacer ce qui fonctionne.</p>
+    <div class="pilier-strip">
+      <div class="pilier">
+        <strong>Progressif</strong>
+        <p>Une connexion par étapes, selon votre environnement et vos priorités.</p>
+      </div>
+      <div class="pilier">
+        <strong>Ouvert</strong>
+        <p>Sans dépendance éditeur. FLEAT ne verrouille pas votre architecture.</p>
+      </div>
+      <div class="pilier">
+        <strong>Complémentaire</strong>
+        <p>On s'ajoute à vos caméras et alarmes — on ne les remplace pas.</p>
+      </div>
+    </div>
+    <div class="cta-row" style="margin-top:28px;">
+      <a class="btn btn-primary" href="contact.html">Évaluer les connecteurs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
   </div></div>
 </section>
 <section class="section">
@@ -102,7 +126,7 @@
       <p class="lead mt-s mx-auto" style="max-width:52ch;">Décrivez-nous votre environnement de sécurité : nous évaluons les connexions possibles, étape par étape.</p>
       <div class="cta-row" style="justify-content:center; margin-top:34px;">
         <a class="btn btn-primary btn-lg" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost-light btn-lg" href="contact.html">Planifier un échange</a>
+        <a class="btn btn-ghost-light btn-lg" href="rappel.html">Être rappelé</a>
       </div></div>
   </div>
 </section>
@@ -123,6 +147,7 @@
         <a href="cas-usage.html">Cas d'usage</a>
         <a href="integrations.html">Intégrations</a>
         <a href="secteurs.html">Secteurs</a>
+        <a href="calculateur.html">Calculateur</a>
       </div>
       <div class="footer-col">
         <h4>Ressources</h4>
@@ -148,22 +173,6 @@
   </div>
 </footer>
 
-
-
-</div>
-  <div class="ck-actions">
-    <button id="cookie-refuse" class="ck-btn ck-refuse">Refuser</button>
-    <button id="cookie-accept" class="ck-btn ck-accept">Accepter</button>
-  </div>
-</div>
-  <p class="ck-body">Ce site utilise des cookies de mesure d'audience pour comprendre comment les visiteurs interagissent avec nos contenus. Aucune donnée n'est partagée à des fins publicitaires.</p>
-  <a href="confidentialite.html" class="ck-link">Politique de confidentialité →</a>
-  <div class="ck-actions">
-    <button class="ck-btn ck-refuse" id="cookie-refuse">Refuser</button>
-    <button class="ck-btn ck-accept" id="cookie-accept">Accepter les cookies</button>
-  </div>
-  <p class="ck-rgpd">Conformément au RGPD, vous pouvez modifier votre choix à tout moment.</p>
-</div>
 <!-- Cookie banner RGPD -->
 <div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
   <p class="ck-text">Nous utilisons des cookies de mesure d'audience pour améliorer votre expérience. <a href="confidentialite.html">En savoir plus</a>.</p>
