@@ -1,120 +1,60 @@
-# FLEAT — Supervision drone connectée
+# FLEAT · Supervision drone connectée
 
-Site vitrine pour **FLEAT**, une solution de supervision drone intégrée aux systèmes de sécurité existants.
+Site vitrine de **FLEAT** : rondes de surveillance automatisées par drone, connectées aux systèmes de sécurité existants.
 
-## À propos
+## Lancer le site en local
 
-FLEAT aide les entreprises à renforcer la surveillance de leurs sites grâce à :
-- **Levée de doute** rapide après alerte (< 60s)
-- **Rondes automatiques** sur des zones définies
-- **Supervision multi-sites** centralisée
-- **Intégration** aux systèmes de sécurité existants
+Prérequis : Node.js.
 
-## Démarrage rapide
-
-### Prérequis
-- Python 3.x (ou un autre serveur HTTP)
-- Un navigateur web moderne
-
-### Installation
-
-1. **Clonez ou téléchargez** le projet
-2. **Naviguez** dans le répertoire :
-   ```bash
-   cd C:\Users\romai\Desktop\Fleat-website
-   ```
-
-### Lancer le site
-
-#### Avec Python (recommandé)
-```bash
-python -m http.server 8000
-```
-Puis ouvrez : **http://localhost:8000**
-
-#### Avec Node.js
 ```bash
 npx http-server -p 8000
 ```
 
-#### Directement dans le navigateur
-Double-cliquez sur `index.html`
+Puis ouvrir **http://localhost:8000**.
 
 ## Structure du projet
 
 ```
 Fleat-website/
-├── index.html              # Page d'accueil
-├── solution.html           # Détails de la solution
+├── index.html              # Accueil
+├── solution.html           # Fonctionnement de la solution
 ├── cas-usage.html          # Cas d'usage
 ├── secteurs.html           # Secteurs d'activité
-├── integrations.html       # Partenaires intégrés
+├── integrations.html       # Compatibilité avec les systèmes de sécurité
 ├── faq.html                # Questions fréquentes
-├── contact.html            # Formulaire de contact
+├── about.html              # À propos
+├── contact.html            # Formulaire « Étudier mon site »
 ├── rappel.html             # Demande de rappel
-├── styles.css              # Feuille de styles
-├── site.js                 # Interactions JavaScript
-├── assets/                 # Logos et images
-│   ├── fleat-logo.png
-│   ├── fleat-logo-white.png
-│   └── fleat-mark.png
-└── README.md               # Ce fichier
+├── mentions-legales.html
+├── confidentialite.html
+├── 404.html
+├── styles.css              # Feuille de styles commune
+├── site.js                 # Interactions (menu, formulaires, cookies, apparitions)
+├── assets/                 # Logos et images locales
+├── robots.txt, sitemap.xml # SEO
+├── CLAUDE.md               # Règles de rédaction du site
+├── CREDITS.md              # Crédits des photos Unsplash
+├── design-references/      # DESIGN.md de référence (Tesla, Vercel, Stripe, Apple, SpaceX)
+└── scraps/                 # Explorations de design, hors site
 ```
 
-## Fonctionnalités
+## Design
 
-- Design responsif (mobile, tablet, desktop)
-- Animations au scroll fluides
-- Mockup interactif de l'interface de supervision
-- Navigation mobile avec menu hamburger
-- Formulaires validés (contact, rappel)
-- Banneau cookies RGPD conforme
-- SEO optimisé (meta tags, schema.org)
-
-## Design System
-
-Le site utilise un système de design cohérent :
-- **Couleurs** : Bleu nuit (#0a1a3d) + Accent bleu (#2f62ea)
-- **Typographie** : Archivo (display) + Hanken Grotesk (texte)
-- **Espacements** : Système de variables CSS fluides
+- **Couleurs** : bleu nuit `#0a1a3d`, encre `#0f1b33`, accent bleu `#2f62ea`.
+- **Typographie** : Archivo (titres), Hanken Grotesk (texte), IBM Plex Mono (libellés).
+- **Photos** : Unsplash, chargées depuis leur CDN (voir `CREDITS.md`).
 
 ## Technologies
 
-- **HTML5** sémantique
-- **CSS3** avec variables personnalisées
-- **JavaScript vanilla** (pas de dépendances)
-- **Responsive design** (mobile-first)
+- HTML, CSS et JavaScript sans framework ni étape de build.
+- [Motion](https://motion.dev) 14.0.0 chargé par CDN pour les animations.
 
-## Pages incluses
+## Règles de rédaction
 
-| Page | Description |
-|------|-------------|
-| `index.html` | Accueil avec hero, bénéfices, cas d'usage |
-| `solution.html` | Détails techniques de la solution |
-| `cas-usage.html` | 6 scénarios concrets d'utilisation |
-| `secteurs.html` | Industries cibles + modales |
-| `integrations.html` | Partenaires et intégrations |
-| `faq.html` | Questions fréquentes avec accordéon |
-| `contact.html` | Formulaire de contact |
-| `rappel.html` | Demande de rappel téléphonique |
-
-## Responsive
-
-- **Desktop** : Expérience complète avec navigation
-- **Tablet** : Ajustements de grille et espacements
-- **Mobile** : Menu hamburger, colonnes simples
-
-## Accessibilité
-
-- ARIA labels sur les éléments interactifs
-- Navigation au clavier fonctionnelle
-- Respect des préférences `prefers-reduced-motion`
-- Contraste suffisant (WCAG AA)
+Voir `CLAUDE.md` : pas de tiret cadratin ni demi-cadratin, phrases courtes, ton factuel, pas d'emoji.
 
 ## Licence
 
 © 2026 FLEAT. Tous droits réservés.
 
----
-
-**Questions ?** Contactez-nous : contact@fleat.fr
+Contact : contact@fleat-solutions.com

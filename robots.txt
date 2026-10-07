@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /
 
-# FLEAT — site vitrine
+# FLEAT · site vitrine
 # Décommenter la ligne ci-dessus et la ligne ci-dessous une fois le site en production
 
 # Allow: /

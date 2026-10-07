@@ -1,0 +1,11 @@
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
+
+# Dossier temporaire du navigateur Playwright
+.playwright/
+
+# Paquet de design d'origine (déjà intégré au site)
+fleat-site-vitrine/
+
+# Réglages personnels Claude Code
+.claude/settings.local.json
