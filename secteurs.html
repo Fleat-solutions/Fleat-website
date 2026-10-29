@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secteurs — FLEAT · Supervision drone par secteur d'activité</title>
+<title>Secteurs · FLEAT · Supervision drone par secteur d'activité</title>
 <meta name="description" content="Santé, énergie, data centers, industrie, logistique, transports, parcs solaires, mines &amp; carrières : découvrez comment FLEAT répond aux enjeux de sûreté de votre secteur.">
 <link rel="canonical" href="https://www.fleat.fr/secteurs.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FLEAT">
-<meta property="og:title" content="Secteurs — FLEAT · Supervision drone par secteur d'activité">
+<meta property="og:title" content="Secteurs · FLEAT · Supervision drone par secteur d'activité">
 <meta property="og:description" content="Santé, énergie, data centers, industrie, logistique, transports, parcs solaires, mines &amp; carrières : FLEAT s'adapte aux contraintes de votre secteur.">
 <meta property="og:url" content="https://www.fleat.fr/secteurs.html">
 <meta property="og:locale" content="fr_FR">
@@ -17,18 +17,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/png" href="assets/fleat-mark.png">
+<meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="styles.css">
 <style>
   /* ============================================================
-     PAGE SECTEURS — Hero tuiles + sections ancrées
+     PAGE SECTEURS · Hero tuiles + sections ancrées
      ============================================================ */
 
-  /* —— Hero —— */
+  /* -- Hero -- */
   .sectors-hero { padding-top: clamp(56px, 7vw, 96px); padding-bottom: clamp(48px, 6vw, 80px); }
   .sectors-hero h1 { margin-top: 18px; }
   .sectors-hero .lead { margin-top: 20px; max-width: 58ch; }
 
-  /* —— Tuiles secteurs dans le hero —— */
+  /* -- Tuiles secteurs dans le hero -- */
   .hx-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -87,7 +88,7 @@
   @media (max-width: 1020px) { .hx-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 480px)  { .hx-grid { grid-template-columns: 1fr; } .hx-tile { flex-direction: row; align-items: center; gap: 16px; padding: 16px 18px; } .hx-tile .hx-sub, .hx-tile .hx-go { display: none; } .hx-ico { flex-shrink: 0; } }
 
-  /* —— Sous-navigation collante —— */
+  /* -- Sous-navigation collante -- */
   .sector-subnav {
     position: sticky;
     top: 72px;
@@ -119,7 +120,7 @@
   .subnav-link:hover { color: var(--ink); background: var(--paper-2); }
   .subnav-link.active { color: var(--accent-600); background: var(--accent-soft); border-color: #d3defb; }
 
-  /* —— Sections secteur —— */
+  /* -- Sections secteur -- */
   .sector-sec { scroll-margin-top: 140px; }
   .sec-grid {
     display: grid;
@@ -150,7 +151,7 @@
   .sec-main .checklist { margin-top: 26px; }
   .sec-main .sec-cta { margin-top: 30px; }
 
-  /* —— Colonne preuve : KPI + visuel —— */
+  /* -- Colonne preuve : KPI + visuel -- */
   .sec-side { display: flex; flex-direction: column; gap: 18px; }
   .kpi-card {
     background: var(--paper);
@@ -184,35 +185,36 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 
 <!-- ===================== HEADER ===================== -->
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="FLEAT — accueil">
-      <img class="brand-logo" src="assets/fleat-logo.png" alt="fleat">
+    <a class="brand" href="index.html" aria-label="FLEAT · accueil">
+      <img class="brand-logo" src="assets/fleat-logo-dark.png" alt="fleat">
     </a>
     <nav class="nav-main" aria-label="Navigation principale">
       <a href="solution.html">Solution</a>
       <a href="cas-usage.html">Cas d'usage</a>
       <a href="secteurs.html" class="active">Secteurs</a>
       <a href="integrations.html">Intégrations</a>
-      <a href="calculateur.html">Calculateur</a>
-      <a href="faq.html">FAQ</a>
+            <a href="faq.html">FAQ</a>
+      <a href="about.html">À propos</a>
     </nav>
     <div class="header-cta">
       <a class="btn btn-ghost" href="rappel.html">Être rappelé</a>
       <a class="btn btn-primary" href="contact.html">Étudier mon site</a>
     </div>
-    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false"><span></span></button>
+    <button type="button" class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><span></span></button>
   </div>
-  <div class="mobile-menu">
+  <div class="mobile-menu" id="menu-mobile">
     <a class="m-link" href="solution.html">Solution</a>
     <a class="m-link" href="cas-usage.html">Cas d'usage</a>
-    <a class="m-link" href="secteurs.html">Secteurs</a>
+    <a class="m-link active" href="secteurs.html">Secteurs</a>
     <a class="m-link" href="integrations.html">Intégrations</a>
-    <a class="m-link" href="calculateur.html">Calculateur</a>
-    <a class="m-link" href="faq.html">FAQ</a>
-    <a class="m-link active" href="contact.html">Contact</a>
+        <a class="m-link" href="faq.html">FAQ</a>
+    <a class="m-link" href="about.html">À propos</a>
+    <a class="m-link" href="contact.html">Contact</a>
     <div class="m-cta">
       <a class="btn btn-ghost btn-block" href="rappel.html">Être rappelé</a>
       <a class="btn btn-primary btn-block" href="contact.html">Étudier mon site</a>
@@ -220,341 +222,216 @@
   </div>
 </header>
 
-<main>
+<main id="contenu" tabindex="-1">
 
 <!-- ===================== HERO : TOUS LES SECTEURS ===================== -->
-<section class="hero sectors-hero" data-screen-label="Hero — Secteurs">
+<section class="hero sectors-hero" data-screen-label="Hero · Secteurs">
+  <div class="hero-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1729286283040-bc4b75550106?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1729286283040-bc4b75550106?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1729286283040-bc4b75550106?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1729286283040-bc4b75550106?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="100vw" alt="" loading="eager" fetchpriority="high"></div>
   <div class="hero-grid-bg" aria-hidden="true"></div>
   <div class="container" style="position:relative;">
     <div class="page-hero-inner">
-      <span class="eyebrow">Secteurs d'activité</span>
-      <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); max-width:20ch;">Votre secteur a ses contraintes. FLEAT s'y adapte.</h1>
-      <p class="lead">Réglementation, étendue des sites, horaires critiques&nbsp;: chaque environnement impose ses propres exigences de sûreté. Choisissez le vôtre pour voir comment nous y répondons.</p>
-      <nav class="hx-grid" aria-label="Accès rapide aux secteurs">
-        <a class="hx-tile" href="#sante">
-          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v10M7 12h10"/><circle cx="12" cy="12" r="9.5"/></svg></span>
-          <span class="hx-name">Santé</span>
-          <span class="hx-sub">Hôpitaux, cliniques, laboratoires</span>
-          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
-        </a>
-        <a class="hx-tile" href="#energie">
-          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg></span>
-          <span class="hx-name">Énergie &amp; Infra</span>
-          <span class="hx-sub">Centrales, sous-stations, réseaux</span>
-          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
-        </a>
-        <a class="hx-tile" href="#datacenter">
-          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M2 17h20M6 6h.01M6 11h.01M11 6h.01M11 11h.01M16 6h.01M16 11h.01"/></svg></span>
-          <span class="hx-name">Data Centers</span>
-          <span class="hx-sub">Sites 24/7, périmètres critiques</span>
-          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
-        </a>
-        <a class="hx-tile" href="#industrie">
-          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 5V3h20v2M8 19v2M16 19v2"/></svg></span>
-          <span class="hx-name">Industrie</span>
-          <span class="hx-sub">Usines, zones techniques étendues</span>
-          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
-        </a>
-        <a class="hx-tile" href="#logistique">
-          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 0 1 6 0M3 7.5v7.5a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5V7.5"/><path d="M3 7.5h18M8 7.5v-3a1.5 1.5 0 0 1 1.5-1.5h5a1.5 1.5 0 0 1 1.5 1.5v3"/></svg></span>
-          <span class="hx-name">Logistique</span>
-          <span class="hx-sub">Entrepôts de 20&nbsp;000&nbsp;m² et plus</span>
-          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
-        </a>
-        <a class="hx-tile" href="#transports">
-          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 0-2 2v2h22v-2a2 2 0 0 0-2-2h-2M8 4h8v8H8z"/><path d="M2 15h20"/></svg></span>
-          <span class="hx-name">Transports</span>
-          <span class="hx-sub">Réseaux linéaires, dépôts</span>
-          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
-        </a>
-        <a class="hx-tile" href="#solaire">
-          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
-          <span class="hx-name">Parcs solaires</span>
-          <span class="hx-sub">Champs photovoltaïques isolés</span>
-          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
-        </a>
-        <a class="hx-tile" href="#carrieres">
-          <span class="hx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 16l4-10h8l4 10"/></svg></span>
-          <span class="hx-name">Mines &amp; Carrières</span>
-          <span class="hx-sub">Terrains accidentés, zones de dépôt</span>
-          <span class="hx-go">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
-        </a>
-      </nav>
+      <span class="eyebrow">Secteurs</span>
+      <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); max-width:22ch;">Votre site a ses contraintes. Nous les étudions avant de proposer quoi que ce soit.</h1>
+      <p class="lead">Surface, topographie, environnement aéronautique, dispositifs déjà en place : la faisabilité d'une surveillance par drone dépend du site. Voici ce que nous observons, secteur par secteur.</p>
     </div>
   </div>
 </section>
 
 <!-- ===================== SOUS-NAV COLLANTE ===================== -->
-<div class="sector-subnav" aria-label="Navigation des secteurs">
+<nav class="sector-subnav" aria-label="Navigation des secteurs">
   <div class="container sector-subnav-inner" id="sector-subnav">
-    <a class="subnav-link" href="#sante">Santé</a>
-    <a class="subnav-link" href="#energie">Énergie</a>
-    <a class="subnav-link" href="#datacenter">Data Centers</a>
     <a class="subnav-link" href="#industrie">Industrie</a>
+    <a class="subnav-link" href="#recyclage">Recyclage</a>
     <a class="subnav-link" href="#logistique">Logistique</a>
-    <a class="subnav-link" href="#transports">Transports</a>
-    <a class="subnav-link" href="#solaire">Solaire</a>
-    <a class="subnav-link" href="#carrieres">Carrières</a>
+    <a class="subnav-link" href="#chantiers">Grands chantiers</a>
+    <a class="subnav-link" href="#datacenter">Data centers</a>
+    <a class="subnav-link" href="#energie">Énergie</a>
   </div>
-</div>
+</nav>
 
-<!-- ===================== 01 · SANTÉ ===================== -->
-<section id="sante" class="section sector-sec" data-screen-label="Secteur — Santé">
+<!-- ===================== 01 · INDUSTRIE ===================== -->
+<section id="industrie" class="section sector-sec" data-screen-label="Secteur · Industrie">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
-        <span class="sec-kicker">
-          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v10M7 12h10"/><circle cx="12" cy="12" r="9.5"/></svg></span>
-          <span class="step-num">SECTEUR 01 · SANTÉ</span>
-        </span>
-        <h2 class="h2">Sécuriser les zones critiques sans alourdir vos équipes.</h2>
-        <p class="lead">Urgences, pharmacies, zones techniques, parkings&nbsp;: un établissement de santé fonctionne jour et nuit, avec des effectifs de sûreté limités. Le drone apporte une capacité de vérification immédiate, sans détourner un agent de son poste.</p>
-        <ul class="checklist">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Couverture 24/7 des zones critiques et des accès</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute en moins de 60 secondes après alarme</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Traçabilité complète pour vos obligations réglementaires</li>
-        </ul>
-        <div class="sec-cta">
-          <a class="btn btn-link" href="contact.html">Étudier mon établissement <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
-      </div>
-      <aside class="sec-side reveal" data-d="1">
-        <div class="kpi-card">
-          <span class="kpi-big">95&nbsp;%</span>
-          <p class="kpi-desc">des intrusions en établissement de santé ont lieu <strong>la nuit</strong>, quand les effectifs sont au plus bas.</p>
-        </div>
-        <div class="ph ph-4x3"><span class="ph-tag">// photo — campus hospitalier, vue aérienne</span></div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== 02 · ÉNERGIE ===================== -->
-<section id="energie" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur — Énergie">
-  <div class="container">
-    <div class="sec-grid">
-      <div class="sec-main reveal">
-        <span class="sec-kicker">
-          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg></span>
-          <span class="step-num">SECTEUR 02 · ÉNERGIE &amp; INFRASTRUCTURES</span>
-        </span>
-        <h2 class="h2">Répondre aux obligations OIV, preuves à l'appui.</h2>
-        <p class="lead">Centrales, sous-stations, réseaux de distribution&nbsp;: les opérateurs d'importance vitale doivent démontrer la robustesse de leur dispositif de sûreté. FLEAT documente chaque mission et chaque levée de doute.</p>
-        <ul class="checklist">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Dispositif aligné sur les exigences réglementaires OIV</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Inspection régulière des périmètres et clôtures</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Documentation horodatée, exploitable en cas d'audit</li>
-        </ul>
-        <div class="sec-cta">
-          <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
-      </div>
-      <aside class="sec-side reveal" data-d="1">
-        <div class="kpi-card">
-          <span class="kpi-big">100&nbsp;%</span>
-          <p class="kpi-desc">des sites classés OIV sont soumis à des <strong>obligations renforcées</strong> de protection périmétrique.</p>
-        </div>
-        <div class="ph ph-4x3"><span class="ph-tag">// photo — poste électrique / infrastructure énergétique</span></div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== 03 · DATA CENTERS ===================== -->
-<section id="datacenter" class="section sector-sec" data-screen-label="Secteur — Data Centers">
-  <div class="container">
-    <div class="sec-grid">
-      <div class="sec-main reveal">
-        <span class="sec-kicker">
-          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M2 17h20M6 6h.01M6 11h.01M11 6h.01M11 11h.01M16 6h.01M16 11h.01"/></svg></span>
-          <span class="step-num">SECTEUR 03 · DATA CENTERS</span>
-        </span>
-        <h2 class="h2">Une sûreté périmétrique à la hauteur de vos SLA.</h2>
-        <p class="lead">Vos clients exigent une disponibilité sans faille — votre périmètre physique aussi. FLEAT complète vos caméras fixes par une observation mobile, intégrée à vos outils de supervision existants.</p>
-        <ul class="checklist">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance ininterrompue, alignée sur un fonctionnement 24/7</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Intégration à vos systèmes de supervision et SIEM</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Traçabilité continue, exploitable pour vos certifications</li>
-        </ul>
-        <div class="sec-cta">
-          <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
-      </div>
-      <aside class="sec-side reveal" data-d="1">
-        <div class="kpi-card">
-          <span class="kpi-big">&lt;&nbsp;15&nbsp;%</span>
-          <p class="kpi-desc">le coût annuel du dispositif représente <strong>moins de 15&nbsp;%</strong> du coût moyen d'une seule intrusion réussie.</p>
-        </div>
-        <div class="ph ph-4x3"><span class="ph-tag">// photo — data center, périmètre extérieur de nuit</span></div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== 04 · INDUSTRIE ===================== -->
-<section id="industrie" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur — Industrie">
-  <div class="container">
-    <div class="sec-grid">
-      <div class="sec-main reveal">
-        <span class="sec-kicker">
-          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 5V3h20v2M8 19v2M16 19v2"/></svg></span>
-          <span class="step-num">SECTEUR 04 · INDUSTRIE</span>
-        </span>
+        <span class="step-num">INDUSTRIE</span>
         <h2 class="h2">Couvrir de grandes emprises, sans angle mort.</h2>
-        <p class="lead">Usines, zones techniques, stockages extérieurs&nbsp;: multiplier les caméras fixes sur une grande emprise coûte cher et laisse toujours des zones aveugles. Un drone couvre l'ensemble du site et se déplace là où l'alerte se déclenche.</p>
+        <p class="lead">Usines, aciéries, cimenteries : multiplier les caméras fixes sur une grande emprise coûte cher et laisse toujours des zones peu couvertes. Une ronde aérienne automatisée parcourt l'ensemble du site selon une trajectoire définie.</p>
         <ul class="checklist">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Couverture complète du site, y compris les zones aveugles</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute immédiate sur chaque alerte</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Inspection visuelle rapide après incident</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Stocks extérieurs, zones sensibles et accès multiples contrôlés régulièrement</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute aérienne après une alerte, sans déplacer immédiatement un agent</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Historique des missions conservé et exploitable pour vos comptes rendus</li>
         </ul>
         <div class="sec-cta">
           <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
       <aside class="sec-side reveal" data-d="1">
-        <div class="kpi-card">
-          <span class="kpi-big">68&nbsp;%</span>
-          <p class="kpi-desc">des intrusions sur sites industriels ont lieu <strong>en dehors des heures d'activité</strong>.</p>
+        <div class="photo photo-4x3 photo-frame">
+          <img src="https://images.unsplash.com/photo-1666219462105-2909c2d72d01?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1666219462105-2909c2d72d01?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1666219462105-2909c2d72d01?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1666219462105-2909c2d72d01?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Cimenterie en bord d'eau : silos, tour de process et stocks de granulats" loading="lazy">
         </div>
-        <div class="ph ph-4x3"><span class="ph-tag">// photo — site industriel, vue d'ensemble</span></div>
+        <div class="card">
+          <span class="step-num">Ce que nous regardons en étude</span>
+          <p class="muted" style="font-size:14.5px; margin-top:12px;">Surface et topographie du site, emplacement possible de la station, zones à survoler ou à éviter, environnement aéronautique, systèmes de sécurité déjà en place.</p>
+        </div>
       </aside>
     </div>
   </div>
 </section>
 
-<!-- ===================== 05 · LOGISTIQUE ===================== -->
-<section id="logistique" class="section sector-sec" data-screen-label="Secteur — Logistique">
+<!-- ===================== 02 · CENTRES DE RECYCLAGE ===================== -->
+<section id="recyclage" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur · Centres de recyclage">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
-        <span class="sec-kicker">
-          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 0 1 6 0M3 7.5v7.5a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5V7.5"/><path d="M3 7.5h18M8 7.5v-3a1.5 1.5 0 0 1 1.5-1.5h5a1.5 1.5 0 0 1 1.5 1.5v3"/></svg></span>
-          <span class="step-num">SECTEUR 05 · LOGISTIQUE</span>
-        </span>
-        <h2 class="h2">Dissuader avant que le préjudice n'existe.</h2>
-        <p class="lead">Quais de chargement, parkings poids lourds, stocks de valeur&nbsp;: sur un entrepôt de 20&nbsp;000&nbsp;m² et plus, la présence visible d'un drone change le calcul de l'intrus — et réduit les fausses alarmes qui épuisent vos équipes.</p>
+        <span class="step-num">CENTRES DE RECYCLAGE</span>
+        <h2 class="h2">Protéger des stocks exposés au vol et au feu.</h2>
+        <p class="lead">Centres de tri, ferrailleurs, plateformes de déchets : la valeur est stockée dehors, en grands volumes. Deux risques reviennent sur ces sites : le vol de métaux et le départ de feu.</p>
         <ul class="checklist">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Couverture des grandes surfaces sans angle mort</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Dissuasion visible sur les quais et parkings</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Réduction des fausses alarmes et des déplacements inutiles</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Rondes de nuit sur les stocks, les bennes et les lignes de clôture</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Imagerie thermique pour repérer un point chaud sur un stock, selon les conditions</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute après une alarme, avant d'envoyer une équipe</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Relevés aériens pour suivre l'évolution des volumes stockés</li>
         </ul>
         <div class="sec-cta">
-          <a class="btn btn-link" href="contact.html">Étudier mon entrepôt <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
       <aside class="sec-side reveal" data-d="1">
-        <div class="kpi-card">
-          <span class="kpi-big">4&nbsp;Md€</span>
-          <p class="kpi-desc">de pertes annuelles liées au <strong>vol en entreposage</strong> et sur la chaîne logistique en Europe.</p>
+        <!-- Photo provisoire : à remplacer par une vue aérienne d'un centre de recyclage -->
+        <div class="photo photo-4x3 photo-frame">
+          <img src="https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'une zone industrielle avec des zones de stockage extérieures" loading="lazy">
         </div>
-        <div class="ph ph-4x3"><span class="ph-tag">// photo — plateforme logistique, quais de chargement</span></div>
+        <div class="card">
+          <span class="step-num">Ce que nous regardons en étude</span>
+          <p class="muted" style="font-size:14.5px; margin-top:12px;">Nature et emplacement des stocks, zones à risque d'incendie, horaires d'exploitation, accès et clôtures, détection et moyens incendie déjà en place.</p>
+        </div>
       </aside>
     </div>
   </div>
 </section>
 
-<!-- ===================== 06 · TRANSPORTS ===================== -->
-<section id="transports" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur — Transports">
+<!-- ===================== 03 · LOGISTIQUE ===================== -->
+<section id="logistique" class="section sector-sec" data-screen-label="Secteur · Logistique">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
-        <span class="sec-kicker">
-          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 0-2 2v2h22v-2a2 2 0 0 0-2-2h-2M8 4h8v8H8z"/><path d="M2 15h20"/></svg></span>
-          <span class="step-num">SECTEUR 06 · TRANSPORTS</span>
-        </span>
-        <h2 class="h2">Surveiller des emprises qu'aucune clôture ne couvre.</h2>
-        <p class="lead">Voies, dépôts, emprises linéaires de plusieurs kilomètres&nbsp;: les réseaux de transport sont impossibles à surveiller exhaustivement depuis le sol. Le drone parcourt l'emprise en quelques minutes et détecte tôt ce qui deviendrait un incident.</p>
+        <span class="step-num">LOGISTIQUE</span>
+        <h2 class="h2">Contrôler des emprises extérieures très étendues.</h2>
+        <p class="lead">Parkings poids lourds, quais de chargement, remorques stationnées, stocks extérieurs et clôtures : une plateforme logistique concentre sa valeur sur des surfaces ouvertes, souvent en périphérie des bâtiments surveillés.</p>
         <ul class="checklist">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Inspection rapide des emprises linéaires</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance des dépôts et du matériel roulant</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Détection précoce d'anomalies sur les voies</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Rondes automatisées sur les parkings, quais et lignes de clôture</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Vérification d'une zone éloignée sans immobiliser une équipe</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Vue aérienne utile pour qualifier rapidement une situation</li>
         </ul>
         <div class="sec-cta">
-          <a class="btn btn-link" href="contact.html">Étudier mon réseau <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
       <aside class="sec-side reveal" data-d="1">
-        <div class="kpi-card">
-          <span class="kpi-big">+30&nbsp;%</span>
-          <p class="kpi-desc">de temps gagné sur les <strong>inspections de maintenance</strong> grâce à l'observation aérienne.</p>
+        <div class="photo photo-4x3 photo-frame">
+          <img src="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'une plateforme logistique : remorques à quai et parking" loading="lazy">
         </div>
-        <div class="ph ph-4x3"><span class="ph-tag">// photo — dépôt ferroviaire / emprise de voies</span></div>
+        <div class="card">
+          <span class="step-num">Ce que nous regardons en étude</span>
+          <p class="muted" style="font-size:14.5px; margin-top:12px;">Emprise des parkings et zones de stockage, flux de véhicules, horaires d'exploitation, points d'accès, dispositifs de détection existants.</p>
+        </div>
       </aside>
     </div>
   </div>
 </section>
 
-<!-- ===================== 07 · PARCS SOLAIRES ===================== -->
-<section id="solaire" class="section sector-sec" data-screen-label="Secteur — Parcs solaires">
+<!-- ===================== 04 · GRANDS CHANTIERS ===================== -->
+<section id="chantiers" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur · Grands chantiers">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
-        <span class="sec-kicker">
-          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></span>
-          <span class="step-num">SECTEUR 07 · PARCS SOLAIRES</span>
-        </span>
-        <h2 class="h2">Des hectares de panneaux, une seule supervision.</h2>
-        <p class="lead">Des dizaines d'hectares isolés, sans présence humaine permanente, avec du matériel convoité&nbsp;: les parcs photovoltaïques cumulent les facteurs de risque. Le drone surveille, vérifie et inspecte — y compris en thermique.</p>
+        <span class="step-num">GRANDS CHANTIERS</span>
+        <h2 class="h2">Surveiller un site qui change toutes les semaines.</h2>
+        <p class="lead">Sur un grand chantier, le plan évolue en permanence : les zones de stockage se déplacent, le matériel coûteux change d'emplacement, et l'installation de caméras fixes suit difficilement ce rythme.</p>
         <ul class="checklist">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance des rangées de panneaux et des onduleurs</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute à distance, sans déplacement terrain</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Inspection thermique pour détecter les panneaux défaillants</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Trajectoires de mission reconfigurables à mesure que le chantier évolue</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contrôle des zones de stockage de matériaux et du matériel stationné</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance des périodes d'inactivité, soirs et week-ends</li>
         </ul>
         <div class="sec-cta">
-          <a class="btn btn-link" href="contact.html">Étudier mon parc <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
       <aside class="sec-side reveal" data-d="1">
-        <div class="kpi-card">
-          <span class="kpi-big">5:1</span>
-          <p class="kpi-desc">retour sur investissement comparé à une <strong>équipe d'intervention terrain</strong> équivalente.</p>
+        <div class="photo photo-4x3 photo-frame">
+          <img src="https://images.unsplash.com/photo-1723367194881-fe2e53534170?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1723367194881-fe2e53534170?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1723367194881-fe2e53534170?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1723367194881-fe2e53534170?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'un chantier avec engins de terrassement" loading="lazy">
         </div>
-        <div class="ph ph-4x3"><span class="ph-tag">// photo — parc photovoltaïque, vue aérienne</span></div>
+        <div class="card">
+          <span class="step-num">Ce que nous regardons en étude</span>
+          <p class="muted" style="font-size:14.5px; margin-top:12px;">Durée et phasage du chantier, emprise et évolution prévue, présence de grues et d'obstacles en hauteur, environnement immédiat, besoins de gardiennage actuels.</p>
+        </div>
       </aside>
     </div>
   </div>
 </section>
 
-<!-- ===================== 08 · MINES & CARRIÈRES ===================== -->
-<section id="carrieres" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur — Mines et carrières">
+<!-- ===================== 05 · DATA CENTERS ===================== -->
+<section id="datacenter" class="section sector-sec" data-screen-label="Secteur · Data centers">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
-        <span class="sec-kicker">
-          <span class="sec-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 16l4-10h8l4 10"/></svg></span>
-          <span class="step-num">SECTEUR 08 · MINES &amp; CARRIÈRES</span>
-        </span>
-        <h2 class="h2">Garder l'œil sur des terrains impraticables de nuit.</h2>
-        <p class="lead">Fronts de taille, zones de dépôt, engins stationnés&nbsp;: un terrain accidenté rend les rondes au sol lentes et dangereuses. Le drone survole l'ensemble de l'exploitation en quelques minutes, de jour comme de nuit.</p>
+        <span class="step-num">DATA CENTERS</span>
+        <h2 class="h2">Ajouter une couche mobile à un périmètre déjà protégé.</h2>
+        <p class="lead">Un data center est généralement bien équipé côté périmètre. L'intérêt d'une capacité aérienne n'est pas de remplacer ce dispositif, mais d'ajouter un moyen d'observation indépendant, capable d'aller vérifier un point précis.</p>
         <ul class="checklist">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Inspection des terrains accidentés sans exposer un agent</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance des zones de dépôt et du matériel</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute immédiate sur toute l'emprise</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Observation complémentaire des clôtures, accès et abords techniques</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Redondance d'un moyen de vérification en cas d'alerte</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Traçabilité des missions pour vos exigences documentaires</li>
         </ul>
         <div class="sec-cta">
-          <a class="btn btn-link" href="contact.html">Étudier mon exploitation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
       <aside class="sec-side reveal" data-d="1">
-        <div class="kpi-card">
-          <span class="kpi-big">−40&nbsp;%</span>
-          <p class="kpi-desc">de <strong>vols de matériel</strong> constatés dès la première année d'exploitation du dispositif.</p>
+        <div class="photo photo-4x3 photo-frame">
+          <img src="https://images.unsplash.com/photo-1715026323313-bb22cbe42381?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1715026323313-bb22cbe42381?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1715026323313-bb22cbe42381?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1715026323313-bb22cbe42381?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'un grand bâtiment technique et de ses abords" loading="lazy">
         </div>
-        <div class="ph ph-4x3"><span class="ph-tag">// photo — carrière en exploitation, vue aérienne</span></div>
+        <div class="card">
+          <span class="step-num">Ce que nous regardons en étude</span>
+          <p class="muted" style="font-size:14.5px; margin-top:12px;">Contraintes de confidentialité et de survol, exigences de disponibilité, interfaçage souhaité avec la supervision existante, cadre réglementaire applicable au site.</p>
+        </div>
       </aside>
     </div>
   </div>
 </section>
 
-<!-- ===================== NOTE SOURCES ===================== -->
-<section class="section-sm" style="padding-block:0;">
+<!-- ===================== 06 · ÉNERGIE ===================== -->
+<section id="energie" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur · Énergie">
   <div class="container">
-    <p style="font-family:var(--f-mono); font-size:11.5px; color:var(--ink-4); max-width:80ch;">* Chiffres indicatifs issus de données sectorielles publiques (sécurité / drone, 2024–2025). Les performances réelles dépendent de la configuration et des contraintes de chaque site.</p>
+    <div class="sec-grid">
+      <div class="sec-main reveal">
+        <span class="step-num">ÉNERGIE</span>
+        <h2 class="h2">Contrôler des installations réparties sur de vastes emprises.</h2>
+        <p class="lead">Parcs éoliens, parcs photovoltaïques, postes électriques, barrages : ces installations couvrent de grandes surfaces, souvent isolées et peu occupées. Les rondes physiques y sont longues et répétitives.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Rondes sur les clôtures, les accès et les abords des installations</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Observation de zones difficiles d'accès sans y envoyer une équipe</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Imagerie thermique pour repérer certaines anomalies selon les conditions</li>
+        </ul>
+        <div class="sec-cta">
+          <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <aside class="sec-side reveal" data-d="1">
+        <div class="photo photo-4x3 photo-frame">
+          <img src="https://images.unsplash.com/photo-1693013112835-5f3128bb555f?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1693013112835-5f3128bb555f?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1693013112835-5f3128bb555f?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1693013112835-5f3128bb555f?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Poste électrique haute tension et lignes d'alimentation" loading="lazy">
+        </div>
+        <div class="card">
+          <span class="step-num">Ce que nous regardons en étude</span>
+          <p class="muted" style="font-size:14.5px; margin-top:12px;">Nature et sensibilité de l'installation, isolement du site, périmètre à couvrir, restrictions de survol, procédures de sûreté existantes, cadre d'autorisation nécessaire.</p>
+        </div>
+      </aside>
+    </div>
   </div>
 </section>
 
-<!-- ===================== CTA FINAL ===================== -->
-<section class="section bg-dark cta-band" data-screen-label="CTA final — Secteurs">
+<section class="section bg-dark cta-band" data-screen-label="CTA final · Secteurs">
   <div class="container text-center" style="position:relative; max-width:760px; text-align:center;">
     <div class="reveal">
       <span class="eyebrow" style="justify-content:center;">Et votre site&nbsp;?</span>
@@ -575,8 +452,8 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <a class="brand" href="index.html" aria-label="FLEAT — accueil">
-          <img class="brand-logo" src="assets/fleat-logo-white.png" alt="fleat">
+        <a class="brand" href="index.html" aria-label="FLEAT · accueil">
+          <img class="brand-logo" src="assets/fleat-logo-transparent.png" alt="fleat">
         </a>
         <p>Supervision drone connectée à vos systèmes de sécurité, pour les environnements professionnels exigeants.</p>
       </div>
@@ -586,18 +463,16 @@
         <a href="cas-usage.html">Cas d'usage</a>
         <a href="integrations.html">Intégrations</a>
         <a href="secteurs.html">Secteurs</a>
-        <a href="calculateur.html">Calculateur</a>
-      </div>
+              </div>
       <div class="footer-col">
         <h4>Ressources</h4>
         <a href="faq.html">FAQ</a>
+        <a href="about.html">À propos</a>
         <a href="contact.html">Contact</a>
-        <a href="contact.html">Demander une démonstration</a>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <a href="mailto:contact@fleat.fr">contact@fleat.fr</a>
-        <a href="tel:+33000000000">+33 (0)0 00 00 00 00</a>
+        <a href="mailto:contact@fleat-solutions.com">contact@fleat-solutions.com</a>
         <a href="rappel.html">Être rappelé</a>
       </div>
     </div>
@@ -606,7 +481,7 @@
       <span class="f-legal">
         <a href="mentions-legales.html">Mentions légales</a>
         <a href="confidentialite.html">Politique de confidentialité</a>
-        <button onclick="window.resetCookieConsent&&window.resetCookieConsent()" style="background:none;border:none;padding:0;font:inherit;font-size:13.5px;color:var(--on-dark-3);cursor:pointer;transition:color .15s;" onmouseover="this.style.color='var(--on-dark)'" onmouseout="this.style.color='var(--on-dark-3)'">Cookies</button>
+        <button type="button" class="f-cookies">Cookies</button>
       </span>
     </div>
   </div>
@@ -616,14 +491,15 @@
 <div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
   <p class="ck-text">Nous utilisons des cookies de mesure d'audience pour améliorer votre expérience. <a href="confidentialite.html">En savoir plus</a>.</p>
   <div class="ck-actions">
-    <button id="cookie-refuse" class="ck-btn ck-refuse">Refuser</button>
-    <button id="cookie-accept" class="ck-btn ck-accept">Accepter</button>
+    <button type="button" id="cookie-refuse" class="ck-btn ck-refuse">Refuser</button>
+    <button type="button" id="cookie-accept" class="ck-btn ck-accept">Accepter</button>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/motion@14.0.0/dist/motion.js"></script>
 <script src="site.js"></script>
 <script>
-/* —— Scrollspy : met en évidence le secteur visible dans la sous-nav —— */
+/* -- Scrollspy : met en évidence le secteur visible dans la sous-nav -- */
 (function () {
   'use strict';
   var links = Array.prototype.slice.call(document.querySelectorAll('#sector-subnav .subnav-link'));
@@ -638,27 +514,44 @@
     });
   }
 
-  if ('IntersectionObserver' in window) {
-    var current = null;
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          current = e.target.id;
-          setActive(current);
-          /* garde le lien actif visible dans la barre (mobile) */
-          var active = document.querySelector('#sector-subnav .subnav-link.active');
-          if (active && active.parentElement) {
-            var bar = active.parentElement;
-            var aLeft = active.offsetLeft, aRight = aLeft + active.offsetWidth;
-            if (aLeft < bar.scrollLeft || aRight > bar.scrollLeft + bar.clientWidth) {
-              bar.scrollTo({ left: aLeft - 24, behavior: 'smooth' });
-            }
-          }
-        }
-      });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-    sections.forEach(function (s) { io.observe(s); });
+  var current, lock = 0, ticking = false;
+  function reveal() {
+    var active = document.querySelector('#sector-subnav .subnav-link.active');
+    if (!active) return;
+    var bar = active.parentElement;
+    var aLeft = active.offsetLeft, aRight = aLeft + active.offsetWidth;
+    if (aLeft < bar.scrollLeft || aRight > bar.scrollLeft + bar.clientWidth) {
+      bar.scrollTo({ left: aLeft - 24, behavior: 'smooth' });
+    }
   }
+  function update() {
+    ticking = false;
+    if (Date.now() < lock) return;
+    /* ligne de lecture : sous l'en-tête + sous-nav, à un tiers de l'écran */
+    var line = 140 + (window.innerHeight - 140) * 0.3;
+    var id = null;
+    for (var i = 0; i < sections.length; i++) {
+      var r = sections[i].getBoundingClientRect();
+      if (r.top <= line && r.bottom > line) { id = sections[i].id; break; }
+    }
+    /* bas de page : la dernière section ne peut pas atteindre la ligne */
+    var last = sections[sections.length - 1].getBoundingClientRect();
+    if (!id && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4 && last.bottom > 140) id = sections[sections.length - 1].id;
+    if (id !== current) { current = id; setActive(id); reveal(); }
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  /* clic : état actif immédiat, sans clignotement pendant le défilement */
+  links.forEach(function (l) {
+    l.addEventListener('click', function () {
+      current = l.getAttribute('href').slice(1);
+      setActive(current); reveal();
+      lock = Date.now() + 900;
+      setTimeout(update, 950);
+    });
+  });
+  update();
 })();
 </script>
 </body>

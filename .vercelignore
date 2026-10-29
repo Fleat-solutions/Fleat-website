@@ -1,0 +1,9 @@
+# Fichiers du dépôt qui ne doivent pas être publiés
+.github/
+scripts/
+design-references/
+scraps/
+CLAUDE.md
+CREDITS.md
+README.md
+.htmlvalidate.json
