@@ -35,7 +35,29 @@ Fleat-website/
 ├── CLAUDE.md               # Règles de rédaction du site
 ├── CREDITS.md              # Crédits des photos Unsplash
 ├── design-references/      # DESIGN.md de référence (Tesla, Vercel, Stripe, Apple, SpaceX)
-└── scraps/                 # Explorations de design, hors site
+├── scraps/                 # Explorations de design, hors site
+├── scripts/                # Contrôles CI (rédaction, liens)
+├── vercel.json             # En-têtes HTTP Vercel
+└── .github/workflows/      # CI GitHub Actions
+```
+
+## Branches et déploiement
+
+| Branche | Rôle | Déploiement Vercel |
+|---|---|---|
+| `dev` | Développement | Preview |
+| `main` | Préproduction, recette | Preview (domaine de préprod) |
+| `prod` | Production | Production (www.fleat.fr) |
+
+- Les changements passent par PR : `dev` vers `main`, puis `main` vers `prod`. La CI refuse tout autre sens.
+- La CI (`.github/workflows/ci.yml`) vérifie les règles de rédaction, les liens internes et le HTML.
+- Hors du domaine de production, Vercel envoie `X-Robots-Tag: noindex` : la préprod n'est pas indexée.
+- `.vercelignore` exclut du déploiement les fichiers de travail (`scraps/`, `design-references/`, docs).
+
+Lancer les contrôles en local :
+
+```bash
+node scripts/check-redaction.mjs && node scripts/check-links.mjs && npx html-validate ./*.html
 ```
 
 ## Design

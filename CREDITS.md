@@ -40,7 +40,7 @@ appliqués : `auto=format` (WebP/AVIF selon le navigateur), `q=70`,
 Ces photographies illustrent des environnements comparables à ceux des
 clients cibles. Elles doivent être remplacées dès que FLEAT disposera de
 ses propres visuels. Rappel matériel : le parc est un **DJI Matrice 4** avec
-**DJI Dock 3**, piloté sous **FlightHub 2** — aucune photo libre ne montre ce
+**DJI Dock 3**, piloté sous **FlightHub 2** : aucune photo libre ne montre ce
 matériel, et aucun autre appareil ne doit apparaître sur le site. À produire ou
 à obtenir du kit média DJI Enterprise : dock installé sur site, Matrice 4 en
 mission de nuit, écran FlightHub 2, imagerie thermique, data center vu de

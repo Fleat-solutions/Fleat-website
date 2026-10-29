@@ -808,3 +808,15 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 
 
   
+
+/* Pages légales */
+.legal h2 { font-size:1.35rem; margin-top:44px; }
+.legal h2:first-of-type { margin-top:8px; }
+.legal h3 { font-size:1.05rem; margin-top:26px; }
+.legal p, .legal li { color:var(--ink-2); margin-top:14px; line-height:1.65; }
+.legal ul { margin-top:8px; display:grid; gap:8px; }
+.legal li { padding-left:20px; position:relative; }
+.legal li::before { content:""; position:absolute; left:0; top:11px; width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.legal code { font-family:var(--f-mono); font-size:.86em; background:var(--paper-2); border:1px solid var(--line); border-radius:5px; padding:1px 6px; color:var(--ink-3); }
+.legal-note { font-family:var(--f-mono); font-size:13px; color:var(--ink-3); background:var(--paper-2); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:8px; padding:14px 16px; margin-bottom:8px; }
+.legal a { color:var(--accent-600); font-weight:600; }
