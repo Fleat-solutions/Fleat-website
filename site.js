@@ -69,6 +69,37 @@
     });
   });
 
+  /* Envoi des formulaires vers Web3Forms (clé publique dans data-w3f-key) */
+  window.fleatSendForm = function (form, onSuccess) {
+    var btn = form.querySelector('button[type="submit"]');
+    var btnHtml = btn ? btn.innerHTML : '';
+    var errBox = form.querySelector('.form-error');
+    if (errBox) errBox.hidden = true;
+    if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
+
+    var data = { access_key: form.dataset.w3fKey, subject: form.dataset.w3fSubject, from_name: 'Site FLEAT' };
+    new FormData(form).forEach(function (value, key) {
+      key = key.replace(/\[\]$/, '');
+      if (key === 'consent') value = 'oui';
+      data[key] = data[key] ? data[key] + ', ' + value : value;
+    });
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (json) {
+        if (!json.success) throw new Error(json.message);
+        onSuccess();
+      })
+      .catch(function () {
+        if (btn) { btn.disabled = false; btn.innerHTML = btnHtml; }
+        if (errBox) { errBox.hidden = false; errBox.focus(); }
+      });
+  };
+
   /* Formulaires de contact : validation + état succès */
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   function setFieldError(field, on) {
@@ -105,14 +136,11 @@
         }
         return;
       }
-      var btn = form.querySelector('button[type="submit"]');
-      if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
-      // Simulation d'envoi (pas de backend sur la maquette)
-      setTimeout(function () {
+      window.fleatSendForm(form, function () {
         form.style.display = 'none';
         var ok = form.parentElement.querySelector('[data-success]');
         if (ok) { ok.classList.add('show'); ok.focus(); }
-      }, 700);
+      });
     });
   });
 
