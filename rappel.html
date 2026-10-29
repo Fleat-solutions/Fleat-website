@@ -78,7 +78,8 @@
 
       <!-- Formulaire court -->
       <div class="reveal">
-        <form id="rappel-form" class="js-contact-form" data-form-name="rappel" novalidate>
+        <form id="rappel-form" class="js-contact-form" data-form-name="rappel" data-w3f-key="8e154353-b93c-42eb-8f2b-ad0d4fd7d3be" data-w3f-subject="Nouvelle demande de rappel" novalidate>
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" aria-hidden="true">
           <div class="field-row">
             <div class="field"><label for="r-prenom">Prénom <span class="req">*</span></label><input id="r-prenom" name="prenom" type="text" autocomplete="given-name" required><span class="err-msg">Champ requis</span></div>
             <div class="field"><label for="r-nom">Nom <span class="req">*</span></label><input id="r-nom" name="nom" type="text" autocomplete="family-name" required><span class="err-msg">Champ requis</span></div>
@@ -101,6 +102,7 @@
           </div>
           <div style="margin-top:26px;"><button type="submit" class="btn btn-primary btn-lg">Demander à être rappelé <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
           <p class="muted" style="font-size:13px; margin-top:16px;">Les champs marqués d'un <span style="color:var(--accent-600);">*</span> sont obligatoires.</p>
+          <p class="form-error" role="alert" tabindex="-1" hidden>L'envoi a échoué. Réessayez, ou écrivez-nous à <a href="mailto:contact@fleat-solutions.com">contact@fleat-solutions.com</a>.</p>
         </form>
 
         <!-- Succès -->
