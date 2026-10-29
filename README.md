@@ -45,11 +45,11 @@ Fleat-website/
 
 | Branche | Rôle | Déploiement Vercel |
 |---|---|---|
-| `dev` | Développement | Preview |
-| `main` | Préproduction, recette | Preview (domaine de préprod) |
-| `prod` | Production | Production (fleat-solutions.com) |
+| `dev` | Développement, branche par défaut | Preview |
+| `staging` | Préproduction, recette | Preview (domaine de préprod) |
+| `main` | Production | Production (fleat-solutions.com) |
 
-- Les changements passent par PR : `dev` vers `main`, puis `main` vers `prod`. La CI refuse tout autre sens.
+- Les changements passent par PR : `dev` vers `staging`, puis `staging` vers `main`. La CI refuse tout autre sens.
 - La CI (`.github/workflows/ci.yml`) vérifie les règles de rédaction, les liens internes et le HTML.
 - Hors du domaine de production, Vercel envoie `X-Robots-Tag: noindex` : la préprod n'est pas indexée.
 - `.vercelignore` exclut du déploiement les fichiers de travail (`scraps/`, `design-references/`, docs).
