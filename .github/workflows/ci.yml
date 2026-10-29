@@ -1,13 +1,13 @@
 # Contrôles qualité du site vitrine.
-# Flux : dev (développement) -> main (préproduction) -> prod (production).
+# Flux : dev (développement) -> staging (préproduction) -> main (production).
 # Le déploiement est géré par l'intégration Git de Vercel, ce workflow bloque les merges non conformes.
 name: CI
 
 on:
   pull_request:
-    branches: [dev, main, prod]
+    branches: [dev, staging, main]
   push:
-    branches: [dev, main, prod]
+    branches: [dev, staging, main]
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -27,12 +27,12 @@ jobs:
           BASE: ${{ github.base_ref }}
           HEAD: ${{ github.head_ref }}
         run: |
-          if [ "$BASE" = "main" ] && [ "$HEAD" != "dev" ]; then
-            echo "::error::La préproduction (main) ne reçoit que des PR depuis dev (reçu : $HEAD)."
+          if [ "$BASE" = "staging" ] && [ "$HEAD" != "dev" ]; then
+            echo "::error::La préproduction (staging) ne reçoit que des PR depuis dev (reçu : $HEAD)."
             exit 1
           fi
-          if [ "$BASE" = "prod" ] && [ "$HEAD" != "main" ]; then
-            echo "::error::La production (prod) ne reçoit que des PR depuis main (reçu : $HEAD)."
+          if [ "$BASE" = "main" ] && [ "$HEAD" != "staging" ]; then
+            echo "::error::La production (main) ne reçoit que des PR depuis staging (reçu : $HEAD)."
             exit 1
           fi
           echo "Flux conforme : $HEAD -> $BASE"
