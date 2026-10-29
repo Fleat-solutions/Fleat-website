@@ -3,237 +3,377 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Solution — FLEAT · Supervision drone pour la sécurité des sites</title>
-<meta name="description" content="Découvrez la solution FLEAT : supervision des missions drone, alertes et levée de doute, intégrations aux systèmes existants et gestion sécurisée des accès.">
-  <link rel="canonical" href="https://www.fleat.fr/solution.html">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="FLEAT">
-  <meta property="og:title" content="Solution — FLEAT · Supervision drone pour la sécurité des sites">
-  <meta property="og:description" content="Découvrez la solution FLEAT : supervision des missions drone, alertes et levée de doute, intégrations aux systèmes existants et gestion sécurisée des accès.">
-  <meta property="og:url" content="https://www.fleat.fr/solution.html">
-  <meta property="og:locale" content="fr_FR">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Solution — FLEAT · Supervision drone pour la sécurité des sites">
-  <meta name="twitter:description" content="Découvrez la solution FLEAT : supervision des missions drone, alertes et levée de doute, intégrations aux systèmes existants et gestion sécurisée des accès.">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="FLEAT">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FLEAT","url":"https://www.fleat.fr","logo":"https://www.fleat.fr/logo.svg","description":"Supervision drone connectée aux systèmes de sécurité pour entreprises.","contactPoint":{"@type":"ContactPoint","email":"contact@fleat.fr","contactType":"customer service","areaServed":"FR","availableLanguage":"French"}}</script>
+<title>Solution · FLEAT · Comment fonctionne la surveillance par drone</title>
+<meta name="description" content="Comment fonctionne FLEAT : station de drones installée sur site, rondes programmées et levée de doute sur alerte, suivi en direct depuis le PC sécurité, intégration aux systèmes existants.">
+<link rel="canonical" href="https://www.fleat.fr/solution.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FLEAT">
+<meta property="og:title" content="Solution · FLEAT · Comment fonctionne la surveillance par drone">
+<meta property="og:description" content="Station de drones sur site, rondes programmées et levée de doute sur alerte, suivi en direct depuis le PC sécurité.">
+<meta property="og:url" content="https://www.fleat.fr/solution.html">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Solution · FLEAT · Comment fonctionne la surveillance par drone">
+<meta name="twitter:description" content="Station de drones sur site, rondes programmées et levée de doute sur alerte, suivi en direct depuis le PC sécurité.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="FLEAT">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FLEAT","url":"https://www.fleat.fr","logo":"https://www.fleat.fr/assets/fleat-logo-dark.png","description":"Supervision drone connectée aux systèmes de sécurité pour entreprises.","contactPoint":{"@type":"ContactPoint","email":"contact@fleat-solutions.com","contactType":"customer service","areaServed":"FR","availableLanguage":"French"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/png" href="assets/fleat-mark.png">
+<meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="styles.css">
+<style>
+a{color:var(--accent)}a:hover{color:var(--accent-600)}
+.sol-anchors{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
+.sol-anchors a{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.03em;color:var(--on-dark-2);padding:7px 12px;border:1px solid var(--dark-line-2);border-radius:999px;background:rgba(10,26,61,.35);transition:color .15s,border-color .15s}
+.sol-anchors a:hover{color:var(--on-dark);border-color:var(--on-dark-3)}
+.sol-sec{scroll-margin-top:84px}
+.kit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,32px);margin-top:48px}
+.kit-item .ph{aspect-ratio:4/3;min-height:0}
+.kit-item h3{font-size:1.25rem;margin-top:20px}
+.kit-item ul{display:grid;gap:8px;margin-top:12px}
+.kit-item li{color:var(--ink-2);font-size:15.5px;padding-left:16px;position:relative;text-wrap:pretty}
+.kit-item li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+@media(max-width:860px){.kit{grid-template-columns:1fr}.kit-item{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:20px;align-items:start}.kit-item h3{margin-top:0}}
+@media(max-width:520px){.kit-item{grid-template-columns:1fr}}
+.mis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,22px);margin-top:48px}
+.mis .card{padding:clamp(24px,3vw,36px)}
+.mis h3{font-size:1.3rem;margin-top:16px;text-wrap:pretty}
+.tl{margin-top:28px;display:grid;padding:0;list-style:none}.card-dark h3{color:var(--on-dark)}
+.tl li{display:grid;grid-template-columns:32px minmax(0,1fr);column-gap:16px;position:relative;padding-bottom:22px}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:15px;top:32px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl .n{width:32px;height:32px;border-radius:50%;border:2px solid var(--accent);color:var(--accent-600);background:var(--paper);display:grid;place-items:center;font-family:var(--f-mono);font-size:12.5px;font-weight:500;grid-row:span 2}
+.tl b{font-weight:600;color:var(--ink);font-size:15.5px;padding-top:5px}
+.tl span{color:var(--ink-3);font-size:14.5px;margin-top:3px;text-wrap:pretty}
+.card-dark .tl li::before{background:var(--dark-line-2)}
+.card-dark .tl .n{background:var(--dark-2);border-color:var(--accent-400);color:var(--accent-400)}
+.card-dark .tl b{color:var(--on-dark)}
+.card-dark .tl span{color:var(--on-dark-2)}
+.card-dark .pill{background:rgba(255,255,255,.05);border-color:var(--dark-line);color:var(--on-dark-2)}
+.pill.warn .dot{background:var(--warn)}
+.mis-note{margin-top:22px;color:var(--ink-3);font-size:14.5px;max-width:70ch}
+@media(max-width:820px){.mis{grid-template-columns:1fr}}
+.op-mock{margin-top:48px}
+.op-body{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px;padding:14px}
+.op-map{position:relative;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.07);height:100%;min-height:280px;background:#08111a}
+.op-map img{width:100%;height:100%;object-fit:cover;filter:saturate(.35) brightness(.55)}
+.op-zone{position:absolute;border:1.5px dashed rgba(91,141,239,.75);border-radius:6px;background:rgba(91,141,239,.08)}
+.op-zone.alert{border:1.5px solid rgba(217,138,43,.9);background:rgba(217,138,43,.14);animation:zone-pulse-b 2s ease-in-out infinite alternate}
+@keyframes zone-pulse-b{from{background:rgba(217,138,43,.06)}to{background:rgba(217,138,43,.22)}}
+.op-zone i{position:absolute;left:6px;top:5px;font-style:normal;font-family:var(--f-mono);font-size:10px;letter-spacing:.04em;color:var(--on-dark)}
+.op-drone{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--accent-400);box-shadow:0 0 0 4px rgba(91,141,239,.25),0 0 0 9px rgba(91,141,239,.10)}
+.op-station{position:absolute;width:12px;height:12px;border-radius:3px;background:var(--on-dark);border:2px solid var(--dark)}
+.op-legend{position:absolute;left:10px;bottom:10px;display:flex;flex-wrap:wrap;gap:6px}
+.op-side{display:grid;gap:14px;grid-template-rows:auto 1fr}
+.op-vid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.35) brightness(.7)}
+.op-vid .mock-vid-overlay{justify-content:space-between}
+.op-vid .mock-vid-overlay span{font-family:var(--f-mono);font-size:10px;letter-spacing:.05em;color:var(--on-dark-2)}
+.op-log{border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px;display:grid;gap:10px;align-content:start}
+.op-log h4{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--on-dark-3);font-weight:500}
+.op-ev{display:grid;grid-template-columns:42px minmax(0,1fr);gap:10px;align-items:baseline;font-size:13px;color:var(--on-dark-2)}
+.op-ev time{font-family:var(--f-mono);font-size:11.5px;color:var(--on-dark-3)}
+.op-ev b{color:var(--on-dark);font-weight:600}
+.op-ev .schip{margin-top:6px;font-size:11px;padding:3px 9px}
+.op-ev.is-alert{margin-inline:-10px;padding:8px 10px;border-radius:6px;background:rgba(217,138,43,.07);box-shadow:inset 2px 0 0 var(--warn-on-dark)}
+.op-ev.is-alert time{color:var(--warn-on-dark)}
+@media(max-width:820px){.op-body{grid-template-columns:1fr}.op-map{height:auto;min-height:0;aspect-ratio:16/10}}
+.op-feats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2vw,28px);margin-top:40px}
+.op-feats h3{font-size:1.05rem}
+.op-feats p{color:var(--on-dark-2);font-size:15px;margin-top:8px;text-wrap:pretty}
+.op-feats>div{border-top:1px solid var(--dark-line-2);padding-top:18px}
+.op-access{margin-top:36px;padding:18px 22px;border:1px solid var(--dark-line);border-radius:var(--r);display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px}
+.op-access .eyebrow{margin-right:6px}
+.op-access span:not(.eyebrow){display:flex;align-items:center;gap:9px;color:var(--on-dark-2);font-size:14.5px}
+.op-access svg{width:17px;height:17px;color:var(--accent-400);flex-shrink:0}
+@media(max-width:900px){.op-feats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.op-feats{grid-template-columns:1fr}}
+.roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,22px);margin-top:48px}
+.roles .card{padding:clamp(24px,3vw,36px)}
+.roles h3{font-size:1.25rem;margin-top:14px}
+.roles .checklist{margin-top:22px}
+.roles .card.you{background:var(--accent-soft);border-color:#d3defb}
+@media(max-width:760px){.roles{grid-template-columns:1fr}}
+.intg-pills{display:flex;flex-wrap:wrap;gap:10px}
+.limits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,22px);margin-top:48px}
+@media(max-width:860px){.limits{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-
+<a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="FLEAT — accueil">
-      <img class="brand-logo" src="assets/fleat-logo.png" alt="fleat — accueil">
-    </a>
-    <nav class="nav-main" aria-label="Navigation principale">
-      <a class="active" href="solution.html">Solution</a>
-      <a href="cas-usage.html">Cas d'usage</a>
-      <a href="secteurs.html">Secteurs</a>
-      <a href="integrations.html">Intégrations</a>
-      <a href="faq.html">FAQ</a>
-    </nav>
-    <div class="header-cta">
-      <a class="btn btn-ghost" href="rappel.html">Être rappelé</a>
-      <a class="btn btn-primary" href="contact.html">Étudier mon site</a>
-    </div>
-    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false"><span></span></button>
-  </div>
-  <div class="mobile-menu">
-    <a class="m-link active" href="solution.html">Solution</a>
-    <a class="m-link" href="cas-usage.html">Cas d'usage</a>
-    <a class="m-link" href="secteurs.html">Secteurs</a>
-    <a class="m-link" href="integrations.html">Intégrations</a>
-    <a class="m-link" href="faq.html">FAQ</a>
-    <a class="m-link" href="contact.html">Contact</a>
-    <div class="m-cta">
-      <a class="btn btn-ghost btn-block" href="rappel.html">Être rappelé</a>
-      <a class="btn btn-primary btn-block" href="contact.html">Étudier mon site</a>
-    </div>
-  </div>
+<div class="container header-inner">
+<a class="brand" href="index.html" aria-label="FLEAT · accueil"><img class="brand-logo" src="assets/fleat-logo-dark.png" alt="fleat · accueil"></a>
+<nav class="nav-main" aria-label="Navigation principale">
+<a class="active" href="solution.html">Solution</a>
+<a href="cas-usage.html">Cas d'usage</a>
+<a href="secteurs.html">Secteurs</a>
+<a href="integrations.html">Intégrations</a>
+<a href="faq.html">FAQ</a>
+<a href="about.html">À propos</a>
+</nav>
+<div class="header-cta">
+<a class="btn btn-ghost" href="rappel.html">Être rappelé</a>
+<a class="btn btn-primary" href="contact.html">Étudier mon site</a>
+</div>
+<button type="button" class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><span></span></button>
+</div>
+<div class="mobile-menu" id="menu-mobile">
+<a class="m-link active" href="solution.html">Solution</a>
+<a class="m-link" href="cas-usage.html">Cas d'usage</a>
+<a class="m-link" href="secteurs.html">Secteurs</a>
+<a class="m-link" href="integrations.html">Intégrations</a>
+<a class="m-link" href="faq.html">FAQ</a>
+<a class="m-link" href="about.html">À propos</a>
+<a class="m-link" href="contact.html">Contact</a>
+<div class="m-cta">
+<a class="btn btn-ghost btn-block" href="rappel.html">Être rappelé</a>
+<a class="btn btn-primary btn-block" href="contact.html">Étudier mon site</a>
+</div>
+</div>
 </header>
-
-<main>
-<section class="section-sm bg-paper-2" style="padding-top:clamp(48px,6vw,72px); border-bottom:1px solid var(--line);">
-  <div class="container">
-    <div class="page-hero-inner" style="max-width:780px;">
-      <span class="eyebrow">La solution</span>
-      <h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); margin-top:18px;">La couche de supervision qui orchestre vos missions drone.</h1>
-      <p class="lead" style="margin-top:20px; max-width:62ch;">FLEAT centralise la gestion, le déclenchement et le suivi des missions drone dans un contexte de sécurité — en s'intégrant progressivement aux systèmes déjà en place sur votre site.</p>
-      <div class="cta-row" style="margin-top:30px;"><a class="btn btn-primary" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-ghost" href="cas-usage.html">Voir les cas d'usage</a></div>
-    </div>
-  </div>
+<main id="contenu" tabindex="-1">
+<section class="hero section-sm" data-screen-label="Hero" style="padding-top:clamp(64px,7vw,100px); padding-bottom:clamp(56px,6vw,84px);">
+<div class="hero-photo" aria-hidden="true"><img src="https://images.unsplash.com/photo-1761414500570-0b835cdcf3c8?auto=format&amp;fit=crop&amp;q=70&amp;w=1600" srcset="https://images.unsplash.com/photo-1761414500570-0b835cdcf3c8?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1761414500570-0b835cdcf3c8?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1761414500570-0b835cdcf3c8?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="100vw" alt="" loading="eager" fetchpriority="high"></div>
+<div class="hero-grid-bg" aria-hidden="true"></div>
+<div class="container">
+<div class="page-hero-inner" style="padding-bottom:8px; max-width:68ch;">
+<span class="eyebrow">La solution</span>
+<h1 class="display" style="font-size:clamp(2.1rem,4.4vw,3.3rem); margin-top:18px;">Une station de drones sur votre site, suivie depuis votre PC sécurité.</h1>
+<p class="lead" style="margin-top:20px; max-width:58ch;">Le drone décolle seul pour une ronde programmée ou après une alerte. Vos opérateurs voient la scène en direct et décident de la suite.</p>
+<div class="cta-row" style="margin-top:30px;">
+<a class="btn btn-primary" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="btn btn-ghost" href="cas-usage.html">Voir les cas d'usage</a>
+</div>
+<nav class="sol-anchors" aria-label="Sur cette page">
+<a href="#dispositif">Le dispositif</a>
+<a href="#mission">Une mission</a>
+<a href="#operateur">Côté opérateur</a>
+<a href="#roles">Qui fait quoi</a>
+<a href="#integrations">Intégrations</a>
+<a href="#cadre">Cadre d'usage</a>
+</nav>
+</div>
+</div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);">
-      <div class="reveal">
-        <span class="eyebrow">Présentation générale</span>
-        <h2 class="h2 mt-s">Un poste de supervision unique pour vos missions drone.</h2>
-        <p class="lead mt-s">FLEAT réunit le déclenchement, le pilotage et le suivi des missions dans une interface pensée pour les équipes sécurité. L'objectif n'est pas de remplacer votre dispositif, mais de lui ajouter une capacité d'observation aérienne maîtrisée.</p>
-        <ul class="checklist" style="margin-top:28px;">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Centralisation du déclenchement et du suivi des missions</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Lecture commune des alertes et des événements</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Interfaçage progressif avec l'existant</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Pensé pour un usage opérationnel quotidien</li>
-        </ul>
-      </div>
-      <div class="reveal" data-d="1"><div class="ph ph-4x3"><span class="ph-tag">// maquette — vue d'ensemble du poste de supervision</span></div></div>
-    </div>
-  </div>
+<section class="section sol-sec" id="dispositif" data-screen-label="Dispositif">
+<div class="container">
+<div class="section-head reveal"><span class="eyebrow">01 · Le dispositif</span><h2 class="h2">Ce qui est installé sur votre site.</h2><p class="lead">Trois éléments, déployés et raccordés par nos équipes.</p></div>
+<div class="kit">
+<div class="kit-item reveal">
+<div class="ph"><span class="ph-tag">photo · station FLEAT sur site</span></div>
+<div><h3>La station</h3><ul><li>Abrite le drone entre deux vols.</li><li>Recharge automatique, sans intervention.</li><li>Posée et raccordée sur votre site.</li></ul></div>
+</div>
+<div class="kit-item reveal" data-d="1">
+<div class="ph"><span class="ph-tag">photo · drone en vol</span></div>
+<div><h3>Le drone</h3><ul><li>Caméra visible et caméra thermique.</li><li>Vols de jour comme de nuit.</li><li>Jusqu'à 40&nbsp;ha couverts par vol, selon le site.</li></ul></div>
+</div>
+<div class="kit-item reveal" data-d="2">
+<div class="ph"><span class="ph-tag">capture · plateforme de supervision</span></div>
+<div><h3>La plateforme</h3><ul><li>Carte du site et suivi du vol en direct.</li><li>Flux vidéo transmis au PC sécurité.</li><li>Historique de chaque mission.</li></ul></div>
+</div>
+</div>
+</div>
 </section>
 
-<section class="section bg-paper-2">
-  <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">Module 01</span><h2 class="h2">Supervision des missions</h2><p class="lead">Suivez l'état du site et de vos missions en temps réel, depuis une carte centralisée.</p></div>
-    <div class="grid g-3" style="margin-top:48px;">
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></span><h3>Carte de supervision</h3><p>Visualisez le site, les zones surveillées et la position du drone sur une carte unique.</p></div>
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><h3>Suivi du drone</h3><p>Trajectoire, altitude et statut de vol suivis en direct pendant la mission.</p></div>
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><h3>Zones de surveillance</h3><p>Définissez les périmètres et points sensibles à couvrir en priorité.</p></div>
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v6h6"/><path d="M3.5 9a9 9 0 1 0 2.5-4.5L3 9"/><path d="M12 8v4l3 2"/></svg></span><h3>Historique des missions</h3><p>Retrouvez chaque mission passée, ses paramètres et son déroulé.</p></div>
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></span><h3>Statuts des interventions</h3><p>Suivez l'avancement de chaque intervention, de l'alerte à la clôture.</p></div>
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M6.5 6.5l3 3M17.5 6.5l-3 3M6.5 17.5l3-3M17.5 17.5l-3-3"/></svg></span><h3>Vue centralisée</h3><p>Une seule interface pour l'ensemble des missions et des sites.</p></div>
-    </div>
-  </div>
+<section class="section bg-paper-2 sol-sec" id="mission" data-screen-label="Mission">
+<div class="container">
+<div class="section-head reveal"><span class="eyebrow">02 · Une mission</span><h2 class="h2">Deux façons de faire décoller le drone.</h2><p class="lead">Une ronde programmée à l'avance, ou une levée de doute déclenchée par une alerte.</p></div>
+<div class="mis">
+<div class="card reveal">
+<span class="pill"><span class="dot"></span>Ronde programmée</span>
+<h3>Le drone patrouille selon votre planning.</h3>
+<ol class="tl">
+<li><span class="n">01</span><b>Planification</b><span>Vous fixez trajets, horaires et fréquence.</span></li>
+<li><span class="n">02</span><b>Décollage</b><span>Le drone quitte la station à l'heure prévue.</span></li>
+<li><span class="n">03</span><b>Parcours</b><span>Il suit la trajectoire et filme les points sensibles.</span></li>
+<li><span class="n">04</span><b>Retour</b><span>Il regagne la station et se recharge.</span></li>
+<li><span class="n">05</span><b>Archivage</b><span>La mission est enregistrée, images horodatées à l'appui.</span></li>
+</ol>
+</div>
+<div class="card card-dark reveal" data-d="1">
+<span class="pill warn"><span class="dot"></span>Levée de doute</span>
+<h3>Le drone vérifie avant qu'un agent se déplace.</h3>
+<ol class="tl">
+<li><span class="n">01</span><b>Alerte</b><span>Une alarme ou une caméra signale un événement.</span></li>
+<li><span class="n">02</span><b>Départ</b><span>Le drone part vers la zone concernée.</span></li>
+<li><span class="n">03</span><b>Sur zone</b><span>Arrivée en 40&nbsp;s environ, selon la configuration du site.</span></li>
+<li><span class="n">04</span><b>Vérification</b><span>L'opérateur voit la scène en direct, en visible ou en thermique.</span></li>
+<li><span class="n">05</span><b>Décision</b><span>Il lève le doute ou engage une intervention. L'événement est tracé.</span></li>
+</ol>
+</div>
+</div>
+<p class="mis-note reveal">La supervision humaine reste possible à chaque étape. Ses modalités sont définies avec vous, selon le cadre réglementaire.</p>
+</div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);">
-      <div class="reveal" data-d="1" style="order:2;"><div class="ph ph-4x3"><span class="ph-tag">// maquette — levée de doute, retour vidéo &amp; fil d'événement</span></div></div>
-      <div class="reveal" style="order:1;">
-        <span class="eyebrow">Module 02</span>
-        <h2 class="h2 mt-s">Alertes et levée de doute</h2>
-        <p class="lead mt-s">Lorsqu'une alerte se déclenche, FLEAT aide à vérifier rapidement la situation et à documenter l'événement.</p>
-        <ul class="checklist" style="margin-top:28px;">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Déclenchement d'une mission après alerte</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Vérification visuelle de la zone concernée</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Retour vidéo pour appuyer la décision</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Aide à la décision pour le PC sécurité</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Traçabilité complète de l'événement</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<section class="section bg-dark sol-sec" id="operateur" data-screen-label="Opérateur">
+<div class="container">
+<div class="section-head reveal"><span class="eyebrow">03 · Côté opérateur</span><h2 class="h2">Tout le suivi dans une seule interface.</h2><p class="lead">Ce que voit votre PC sécurité pendant une levée de doute.</p></div>
+<div class="mock op-mock reveal" aria-label="Illustration de l'interface de supervision" role="img">
+<div class="mock-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mock-title">FLEAT · Supervision · Site Nord</span><span class="mock-live">EN DIRECT</span></div>
+<div class="op-body">
+<div class="op-map">
+<img src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&amp;fit=crop&amp;q=70&amp;w=1400" srcset="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w" sizes="(max-width: 900px) 100vw, 50vw" alt="" loading="lazy">
+<div class="op-zone" style="left:6%;top:10%;width:38%;height:34%;"><i>ZONE A</i></div>
+<div class="op-zone" style="left:52%;top:8%;width:40%;height:28%;"><i>ZONE B</i></div>
+<div class="op-zone alert" style="left:56%;top:52%;width:34%;height:32%;"><i>ZONE C · ALERTE</i></div>
+<span class="op-station" style="left:14%;top:70%;"></span>
+<span class="op-drone" style="left:68%;top:64%;"></span>
+<div class="op-legend"><span class="schip ok"><span class="d"></span>Drone en vol</span><span class="schip warn"><span class="d"></span>1 alerte</span></div>
+</div>
+<div class="op-side">
+<div class="mock-video op-vid">
+<img src="https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=70&amp;w=900" srcset="https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=70&amp;w=900 900w" sizes="(max-width: 900px) 100vw, 50vw" alt="" loading="lazy">
+<div class="mock-scanline"></div>
+<div class="mock-reticle"><span class="r-h"></span><span class="r-v"></span><span class="r-c"></span></div>
+<div class="mock-vid-overlay"><span class="mock-rec">● REC</span><span>THERMIQUE</span><span id="mock-ts">02:14:36</span></div>
+</div>
+<div class="op-log">
+<h4>Événements</h4>
+<div class="op-ev is-alert"><time>02:14</time><div><b>Alarme périmétrique · Zone C</b><br><span class="schip warn"><span class="d"></span>Levée de doute en cours</span></div></div>
+<div class="op-ev"><time>01:30</time><div><b>Ronde planifiée</b> · terminée</div></div>
+<div class="op-ev"><time>23:00</time><div><b>Ronde planifiée</b> · terminée</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="op-feats">
+<div class="reveal"><h3>Carte du site</h3><p>Zones surveillées et position du drone.</p></div>
+<div class="reveal" data-d="1"><h3>Flux en direct</h3><p>Vidéo visible ou thermique, selon la situation.</p></div>
+<div class="reveal" data-d="2"><h3>Historique</h3><p>Chaque mission et chaque événement, retrouvables.</p></div>
+<div class="reveal" data-d="3"><h3>Multi-sites</h3><p>Plusieurs sites suivis depuis le même écran.</p></div>
+</div>
+<div class="op-access reveal">
+<span class="eyebrow">Accès et traçabilité</span>
+<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/></svg>Comptes et rôles par utilisateur</span>
+<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h4"/></svg>Historique des actions</span>
+<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Données sensibles protégées</span>
+</div>
+</div>
 </section>
 
-<section class="section bg-paper-2">
-  <div class="container">
-    <div class="grid g-2" style="align-items:start; gap:clamp(32px,5vw,64px);">
-      <div class="reveal">
-        <span class="eyebrow">Module 03</span>
-        <h2 class="h2 mt-s">Intégrations</h2>
-        <p class="lead mt-s">FLEAT est conçu pour s'intégrer progressivement aux systèmes de sécurité existants, selon les besoins du client.</p>
-        <p class="muted mt-s">Nous ne promettons pas une compatibilité universelle immédiate : chaque connexion est étudiée et déployée par étapes, en fonction de votre environnement.</p>
-        <div class="cta-row" style="margin-top:26px;"><a class="btn-link" href="integrations.html">Détail des intégrations <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-      </div>
-      <div class="reveal" data-d="1" style="display:grid; gap:12px; grid-template-columns:1fr 1fr;">
-        <span class="pill">Caméras &amp; vidéo</span><span class="pill">Alarmes</span>
-        <span class="pill">VMS</span><span class="pill">Contrôle d'accès</span>
-        <span class="pill">Solutions drone</span><span class="pill">Supervision existante</span>
-      </div>
-    </div>
-  </div>
+<section class="section sol-sec" id="roles" data-screen-label="Rôles">
+<div class="container">
+<div class="section-head reveal"><span class="eyebrow">04 · Qui fait quoi</span><h2 class="h2">Vous gardez la décision. Nous portons le déploiement.</h2></div>
+<div class="roles">
+<div class="card reveal">
+<span class="step-num">FLEAT</span>
+<h3>Ce que nous prenons en charge</h3>
+<ul class="checklist">
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Étude du site et conception des missions</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Préparation du cadre réglementaire</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Installation et raccordement de la station</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Tests, mise en service et formation</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Accompagnement en exploitation</li>
+</ul>
+</div>
+<div class="card you reveal" data-d="1">
+<span class="step-num">Vos équipes</span>
+<h3>Ce que vous pilotez</h3>
+<ul class="checklist">
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Fixer les zones et les priorités du site</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Suivre les missions depuis l'interface</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Lever le doute et décider d'une intervention</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Gérer les accès des utilisateurs</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">Module 04</span><h2 class="h2">Sécurité et gestion des accès</h2><p class="lead">Une solution pensée pour des environnements où le contrôle des accès et des données est essentiel.</p></div>
-    <div class="grid g-3" style="margin-top:48px;">
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span><h3>Gestion des utilisateurs</h3><p>Administrez les comptes et leurs périmètres d'accès.</p></div>
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Gestion des rôles</h3><p>Définissez des droits adaptés à chaque fonction.</p></div>
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>Accès sécurisés</h3><p>Des accès maîtrisés aux missions et aux flux sensibles.</p></div>
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h4"/></svg></span><h3>Historique des actions</h3><p>Tracez les actions réalisées dans l'interface.</p></div>
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M6.5 6.5l3 3M17.5 6.5l-3 3M6.5 17.5l3-3M17.5 17.5l-3-3"/></svg></span><h3>Supervision centralisée</h3><p>Pilotez l'ensemble depuis un point d'accès unique.</p></div>
-      <div class="card card-hover reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12h6M9 9h6M9 15h3"/></svg></span><h3>Données protégées</h3><p>Les données sensibles sont gérées de manière sécurisée.</p></div>
-    </div>
-  </div>
+<section class="section bg-paper-2 sol-sec" id="integrations" data-screen-label="Intégrations">
+<div class="container">
+<div class="grid g-2" style="align-items:start; gap:clamp(32px,5vw,64px);">
+<div class="reveal">
+<span class="eyebrow">05 · Intégrations</span>
+<h2 class="h2 mt-s">Connecté à ce que vous avez déjà.</h2>
+<p class="lead mt-s">FLEAT s'intègre progressivement aux systèmes de sécurité en place, selon vos besoins.</p>
+<p class="muted mt-s">Chaque connexion est étudiée et déployée par étapes, en fonction de votre environnement.</p>
+<div class="cta-row" style="margin-top:26px;"><a class="btn-link" href="integrations.html">Détail des intégrations <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
+<div class="reveal intg-pills" data-d="1">
+<span class="pill">Caméras &amp; vidéo</span><span class="pill">Alarmes</span><span class="pill">Contrôle d'accès</span><span class="pill">VMS</span><span class="pill">Supervision existante</span>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section sol-sec" id="cadre" data-screen-label="Cadre d'usage">
+<div class="container">
+<div class="section-head reveal"><span class="eyebrow">06 · Cadre d'usage</span><h2 class="h2">Ce que nous validons avant d'installer.</h2><p class="lead">Un drone ne s'installe pas partout. Chaque site est étudié avant tout engagement.</p></div>
+<div class="limits">
+<div class="card reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Réglementation</h3><p>Le scénario de vol est préparé selon le cadre applicable à votre site.</p></div>
+<div class="card reveal feature" data-d="1"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.7-9h1.8a4.5 4.5 0 0 1 0 9z"/></svg></span><h3>Météo</h3><p>Les conditions de vol sont prises en compte dans la conception des missions.</p></div>
+<div class="card reveal feature" data-d="2"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></span><h3>Faisabilité du site</h3><p>Emprise, obstacles et connectivité sont évalués au cas par cas.</p></div>
+</div>
+<div class="cta-row reveal" style="margin-top:28px;"><a class="btn-link" href="faq.html">Toutes les questions dans la FAQ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
 </section>
 
 <section class="section bg-dark cta-band radar-bg">
-  <div class="container text-center" style="position:relative; max-width:760px;">
-    <div class="reveal">
-      <span class="eyebrow" style="justify-content:center;">Passons à votre site</span>
-      <h2 class="h2 mt-s">Étudions ensemble la sécurisation de votre site par drone.</h2>
-      <p class="lead mt-s mx-auto" style="max-width:52ch;">Décrivez-nous votre site et vos enjeux : nous évaluons la faisabilité d'un dispositif adapté à vos contraintes.</p>
-      <div class="cta-row" style="justify-content:center; margin-top:34px;">
-        <a class="btn btn-primary btn-lg" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost-light btn-lg" href="contact.html">Planifier un échange</a>
-      </div>
-    </div>
-  </div>
+<div class="container text-center" style="position:relative; max-width:760px;">
+<div class="reveal">
+<span class="eyebrow" style="justify-content:center;">Passons à votre site</span>
+<h2 class="h2 mt-s">Étudions ensemble la sécurisation de votre site par drone.</h2>
+<p class="lead mt-s mx-auto" style="max-width:52ch;">Décrivez-nous votre site et vos enjeux : nous évaluons la faisabilité d'un dispositif adapté à vos contraintes.</p>
+<div class="cta-row" style="justify-content:center; margin-top:34px;">
+<a class="btn btn-primary btn-lg" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="btn btn-ghost-light btn-lg" href="rappel.html">Être rappelé</a>
+</div>
+</div>
+</div>
 </section>
 </main>
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a class="brand" href="index.html" aria-label="FLEAT — accueil">
-          <img class="brand-logo" src="assets/fleat-logo-white.png" alt="fleat">
-        </a>
-        <p>Supervision drone connectée à vos systèmes de sécurité, pour les environnements professionnels exigeants.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Produit</h4>
-        <a href="solution.html">Solution</a>
-        <a href="cas-usage.html">Cas d'usage</a>
-        <a href="integrations.html">Intégrations</a>
-        <a href="secteurs.html">Secteurs</a>
-      </div>
-      <div class="footer-col">
-        <h4>Ressources</h4>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
-        <a href="contact.html">Demander une démonstration</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <a href="mailto:contact@fleat.fr">contact@fleat.fr</a>
-        <a href="tel:+33000000000">+33 (0)0 00 00 00 00</a>
-        <a href="rappel.html">Être rappelé</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© <span data-year>2026</span> FLEAT. Tous droits réservés.</span>
-      <span class="f-legal">
-        <a href="mentions-legales.html">Mentions légales</a>
-        <a href="confidentialite.html">Politique de confidentialité</a>
-        <button onclick="window.resetCookieConsent&&window.resetCookieConsent()" style="background:none;border:none;padding:0;font:inherit;font-size:13.5px;color:var(--on-dark-3);cursor:pointer;transition:color .15s;" onmouseover="this.style.color='var(--on-dark)'" onmouseout="this.style.color='var(--on-dark-3)'">Cookies</button>
-      </span>
-    </div>
-  </div>
+<div class="container">
+<div class="footer-top">
+<div class="footer-brand">
+<a class="brand" href="index.html" aria-label="FLEAT · accueil"><img class="brand-logo" src="assets/fleat-logo-transparent.png" alt="fleat"></a>
+<p>Supervision drone connectée à vos systèmes de sécurité, pour les environnements professionnels exigeants.</p>
+</div>
+<div class="footer-col">
+<h4>Produit</h4>
+<a href="solution.html">Solution</a>
+<a href="cas-usage.html">Cas d'usage</a>
+<a href="integrations.html">Intégrations</a>
+<a href="secteurs.html">Secteurs</a>
+</div>
+<div class="footer-col">
+<h4>Ressources</h4>
+<a href="faq.html">FAQ</a>
+<a href="about.html">À propos</a>
+<a href="contact.html">Contact</a>
+</div>
+<div class="footer-col">
+<h4>Contact</h4>
+<a href="mailto:contact@fleat-solutions.com">contact@fleat-solutions.com</a>
+<a href="rappel.html">Être rappelé</a>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© <span data-year>2026</span> FLEAT. Tous droits réservés.</span>
+<span class="f-legal">
+<a href="mentions-legales.html">Mentions légales</a>
+<a href="confidentialite.html">Politique de confidentialité</a>
+<button type="button" class="f-cookies">Cookies</button>
+</span>
+</div>
+</div>
 </footer>
 
-
-
-</div>
-  <div class="ck-actions">
-    <button id="cookie-refuse" class="ck-btn ck-refuse">Refuser</button>
-    <button id="cookie-accept" class="ck-btn ck-accept">Accepter</button>
-  </div>
-</div>
-  <p class="ck-body">Ce site utilise des cookies de mesure d'audience pour comprendre comment les visiteurs interagissent avec nos contenus. Aucune donnée n'est partagée à des fins publicitaires.</p>
-  <a href="confidentialite.html" class="ck-link">Politique de confidentialité →</a>
-  <div class="ck-actions">
-    <button class="ck-btn ck-refuse" id="cookie-refuse">Refuser</button>
-    <button class="ck-btn ck-accept" id="cookie-accept">Accepter les cookies</button>
-  </div>
-  <p class="ck-rgpd">Conformément au RGPD, vous pouvez modifier votre choix à tout moment.</p>
-</div>
-<!-- Cookie banner RGPD -->
 <div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
-  <p class="ck-text">Nous utilisons des cookies de mesure d'audience pour améliorer votre expérience. <a href="confidentialite.html">En savoir plus</a>.</p>
-  <div class="ck-actions">
-    <button id="cookie-refuse" class="ck-btn ck-refuse">Refuser</button>
-    <button id="cookie-accept" class="ck-btn ck-accept">Accepter</button>
-  </div>
+<p class="ck-text">Nous utilisons des cookies de mesure d'audience pour améliorer votre expérience. <a href="confidentialite.html">En savoir plus</a>.</p>
+<div class="ck-actions">
+<button type="button" id="cookie-refuse" class="ck-btn ck-refuse">Refuser</button>
+<button type="button" id="cookie-accept" class="ck-btn ck-accept">Accepter</button>
 </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/motion@14.0.0/dist/motion.js"></script>
 <script src="site.js"></script>
 </body>
 </html>
