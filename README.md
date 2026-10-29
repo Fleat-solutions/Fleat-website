@@ -47,7 +47,7 @@ Fleat-website/
 |---|---|---|
 | `dev` | Développement | Preview |
 | `main` | Préproduction, recette | Preview (domaine de préprod) |
-| `prod` | Production | Production (www.fleat.fr) |
+| `prod` | Production | Production (fleat-solutions.com) |
 
 - Les changements passent par PR : `dev` vers `main`, puis `main` vers `prod`. La CI refuse tout autre sens.
 - La CI (`.github/workflows/ci.yml`) vérifie les règles de rédaction, les liens internes et le HTML.
