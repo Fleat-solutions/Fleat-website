@@ -820,3 +820,8 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .legal code { font-family:var(--f-mono); font-size:.86em; background:var(--paper-2); border:1px solid var(--line); border-radius:5px; padding:1px 6px; color:var(--ink-3); }
 .legal-note { font-family:var(--f-mono); font-size:13px; color:var(--ink-3); background:var(--paper-2); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:8px; padding:14px 16px; margin-bottom:8px; }
 .legal a { color:var(--accent-600); font-weight:600; }
+
+/* Formulaires : piège à robots et message d'échec d'envoi */
+.hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
+.form-error { margin-top:14px; font-size:14px; color:#b42318; background:#fef3f2; border:1px solid #fecdca; border-radius:8px; padding:12px 14px; }
+.form-error a { color:inherit; font-weight:600; text-decoration:underline; }

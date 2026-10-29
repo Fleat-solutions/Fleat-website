@@ -415,7 +415,8 @@
 
       <!-- ── FORMULAIRE ── -->
       <div class="reveal">
-        <form id="multi-form" novalidate>
+        <form id="multi-form" data-w3f-key="52d65c79-06dd-43ea-848a-d1bca24ecba4" data-w3f-subject="Nouvelle demande d'étude de site" novalidate>
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" aria-hidden="true">
 
           <!-- Barre de progression -->
           <div class="form-progress" role="progressbar" aria-label="Étapes du formulaire">
@@ -617,6 +618,7 @@
               </button>
             </div>
             <p class="muted" style="font-size:12.5px; margin-top:14px;">Les champs marqués d'un <span style="color:var(--accent-600);">*</span> sont obligatoires. Vos données sont traitées conformément au RGPD.</p>
+            <p class="form-error" role="alert" tabindex="-1" hidden>L'envoi a échoué. Réessayez, ou écrivez-nous à <a href="mailto:contact@fleat-solutions.com">contact@fleat-solutions.com</a>.</p>
           </div>
 
         </form>
@@ -818,16 +820,11 @@
     e.preventDefault();
     if (!validateStep(3)) return;
 
-    const btn = form.querySelector('.btn-submit');
-    btn.textContent = 'Envoi en cours…';
-    btn.disabled = true;
-
-    // Simulate submission
-    setTimeout(() => {
+    window.fleatSendForm(form, () => {
       form.style.display = 'none';
       successPanel.classList.add('visible');
       successPanel.focus();
-    }, 900);
+    });
   });
 
   // Un choix fait disparaître le message d'erreur du groupe
