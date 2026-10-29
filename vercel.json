@@ -12,7 +12,7 @@
     },
     {
       "source": "/(.*)",
-      "missing": [{ "type": "host", "value": "^(www\\.)?fleat\\.fr$" }],
+      "missing": [{ "type": "host", "value": "^(www\\.)?fleat-solutions\\.com$" }],
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     },
     {
