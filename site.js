@@ -157,6 +157,46 @@
     update();
   });
 
+  /* Accordéons mobiles : [data-collapse] résume la section, [data-detail] se déplie au toucher */
+  var collapsibles = document.querySelectorAll('[data-collapse]');
+  if (collapsibles.length) {
+    var mobile = window.matchMedia('(max-width: 600px)');
+    var arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+    var setOpen = function (sec, open) {
+      sec.classList.toggle('is-collapsed', !open);
+      var btn = sec.querySelector('.collapse-toggle');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.firstChild.textContent = open ? 'Masquer le détail' : 'Voir le détail';
+    };
+    collapsibles.forEach(function (sec) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'collapse-toggle';
+      btn.innerHTML = '<span></span>' + arrow;
+      var anchor = sec.querySelector('[data-clamp]') || sec.querySelector('h2');
+      anchor.insertAdjacentElement('afterend', btn);
+      btn.addEventListener('click', function () { setOpen(sec, sec.classList.contains('is-collapsed')); });
+    });
+    var openTarget = function (rescroll) {
+      var target = location.hash && document.getElementById(location.hash.slice(1));
+      if (!target || !mobile.matches) return;
+      var sec = target.closest('[data-collapse]');
+      if (sec) setOpen(sec, true);
+      /* au chargement, les sections repliées au-dessus ont décalé l'ancre : on la rejoint */
+      if (rescroll) requestAnimationFrame(function () { target.scrollIntoView(); });
+    };
+    var applyMode = function (rescroll) {
+      collapsibles.forEach(function (sec) {
+        sec.classList.toggle('is-collapsible', mobile.matches);
+        setOpen(sec, !mobile.matches);
+      });
+      openTarget(rescroll === true);
+    };
+    applyMode(true);
+    mobile.addEventListener('change', applyMode);
+    window.addEventListener('hashchange', function () { openTarget(false); });
+  }
+
   /* Année footer */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();

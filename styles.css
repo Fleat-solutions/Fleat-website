@@ -856,3 +856,14 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   .sector-rail .sector-card { flex: 0 0 78%; scroll-snap-align: start; }
   .sector-rail .reveal { opacity: 1; transform: none; }
 }
+
+/* Accordéons mobiles : sections résumées, détail affiché au toucher (activé par site.js) */
+.collapse-toggle { display: none; }
+@media (max-width: 600px) {
+  .is-collapsible { padding-block: 44px; }
+  .is-collapsible .collapse-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 14px; padding: 0; font-weight: 600; font-size: 15px; color: var(--accent-600); }
+  .is-collapsible .collapse-toggle svg { width: 16px; height: 16px; transition: transform .2s ease; }
+  .is-collapsible:not(.is-collapsed) .collapse-toggle svg { transform: rotate(180deg); }
+  .is-collapsed [data-detail] { display: none !important; }
+  .is-collapsed [data-clamp] { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+}
