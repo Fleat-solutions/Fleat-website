@@ -145,6 +145,18 @@
     });
   });
 
+  /* Barres défilantes : indique s'il reste du contenu à gauche ou à droite */
+  document.querySelectorAll('[data-scroll-fade]').forEach(function (el) {
+    function update() {
+      var max = el.scrollWidth - el.clientWidth;
+      el.classList.toggle('fade-l', el.scrollLeft > 2);
+      el.classList.toggle('fade-r', el.scrollLeft < max - 2);
+    }
+    el.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+
   /* Année footer */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();

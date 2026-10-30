@@ -306,8 +306,8 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .g-2 { grid-template-columns: repeat(2, 1fr); }
 .g-3 { grid-template-columns: repeat(3, 1fr); }
 .g-4 { grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 900px) { .g-3, .g-4 { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .g-2, .g-3, .g-4 { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .g-2 { grid-template-columns: 1fr; } .g-2 .photo-4x3 { aspect-ratio: 16 / 9; } .g-3, .g-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .g-3, .g-4 { grid-template-columns: 1fr; } }
 
 /* Icône carrée sobre */
 .ico {
@@ -825,3 +825,26 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
 .form-error { margin-top:14px; font-size:14px; color:#b42318; background:#fef3f2; border:1px solid #fecdca; border-radius:8px; padding:12px 14px; }
 .form-error a { color:inherit; font-weight:600; text-decoration:underline; }
+
+/* Barres défilantes : dégradé sur le bord qui cache encore du contenu */
+[data-scroll-fade].fade-r { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent); }
+[data-scroll-fade].fade-l { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 40px), transparent); }
+[data-scroll-fade].fade-l.fade-r { -webkit-mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent); }
+
+/* Pied de page : liens légaux assez hauts pour le doigt sur écran tactile */
+@media (max-width: 860px) {
+  .footer-bottom .f-legal { gap: 0 22px; }
+  .footer-bottom .f-legal a, .f-cookies { display: inline-flex; align-items: center; min-height: 44px; }
+}
+
+/* Écrans tactiles : cibles d'au moins 44 px pour le doigt */
+@media (pointer: coarse) {
+  .footer-col a { padding: 11px 0; }
+  .btn-link { min-height: 44px; }
+  .subnav-link, .cu-tab, .sol-anchors a, .cu-layers button { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+/* Téléphone en paysage : les barres collantes ne doivent pas manger l'écran */
+@media (max-height: 500px) and (orientation: landscape) {
+  nav.sector-subnav, nav.cu-subnav { position: static; }
+}
