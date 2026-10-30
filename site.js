@@ -92,6 +92,7 @@
       .then(function (res) { return res.json(); })
       .then(function (json) {
         if (!json.success) throw new Error(json.message);
+        window.fleatTrack('generate_lead', { form_name: form.dataset.formName });
         onSuccess();
       })
       .catch(function () {
@@ -178,6 +179,36 @@
     setInterval(updateTs, 1000);
   }
 
+  /* Mesure d'audience Google Analytics 4 : chargée uniquement après consentement, sur le domaine de production */
+  var GA_ID = 'G-NTDF6J8CZG';
+  var isProduction = /(^|\.)fleat-solutions\.com$/.test(location.hostname);
+  function loadAnalytics() {
+    if (!isProduction) return;
+    window['ga-disable-' + GA_ID] = false;
+    if (window.gtag) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_ID, { cookie_expires: 34128000 }); // 13 mois, durée maximale recommandée par la CNIL
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+  }
+  function stopAnalytics() {
+    window['ga-disable-' + GA_ID] = true;
+    document.cookie.split(';').forEach(function (c) {
+      var name = c.split('=')[0].trim();
+      if (name.indexOf('_ga') !== 0) return;
+      ['', '; domain=' + location.hostname, '; domain=.' + location.hostname.replace(/^www\./, '')].forEach(function (d) {
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + d;
+      });
+    });
+  }
+  window.fleatTrack = function (name, params) {
+    if (window.gtag && !window['ga-disable-' + GA_ID]) window.gtag('event', name, params);
+  };
+
   /* Bannière cookies RGPD */
   var banner = document.getElementById('cookie-banner');
   if (banner) {
@@ -185,9 +216,11 @@
     if (consent === 'accepted' || consent === 'refused') {
       banner.classList.add('hidden');
     }
+    if (consent === 'accepted') loadAnalytics();
     document.getElementById('cookie-accept').addEventListener('click', function () {
       localStorage.setItem('fleat_cookie_consent', 'accepted');
       banner.classList.add('hidden');
+      loadAnalytics();
     });
     document.getElementById('cookie-refuse').addEventListener('click', function () {
       localStorage.setItem('fleat_cookie_consent', 'refused');
@@ -210,6 +243,7 @@
   /* Reset préférences cookies (accessible depuis confidentialite.html) */
   window.resetCookieConsent = function () {
     localStorage.removeItem('fleat_cookie_consent');
+    stopAnalytics();
     var b = document.getElementById('cookie-banner');
     if (b) { b.classList.remove('hidden'); }
   };
