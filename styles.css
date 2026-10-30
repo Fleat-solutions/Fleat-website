@@ -846,7 +846,7 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 @media (pointer: coarse) {
   .footer-col a { padding: 11px 0; }
   .btn-link { min-height: 44px; }
-  .subnav-link, .cu-tab, .sol-anchors a, .cu-layers button { min-height: 44px; display: inline-flex; align-items: center; }
+  .subnav-link, .cu-tab, .cu-layers button { min-height: 44px; display: inline-flex; align-items: center; }
 }
 
 /* Téléphone en paysage : les barres collantes ne doivent pas manger l'écran */
