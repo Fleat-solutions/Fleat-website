@@ -407,6 +407,11 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   .hero-night .hero-photo img { object-position: 50% 52%; }
   .hero-night .hero-photo::after { background: linear-gradient(180deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.8) 46%, rgba(0,0,0,.92) 100%); }
   .hero-copy { max-width: none; }
+  /* Accueil : photo dégagée en haut, texte posé en bas sur un fond assombri */
+  .hero-home { min-height: 82svh; align-items: flex-end; }
+  .hero-home .hero-photo::after { background: linear-gradient(180deg, rgba(0,0,0,.1) 0%, rgba(0,0,0,.2) 22%, rgba(0,0,0,.72) 42%, rgba(0,0,0,.9) 60%, rgba(0,0,0,.94) 100%); }
+  .hero-home .hero-grid-bg { opacity: .12; }
+  .hero-home .hero-copy { text-shadow: 0 2px 18px rgba(0,0,0,.55); }
 }
 .sector-card { position: relative; overflow: hidden; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
 .sector-card:hover { border-color: var(--line-2); box-shadow: var(--sh); transform: translateY(-2px); }
