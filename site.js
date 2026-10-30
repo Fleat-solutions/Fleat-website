@@ -197,6 +197,41 @@
     window.addEventListener('hashchange', function () { openTarget(false); });
   }
 
+  /* Onglets mobiles : [data-tabs] n'affiche qu'un de ses blocs [data-tab] à la fois sur petit écran */
+  document.querySelectorAll('[data-tabs]').forEach(function (group, g) {
+    var panels = Array.prototype.slice.call(group.querySelectorAll(':scope > [data-tab]'));
+    if (panels.length < 2) return;
+    var bar = document.createElement('div');
+    bar.className = 'm-tabs';
+    bar.setAttribute('role', 'tablist');
+    var mq = window.matchMedia('(max-width: 600px)');
+    var current = 0;
+    var select = function (i) {
+      current = i;
+      panels.forEach(function (p, j) {
+        var on = i === j;
+        p.hidden = mq.matches && !on;
+        bar.children[j].setAttribute('aria-selected', on ? 'true' : 'false');
+        bar.children[j].tabIndex = on ? 0 : -1;
+      });
+    };
+    panels.forEach(function (p, i) {
+      p.id = p.id || 'tab-' + g + '-' + i;
+      p.setAttribute('role', 'tabpanel');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-controls', p.id);
+      b.textContent = p.getAttribute('data-tab');
+      b.addEventListener('click', function () { select(i); });
+      bar.appendChild(b);
+    });
+    group.parentElement.insertBefore(bar, group);
+    group.parentElement.classList.add('has-tabs');
+    mq.addEventListener('change', function () { select(current); });
+    select(0);
+  });
+
   /* Année footer */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();

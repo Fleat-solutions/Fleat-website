@@ -849,12 +849,23 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   nav.sector-subnav, nav.cu-subnav { position: static; }
 }
 
-/* Accueil, secteurs : carrousel horizontal sur mobile au lieu de six cartes empilées */
+/* Carrousels mobiles (.m-rail) : cartes qui défilent au doigt au lieu de s'empiler */
 @media (max-width: 600px) {
-  .sector-rail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gut)); padding: 2px var(--gut) 6px; scroll-padding-inline: var(--gut); }
-  .sector-rail::-webkit-scrollbar { display: none; }
-  .sector-rail .sector-card { flex: 0 0 78%; scroll-snap-align: start; }
-  .sector-rail .reveal { opacity: 1; transform: none; }
+  div.m-rail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gut)); padding: 2px var(--gut) 6px; scroll-padding-inline: var(--gut); }
+  div.m-rail::-webkit-scrollbar { display: none; }
+  div.m-rail > * { flex: 0 0 78%; scroll-snap-align: start; }
+  div.m-rail .reveal, div.m-rail.reveal { opacity: 1; transform: none; }
+  div.op-feats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Onglets mobiles ([data-tabs]) : un seul bloc affiché à la fois, choisi dans une barre d'onglets */
+.m-tabs { display: none; }
+@media (max-width: 600px) {
+  .has-tabs .m-tabs { display: flex; gap: 8px; margin-top: 28px; }
+  .m-tabs button { flex: 1; min-height: 44px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); font-weight: 600; font-size: 14.5px; color: var(--ink-2); }
+  .m-tabs button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .has-tabs [data-tab][hidden] { display: none !important; }
+  .has-tabs > [data-tabs] { margin-top: 14px; }
 }
 
 /* Accordéons mobiles : sections résumées, détail affiché au toucher (activé par site.js) */

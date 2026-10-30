@@ -162,7 +162,7 @@ a{color:var(--accent)}a:hover{color:var(--accent-600)}
 <section class="section sol-sec" id="dispositif" data-screen-label="Dispositif">
 <div class="container">
 <div class="section-head reveal"><span class="eyebrow">01 · Le dispositif</span><h2 class="h2">Ce qui est installé sur votre site.</h2><p class="lead">Trois éléments, déployés et raccordés par nos équipes.</p></div>
-<div class="kit">
+<div class="kit m-rail" data-scroll-fade>
 <div class="kit-item reveal">
 <div class="ph"><span class="ph-tag">photo · station FLEAT sur site</span></div>
 <div><h3>La station</h3><ul><li>Abrite le drone entre deux vols.</li><li>Recharge automatique, sans intervention.</li><li>Posée et raccordée sur votre site.</li></ul></div>
@@ -182,8 +182,8 @@ a{color:var(--accent)}a:hover{color:var(--accent-600)}
 <section class="section bg-paper-2 sol-sec" id="mission" data-screen-label="Mission">
 <div class="container">
 <div class="section-head reveal"><span class="eyebrow">02 · Une mission</span><h2 class="h2">Deux façons de faire décoller le drone.</h2><p class="lead">Une ronde programmée à l'avance, ou une levée de doute déclenchée par une alerte.</p></div>
-<div class="mis">
-<div class="card reveal">
+<div class="mis" data-tabs>
+<div class="card reveal" data-tab="Ronde programmée">
 <span class="pill"><span class="dot"></span>Ronde programmée</span>
 <h3>Le drone patrouille selon votre planning.</h3>
 <ol class="tl">
@@ -194,7 +194,7 @@ a{color:var(--accent)}a:hover{color:var(--accent-600)}
 <li><span class="n">05</span><b>Archivage</b><span>La mission est enregistrée, images horodatées à l'appui.</span></li>
 </ol>
 </div>
-<div class="card card-dark reveal" data-d="1">
+<div class="card card-dark reveal" data-d="1" data-tab="Levée de doute">
 <span class="pill warn"><span class="dot"></span>Levée de doute</span>
 <h3>Le drone vérifie avant qu'un agent se déplace.</h3>
 <ol class="tl">
@@ -259,8 +259,8 @@ a{color:var(--accent)}a:hover{color:var(--accent-600)}
 <section class="section sol-sec" id="roles" data-screen-label="Rôles">
 <div class="container">
 <div class="section-head reveal"><span class="eyebrow">04 · Qui fait quoi</span><h2 class="h2">Vous gardez la décision. Nous portons le déploiement.</h2></div>
-<div class="roles">
-<div class="card reveal">
+<div class="roles" data-tabs>
+<div class="card reveal" data-tab="FLEAT">
 <span class="step-num">FLEAT</span>
 <h3>Ce que nous prenons en charge</h3>
 <ul class="checklist">
@@ -271,7 +271,7 @@ a{color:var(--accent)}a:hover{color:var(--accent-600)}
 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Accompagnement en exploitation</li>
 </ul>
 </div>
-<div class="card you reveal" data-d="1">
+<div class="card you reveal" data-d="1" data-tab="Vos équipes">
 <span class="step-num">Vos équipes</span>
 <h3>Ce que vous pilotez</h3>
 <ul class="checklist">
@@ -305,7 +305,7 @@ a{color:var(--accent)}a:hover{color:var(--accent-600)}
 <section class="section sol-sec" id="cadre" data-screen-label="Cadre d'usage">
 <div class="container">
 <div class="section-head reveal"><span class="eyebrow">06 · Cadre d'usage</span><h2 class="h2">Ce que nous validons avant d'installer.</h2><p class="lead">Un drone ne s'installe pas partout. Chaque site est étudié avant tout engagement.</p></div>
-<div class="limits">
+<div class="limits m-rail" data-scroll-fade>
 <div class="card reveal feature"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Réglementation</h3><p>Le scénario de vol est préparé selon le cadre applicable à votre site.</p></div>
 <div class="card reveal feature" data-d="1"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.7-9h1.8a4.5 4.5 0 0 1 0 9z"/></svg></span><h3>Météo</h3><p>Les conditions de vol sont prises en compte dans la conception des missions.</p></div>
 <div class="card reveal feature" data-d="2"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg></span><h3>Faisabilité du site</h3><p>Emprise, obstacles et connectivité sont évalués au cas par cas.</p></div>
