@@ -30,7 +30,8 @@ Fleat-website/
 ├── 404.html
 ├── styles.css              # Feuille de styles commune
 ├── site.js                 # Interactions (menu, formulaires, cookies, apparitions)
-├── assets/                 # Logos et images locales
+├── assets/                 # Images optimisées servies par le site
+├── brand/                  # Originaux haute définition (logos, photos), non publiés
 ├── robots.txt, sitemap.xml # SEO
 ├── CLAUDE.md               # Règles de rédaction du site
 ├── CREDITS.md              # Crédits des photos Unsplash
