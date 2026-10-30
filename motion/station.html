@@ -16,6 +16,7 @@ body{background:var(--paper);padding:40px;font-family:var(--f-text)}
 <script type="module">
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { makeDrone } from './drone.js';
 
 /* Unités en mètres. Cotes inspirées du Dock 3 : 640 × 745 × 770 mm capot fermé, 1 760 × 745 × 485 mm capot ouvert. */
 const host = document.getElementById('kv');
@@ -34,7 +35,12 @@ scene.fog = new THREE.Fog('#e6ecf4', 14, 30);
 /* Caméra orthographique, vue de trois quarts plongeante */
 const VIEW = 3.4;
 const cam = new THREE.OrthographicCamera(-VIEW * 4 / 3, VIEW * 4 / 3, VIEW, -VIEW, .1, 100);
-cam.position.set(7, 5.8, 7); cam.lookAt(-.35, .95, -.75); cam.zoom = 1.55; cam.updateProjectionMatrix();
+/* plan large (contexte du site) et plan serré (dock et drone lisibles) ; la caméra passe de l'un à l'autre */
+const WIDE = { at: new THREE.Vector3(-.35, .95, -.75), zoom: 1.55 }, TIGHT_ZOOM = 2.7;
+const CAM_OFF = new THREE.Vector3(7, 5.8, 7).sub(WIDE.at);
+const camTarget = new THREE.Vector3();
+function placeCam(at, zoom) { cam.position.copy(at).add(CAM_OFF); cam.lookAt(at); cam.zoom = zoom; cam.updateProjectionMatrix(); }
+placeCam(WIDE.at, WIDE.zoom);
 
 /* Lumières : ciel + soleil avec ombres douces */
 scene.add(new THREE.HemisphereLight('#f4f7fc', '#b9c2cf', 1.25));
@@ -149,37 +155,16 @@ function hoodHalf(side) {
 }
 const hoodL = hoodHalf(-1), hoodR = hoodHalf(1);
 
-/* ---------- Drone inspiré du Matrice 4D ---------- */
-const drone = new THREE.Group(); scene.add(drone);
-const body = M('#3a4048', { roughness: .45, metalness: .15 }), bodyD = M('#262a30', { roughness: .55 });
-mesh(new RoundedBoxGeometry(.2, .07, .13, 3, .025), body, 0, .06, 0, drone);
-mesh(new RoundedBoxGeometry(.12, .03, .09, 3, .012), M('#4a515b', { roughness: .4 }), -.01, .1, 0, drone);
-const props = [];
-[[1, 1], [1, -1], [-1, 1], [-1, -1]].forEach(([a, b]) => {
-  const arm = mesh(new THREE.BoxGeometry(.2, .018, .022), bodyD, a * .09, .065, b * .09, drone); arm.rotation.y = -Math.atan2(b, a);
-  mesh(new THREE.CylinderGeometry(.022, .024, .035, 16), bodyD, a * .16, .08, b * .16, drone);
-  const prop = new THREE.Group(); prop.position.set(a * .16, .102, b * .16); drone.add(prop);
-  mesh(new THREE.BoxGeometry(.25, .004, .022), M('#1c1f24', { roughness: .5 }), 0, 0, 0, prop);
-  const disc = new THREE.Mesh(new THREE.CircleGeometry(.125, 40), new THREE.MeshBasicMaterial({ color: '#6c7890', transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide }));
-  disc.rotation.x = -Math.PI / 2; prop.add(disc);
-  props.push({ g: prop, disc, dir: a * b });
-  mesh(new THREE.BoxGeometry(.012, .05, .012), bodyD, a * .14, .025, b * .14, drone);
-});
-/* nacelle caméra à l'avant */
-mesh(new THREE.SphereGeometry(.03, 20, 14), bodyD, .11, .03, 0, drone);
-mesh(new RoundedBoxGeometry(.045, .04, .07, 2, .01), M('#2a2f36', { roughness: .4 }), .125, .02, 0, drone);
-mesh(new THREE.CircleGeometry(.012, 20), M('#3f6db8', { roughness: .1, metalness: .6 }), .148, .022, -.015, drone).rotation.y = Math.PI / 2;
-mesh(new THREE.CircleGeometry(.009, 20), M('#3f6db8', { roughness: .1, metalness: .6 }), .148, .022, .018, drone).rotation.y = Math.PI / 2;
-const navR = new THREE.MeshStandardMaterial({ color: '#ff5a4f', emissive: '#ff3b30', emissiveIntensity: 2 });
-const navG = new THREE.MeshStandardMaterial({ color: '#3ad07a', emissive: '#22c55e', emissiveIntensity: 2 });
-mesh(new THREE.SphereGeometry(.008, 10, 8), navR, .16, .085, -.16, drone);
-mesh(new THREE.SphereGeometry(.008, 10, 8), navG, .16, .085, .16, drone);
-drone.rotation.y = Math.PI / 4; drone.scale.setScalar(.88);
+/* ---------- Drone (modèle partagé, inspiré du Matrice 4D) ---------- */
+const D4 = makeDrone(THREE, RoundedBoxGeometry);
+const drone = D4.group; scene.add(drone);
+/* échelle 1,02 et cap aligné sur le dock : c'est la position qui laisse rentrer drone et hélices sous le capot fermé */
+drone.scale.setScalar(1.02);
 
 /* ---------- Chronologie (12 s) ---------- */
 const T = 12, ease = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
 const seg = (t, a, b) => t <= a ? 0 : t >= b ? 1 : ease((t - a) / (b - a)), lerp = (a, b, p) => a + (b - a) * p;
-const PAD = HB - .024, HOVER = 1.55;
+const PAD = HB - .028, HOVER = 1.55;
 const dot = document.getElementById('chipDot'), txt = document.getElementById('chipTxt');
 function render(t) {
   t = ((t % T) + T) % T;
@@ -195,10 +180,15 @@ function render(t) {
   else p = [0, lerp(1.2, PAD, seg(t, 9.9, 11)), 0];
   drone.visible = !!p;
   if (p) drone.position.set(p[0], p[1], p[2]);
-  props.forEach(pr => { pr.g.rotation.y = t * 60 * pr.dir * spin + pr.dir * .6; pr.disc.material.opacity = .32 * spin; pr.g.children[0].visible = spin < .6; });
+  D4.setSpin(spin, t);
+  /* serré au dock, recul pendant le départ en mission, retour en serré pour l'atterrissage */
+  const k = 1 - seg(t, 4.6, 6.4) + seg(t, 8.4, 10.2);
+  const ty = t < 8 ? .45 + .55 * seg(t, 3, 4.6) : .45 + .45 * (1 - seg(t, 9.9, 11));
+  camTarget.set(0, ty, 0).lerp(WIDE.at, 1 - k);
+  placeCam(camTarget, lerp(WIDE.zoom, TIGHT_ZOOM, k));
   const mission = t >= 4.6 && t < 11.2, col = mission ? '#2f62ea' : '#1f9d57';
   ledMat.color.set(col); ledMat.emissive.set(col); dot.style.background = col;
-  const on = Math.floor(t * 2) % 2 === 0; navR.emissiveIntensity = navG.emissiveIntensity = on ? 2.4 : .2;
+  D4.setLights(Math.floor(t * 2) % 2 === 0);
   txt.textContent = t >= 9.3 && t < 11.2 ? 'Retour' : mission ? 'En mission' : (t >= 1 && t < 4.6 ? 'Décollage' : 'En charge');
   renderer.render(scene, cam);
 }
