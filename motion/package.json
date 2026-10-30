@@ -1,0 +1,15 @@
+{
+  "name": "fleat-motion",
+  "private": true,
+  "description": "Animations 3D du site FLEAT et leur rendu vidéo (non publié sur le site)",
+  "scripts": {
+    "sheet": "node render.js sheet 0.5 2.4 3.8 5.4 9.0 10.6",
+    "video": "node render.js video"
+  },
+  "dependencies": {
+    "three": "0.160.0"
+  },
+  "devDependencies": {
+    "playwright": "1.49.1"
+  }
+}
