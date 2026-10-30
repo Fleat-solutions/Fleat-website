@@ -848,3 +848,11 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 @media (max-height: 500px) and (orientation: landscape) {
   nav.sector-subnav, nav.cu-subnav { position: static; }
 }
+
+/* Accueil, secteurs : carrousel horizontal sur mobile au lieu de six cartes empilées */
+@media (max-width: 600px) {
+  .sector-rail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gut)); padding: 2px var(--gut) 6px; scroll-padding-inline: var(--gut); }
+  .sector-rail::-webkit-scrollbar { display: none; }
+  .sector-rail .sector-card { flex: 0 0 78%; scroll-snap-align: start; }
+  .sector-rail .reveal { opacity: 1; transform: none; }
+}
