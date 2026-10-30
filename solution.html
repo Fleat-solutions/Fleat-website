@@ -25,9 +25,11 @@
 <link rel="stylesheet" href="styles.css">
 <style>
 a{color:var(--accent)}a:hover{color:var(--accent-600)}
-.sol-anchors{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
-.sol-anchors a{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.03em;color:var(--on-dark-2);padding:7px 12px;border:1px solid var(--dark-line-2);border-radius:999px;background:rgba(10,26,61,.35);transition:color .15s,border-color .15s}
-.sol-anchors a:hover{color:var(--on-dark);border-color:var(--on-dark-3)}
+.sol-anchors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:28px;margin-top:44px}
+.sol-anchors a{display:flex;align-items:baseline;gap:10px;padding:13px 0;border-top:1px solid var(--dark-line-2);font-size:15px;font-weight:600;color:var(--on-dark-2);transition:color .15s,border-color .15s}
+.sol-anchors a i{font-family:var(--f-mono);font-size:12px;font-weight:400;font-style:normal;letter-spacing:.04em;color:var(--accent-400)}
+.sol-anchors a:hover{color:var(--on-dark);border-top-color:var(--accent-400)}
+@media(max-width:600px){.sol-anchors{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px;margin-top:36px}}
 .sol-sec{scroll-margin-top:84px}
 .kit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,32px);margin-top:48px}
 .kit-item .ph{aspect-ratio:4/3;min-height:0}
@@ -148,12 +150,12 @@ a{color:var(--accent)}a:hover{color:var(--accent-600)}
 <a class="btn btn-ghost" href="cas-usage.html">Voir les cas d'usage</a>
 </div>
 <nav class="sol-anchors" aria-label="Sur cette page">
-<a href="#dispositif">Le dispositif</a>
-<a href="#mission">Une mission</a>
-<a href="#operateur">Côté opérateur</a>
-<a href="#roles">Qui fait quoi</a>
-<a href="#integrations">Intégrations</a>
-<a href="#cadre">Cadre d'usage</a>
+<a href="#dispositif"><i>01</i>Le dispositif</a>
+<a href="#mission"><i>02</i>Une mission</a>
+<a href="#operateur"><i>03</i>Côté opérateur</a>
+<a href="#roles"><i>04</i>Qui fait quoi</a>
+<a href="#integrations"><i>05</i>Intégrations</a>
+<a href="#cadre"><i>06</i>Cadre d'usage</a>
 </nav>
 </div>
 </div>
