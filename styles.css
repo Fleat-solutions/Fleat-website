@@ -863,7 +863,10 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   .is-collapsible { padding-block: 44px; }
   .is-collapsible .collapse-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 14px; padding: 0; font-weight: 600; font-size: 15px; color: var(--accent-600); }
   .is-collapsible .collapse-toggle svg { width: 16px; height: 16px; transition: transform .2s ease; }
+  .bg-dark .is-collapsible .collapse-toggle, .is-collapsible.bg-dark .collapse-toggle { color: var(--accent-400); }
   .is-collapsible:not(.is-collapsed) .collapse-toggle svg { transform: rotate(180deg); }
   .is-collapsed [data-detail] { display: none !important; }
+  .is-collapsed .uh { padding-bottom: 0; border-bottom: 0; }
+  .uh .collapse-toggle { margin-top: 0; }
   .is-collapsed [data-clamp] { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 }
