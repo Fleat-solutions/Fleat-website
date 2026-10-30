@@ -306,8 +306,8 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .g-2 { grid-template-columns: repeat(2, 1fr); }
 .g-3 { grid-template-columns: repeat(3, 1fr); }
 .g-4 { grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 900px) { .g-3, .g-4 { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .g-2, .g-3, .g-4 { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .g-2 { grid-template-columns: 1fr; } .g-2 .photo-4x3 { aspect-ratio: 16 / 9; } .g-3, .g-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .g-3, .g-4 { grid-template-columns: 1fr; } }
 
 /* Icône carrée sobre */
 .ico {
@@ -825,3 +825,59 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
 .form-error { margin-top:14px; font-size:14px; color:#b42318; background:#fef3f2; border:1px solid #fecdca; border-radius:8px; padding:12px 14px; }
 .form-error a { color:inherit; font-weight:600; text-decoration:underline; }
+
+/* Barres défilantes : dégradé sur le bord qui cache encore du contenu */
+[data-scroll-fade].fade-r { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent); }
+[data-scroll-fade].fade-l { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 40px), transparent); }
+[data-scroll-fade].fade-l.fade-r { -webkit-mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent); }
+
+/* Pied de page : liens légaux assez hauts pour le doigt sur écran tactile */
+@media (max-width: 860px) {
+  .footer-bottom .f-legal { gap: 0 22px; }
+  .footer-bottom .f-legal a, .f-cookies { display: inline-flex; align-items: center; min-height: 44px; }
+}
+
+/* Écrans tactiles : cibles d'au moins 44 px pour le doigt */
+@media (pointer: coarse) {
+  .footer-col a { padding: 11px 0; }
+  .btn-link { min-height: 44px; }
+  .subnav-link, .cu-tab, .sol-anchors a, .cu-layers button { min-height: 44px; display: inline-flex; align-items: center; }
+}
+
+/* Téléphone en paysage : les barres collantes ne doivent pas manger l'écran */
+@media (max-height: 500px) and (orientation: landscape) {
+  nav.sector-subnav, nav.cu-subnav { position: static; }
+}
+
+/* Carrousels mobiles (.m-rail) : cartes qui défilent au doigt au lieu de s'empiler */
+@media (max-width: 600px) {
+  div.m-rail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * var(--gut)); padding: 2px var(--gut) 6px; scroll-padding-inline: var(--gut); }
+  div.m-rail::-webkit-scrollbar { display: none; }
+  div.m-rail > * { flex: 0 0 78%; scroll-snap-align: start; }
+  div.m-rail .reveal, div.m-rail.reveal { opacity: 1; transform: none; }
+  div.op-feats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Onglets mobiles ([data-tabs]) : un seul bloc affiché à la fois, choisi dans une barre d'onglets */
+.m-tabs { display: none; }
+@media (max-width: 600px) {
+  .has-tabs .m-tabs { display: flex; gap: 8px; margin-top: 28px; }
+  .m-tabs button { flex: 1; min-height: 44px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); font-weight: 600; font-size: 14.5px; color: var(--ink-2); }
+  .m-tabs button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .has-tabs [data-tab][hidden] { display: none !important; }
+  .has-tabs > [data-tabs] { margin-top: 14px; }
+}
+
+/* Accordéons mobiles : sections résumées, détail affiché au toucher (activé par site.js) */
+.collapse-toggle { display: none; }
+@media (max-width: 600px) {
+  .is-collapsible { padding-block: 44px; }
+  .is-collapsible .collapse-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 14px; padding: 0; font-weight: 600; font-size: 15px; color: var(--accent-600); }
+  .is-collapsible .collapse-toggle svg { width: 16px; height: 16px; transition: transform .2s ease; }
+  .bg-dark .is-collapsible .collapse-toggle, .is-collapsible.bg-dark .collapse-toggle { color: var(--accent-400); }
+  .is-collapsible:not(.is-collapsed) .collapse-toggle svg { transform: rotate(180deg); }
+  .is-collapsed [data-detail] { display: none !important; }
+  .is-collapsed .uh { padding-bottom: 0; border-bottom: 0; }
+  .uh .collapse-toggle { margin-top: 0; }
+  .is-collapsed [data-clamp] { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+}
