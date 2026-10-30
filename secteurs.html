@@ -239,7 +239,7 @@
 
 <!-- ===================== SOUS-NAV COLLANTE ===================== -->
 <nav class="sector-subnav" aria-label="Navigation des secteurs">
-  <div class="container sector-subnav-inner" id="sector-subnav">
+  <div class="container sector-subnav-inner" data-scroll-fade id="sector-subnav">
     <a class="subnav-link" href="#industrie">Industrie</a>
     <a class="subnav-link" href="#recyclage">Recyclage</a>
     <a class="subnav-link" href="#logistique">Logistique</a>
@@ -250,23 +250,23 @@
 </nav>
 
 <!-- ===================== 01 · INDUSTRIE ===================== -->
-<section id="industrie" class="section sector-sec" data-screen-label="Secteur · Industrie">
+<section id="industrie" data-collapse class="section sector-sec" data-screen-label="Secteur · Industrie">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
         <span class="step-num">INDUSTRIE</span>
         <h2 class="h2">Couvrir de grandes emprises, sans angle mort.</h2>
-        <p class="lead">Usines, aciéries, cimenteries : multiplier les caméras fixes sur une grande emprise coûte cher et laisse toujours des zones peu couvertes. Une ronde aérienne automatisée parcourt l'ensemble du site selon une trajectoire définie.</p>
-        <ul class="checklist">
+        <p class="lead" data-clamp>Usines, aciéries, cimenteries : multiplier les caméras fixes sur une grande emprise coûte cher et laisse toujours des zones peu couvertes. Une ronde aérienne automatisée parcourt l'ensemble du site selon une trajectoire définie.</p>
+        <ul class="checklist" data-detail>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Stocks extérieurs, zones sensibles et accès multiples contrôlés régulièrement</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute aérienne après une alerte, sans déplacer immédiatement un agent</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Historique des missions conservé et exploitable pour vos comptes rendus</li>
         </ul>
-        <div class="sec-cta">
+        <div class="sec-cta" data-detail>
           <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
-      <aside class="sec-side reveal" data-d="1">
+      <aside data-detail class="sec-side reveal" data-d="1">
         <div class="photo photo-4x3 photo-frame">
           <img src="https://images.unsplash.com/photo-1666219462105-2909c2d72d01?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1666219462105-2909c2d72d01?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1666219462105-2909c2d72d01?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1666219462105-2909c2d72d01?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Cimenterie en bord d'eau : silos, tour de process et stocks de granulats" loading="lazy">
         </div>
@@ -280,24 +280,24 @@
 </section>
 
 <!-- ===================== 02 · CENTRES DE RECYCLAGE ===================== -->
-<section id="recyclage" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur · Centres de recyclage">
+<section id="recyclage" data-collapse class="section sector-sec flip bg-paper-2" data-screen-label="Secteur · Centres de recyclage">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
         <span class="step-num">CENTRES DE RECYCLAGE</span>
         <h2 class="h2">Protéger des stocks exposés au vol et au feu.</h2>
-        <p class="lead">Centres de tri, ferrailleurs, plateformes de déchets : la valeur est stockée dehors, en grands volumes. Deux risques reviennent sur ces sites : le vol de métaux et le départ de feu.</p>
-        <ul class="checklist">
+        <p class="lead" data-clamp>Centres de tri, ferrailleurs, plateformes de déchets : la valeur est stockée dehors, en grands volumes. Deux risques reviennent sur ces sites : le vol de métaux et le départ de feu.</p>
+        <ul class="checklist" data-detail>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Rondes de nuit sur les stocks, les bennes et les lignes de clôture</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Imagerie thermique pour repérer un point chaud sur un stock, selon les conditions</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Levée de doute après une alarme, avant d'envoyer une équipe</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Relevés aériens pour suivre l'évolution des volumes stockés</li>
         </ul>
-        <div class="sec-cta">
+        <div class="sec-cta" data-detail>
           <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
-      <aside class="sec-side reveal" data-d="1">
+      <aside data-detail class="sec-side reveal" data-d="1">
         <!-- Photo provisoire : à remplacer par une vue aérienne d'un centre de recyclage -->
         <div class="photo photo-4x3 photo-frame">
           <img src="https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'une zone industrielle avec des zones de stockage extérieures" loading="lazy">
@@ -312,23 +312,23 @@
 </section>
 
 <!-- ===================== 03 · LOGISTIQUE ===================== -->
-<section id="logistique" class="section sector-sec" data-screen-label="Secteur · Logistique">
+<section id="logistique" data-collapse class="section sector-sec" data-screen-label="Secteur · Logistique">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
         <span class="step-num">LOGISTIQUE</span>
         <h2 class="h2">Contrôler des emprises extérieures très étendues.</h2>
-        <p class="lead">Parkings poids lourds, quais de chargement, remorques stationnées, stocks extérieurs et clôtures : une plateforme logistique concentre sa valeur sur des surfaces ouvertes, souvent en périphérie des bâtiments surveillés.</p>
-        <ul class="checklist">
+        <p class="lead" data-clamp>Parkings poids lourds, quais de chargement, remorques stationnées, stocks extérieurs et clôtures : une plateforme logistique concentre sa valeur sur des surfaces ouvertes, souvent en périphérie des bâtiments surveillés.</p>
+        <ul class="checklist" data-detail>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Rondes automatisées sur les parkings, quais et lignes de clôture</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Vérification d'une zone éloignée sans immobiliser une équipe</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Vue aérienne utile pour qualifier rapidement une situation</li>
         </ul>
-        <div class="sec-cta">
+        <div class="sec-cta" data-detail>
           <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
-      <aside class="sec-side reveal" data-d="1">
+      <aside data-detail class="sec-side reveal" data-d="1">
         <div class="photo photo-4x3 photo-frame">
           <img src="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'une plateforme logistique : remorques à quai et parking" loading="lazy">
         </div>
@@ -342,23 +342,23 @@
 </section>
 
 <!-- ===================== 04 · GRANDS CHANTIERS ===================== -->
-<section id="chantiers" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur · Grands chantiers">
+<section id="chantiers" data-collapse class="section sector-sec flip bg-paper-2" data-screen-label="Secteur · Grands chantiers">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
         <span class="step-num">GRANDS CHANTIERS</span>
         <h2 class="h2">Surveiller un site qui change toutes les semaines.</h2>
-        <p class="lead">Sur un grand chantier, le plan évolue en permanence : les zones de stockage se déplacent, le matériel coûteux change d'emplacement, et l'installation de caméras fixes suit difficilement ce rythme.</p>
-        <ul class="checklist">
+        <p class="lead" data-clamp>Sur un grand chantier, le plan évolue en permanence : les zones de stockage se déplacent, le matériel coûteux change d'emplacement, et l'installation de caméras fixes suit difficilement ce rythme.</p>
+        <ul class="checklist" data-detail>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Trajectoires de mission reconfigurables à mesure que le chantier évolue</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Contrôle des zones de stockage de matériaux et du matériel stationné</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Surveillance des périodes d'inactivité, soirs et week-ends</li>
         </ul>
-        <div class="sec-cta">
+        <div class="sec-cta" data-detail>
           <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
-      <aside class="sec-side reveal" data-d="1">
+      <aside data-detail class="sec-side reveal" data-d="1">
         <div class="photo photo-4x3 photo-frame">
           <img src="https://images.unsplash.com/photo-1723367194881-fe2e53534170?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1723367194881-fe2e53534170?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1723367194881-fe2e53534170?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1723367194881-fe2e53534170?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'un chantier avec engins de terrassement" loading="lazy">
         </div>
@@ -372,23 +372,23 @@
 </section>
 
 <!-- ===================== 05 · DATA CENTERS ===================== -->
-<section id="datacenter" class="section sector-sec" data-screen-label="Secteur · Data centers">
+<section id="datacenter" data-collapse class="section sector-sec" data-screen-label="Secteur · Data centers">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
         <span class="step-num">DATA CENTERS</span>
         <h2 class="h2">Ajouter une couche mobile à un périmètre déjà protégé.</h2>
-        <p class="lead">Un data center est généralement bien équipé côté périmètre. L'intérêt d'une capacité aérienne n'est pas de remplacer ce dispositif, mais d'ajouter un moyen d'observation indépendant, capable d'aller vérifier un point précis.</p>
-        <ul class="checklist">
+        <p class="lead" data-clamp>Un data center est généralement bien équipé côté périmètre. L'intérêt d'une capacité aérienne n'est pas de remplacer ce dispositif, mais d'ajouter un moyen d'observation indépendant, capable d'aller vérifier un point précis.</p>
+        <ul class="checklist" data-detail>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Observation complémentaire des clôtures, accès et abords techniques</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Redondance d'un moyen de vérification en cas d'alerte</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Traçabilité des missions pour vos exigences documentaires</li>
         </ul>
-        <div class="sec-cta">
+        <div class="sec-cta" data-detail>
           <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
-      <aside class="sec-side reveal" data-d="1">
+      <aside data-detail class="sec-side reveal" data-d="1">
         <div class="photo photo-4x3 photo-frame">
           <img src="https://images.unsplash.com/photo-1715026323313-bb22cbe42381?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1715026323313-bb22cbe42381?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1715026323313-bb22cbe42381?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1715026323313-bb22cbe42381?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'un grand bâtiment technique et de ses abords" loading="lazy">
         </div>
@@ -402,23 +402,23 @@
 </section>
 
 <!-- ===================== 06 · ÉNERGIE ===================== -->
-<section id="energie" class="section sector-sec flip bg-paper-2" data-screen-label="Secteur · Énergie">
+<section id="energie" data-collapse class="section sector-sec flip bg-paper-2" data-screen-label="Secteur · Énergie">
   <div class="container">
     <div class="sec-grid">
       <div class="sec-main reveal">
         <span class="step-num">ÉNERGIE</span>
         <h2 class="h2">Contrôler des installations réparties sur de vastes emprises.</h2>
-        <p class="lead">Parcs éoliens, parcs photovoltaïques, postes électriques, barrages : ces installations couvrent de grandes surfaces, souvent isolées et peu occupées. Les rondes physiques y sont longues et répétitives.</p>
-        <ul class="checklist">
+        <p class="lead" data-clamp>Parcs éoliens, parcs photovoltaïques, postes électriques, barrages : ces installations couvrent de grandes surfaces, souvent isolées et peu occupées. Les rondes physiques y sont longues et répétitives.</p>
+        <ul class="checklist" data-detail>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Rondes sur les clôtures, les accès et les abords des installations</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Observation de zones difficiles d'accès sans y envoyer une équipe</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Imagerie thermique pour repérer certaines anomalies selon les conditions</li>
         </ul>
-        <div class="sec-cta">
+        <div class="sec-cta" data-detail>
           <a class="btn btn-link" href="contact.html">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
-      <aside class="sec-side reveal" data-d="1">
+      <aside data-detail class="sec-side reveal" data-d="1">
         <div class="photo photo-4x3 photo-frame">
           <img src="https://images.unsplash.com/photo-1693013112835-5f3128bb555f?auto=format&fit=crop&q=70&w=1600" srcset="https://images.unsplash.com/photo-1693013112835-5f3128bb555f?auto=format&amp;fit=crop&amp;q=70&amp;w=640 640w, https://images.unsplash.com/photo-1693013112835-5f3128bb555f?auto=format&amp;fit=crop&amp;q=70&amp;w=1024 1024w, https://images.unsplash.com/photo-1693013112835-5f3128bb555f?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Poste électrique haute tension et lignes d'alimentation" loading="lazy">
         </div>

@@ -145,6 +145,93 @@
     });
   });
 
+  /* Barres défilantes : indique s'il reste du contenu à gauche ou à droite */
+  document.querySelectorAll('[data-scroll-fade]').forEach(function (el) {
+    function update() {
+      var max = el.scrollWidth - el.clientWidth;
+      el.classList.toggle('fade-l', el.scrollLeft > 2);
+      el.classList.toggle('fade-r', el.scrollLeft < max - 2);
+    }
+    el.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
+
+  /* Accordéons mobiles : [data-collapse] résume la section, [data-detail] se déplie au toucher */
+  var collapsibles = document.querySelectorAll('[data-collapse]');
+  if (collapsibles.length) {
+    var mobile = window.matchMedia('(max-width: 600px)');
+    var arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+    var setOpen = function (sec, open) {
+      sec.classList.toggle('is-collapsed', !open);
+      var btn = sec.querySelector('.collapse-toggle');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.firstChild.textContent = open ? 'Masquer le détail' : 'Voir le détail';
+    };
+    collapsibles.forEach(function (sec) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'collapse-toggle';
+      btn.innerHTML = '<span></span>' + arrow;
+      var anchor = sec.querySelector('[data-clamp]') || sec.querySelector('h2');
+      anchor.insertAdjacentElement('afterend', btn);
+      btn.addEventListener('click', function () { setOpen(sec, sec.classList.contains('is-collapsed')); });
+    });
+    var openTarget = function (rescroll) {
+      var target = location.hash && document.getElementById(location.hash.slice(1));
+      if (!target || !mobile.matches) return;
+      var sec = target.closest('[data-collapse]');
+      if (sec) setOpen(sec, true);
+      /* au chargement, les sections repliées au-dessus ont décalé l'ancre : on la rejoint */
+      if (rescroll) requestAnimationFrame(function () { target.scrollIntoView(); });
+    };
+    var applyMode = function (rescroll) {
+      collapsibles.forEach(function (sec) {
+        sec.classList.toggle('is-collapsible', mobile.matches);
+        setOpen(sec, !mobile.matches);
+      });
+      openTarget(rescroll === true);
+    };
+    applyMode(true);
+    mobile.addEventListener('change', applyMode);
+    window.addEventListener('hashchange', function () { openTarget(false); });
+  }
+
+  /* Onglets mobiles : [data-tabs] n'affiche qu'un de ses blocs [data-tab] à la fois sur petit écran */
+  document.querySelectorAll('[data-tabs]').forEach(function (group, g) {
+    var panels = Array.prototype.slice.call(group.querySelectorAll(':scope > [data-tab]'));
+    if (panels.length < 2) return;
+    var bar = document.createElement('div');
+    bar.className = 'm-tabs';
+    bar.setAttribute('role', 'tablist');
+    var mq = window.matchMedia('(max-width: 600px)');
+    var current = 0;
+    var select = function (i) {
+      current = i;
+      panels.forEach(function (p, j) {
+        var on = i === j;
+        p.hidden = mq.matches && !on;
+        bar.children[j].setAttribute('aria-selected', on ? 'true' : 'false');
+        bar.children[j].tabIndex = on ? 0 : -1;
+      });
+    };
+    panels.forEach(function (p, i) {
+      p.id = p.id || 'tab-' + g + '-' + i;
+      p.setAttribute('role', 'tabpanel');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-controls', p.id);
+      b.textContent = p.getAttribute('data-tab');
+      b.addEventListener('click', function () { select(i); });
+      bar.appendChild(b);
+    });
+    group.parentElement.insertBefore(bar, group);
+    group.parentElement.classList.add('has-tabs');
+    mq.addEventListener('change', function () { select(current); });
+    select(0);
+  });
+
   /* Année footer */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
