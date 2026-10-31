@@ -143,6 +143,7 @@ section { position: relative; }
   gap: 9px;
 }
 .bg-dark .eyebrow { color: var(--accent-400); }
+.hero .eyebrow { color: #fff; font-family: var(--f-display); font-weight: 600; }
 
 .display { font-size: clamp(2.4rem, 5.2vw, 4.05rem); line-height: 1.03; letter-spacing: -0.03em; }
 /* Slogan affiché en grand sans être le H1 (le H1 SEO est placé dans la première section) */
