@@ -143,13 +143,14 @@ section { position: relative; }
   gap: 9px;
 }
 .bg-dark .eyebrow { color: var(--accent-400); }
+.hero .eyebrow { color: #fff; font-family: var(--f-display); font-weight: 600; }
 
 .display { font-size: clamp(2.4rem, 5.2vw, 4.05rem); line-height: 1.03; letter-spacing: -0.03em; }
-/* Le H1 porte les mots-clés dans le surtitre ; le slogan reste affiché en grand */
-.page-kicker { font: inherit; line-height: inherit; letter-spacing: inherit; color: inherit; text-wrap: initial; }
+/* Slogan affiché en grand sans être le H1 (le H1 SEO est placé dans la première section) */
 p.display { font-family: var(--f-display); font-weight: 700; color: var(--ink); text-wrap: balance; }
 .hero p.display, .bg-dark p.display { color: var(--on-dark); }
-.page-kicker .eyebrow { color: #fff; font-family: var(--f-display); font-weight: 600; }
+/* H1 SEO discret, en tête de la première section sous le haut de page */
+.seo-title { font-family: var(--f-mono); font-size: 12px; font-weight: 500; line-height: 1.5; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: clamp(28px, 4vw, 44px); }
 .h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
 .h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); letter-spacing: -0.018em; }
 .lead { font-size: clamp(1.08rem, 1.6vw, 1.3rem); line-height: 1.55; color: var(--ink-2); }
