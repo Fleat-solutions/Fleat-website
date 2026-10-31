@@ -149,6 +149,7 @@ section { position: relative; }
 .page-kicker { font: inherit; line-height: inherit; letter-spacing: inherit; color: inherit; text-wrap: initial; }
 p.display { font-family: var(--f-display); font-weight: 700; color: var(--ink); text-wrap: balance; }
 .hero p.display, .bg-dark p.display { color: var(--on-dark); }
+.page-kicker .eyebrow { color: #fff; font-family: var(--f-display); font-weight: 600; }
 .h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
 .h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); letter-spacing: -0.018em; }
 .lead { font-size: clamp(1.08rem, 1.6vw, 1.3rem); line-height: 1.55; color: var(--ink-2); }
