@@ -3,8 +3,6 @@
    Sobre · premium · B2B sécurité / supervision drone
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
-
 :root {
   /* · Light / paper · */
   --paper:        #ffffff;
@@ -147,6 +145,10 @@ section { position: relative; }
 .bg-dark .eyebrow { color: var(--accent-400); }
 
 .display { font-size: clamp(2.4rem, 5.2vw, 4.05rem); line-height: 1.03; letter-spacing: -0.03em; }
+/* Le H1 porte les mots-clés dans le surtitre ; le slogan reste affiché en grand */
+.page-kicker { font: inherit; line-height: inherit; letter-spacing: inherit; color: inherit; text-wrap: initial; }
+p.display { font-family: var(--f-display); font-weight: 700; color: var(--ink); text-wrap: balance; }
+.hero p.display, .bg-dark p.display { color: var(--on-dark); }
 .h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
 .h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); letter-spacing: -0.018em; }
 .lead { font-size: clamp(1.08rem, 1.6vw, 1.3rem); line-height: 1.55; color: var(--ink-2); }
