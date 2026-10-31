@@ -9,3 +9,7 @@ fleat-site-vitrine/
 
 # Réglages personnels Claude Code
 .claude/settings.local.json
+
+# Motion design : dépendances et rendus générés
+motion/node_modules/
+motion/out/
