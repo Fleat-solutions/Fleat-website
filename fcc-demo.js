@@ -115,7 +115,7 @@
       if (get('video') === '1') left = Math.min(right - 200, $('.fcc-vid').offsetWidth + 12);
     }
     var s = S.follow ? 1.9 : 1;
-    var fx = S.follow ? S.dp[0] : 1300, fy = S.follow ? S.dp[1] : 560;
+    var fx = S.follow ? S.dp[0] : 1300, fy = S.follow ? S.dp[1] : 600;
     var tx = (left + right) / 2 - fx / IW * cw * s;
     var ty = mh / 2 - fy / IH * ch * s;
     tx = Math.min(0, Math.max(mw - cw * s, tx));
@@ -150,7 +150,7 @@
         break;
       case 'modal':
         n = '5/5';
-        if (!stacked.matches) { t = S.motif ? 'Confirmez la clôture.' : 'Choisissez un motif de clôture.'; h = S.motif ? okBtn : motifBtns[0]; }
+        if (!stacked.matches) { t = S.motif ? 'Confirmez la clôture.' : 'Une personne est visible sur le flux. Motif : <b>Personne autorisée</b>.'; h = S.motif ? okBtn : motifBtns[0]; }
         break;
       case 'closed': n = '5/5'; t = S.st === 'closed' ? 'Alerte clôturée. Le drone rentre seul à sa station.' : 'Le drone rentre à sa station.'; h = $('.fcc-hud-s'); break;
     }
@@ -177,8 +177,10 @@
     if (!c.classList.contains('on')) c.classList.add('on');
     var cw = c.offsetWidth, ch = c.offsetHeight, gap = 12, m = 8;
     var cx = r.left + r.width / 2 - R.left, side, x, y;
-    var inCtx = !stacked.matches && el.closest('.fcc-ctx');
-    if (inCtx && r.left - R.left > cw + 20) {
+    var inCtx = !stacked.matches && el.closest('.fcc-ctx'), inModal = el.closest('.fcc-modal');
+    if (inModal && r.top - R.top - gap - ch > m) {
+      side = 'top'; x = cx - cw / 2; y = r.top - R.top - gap - ch;
+    } else if (inCtx && r.left - R.left > cw + 20) {
       side = 'left'; x = r.left - R.left - cw - gap; y = r.top - R.top + r.height / 2 - ch / 2;
     } else if (r.bottom - R.top + gap + ch < R.height - m) {
       side = 'bottom'; x = cx - cw / 2; y = r.bottom - R.top + gap;
