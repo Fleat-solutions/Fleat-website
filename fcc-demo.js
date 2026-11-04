@@ -15,6 +15,14 @@
   var drone = document.getElementById('fcc-drone');
   var motifBtns = Array.prototype.slice.call(root.querySelectorAll('[data-motif]'));
   var okBtn = $('.fcc-modal[data-m="close"] .fcc-m-ok');
+  /* Flux thermique simulé : une vidéo découpée selon les phases de vol (secondes) */
+  var vid = $('.fcc-vid-th');
+  var VT = { takeoff: 0, transit: 2.8, zoom: 8.8, hover: 11.4, hoverEnd: 17.4, rth: 17.4, land: 22.0 };
+  function vplay(t) {
+    if (reduced || !vid) return;
+    try { if (t !== undefined) vid.currentTime = t; var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {}
+  }
+  function vpause() { if (vid) try { vid.pause(); } catch (e) {} }
   root.appendChild(F.coach);
 
   /* Géométrie : image IGN 2376 x 1080 px, 0,418 m par pixel */
@@ -251,11 +259,12 @@
     if (S.m.phase === 'prep') { endMission(); return; }
     var from = S.m.phase === 'takeoff' ? 0 : S.pos;
     S.m = from > 0 ? { phase: 'rth', t: 0, from: from } : { phase: 'land', t: 0, fromAlt: S.alt };
+    vplay(from > 0 ? VT.rth + (1 - from) * (VT.land - VT.rth) : VT.land);
     set('hudst', 'rth'); set('hover', '0'); set('zoom', '0'); set('paused', '0');
     F.pauseBtn.disabled = false; txt('pauseBtn', 'Pause');
   }
   function endMission() {
-    S.m = null; set('hud', '0'); set('air', '0'); set('flown', '0'); set('hover', '0'); set('zoom', '0'); set('dock', 'closed'); set('paused', '0');
+    S.m = null; vpause(); set('hud', '0'); set('air', '0'); set('flown', '0'); set('hover', '0'); set('zoom', '0'); set('dock', 'closed'); set('paused', '0');
     setDrone(0, 0, 0, .55); drawTrail(0);
     txt('fly', '0'); txt('nmis', '0'); txt('dockSt', 'Drone à bord');
     if (S.follow) toggleFollow(false);
@@ -278,6 +287,7 @@
     if (!S.m) return;
     var p = get('paused') !== '1';
     set('paused', p ? '1' : '0'); txt('pauseBtn', p ? 'Reprendre' : 'Pause');
+    if (p) vpause(); else if (S.m.phase !== 'prep') vplay();
     txt('hudStT', p ? 'En pause' : PH[S.m.phase] ? PH[S.m.phase].st : 'Sur zone');
     tele();
   }
@@ -324,7 +334,7 @@
   function srcBtns() {
     var s = get('src');
     root.querySelectorAll('[data-src]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-src') === s ? 'true' : 'false'); });
-    txt('vidF', s === 'dock' ? 'Station 01 · caméra extérieure' : 'Drone 01 · caméra thermique');
+    txt('vidF', s === 'dock' ? 'Station 01 · caméra extérieure' : 'Drone 01 · caméra thermique · flux simulé');
     txt('vidMode', s === 'dock' ? 'VISIBLE' : 'THERMIQUE');
   }
   function tele() {
@@ -392,6 +402,7 @@
   });
 
   function replay() {
+    vpause(); if (vid && vid.readyState) try { vid.currentTime = 0; } catch (e) {}
     reset();
     setTimeout(alertIn, reduced ? 0 : 700);
   }
@@ -434,15 +445,16 @@
       }
       if (get('hudst') !== 'onsite') txt('hudStT', P.st);
       if (f >= 1) {
-        if (m.phase === 'prep') { m.phase = 'takeoff'; m.t = 0; if (S.state === 'flight') guide(); }
-        else if (m.phase === 'takeoff') { m.phase = 'transit'; m.t = 0; }
+        if (m.phase === 'prep') { m.phase = 'takeoff'; m.t = 0; vplay(VT.takeoff); if (S.state === 'flight') guide(); }
+        else if (m.phase === 'takeoff') { m.phase = 'transit'; m.t = 0; if (vid && Math.abs(vid.currentTime - VT.transit) > .5) vplay(VT.transit); }
         else if (m.phase === 'transit') {
           m.phase = 'onsite'; S.t2 = S.sim;
+          if (vid && (vid.currentTime < VT.zoom - .3 || vid.currentTime > VT.zoom + .6)) vplay(VT.zoom);
           set('hudst', 'onsite'); txt('hudStT', 'Sur zone'); hudVals(0, 0, 'Observation', 100, 97);
           set('hover', '1'); set('zoom', '1'); F.pauseBtn.disabled = true;
           if (S.state === 'flight') go('onsite'); else if (S.prev === 'flight') S.prev = 'onsite';
         }
-        else if (m.phase === 'rth') { m.phase = 'land'; m.t = 0; set('hover', '0'); }
+        else if (m.phase === 'rth') { m.phase = 'land'; m.t = 0; set('hover', '0'); if (vid && vid.currentTime < VT.land - .5) vplay(VT.land); }
         else if (m.phase === 'land') {
           endMission();
           if (S.st === 'closed') setTimeout(finish, reduced ? 0 : 400);
@@ -452,6 +464,7 @@
       if (S.follow) layout(true);
       tele();
     }
+    if (S.m && S.m.phase === 'onsite' && vid && vid.currentTime >= VT.hoverEnd - .08) vid.currentTime = VT.hover;
     raf = requestAnimationFrame(frame);
   }
   function run() { if (!raf && visible && !document.hidden) { last = 0; raf = requestAnimationFrame(frame); } }
@@ -464,6 +477,7 @@
       visible = en[0].isIntersecting;
       if (visible) {
         layout(true); run();
+        if (vid && vid.preload !== 'auto' && !reduced) { vid.preload = 'auto'; vid.load(); }
         if (!started && en[0].intersectionRatio >= 0.3) { started = true; setTimeout(alertIn, reduced ? 0 : 900); }
       } else halt();
     }, { threshold: [0, 0.3] }).observe(root);

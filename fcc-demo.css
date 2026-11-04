@@ -296,8 +296,7 @@
 .fcc-vid-tabs button:hover { color: var(--text-secondary); }
 .fcc-vid-tabs button[aria-pressed="true"] { color: var(--a-bright); border-color: var(--a-border); background: var(--a-muted); }
 .fcc-vid-v { position: relative; aspect-ratio: 16 / 10; background: #050608; overflow: hidden; }
-.fcc-vid-th { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform-origin: 58% 62%; transform: scale(1.05); transition: transform 2.6s cubic-bezier(.3,.6,.3,1), opacity .3s; }
-.fcc[data-zoom="1"] .fcc-vid-th { transform: scale(2); }
+.fcc-vid-th { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #111; }
 .fcc-vid-dock { position: absolute; inset: 0; display: none; align-items: flex-end; padding: 10px; background: radial-gradient(ellipse at 50% 40%, #31507a 0%, #13233c 60%, #0a1322 100%); }
 .fcc-vid-dock span { font-size: 10px; color: rgba(255,255,255,.7); font-family: var(--f-appmono); }
 .fcc[data-src="dock"] .fcc-vid-dock { display: flex; }
@@ -307,8 +306,9 @@
 .fcc:not([data-air="1"]):not([data-src="dock"]) .fcc-vid-wait { display: flex; }
 .fcc-ret { position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; }
 .fcc-ret::before, .fcc-ret::after { content: ""; position: absolute; background: rgba(255,255,255,.55); }
-.fcc-ret::before { left: -12px; right: -12px; top: 50%; height: 1px; }
-.fcc-ret::after { top: -12px; bottom: -12px; left: 50%; width: 1px; }
+.fcc-ret { border-color: rgba(255,255,255,.45); }
+.fcc-ret::before { left: -14px; right: -14px; top: 50%; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,.6) 0 28%, transparent 28% 72%, rgba(255,255,255,.6) 72%) !important; }
+.fcc-ret::after { top: -14px; bottom: -14px; left: 50%; width: 1px; background: linear-gradient(180deg, rgba(255,255,255,.6) 0 28%, transparent 28% 72%, rgba(255,255,255,.6) 72%) !important; }
 .fcc-vid-o { position: absolute; top: 8px; left: 8px; right: 8px; display: flex; gap: 8px; font-family: var(--f-appmono); font-size: 9.5px; letter-spacing: .05em; color: #fff; }
 .fcc-vid-o > span { background: rgba(0,0,0,.5); padding: 2px 6px; border-radius: 4px; }
 .fcc-rec { color: #ff6b6b; }
