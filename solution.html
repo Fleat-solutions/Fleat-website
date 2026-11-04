@@ -311,9 +311,10 @@ a{color:var(--accent)}a:hover{color:var(--accent-600)}
 <div class="fcc-vid-h"><span class="fcc-live"><i></i>Flux live</span><span class="fcc-tag">2 sources</span><button type="button" class="fcc-x" data-act="video" aria-label="Fermer le flux vidéo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
 <div class="fcc-vid-tabs" role="group" aria-label="Source vidéo"><button type="button" data-act="src" data-src="drone" aria-pressed="true">Drone 01</button><button type="button" data-act="src" data-src="dock" aria-pressed="false">Station 01</button></div>
 <div class="fcc-vid-v">
-<video class="fcc-vid-th" muted playsinline preload="none" poster="assets/demo-thermique-poster.webp" aria-label="Flux thermique simulé du drone"><source src="assets/demo-thermique.webm" type="video/webm"><source src="assets/demo-thermique.mp4" type="video/mp4"></video>
+<video class="fcc-vid-th" muted playsinline preload="none" poster="assets/demo-thermique-poster.webp" aria-label="Flux thermique simulé du drone"><source src="assets/demo-thermique.webm" type='video/webm; codecs="vp9"'><source src="assets/demo-thermique.mp4" type='video/mp4; codecs="avc1.640016"'></video>
 <span class="fcc-vid-dock" aria-hidden="true"><span>Caméra de la station · vue du ciel</span></span>
 <span class="fcc-vid-wait" aria-hidden="true" data-f="vidWait">Drone dans la station<small>Le flux démarre au décollage</small></span>
+<span class="fcc-vid-conn" aria-hidden="true">Connexion au flux…<small>Drone 01 · caméra thermique</small></span>
 <span class="fcc-ret" aria-hidden="true"></span>
 <span class="fcc-vid-o" aria-hidden="true"><span class="fcc-rec">● LIVE</span><span data-f="vidMode">THERMIQUE</span><span class="fcc-zoom">ZOOM ×2</span></span>
 <span class="fcc-vid-tc" aria-hidden="true" data-f="tc">02:14:12</span>

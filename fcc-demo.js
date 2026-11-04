@@ -19,10 +19,14 @@
   var vid = $('.fcc-vid-th');
   var VT = { takeoff: 0, transit: 2.8, zoom: 8.8, hover: 11.4, hoverEnd: 17.4, rth: 17.4, land: 22.0 };
   function vplay(t) {
-    if (reduced || !vid) return;
+    if (!vid) return;
     try { if (t !== undefined) vid.currentTime = t; var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {}
   }
   function vpause() { if (vid) try { vid.pause(); } catch (e) {} }
+  if (vid) {
+    vid.addEventListener('playing', function () { set('vlive', '1'); });
+    vid.addEventListener('waiting', function () { set('vlive', '0'); });
+  }
   root.appendChild(F.coach);
 
   /* Géométrie : image IGN 2376 x 1080 px, 0,418 m par pixel */
@@ -57,7 +61,6 @@
     rth:     { ms: 4600, sim: 26, act: 'Retour',      st: 'Retour base' },
     land:    { ms: 1800, sim: 6,  act: 'Atterrissage', st: 'Atterrissage' }
   };
-  if (reduced) Object.keys(PH).forEach(function (k) { PH[k].ms = 1; });
   var ETA_TOTAL = PH.prep.sim + PH.takeoff.sim + PH.transit.sim;
   var BASE = 2 * 3600 + 14 * 60 + 6;
   function clock(s) { s = Math.floor(BASE + s); return pad(Math.floor(s / 3600)) + ':' + pad(Math.floor(s / 60) % 60) + ':' + pad(s % 60); }
@@ -65,7 +68,7 @@
   var S;
   function reset() {
     S = { state: 'idle', st: 'new', sim: 0, m: null, pos: 0, alt: 0, dp: at(0), motif: '', t2: null, t3: null, dispatched: false, follow: false, userActed: false, prev: null, aborted: false };
-    ['ctx', 'video', 'hud', 'flown', 'zoom', 'hover', 'nal', 'banner', 'zalert', 'air', 'paused', 'toast', 'notifs', 'rail'].forEach(function (k) { set(k, '0'); });
+    ['ctx', 'video', 'hud', 'flown', 'zoom', 'hover', 'nal', 'banner', 'zalert', 'air', 'paused', 'toast', 'notifs', 'rail', 'vlive'].forEach(function (k) { set(k, '0'); });
     set('state', 'idle'); set('st', 'new'); set('hudst', 'run'); set('dock', 'closed'); set('src', 'drone'); set('pop', ''); set('modal', '');
     setDrone(0, 0, 0, .55);
     drawTrail(0);
@@ -264,7 +267,7 @@
     F.pauseBtn.disabled = false; txt('pauseBtn', 'Pause');
   }
   function endMission() {
-    S.m = null; vpause(); set('hud', '0'); set('air', '0'); set('flown', '0'); set('hover', '0'); set('zoom', '0'); set('dock', 'closed'); set('paused', '0');
+    S.m = null; vpause(); set('vlive', '0'); set('hud', '0'); set('air', '0'); set('flown', '0'); set('hover', '0'); set('zoom', '0'); set('dock', 'closed'); set('paused', '0');
     setDrone(0, 0, 0, .55); drawTrail(0);
     txt('fly', '0'); txt('nmis', '0'); txt('dockSt', 'Drone à bord');
     if (S.follow) toggleFollow(false);
@@ -477,7 +480,7 @@
       visible = en[0].isIntersecting;
       if (visible) {
         layout(true); run();
-        if (vid && vid.preload !== 'auto' && !reduced) { vid.preload = 'auto'; vid.load(); }
+        if (vid && vid.preload !== 'auto') { vid.preload = 'auto'; vid.load(); }
         if (!started && en[0].intersectionRatio >= 0.3) { started = true; setTimeout(alertIn, reduced ? 0 : 900); }
       } else halt();
     }, { threshold: [0, 0.3] }).observe(root);
