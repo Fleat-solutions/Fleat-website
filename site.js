@@ -237,6 +237,35 @@
     el.textContent = new Date().getFullYear();
   });
 
+  /* Mockup timer + timestamp */
+  var mockTimer = document.getElementById('mock-timer');
+  var mockTs = document.getElementById('mock-ts');
+  var mockBat = document.getElementById('mock-bat');
+  var mockBatBar = document.getElementById('mock-bat-bar');
+  if (mockTimer) {
+    var elapsed = 38;
+    var bat = 74;
+    setInterval(function () {
+      elapsed++;
+      mockTimer.innerHTML = elapsed + '<span style="font-size:.85rem; color:var(--on-dark-3); font-weight:400;">s</span>';
+      // drain battery slowly
+      if (bat > 10) { bat = Math.max(10, bat - 0.01); }
+      if (mockBat) mockBat.textContent = Math.round(bat) + '%';
+      if (mockBatBar) mockBatBar.style.width = bat + '%';
+    }, 1000);
+  }
+  if (mockTs) {
+    function updateTs() {
+      var d = new Date();
+      mockTs.textContent =
+        d.getHours().toString().padStart(2,'0') + ':' +
+        d.getMinutes().toString().padStart(2,'0') + ':' +
+        d.getSeconds().toString().padStart(2,'0');
+    }
+    updateTs();
+    setInterval(updateTs, 1000);
+  }
+
   /* Mesure d'audience Google Analytics 4 : chargée uniquement après consentement, sur le domaine de production */
   var GA_ID = 'G-NTDF6J8CZG';
   var isProduction = /(^|\.)fleat-solutions\.com$/.test(location.hostname);
