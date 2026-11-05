@@ -517,6 +517,18 @@
   document.addEventListener('visibilitychange', function () { if (document.hidden) halt(); else run(); });
   window.addEventListener('resize', function () { layout(true); placeCoach(); });
 
+  /* Liens vers la démo : cadrer l'interface au centre de l'écran, sous l'en-tête */
+  document.querySelectorAll('a[href="#demo-interface"]').forEach(function (l) {
+    l.addEventListener('click', function (e) {
+      e.preventDefault();
+      var head = (document.querySelector('.site-header') || {}).offsetHeight || 0;
+      var r = root.getBoundingClientRect(), avail = window.innerHeight - head;
+      var off = r.height < avail ? (avail - r.height) / 2 : 12;
+      window.scrollTo({ top: window.scrollY + r.top - head - off, behavior: reduced ? 'auto' : 'smooth' });
+      if (history.replaceState) history.replaceState(null, '', '#demo-interface');
+    });
+  });
+
   /* Glisser la carte au clic gauche (souris uniquement, le tactile garde le défilement de la page) */
   var drag = null;
   mapwrap.addEventListener('pointerdown', function (e) {
