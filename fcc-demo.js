@@ -9,6 +9,8 @@
   var tac = /[?&]ui=tactique\b/.test(location.search);
   if (tac) root.classList.add('fcc-tac');
   var stacked = window.matchMedia('(max-width: 900px)');
+  /* Téléphone : démo à la hauteur d'un écran, carte fixe en haut, panneaux qui défilent dessous */
+  var phone = window.matchMedia('(max-width: 640px)');
 
   var F = {};
   root.querySelectorAll('[data-f]').forEach(function (el) { F[el.getAttribute('data-f')] = el; });
@@ -161,6 +163,7 @@
       case 'flight':
         n = '3/5';
         if (!vid) { t = m && m.phase === 'prep' ? 'La station s’ouvre. Ouvrez le flux du drone : <b>Vidéo</b>.' : 'Le drone décolle. Ouvrez son flux : <b>Vidéo</b>.'; h = F.barVid; }
+        else if (phone.matches) { t = 'Arrivée sur zone en 40 s environ. Le flux du drone s’affiche ici.'; h = $('.fcc-vid'); }
         else { t = 'Arrivée sur zone en 40 s environ. Suivez la mission ici.'; h = $('.fcc-hud'); }
         break;
       case 'onsite':
@@ -186,7 +189,10 @@
     hinted = el;
     if (!el) return;
     el.classList.add('fcc-hint');
-    if (S.userActed && stacked.matches) {
+    if (S.userActed && phone.matches) {
+      /* la marge haute du défilement (scroll-padding) garde l'élément sous la carte fixe */
+      if (!el.closest('.fcc-mapwrap')) el.scrollIntoView({ block: 'nearest', behavior: reduced ? 'auto' : 'smooth' });
+    } else if (S.userActed && stacked.matches) {
       var r = el.getBoundingClientRect();
       if (r.top < 60 || r.bottom > window.innerHeight - 90) el.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
     }
@@ -515,6 +521,16 @@
     }, { threshold: [0, 0.3] }).observe(root);
   } else { visible = true; run(); started = true; alertIn(); }
   document.addEventListener('visibilitychange', function () { if (document.hidden) halt(); else run(); });
+  /* Téléphone : la bannière d'alerte passe sous la carte au lieu de la recouvrir */
+  var stage = $('.fcc-stage'), crit = $('.fcc-crit');
+  function placeCrit() {
+    if (phone.matches) { if (crit.parentNode !== stage) stage.insertBefore(crit, mapwrap.nextSibling); }
+    else if (crit.parentNode !== mapwrap) mapwrap.appendChild(crit);
+  }
+  placeCrit();
+  if (phone.addEventListener) phone.addEventListener('change', function () { placeCrit(); layout(true); placeCoach(); });
+  var coachRaf = 0;
+  stage.addEventListener('scroll', function () { if (!coachRaf) coachRaf = requestAnimationFrame(function () { coachRaf = 0; placeCoach(); }); }, { passive: true });
   window.addEventListener('resize', function () { layout(true); placeCoach(); });
 
   /* Liens vers la démo : cadrer l'interface au centre de l'écran, sous l'en-tête */
