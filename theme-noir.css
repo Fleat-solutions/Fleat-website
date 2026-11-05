@@ -1,0 +1,147 @@
+/* FLEAT · thème noir (page solution, en test avant extension au site).
+   Inspiration : interfaces sobres type Linear et Anduril. Fond quasi noir,
+   texte blanc et gris, filets fins, boutons blancs, aucune couleur d'accent. */
+
+body.theme-noir {
+  --paper: #08090a;
+  --paper-2: #0b0c0e;
+  --paper-3: #121316;
+  --line: rgba(255,255,255,.08);
+  --line-2: rgba(255,255,255,.14);
+  --ink: #f7f8f8;
+  --ink-2: #b4b8bf;
+  --ink-3: #8a8f98;
+  --ink-4: #62666d;
+  --dark: #08090a;
+  --dark-2: #0e0f11;
+  --dark-3: #141518;
+  --dark-4: #1c1d21;
+  --dark-line: rgba(255,255,255,.08);
+  --dark-line-2: rgba(255,255,255,.14);
+  --on-dark: #f7f8f8;
+  --on-dark-2: #b4b8bf;
+  --on-dark-3: #8a8f98;
+  --accent: #f7f8f8;
+  --accent-600: #ffffff;
+  --accent-400: #d0d3d8;
+  --accent-soft: rgba(255,255,255,.04);
+  --accent-ink: #f7f8f8;
+  --accent-glow: rgba(255,255,255,.08);
+  --sh-sm: none; --sh: none; --sh-lg: none;
+  --r-lg: 12px;
+  --f-display: 'Inter', system-ui, sans-serif;
+  --f-text: 'Inter', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink-2);
+  font-size: 16px;
+  font-feature-settings: "cv01", "ss03";
+}
+body.theme-noir ::selection { background: rgba(255,255,255,.22); color: #fff; }
+
+/* Typographie : titres serrés, dégradé blanc vers gris */
+body.theme-noir h1, body.theme-noir h2, body.theme-noir h3, body.theme-noir h4 { font-weight: 600; letter-spacing: -0.025em; color: var(--ink); }
+body.theme-noir .h2, body.theme-noir .display {
+  font-weight: 600; letter-spacing: -0.035em; line-height: 1.06;
+  background: linear-gradient(180deg, #ffffff 30%, rgba(255,255,255,.62));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+body.theme-noir .h2 { font-size: clamp(2rem, 3.8vw, 3rem); }
+body.theme-noir .lead { color: var(--ink-3); font-size: clamp(1.05rem, 1.5vw, 1.2rem); letter-spacing: -0.01em; }
+body.theme-noir .eyebrow, body.theme-noir .bg-dark .eyebrow, body.theme-noir .hero .eyebrow {
+  font-family: var(--f-mono); font-weight: 400; font-size: 12px; letter-spacing: .08em;
+  color: var(--ink-3);
+}
+body.theme-noir .muted { color: var(--ink-3); }
+body.theme-noir a { color: inherit; }
+
+/* Sections : même noir partout, séparées par un filet */
+body.theme-noir .bg-paper-2, body.theme-noir .bg-dark { background: var(--paper); }
+body.theme-noir main > .section + .section, body.theme-noir main > section + section { border-top: 1px solid var(--line); }
+
+/* En-tête */
+body.theme-noir .site-header { background: rgba(8,9,10,.72); backdrop-filter: saturate(140%) blur(16px); }
+body.theme-noir .site-header.scrolled { border-bottom-color: var(--line); box-shadow: none; }
+body.theme-noir .nav-main a { color: var(--ink-3); font-size: 14px; }
+body.theme-noir .nav-main a:hover { color: var(--ink); background: transparent; }
+body.theme-noir .nav-main a.active { color: var(--ink); font-weight: 500; }
+body.theme-noir .nav-main a.active::after { display: none; }
+body.theme-noir .nav-toggle span, body.theme-noir .nav-toggle span::before, body.theme-noir .nav-toggle span::after { background: var(--ink); }
+body.theme-noir.menu-open .nav-toggle span { background: transparent; }
+body.theme-noir .mobile-menu { background: #0b0c0e; }
+
+/* Boutons */
+body.theme-noir .btn { font-size: 14.5px; font-weight: 500; border-radius: 8px; padding: 10px 18px; letter-spacing: -0.005em; }
+body.theme-noir .btn-lg { padding: 13px 22px; font-size: 15px; }
+body.theme-noir .btn-primary { background: #f7f8f8; color: #08090a; box-shadow: none; }
+body.theme-noir .btn-primary:hover { background: #ffffff; color: #08090a; }
+body.theme-noir .btn-ghost, body.theme-noir .btn-ghost-light, body.theme-noir .hero .btn-ghost { background: rgba(255,255,255,.03); color: var(--ink); border-color: rgba(255,255,255,.12); }
+body.theme-noir .btn-ghost:hover, body.theme-noir .btn-ghost-light:hover, body.theme-noir .hero .btn-ghost:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.2); }
+body.theme-noir .btn-link, body.theme-noir .bg-dark .btn-link { color: var(--ink); font-weight: 500; font-size: 14.5px; }
+body.theme-noir .btn-link:hover { color: #fff; }
+
+/* Haut de page : photo désaturée, aucune lueur colorée */
+body.theme-noir .hero { background: #08090a; border-bottom: 1px solid var(--line); }
+body.theme-noir .hero::before { background: radial-gradient(70% 90% at 80% 0%, rgba(255,255,255,.06), transparent 60%); }
+body.theme-noir .hero-photo img { filter: grayscale(1) contrast(1.1); opacity: .45; }
+body.theme-noir .hero-photo::after { background: linear-gradient(100deg, #08090a 0%, rgba(8,9,10,.9) 40%, rgba(8,9,10,.55) 75%, rgba(8,9,10,.4) 100%), linear-gradient(0deg, #08090a 0%, transparent 40%); }
+body.theme-noir .hero-grid-bg { opacity: .35; }
+body.theme-noir .hero .lead { color: var(--ink-3); }
+
+/* Cartes et surfaces */
+body.theme-noir .card, body.theme-noir .card-dark {
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+  border: 1px solid var(--line); border-radius: 12px; color: var(--ink-2);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+}
+body.theme-noir .card-dark h3 { color: var(--ink); }
+body.theme-noir .roles .card.you { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border-color: var(--line-2); }
+body.theme-noir .ico, body.theme-noir .card-dark .ico { background: rgba(255,255,255,.04); border-color: var(--line); color: var(--ink-2); border-radius: 8px; }
+body.theme-noir .checklist li, body.theme-noir .bg-dark .checklist li { color: var(--ink-2); font-size: 15px; }
+body.theme-noir .checklist li svg, body.theme-noir .bg-dark .checklist li svg { color: var(--ink-3); }
+body.theme-noir .step-num, body.theme-noir .card-dark .step-num { color: var(--ink-3); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+body.theme-noir .feature p { color: var(--ink-3); font-size: 15px; }
+body.theme-noir .ph { background-color: #0d0e10; background-image: repeating-linear-gradient(45deg, transparent 0 11px, rgba(255,255,255,.025) 11px 22px); border-color: var(--line); border-radius: 12px; }
+body.theme-noir .ph-tag { background: #121316; border-color: var(--line); color: var(--ink-3); }
+body.theme-noir .kit-item li { color: var(--ink-3); font-size: 15px; }
+body.theme-noir .kit-item li::before { width: 4px; height: 4px; top: .7em; background: var(--ink-4); }
+body.theme-noir .intg-list { background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012)); border-color: var(--line); box-shadow: none; }
+body.theme-noir .intg-list small { color: var(--ink-3); }
+
+/* Missions : frise grise, seul un point ambre signale la levée de doute */
+body.theme-noir .tl .n, body.theme-noir .card-dark .tl .n { background: #0e0f11; border: 1px solid var(--line-2); color: var(--ink-3); font-size: 11.5px; }
+body.theme-noir .tl li::before, body.theme-noir .card-dark .tl li::before { width: 1px; left: 16px; background: var(--line); }
+body.theme-noir .tl b, body.theme-noir .card-dark .tl b { color: var(--ink); font-weight: 500; }
+body.theme-noir .tl span, body.theme-noir .card-dark .tl span { color: var(--ink-3); }
+body.theme-noir .mis .pill, body.theme-noir .mis .card-dark .pill { color: var(--ink-3); font-weight: 500; font-size: 13px; }
+body.theme-noir .mis .pill .dot { width: 6px; height: 6px; background: var(--ink-4); }
+body.theme-noir .mis .pill.warn .dot { background: #d9a046; }
+body.theme-noir .mis-note { color: var(--ink-4); }
+body.theme-noir .m-tabs button { background: transparent; border-color: var(--line); color: var(--ink-3); }
+body.theme-noir .m-tabs button[aria-selected="true"] { background: #f7f8f8; border-color: #f7f8f8; color: #08090a; }
+
+/* Démo opérateur : halo neutre derrière l'interface */
+body.theme-noir #operateur .fcc-wrap { position: relative; }
+body.theme-noir #operateur .fcc-wrap::before { content: ""; position: absolute; left: 10%; right: 10%; top: -60px; height: 240px; background: radial-gradient(50% 100% at 50% 0%, rgba(255,255,255,.07), transparent 70%); pointer-events: none; }
+body.theme-noir .fcc { border-color: rgba(255,255,255,.1); box-shadow: 0 40px 120px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.02); }
+body.theme-noir .fcc-end-a .btn-primary { background: #f7f8f8; color: #08090a; }
+body.theme-noir .fcc-end-a .btn-primary:hover { background: #fff; color: #08090a; }
+body.theme-noir .fcc-note { color: var(--ink-4); font-size: 12.5px; }
+
+/* Points forts sous la démo : trois colonnes, filet, index discret */
+.op-pts { margin-top: clamp(56px, 7vw, 88px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); }
+.op-pt { border-top: 1px solid var(--line-2); padding-top: 22px; }
+.op-pt small { display: block; font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; color: var(--ink-4); }
+.op-pt h3 { margin-top: 14px; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+.op-pt p { margin-top: 8px; font-size: 15px; line-height: 1.6; color: var(--ink-3); }
+@media (max-width: 820px) { .op-pts { grid-template-columns: 1fr; gap: 28px; } }
+
+/* Bande d'appel finale */
+body.theme-noir .cta-band::before { background: radial-gradient(60% 100% at 50% 0%, rgba(255,255,255,.07), transparent 65%); }
+body.theme-noir .radar-bg::after { opacity: .25; filter: grayscale(1); }
+
+/* Pied de page */
+body.theme-noir .site-footer { background: #08090a; border-top-color: var(--line); }
+body.theme-noir .footer-col h4 { color: var(--ink-4); }
+body.theme-noir .footer-col a, body.theme-noir .footer-bottom a { color: var(--ink-3); }
+body.theme-noir .footer-col a:hover, body.theme-noir .footer-bottom a:hover { color: var(--ink); }
+body.theme-noir #cookie-banner { background: rgba(14,15,17,.97); }
