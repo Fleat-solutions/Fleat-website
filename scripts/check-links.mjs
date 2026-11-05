@@ -1,4 +1,5 @@
 // Vérifie les liens internes des pages HTML : fichier cible présent et ancre (#id) existante.
+// Les pages sont servies sans extension (cleanUrls) : /solution correspond à solution.html, / à index.html.
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname, normalize } from 'node:path';
 
@@ -20,7 +21,13 @@ for (const page of pages) {
   for (const [, attr, raw] of html.matchAll(/\s(href|src)="([^"]*)"/g)) {
     if (!raw || /^(https?:|mailto:|tel:|data:|javascript:|\/\/)/.test(raw)) continue;
     const [path, hash] = raw.split('#');
-    const target = path ? normalize(join(path.startsWith('/') ? '' : dirname(page), path.split('?')[0])).replace(/^\//, '') : page;
+    if (/\.html$/.test(path.split('?')[0])) {
+      errors.push(`${page} : ${attr}="${raw}" doit pointer vers l'URL sans .html`);
+      continue;
+    }
+    let target = path ? normalize(join(path.startsWith('/') ? '' : dirname(page), path.split('?')[0])).replace(/^\//, '') : page;
+    if (target === '' || target === '.') target = 'index.html';
+    else if (!/\.[a-z0-9]+$/i.test(target) && existsSync(join(root, target + '.html'))) target += '.html';
     if (!existsSync(join(root, decodeURIComponent(target)))) {
       errors.push(`${page} : ${attr}="${raw}" pointe vers un fichier absent`);
     } else if (hash && target.endsWith('.html') && !idsOf(target).has(hash)) {
