@@ -29,6 +29,7 @@
   --r: #ef4444; --r-text: #f87171; --r-muted: rgba(239,68,68,.12);
   --info-muted: rgba(59,130,246,.12);
   --drone: #22d3ee;
+  --infra: #f2f4f7; /* infrastructure fixe (station, caméras) : blanc ; ce qui vole : cyan */
   --drone-rgb: 34,211,238;
   --f-app: 'Inter', system-ui, -apple-system, sans-serif;
   --f-appmono: 'IBM Plex Mono', ui-monospace, monospace;
@@ -108,8 +109,11 @@
 /* ── Scène + carte ─────────────────────────────────────── */
 .fcc-stage { position: relative; flex: 1; min-width: 0; overflow: hidden; }
 .fcc-mapwrap { position: absolute; inset: 0; overflow: hidden; container-type: size; background: #10151d; }
+@media (pointer: fine) { .fcc-mapwrap { cursor: grab; } .fcc[data-drag="1"] .fcc-mapwrap { cursor: grabbing; user-select: none; } .fcc[data-drag="1"] .fcc-canvas { transition: none !important; } }
 .fcc-canvas { position: absolute; left: 0; top: 0; width: max(100cqw, calc(100cqh * 2.2)); aspect-ratio: 2376 / 1080; transform-origin: 0 0; transition: transform .45s cubic-bezier(.3,.6,.3,1); }
-.fcc-ortho, .fcc-plan { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fcc-plan { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Orthophoto élargie : 150 % de l'emprise du plan, centrée, pour pouvoir dézoomer sans bord vide */
+.fcc-ortho { position: absolute; left: -25%; top: -25%; width: 150%; height: 150%; max-width: none; }
 .fcc-ortho { object-fit: cover; filter: saturate(.85) brightness(.82); transition: filter .3s; }
 .fcc[data-layer="tac"] .fcc-ortho { filter: grayscale(1) brightness(.38) contrast(1.25); }
 .fcc-zone { fill: rgba(74,143,190,.14); stroke: rgba(126,200,240,.95); stroke-width: 1.6; stroke-dasharray: 6 4; stroke-linejoin: round; vector-effect: non-scaling-stroke; transition: fill .3s, stroke .3s; }
@@ -126,14 +130,18 @@
 
 /* Station */
 .fcc-dock { position: absolute; display: flex; flex-direction: column; align-items: center; padding: 0; border: 0; background: none; cursor: pointer; transform: translate(-50%, -12px) scale(calc(1 / var(--cam))); transform-origin: 50% 12px; }
-.fcc-dock-pin { width: 24px; height: 24px; display: grid; place-items: center; border: 2px solid rgba(255,255,255,.85); border-radius: 5px; background: rgba(74,143,190,.92); color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.45); transition: background .3s, transform .15s; }
+.fcc-dock-pin { width: 22px; height: 22px; display: grid; place-items: center; color: var(--infra); filter: drop-shadow(0 0 1px #000) drop-shadow(0 1px 2px rgba(0,0,0,.9)); transition: transform .15s; }
 .fcc-dock:hover .fcc-dock-pin { transform: scale(1.1); }
-.fcc[data-dock="open"] .fcc-dock-pin { background: rgba(245,158,11,.95); }
-.fcc-dock-pin svg { width: 11px; height: 11px; }
+.fcc-dock-pin .lid-o { display: none; }
+.fcc[data-dock="open"] .fcc-dock-pin .lid-o { display: inline; }
+.fcc[data-dock="open"] .fcc-dock-pin .lid-c { display: none; }
+.fcc-dock-pin svg { width: 22px; height: 22px; }
 .fcc-dock-l, .fcc-drone-l { margin-top: 4px; padding: 2px 6px; border: 1px solid var(--border-stronger); border-radius: 5px; background: var(--overlay-tactical); color: var(--text-secondary); font-size: 10px; font-weight: 600; white-space: nowrap; display: flex; flex-direction: column; align-items: center; line-height: 1.25; }
 .fcc[data-atdock="1"] .fcc-dock-l { visibility: hidden; }
+.fcc .fcc-dock .fcc-dock-l { margin-top: 2px; padding: 0; border: 0; background: none; font: 600 9.5px var(--f-app); letter-spacing: .07em; text-transform: uppercase; color: var(--infra); text-shadow: 0 0 2px #000, 0 1px 3px #000; align-items: center; }
+.fcc .fcc-dock .fcc-dock-l em { font-size: 9px; font-weight: 500; letter-spacing: .02em; text-transform: none; color: rgba(255,255,255,.75); }
 .fcc-dock-l em { font-style: normal; font-size: 9px; font-weight: 500; color: var(--text-muted); }
-.fcc[data-dock="open"] .fcc-dock-l em { color: var(--y-text); }
+
 
 /* Pin d'alerte */
 .fcc-pin { position: absolute; width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; transform: translate(-50%, -50%) scale(calc(1 / var(--cam))); }
@@ -396,6 +404,7 @@
 .fcc-coach[data-side="bottom"] .fcc-coach-ar { top: -5px; left: var(--ax, 50%); margin-left: -5px; }
 .fcc-coach[data-side="top"] .fcc-coach-ar { bottom: -5px; left: var(--ax, 50%); margin-left: -5px; }
 .fcc-coach[data-side="left"] .fcc-coach-ar { right: -5px; top: var(--ay, 50%); margin-top: -5px; }
+.fcc-coach[data-side="right"] .fcc-coach-ar { left: -5px; top: var(--ay, 50%); margin-top: -5px; }
 .fcc .fcc-hint { animation: fcc-hint 1.8s ease-in-out infinite; }
 @keyframes fcc-hint { 0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,0), 0 0 0 2px rgba(255,255,255,.9); } 50% { box-shadow: 0 0 0 6px rgba(255,255,255,.14), 0 0 0 2px rgba(255,255,255,.9); } }
 
@@ -420,9 +429,9 @@
 .fcc-note { margin-top: 12px; color: var(--on-dark-3); font-size: 13px; }
 
 /* ── Responsive ────────────────────────────────────────── */
+.fcc[data-ctx="1"] .fcc-posture .fcc-hide-s { display: none; }
 @media (max-width: 1240px) {
   .fcc-hide-m { display: none; }
-  .fcc[data-ctx="1"] .fcc-posture .fcc-hide-s { display: none; }
 }
 @media (max-width: 1100px) {
   .fcc-body { height: 560px; }
@@ -474,3 +483,123 @@
   .fcc *, .fcc *::before, .fcc *::after { animation: none !important; transition: none !important; }
   .fcc .fcc-hint { box-shadow: 0 0 0 2px rgba(255,255,255,.9); }
 }
+
+/* ============================================================
+   Variante tactique (?ui=tactique) : panneaux denses, coins vifs,
+   codes couleur sémantiques. Jaune : à qualifier. Cyan : nos moyens.
+   Rouge : menace. Violet : zone sensible.
+   ============================================================ */
+.fcc:not(.fcc-tac) .fcc-tac-only { display: none !important; }
+.fcc.fcc-tac g.fcc-tac-only { display: inline; }
+.fcc.fcc-tac .fcc-cam.fcc-tac-only, .fcc.fcc-tac .fcc-pintag.fcc-tac-only, .fcc.fcc-tac .fcc-cls.fcc-tac-only { display: flex; }
+.fcc.fcc-tac {
+  --y-tac: #f2d21b; --c-tac: #22d3ee; --r-tac: #ff4d4d; --v-tac: #8b6cf0; --o-tac: #f59e0b;
+  --panel: rgba(12,13,14,.92);
+  --drone: #22d3ee; --drone-rgb: 34,211,238;
+  border-radius: 6px; font-feature-settings: "tnum";
+}
+.fcc.fcc-tac * { letter-spacing: 0; }
+
+/* Barre du haut et rail : plus serrés, coins vifs */
+.fcc.fcc-tac .fcc-top { height: 40px; background: #0b0c0d; }
+.fcc.fcc-tac .fcc-search, .fcc.fcc-tac .fcc-replay-top, .fcc.fcc-tac .fcc-ri, .fcc.fcc-tac .fcc-bell, .fcc.fcc-tac .fcc-user { border-radius: 3px; }
+.fcc.fcc-tac .fcc-rail { background: #0b0c0d; }
+.fcc.fcc-tac .fcc-ri.on { box-shadow: inset 2px 0 0 var(--y-tac); }
+
+/* Carte : imagerie légèrement éteinte, symbologie nette */
+.fcc.fcc-tac .fcc-ortho { filter: saturate(.7) brightness(.78) contrast(1.05); }
+.fcc.fcc-tac .fcc-zone { fill: rgba(28,24,8,.42); stroke: rgba(214,180,72,.95); stroke-width: 2; stroke-dasharray: none; }
+.fcc.fcc-tac .fcc-zone-c { fill: rgba(139,108,240,.16); stroke: rgba(139,108,240,.9); }
+.fcc.fcc-tac[data-zalert="1"] .fcc-zone-c { fill: rgba(139,108,240,.2); stroke: var(--v-tac); animation: none; }
+.fcc.fcc-tac .fcc-zl { background: none; padding: 0; font: 600 10px var(--f-app); text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.85); text-shadow: 0 1px 2px rgba(0,0,0,.9); }
+.fcc.fcc-tac .fcc-zl b { font-weight: 700; }
+.fcc.fcc-tac .fcc-cone { fill: url(#fcc-cone-g); stroke: none; }
+.fcc.fcc-tac .fcc-route { stroke: rgba(34,211,238,.75); stroke-dasharray: 2 5; }
+.fcc.fcc-tac .fcc-trail { stroke: var(--c-tac); stroke-width: 1.6; }
+.fcc-cam { position: absolute; transform: translate(-50%, -6px) scale(calc(1 / var(--cam))); transform-origin: 50% 6px; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; }
+.fcc-cam i { width: 12px; height: 12px; border-radius: 50%; background: #0b0c0d; border: 2px solid var(--infra); box-shadow: 0 0 0 2px rgba(0,0,0,.45); }
+.fcc-cam em { padding: 1px 5px; border-radius: 4px; background: rgba(10,11,12,.85); border: 1px solid rgba(255,255,255,.12); font: 600 9.5px var(--f-app); font-style: normal; color: rgba(255,255,255,.85); }
+
+/* Station : glyphe cyan, sans pastille */
+.fcc.fcc-tac .fcc-drone-l { border-radius: 2px; background: rgba(10,11,12,.85); border-color: rgba(255,255,255,.12); font-size: 10px; }
+.fcc.fcc-tac .fcc-drone-a { border-radius: 2px; }
+
+/* Cible : équerres jaunes et chevron, à qualifier */
+.fcc.fcc-tac .fcc-pin span { width: 24px; height: 24px; border: 0; border-radius: 0; animation: none; box-shadow: none;
+  background:
+    linear-gradient(var(--y-tac), var(--y-tac)) 0 0 / 7px 1.5px, linear-gradient(var(--y-tac), var(--y-tac)) 0 0 / 1.5px 7px,
+    linear-gradient(var(--y-tac), var(--y-tac)) 100% 0 / 7px 1.5px, linear-gradient(var(--y-tac), var(--y-tac)) 100% 0 / 1.5px 7px,
+    linear-gradient(var(--y-tac), var(--y-tac)) 0 100% / 7px 1.5px, linear-gradient(var(--y-tac), var(--y-tac)) 0 100% / 1.5px 7px,
+    linear-gradient(var(--y-tac), var(--y-tac)) 100% 100% / 7px 1.5px, linear-gradient(var(--y-tac), var(--y-tac)) 100% 100% / 1.5px 7px;
+  background-repeat: no-repeat; position: relative; }
+.fcc.fcc-tac .fcc-pin span::after { content: ""; position: absolute; left: 50%; top: 50%; width: 9px; height: 9px; margin: -6px 0 0 -6px; border: 1.6px solid var(--y-tac); transform: rotate(45deg); background: radial-gradient(circle, var(--y-tac) 0 1.6px, rgba(242,210,27,.18) 2px); }
+.fcc-pintag { position: absolute; transform: translate(0, -100%) scale(calc(1 / var(--cam))); transform-origin: 0 100%; display: flex; flex-direction: column; gap: 1px; padding: 5px 8px 6px; background: rgba(10,11,12,.88); border-left: 2px solid var(--y-tac); pointer-events: none; white-space: nowrap; }
+.fcc-pintag small { font: 700 9px var(--f-app); letter-spacing: .08em; text-transform: uppercase; color: var(--y-tac); }
+.fcc-pintag b { font: 600 12.5px var(--f-app); color: #fff; }
+.fcc-pintag > span { font: 500 10.5px var(--f-app); color: rgba(255,255,255,.65); font-variant-numeric: tabular-nums; }
+.fcc.fcc-tac[data-nal="0"] .fcc-pintag.fcc-tac-only { display: none; }
+
+/* Panneaux flottants : fond quasi noir, coins vifs */
+.fcc.fcc-tac .fcc-posture, .fcc.fcc-tac .fcc-bar { background: var(--panel); box-shadow: 0 6px 24px rgba(0,0,0,.6); }
+.fcc.fcc-tac .fcc-layers-t, .fcc.fcc-tac .fcc-layers-t button { border-radius: 3px; }
+.fcc.fcc-tac .fcc-pop, .fcc.fcc-tac .fcc-vid, .fcc.fcc-tac .fcc-hud, .fcc.fcc-tac .fcc-toast, .fcc.fcc-tac .fcc-drop { border-radius: 4px; background: var(--panel); }
+
+/* Bannière d'alerte : carte jaune « à qualifier » */
+.fcc.fcc-tac .fcc-crit { background: rgba(12,13,14,.95); border: 1px solid var(--y-tac); border-radius: 4px; box-shadow: 0 10px 32px rgba(0,0,0,.6); }
+.fcc.fcc-tac .fcc-crit-pulse { display: none; }
+.fcc.fcc-tac .fcc-crit-ico, .fcc.fcc-tac .fcc-crit-t small, .fcc.fcc-tac .fcc-crit-m { color: var(--y-tac); }
+.fcc.fcc-tac .fcc-btn-ack, .fcc.fcc-tac .fcc-btn-go { border-radius: 3px; }
+.fcc.fcc-tac .fcc-btn-go { background: #f4f4f5; color: #0b0c0d; box-shadow: none; }
+
+/* Fiche d'alerte : grille dense type fiche de piste */
+.fcc.fcc-tac .fcc-ctx { background: rgba(10,11,12,.96); box-shadow: -12px 0 40px rgba(0,0,0,.55); }
+.fcc.fcc-tac .fcc-ctx-h { margin: 12px 12px 0; padding: 12px 12px 10px; border: 1px solid var(--y-tac); border-bottom: 0; border-radius: 4px 4px 0 0; background: rgba(242,210,27,.04); }
+.fcc.fcc-tac[data-st="closed"] .fcc-ctx-h { border-color: var(--c-tac); background: rgba(34,211,238,.04); }
+.fcc.fcc-tac .fcc-ctx-t { display: flex; align-items: center; gap: 8px; color: var(--y-tac); font-size: 15px; margin-bottom: 8px; }
+.fcc.fcc-tac .fcc-ctx-t::before { content: ""; width: 8px; height: 8px; margin: 0 2px; border: 1.6px solid currentColor; transform: rotate(45deg); }
+.fcc.fcc-tac[data-st="closed"] .fcc-ctx-t { color: var(--c-tac); }
+.fcc.fcc-tac .fcc-x { top: 18px; right: 18px; border-radius: 3px; }
+.fcc.fcc-tac .fcc-sev, .fcc.fcc-tac .fcc-st { border-radius: 2px; height: 18px; font-size: 9.5px; }
+.fcc.fcc-tac .fcc-sev { color: var(--y-tac); border-color: rgba(242,210,27,.45); background: rgba(242,210,27,.08); }
+.fcc.fcc-tac .fcc-st { color: rgba(255,255,255,.8); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); }
+.fcc-cls { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding-top: 9px; border-top: 1px solid rgba(255,255,255,.08); }
+.fcc-cls span { font: 600 9.5px var(--f-app); letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.fcc-cls b { font: 600 12.5px var(--f-app); color: var(--y-tac); }
+.fcc.fcc-tac[data-st="closed"] .fcc-cls b { color: var(--c-tac); }
+.fcc.fcc-tac .fcc-ctx-b { margin: 0 12px; padding: 4px 12px 12px; border: 1px solid var(--y-tac); border-top: 0; border-radius: 0 0 4px 4px; background: rgba(242,210,27,.02); flex: none; gap: 12px; }
+.fcc.fcc-tac[data-st="closed"] .fcc-ctx-b { border-color: var(--c-tac); background: rgba(34,211,238,.02); }
+.fcc.fcc-tac .fcc-grid { gap: 12px 16px; }
+.fcc.fcc-tac .fcc-field, .fcc.fcc-tac .fcc-desc { padding: 0; background: none; border: 0; }
+.fcc.fcc-tac .fcc-field span, .fcc.fcc-tac .fcc-desc span { font-size: 9.5px; letter-spacing: .08em; color: rgba(255,255,255,.45); margin-bottom: 2px; }
+.fcc.fcc-tac .fcc-field strong { font-size: 15px; color: #fff; font-weight: 600; }
+.fcc.fcc-tac .fcc-desc p { font-size: 12.5px; color: rgba(255,255,255,.72); }
+.fcc.fcc-tac .fcc-ctx-a { margin-top: auto; border-top-color: rgba(255,255,255,.08); }
+.fcc.fcc-tac .fcc-a { border-radius: 3px; justify-content: flex-start; padding: 9px 12px; }
+.fcc.fcc-tac .fcc-a-ack { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.14); color: #fff; }
+.fcc.fcc-tac .fcc-a-go { background: #f4f4f5; border-color: #f4f4f5; color: #0b0c0d; }
+.fcc.fcc-tac .fcc-a-close { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.14); color: rgba(255,255,255,.8); }
+
+/* Bandeau de mission : file d'actions avec minuteur encadré et arrêt rouge */
+.fcc.fcc-tac .fcc-hud { gap: 8px; padding: 10px 12px; }
+.fcc.fcc-tac .fcc-hud-n { font-size: 13px; }
+.fcc.fcc-tac .fcc-hud-b { border-radius: 2px; background: rgba(34,211,238,.12); color: var(--c-tac); }
+.fcc.fcc-tac .fcc-hud-st small { font-size: 9.5px; letter-spacing: .08em; color: rgba(255,255,255,.4); }
+.fcc.fcc-tac .fcc-hud-st b { font-size: 14px; color: #fff; }
+.fcc.fcc-tac [data-f="eta"] { font-family: var(--f-appmono); padding: 0 6px; border: 1px solid rgba(255,255,255,.3); border-radius: 2px; }
+.fcc.fcc-tac .fcc-prog { height: 3px; border-radius: 0; }
+.fcc.fcc-tac .fcc-prog span { background: var(--c-tac); border-radius: 0; }
+.fcc.fcc-tac .fcc-hud-btn { border-radius: 3px; height: 26px; }
+.fcc.fcc-tac .fcc-hud-btn-d { background: #e5383b; border-color: #e5383b; color: #fff; }
+.fcc.fcc-tac .fcc-hud-btn-d:hover:not(:disabled) { background: #f04447; color: #fff; }
+
+/* Vidéo, modales, guidage */
+.fcc.fcc-tac .fcc-vid-tabs button, .fcc.fcc-tac .fcc-tag, .fcc.fcc-tac .fcc-vid-o > span, .fcc.fcc-tac .fcc-vid-tc { border-radius: 2px; }
+.fcc.fcc-tac .fcc-modal-c, .fcc.fcc-tac .fcc-end-c { border-radius: 4px; background: #0e0f10; }
+.fcc.fcc-tac .fcc-motifs button, .fcc.fcc-tac .fcc-ta, .fcc.fcc-tac .fcc-warn, .fcc.fcc-tac .fcc-m-ok, .fcc.fcc-tac .fcc-m-cancel, .fcc.fcc-tac .fcc-replay { border-radius: 3px; }
+.fcc.fcc-tac .fcc-coach { border-radius: 4px; }
+
+/* Centrage précis des pastilles (compteurs, avatar) */
+.fcc-bar-b em, .fcc-bell i, .fcc-user b { display: inline-flex; align-items: center; justify-content: center; line-height: 1; padding-top: 0; padding-bottom: 0; font-variant-numeric: tabular-nums; text-align: center; }
+.fcc-bar-b em { min-width: 16px; height: 16px; padding: 0 4px; font-size: 9.5px; }
+.fcc-bell i { width: 15px; min-width: 15px; height: 15px; padding: 0; font-size: 9px; }
+.fcc-user b { width: 26px; height: 26px; flex-shrink: 0; font-size: 10px; letter-spacing: .02em; }

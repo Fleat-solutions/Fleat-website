@@ -5,6 +5,9 @@
   var root = document.getElementById('fcc');
   if (!root) return;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Variante d'interface tactique : ?ui=tactique */
+  var tac = /[?&]ui=tactique\b/.test(location.search);
+  if (tac) root.classList.add('fcc-tac');
   var stacked = window.matchMedia('(max-width: 900px)');
 
   var F = {};
@@ -67,12 +70,12 @@
 
   var S;
   function reset() {
-    S = { state: 'idle', st: 'new', sim: 0, m: null, pos: 0, alt: 0, dp: at(0), motif: '', t2: null, t3: null, dispatched: false, follow: false, userActed: false, prev: null, aborted: false };
+    S = { state: 'idle', st: 'new', sim: 0, m: null, pos: 0, alt: 0, dp: at(0), pan: { x: 0, y: 0 }, motif: '', t2: null, t3: null, dispatched: false, follow: false, userActed: false, prev: null, aborted: false };
     ['ctx', 'video', 'hud', 'flown', 'zoom', 'hover', 'nal', 'banner', 'zalert', 'air', 'paused', 'toast', 'notifs', 'rail', 'vlive'].forEach(function (k) { set(k, '0'); });
     set('state', 'idle'); set('st', 'new'); set('hudst', 'run'); set('dock', 'closed'); set('src', 'drone'); set('pop', ''); set('modal', '');
     setDrone(0, 0, 0, .55);
     drawTrail(0);
-    txt('fly', '0'); txt('nmis', '0'); txt('nal', '0'); txt('bellN', '0'); txt('status', 'Nouvelle');
+    txt('fly', '0'); txt('nmis', '0'); txt('nal', '0'); txt('bellN', '0'); txt('status', 'Nouvelle'); txt('cls', 'À qualifier');
     txt('dockSt', 'Drone à bord'); txt('hudStT', 'En cours'); hudVals(DIST, ETA_TOTAL, 'Préparation', 0, 98);
     txt('pauseBtn', 'Pause'); F.pauseBtn.disabled = false;
     F.followBtn.setAttribute('aria-pressed', 'false');
@@ -101,7 +104,8 @@
   }
   function hudVals(rem, eta, act, pct, bat) {
     txt('rem', Math.max(0, Math.round(rem)) + ' m');
-    txt('eta', Math.max(0, Math.ceil(eta)) + ' s');
+    var e = Math.max(0, Math.ceil(eta));
+    txt('eta', tac ? pad(Math.floor(e / 60)) + ':' + pad(e % 60) : e + ' s');
     txt('act', act);
     txt('pct', Math.round(pct) + ' %'); F.progBar.style.width = pct + '%';
     txt('alt2', Math.round(S ? S.alt : 0) + ' m');
@@ -118,12 +122,25 @@
       if (get('ctx') === '1') right = mw - $('.fcc-ctx').offsetWidth;
       if (get('video') === '1') left = Math.min(right - 200, $('.fcc-vid').offsetWidth + 12);
     }
-    var s = S.follow ? 1.9 : 1;
-    var fx = S.follow ? S.dp[0] : 1300, fy = S.follow ? S.dp[1] : 600;
+    /* Vue d'ensemble légèrement dézoomée ; l'orthophoto déborde de 25 % autour du plan */
+    var s = S.follow ? 1.6 : (stacked.matches ? 0.86 : 0.78);
+    var fx = S.follow ? S.dp[0] : 1220, fy = S.follow ? S.dp[1] : 597;
+    /* Réserve le haut de la carte quand la bannière d'alerte et sa bulle sont affichées */
+    var top = 0;
+    if (!stacked.matches && get('banner') === '1') {
+      var cb = $('.fcc-crit').getBoundingClientRect(), mb = mapwrap.getBoundingClientRect();
+      top = Math.max(0, cb.bottom - mb.top) + (F.coach.classList.contains('on') && F.coach.getAttribute('data-side') !== 'right' ? F.coach.offsetHeight + 16 : 14);
+    }
+    /* Le site (y 90 à 1104 du plan) doit tenir entre la réserve haute et le bas de la carte */
+    if (!S.follow && top) s = Math.min(s, (mh - top - 16) / (1014 / IH * ch));
     var tx = (left + right) / 2 - fx / IW * cw * s;
-    var ty = mh / 2 - fy / IH * ch * s;
-    tx = Math.min(0, Math.max(mw - cw * s, tx));
-    ty = Math.min(0, Math.max(mh - ch * s, ty));
+    var ty = (top + mh) / 2 - fy / IH * ch * s;
+    /* Déplacement manuel (glisser à la souris), borné à l'orthophoto */
+    var bx = tx, by = ty;
+    tx += S.pan.x; ty += S.pan.y;
+    tx = Math.min(0.25 * cw * s, Math.max(mw - 1.25 * cw * s, tx));
+    ty = Math.min(0.25 * ch * s, Math.max(mh - 1.25 * ch * s, ty));
+    S.pan.x = tx - bx; S.pan.y = ty - by;
     canvas.style.transition = instant ? 'none' : '';
     canvas.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) scale(' + s + ')';
     root.style.setProperty('--cam', s);
@@ -182,7 +199,10 @@
     var cw = c.offsetWidth, ch = c.offsetHeight, gap = 12, m = 8;
     var cx = r.left + r.width / 2 - R.left, side, x, y;
     var inCtx = !stacked.matches && el.closest('.fcc-ctx'), inModal = el.closest('.fcc-modal');
-    if (inModal && r.top - R.top - gap - ch > m) {
+    var inBanner = !stacked.matches && el.closest('.fcc-crit');
+    if (inBanner && R.right - r.right > cw + gap + m) {
+      side = 'right'; x = r.right - R.left + gap; y = r.top - R.top + r.height / 2 - ch / 2;
+    } else if (inModal && r.top - R.top - gap - ch > m) {
       side = 'top'; x = cx - cw / 2; y = r.top - R.top - gap - ch;
     } else if (inCtx && r.left - R.left > cw + 20) {
       side = 'left'; x = r.left - R.left - cw - gap; y = r.top - R.top + r.height / 2 - ch / 2;
@@ -197,6 +217,7 @@
     c.style.setProperty('--ax', Math.max(14, Math.min(cw - 14, cx - x)) + 'px');
     c.style.setProperty('--ay', Math.max(14, Math.min(ch - 14, r.top - R.top + r.height / 2 - y)) + 'px');
     c.style.left = Math.round(x) + 'px'; c.style.top = Math.round(y) + 'px';
+    if (c.getAttribute('data-prev') !== side) { c.setAttribute('data-prev', side); if (get('banner') === '1') layout(); }
   }
 
   function go(state) { S.state = state; set('state', state); guide(); }
@@ -207,6 +228,7 @@
     set('nal', '1'); set('banner', '1'); set('zalert', '1');
     txt('nal', '1'); txt('bellN', '1'); txt('recv', clock(0)); txt('t1', clock(0));
     go('alert');
+    setTimeout(function () { layout(); }, 60);
   }
 
   /* ── Actions opérateur ── */
@@ -219,11 +241,11 @@
   function closeCtx() { set('ctx', '0'); layout(); guide(); }
   function ack() {
     if (S.st === 'new') { S.st = 'ack'; set('st', 'ack'); txt('status', 'Acquittée'); set('banner', '0'); }
-    openCtx();
+    openCtx(); layout();
   }
   function dispatch() {
     S.dispatched = true; S.aborted = false;
-    S.st = 'dispatched'; set('st', 'dispatched'); txt('status', 'Mission lancée'); set('banner', '0');
+    S.st = 'dispatched'; set('st', 'dispatched'); txt('status', 'Mission lancée'); set('banner', '0'); setTimeout(function () { layout(); }, 0);
     set('hud', '1'); set('flown', '1'); set('dock', 'open'); set('hudst', 'run'); set('paused', '0');
     txt('dockSt', 'Ouverture…'); txt('fly', '0'); txt('nmis', '1'); txt('msLiveS', 'En cours · Drone 01');
     F.pauseBtn.disabled = false; txt('pauseBtn', 'Pause');
@@ -258,6 +280,7 @@
   function confirmClose() {
     set('modal', '');
     S.st = 'closed'; set('st', 'closed'); txt('status', 'Clôturée'); txt('motif', S.motif);
+    txt('cls', S.motifShort ? S.motifShort.charAt(0).toUpperCase() + S.motifShort.slice(1) : 'Clôturée');
     set('nal', '0'); set('banner', '0'); set('zalert', '0'); txt('nal', '0'); txt('bellN', '0');
     S.t3 = S.sim;
     if (S.m && S.m.phase !== 'rth' && S.m.phase !== 'land') startRth();
@@ -425,7 +448,7 @@
     if (m && !paused && PH[m.phase]) rate = PH[m.phase].sim / PH[m.phase].ms;
     if (S.state !== 'idle' && S.state !== 'done') {
       S.sim += dt * rate;
-      txt('age', Math.max(1, Math.floor(S.sim)) + ' s');
+      txt('age', Math.max(1, Math.floor(S.sim)) + ' s'); txt('tagAge', Math.max(1, Math.floor(S.sim)) + ' s');
       txt('tc', clock(S.sim));
     }
     if (m && !paused && m.phase !== 'onsite') {
@@ -493,6 +516,42 @@
   } else { visible = true; run(); started = true; alertIn(); }
   document.addEventListener('visibilitychange', function () { if (document.hidden) halt(); else run(); });
   window.addEventListener('resize', function () { layout(true); placeCoach(); });
+
+  /* Liens vers la démo : cadrer l'interface au centre de l'écran, sous l'en-tête */
+  document.querySelectorAll('a[href="#demo-interface"]').forEach(function (l) {
+    l.addEventListener('click', function (e) {
+      e.preventDefault();
+      var head = (document.querySelector('.site-header') || {}).offsetHeight || 0;
+      var r = root.getBoundingClientRect(), avail = window.innerHeight - head;
+      var off = r.height < avail ? (avail - r.height) / 2 : 12;
+      window.scrollTo({ top: window.scrollY + r.top - head - off, behavior: reduced ? 'auto' : 'smooth' });
+      if (history.replaceState) history.replaceState(null, '', '#demo-interface');
+    });
+  });
+
+  /* Glisser la carte au clic gauche (souris uniquement, le tactile garde le défilement de la page) */
+  var drag = null;
+  mapwrap.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('button, a')) return;
+    drag = { x: e.clientX, y: e.clientY, px: S.pan.x, py: S.pan.y, moved: false, id: e.pointerId };
+  });
+  mapwrap.addEventListener('pointermove', function (e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 4) return;
+    if (!drag.moved) { drag.moved = true; mapwrap.setPointerCapture(e.pointerId); root.setAttribute('data-drag', '1'); if (S.follow) toggleFollow(false); }
+    S.pan.x = drag.px + dx; S.pan.y = drag.py + dy;
+    layout(true); placeCoach();
+    e.preventDefault();
+  });
+  function endDrag() { if (drag) { drag = null; root.removeAttribute('data-drag'); } }
+  mapwrap.addEventListener('pointerup', endDrag);
+  mapwrap.addEventListener('pointercancel', endDrag);
+  /* Double-clic : recentrer */
+  mapwrap.addEventListener('dblclick', function (e) {
+    if (e.target.closest('button, a')) return;
+    S.pan.x = 0; S.pan.y = 0; layout();
+  });
   var img = $('.fcc-ortho');
   if (img && !img.complete) img.addEventListener('load', function () { layout(true); });
 })();
