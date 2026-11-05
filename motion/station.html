@@ -5,9 +5,11 @@
 <style>
 body{background:var(--paper);padding:40px;font-family:var(--f-text)}
 .demo{width:420px}
-.kv{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:#e9eef5}
+/* pas de bordure ni d'arrondi dans le rendu : la carte du site fournit le cadre */
+.kv{position:relative;overflow:hidden;aspect-ratio:4/3;background:#1b1e23}
 .kv canvas{display:block;width:100%!important;height:100%!important}
-.kv-chip{position:absolute;left:14px;top:12px;display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;background:#fff;border:1px solid var(--line);border-radius:999px;font:600 12.5px/1 var(--f-text);color:var(--ink);box-shadow:var(--sh-sm)}
+/* pastille d'état aux couleurs du thème noir du site */
+.kv-chip{position:absolute;left:14px;top:12px;display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;background:rgba(8,9,10,.82);border:1px solid rgba(255,255,255,.14);border-radius:999px;font:600 12.5px/1 var(--f-text);color:#f7f8f8}
 .kv-chip i{width:9px;height:9px;border-radius:50%;background:var(--ok)}
 </style>
 <script type="importmap">{"imports":{"three":"/three/three.module.js","three/addons/":"/three/addons/"}}</script>
@@ -54,12 +56,12 @@ scene.add(sun);
 const M = (c, o = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: .7, metalness: 0 }, o));
 function mesh(geo, mat, x = 0, y = 0, z = 0, parent = scene) { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; parent.add(m); return m; }
 
-/* ---------- Sol : dalle béton, joints, marquage de la zone ---------- */
+/* ---------- Sol : enrobé noir, joints, marquage de la zone ---------- */
 function concreteTexture() {
   const c = document.createElement('canvas'); c.width = c.height = 1024; const g = c.getContext('2d');
-  g.fillStyle = '#d8dde5'; g.fillRect(0, 0, 1024, 1024);
-  for (let i = 0; i < 9000; i++) { const v = 200 + Math.random() * 30; g.fillStyle = `rgba(${v},${v + 3},${v + 8},.35)`; g.fillRect(Math.random() * 1024, Math.random() * 1024, 2, 2); }
-  g.strokeStyle = 'rgba(150,160,175,.55)'; g.lineWidth = 2;
+  g.fillStyle = '#1b1e23'; g.fillRect(0, 0, 1024, 1024);
+  for (let i = 0; i < 9000; i++) { const v = 34 + Math.random() * 26; g.fillStyle = `rgba(${v},${v + 2},${v + 5},.5)`; g.fillRect(Math.random() * 1024, Math.random() * 1024, 2, 2); }
+  g.strokeStyle = 'rgba(90,98,112,.5)'; g.lineWidth = 2;
   for (let k = 0; k <= 1024; k += 128) { g.beginPath(); g.moveTo(k, 0); g.lineTo(k, 1024); g.stroke(); g.beginPath(); g.moveTo(0, k); g.lineTo(1024, k); g.stroke(); }
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(3, 3); t.anisotropy = 4; return t;
 }

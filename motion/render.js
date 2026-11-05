@@ -1,7 +1,8 @@
 // Rendu de l'animation 3D de la station (motion/station.html) image par image, puis encodage vidéo.
 // Usage :
 //   node render.js sheet 0.5 2.4 3.8   planche d'images clés aux instants donnés (secondes)
-//   node render.js video               boucle complète : out/station.mp4, out/station.webm, out/station-poster.webp
+//   node render.js video               boucle complète : out/station.mp4 et out/station-poster.webp
+// Un seul MP4 (H.264, lu partout) : le WebM ne pesait pas moins lourd sur cette scène.
 const { chromium } = require('playwright');
 const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
@@ -9,7 +10,7 @@ const path = require('node:path');
 
 const HERE = __dirname, ROOT = path.join(HERE, '..'), OUT = path.join(HERE, 'out');
 const THREE = path.join(HERE, 'node_modules', 'three');
-const DURATION = 12, FPS = 30, POSTER_T = 3.8;
+const DURATION = 12, FPS = 24, POSTER_T = 3.8, WIDTH = 640;
 const [mode = 'video', ...times] = process.argv.slice(2);
 
 function resolve(url) {
@@ -51,10 +52,9 @@ function resolve(url) {
     }
     await at(POSTER_T); await card.screenshot({ path: path.join(OUT, 'poster.png') });
     const input = ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', path.join(frames, 'f-%04d.png')];
-    execFileSync('ffmpeg', [...input, '-vf', 'scale=840:-2,format=yuv420p', '-c:v', 'libx264', '-crf', '20', '-movflags', '+faststart', path.join(OUT, 'station.mp4')]);
-    execFileSync('ffmpeg', [...input, '-vf', 'scale=840:-2', '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '36', '-row-mt', '1', path.join(OUT, 'station.webm')]);
-    execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', path.join(OUT, 'poster.png'), '-vf', 'scale=840:-2', '-quality', '80', path.join(OUT, 'station-poster.webp')]);
-    console.log(`Vidéos et image d'attente dans ${OUT}`);
+    execFileSync('ffmpeg', [...input, '-vf', `scale=${WIDTH}:-2,format=yuv420p`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '24', '-tune', 'animation', '-movflags', '+faststart', path.join(OUT, 'station.mp4')]);
+    execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', path.join(OUT, 'poster.png'), '-vf', `scale=${WIDTH}:-2`, '-quality', '80', path.join(OUT, 'station-poster.webp')]);
+    console.log(`Vidéo et image d'attente dans ${OUT}`);
   }
   await browser.close();
 })();
