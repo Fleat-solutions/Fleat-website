@@ -80,12 +80,13 @@ body.theme-noir .btn-ghost:hover, body.theme-noir .btn-ghost-light:hover, body.t
 body.theme-noir .btn-link, body.theme-noir .bg-dark .btn-link { color: var(--ink); font-weight: 500; font-size: 14.5px; }
 body.theme-noir .btn-link:hover { color: #fff; }
 
-/* Haut de page : photo désaturée, aucune lueur colorée */
+/* Haut de page : photos en couleur, voiles neutres (sans teinte bleue) */
 body.theme-noir .hero { background: #08090a; border-bottom: 1px solid var(--line); }
 body.theme-noir .hero::before { background: radial-gradient(70% 90% at 80% 0%, rgba(255,255,255,.06), transparent 60%); }
-body.theme-noir .hero-photo img { filter: grayscale(1) contrast(1.1); opacity: .45; }
-body.theme-noir .hero-photo::after { background: linear-gradient(100deg, #08090a 0%, rgba(8,9,10,.9) 40%, rgba(8,9,10,.55) 75%, rgba(8,9,10,.4) 100%), linear-gradient(0deg, #08090a 0%, transparent 40%); }
 body.theme-noir .hero-grid-bg { opacity: .35; }
+body.theme-noir .photo-tint::after { background: linear-gradient(180deg, rgba(8,9,10,.08), rgba(8,9,10,.45)); }
+body.theme-noir .photo-band::after { background: linear-gradient(100deg, rgba(8,9,10,.92) 0%, rgba(8,9,10,.74) 48%, rgba(8,9,10,.38) 100%); }
+body.theme-noir .photo .photo-cap { background: linear-gradient(180deg, transparent, rgba(8,9,10,.82)); }
 body.theme-noir .hero .lead { color: var(--ink-3); }
 
 /* Cartes et surfaces */
