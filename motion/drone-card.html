@@ -1,8 +1,10 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><title>Drone FLEAT · 3D</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <link rel="stylesheet" href="/styles.css">
 <style>
+/* mêmes polices que le thème noir du site (Inter) */
+:root{--f-text:'Inter',system-ui,sans-serif;--f-display:'Inter',system-ui,sans-serif}
 body{background:var(--paper);padding:40px;font-family:var(--f-text)}
 .demo{width:420px}
 /* pas de bordure ni d'arrondi dans le rendu : la carte du site fournit le cadre */
@@ -10,14 +12,16 @@ body{background:var(--paper);padding:40px;font-family:var(--f-text)}
 .kv canvas{display:block;width:100%!important;height:100%!important}
 /* pastille d'état aux couleurs du thème noir du site */
 .kv-chip{position:absolute;left:14px;top:12px;display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;background:rgba(8,9,10,.82);border:1px solid rgba(255,255,255,.14);border-radius:999px;font:600 12.5px/1 var(--f-text);color:#f7f8f8}
-.kv-chip i{width:7px;height:7px;border-radius:50%;background:#f7f8f8}
+.kv-chip i{width:9px;height:9px;border-radius:50%;background:#f7f8f8}
+/* texte abaissé de 1 px : le centre des majuscules tombe sur le centre du point */
+.kv-chip>span{position:relative;top:1px}
 /* repères de visée fins, style capteur */
 .kv-hud{position:absolute;inset:0;pointer-events:none}
 .kv-hud b{position:absolute;width:14px;height:14px;border-color:rgba(255,255,255,.45);border-style:solid;border-width:0}
 .kv-hud .c1{right:14px;top:14px;border-top-width:1px;border-right-width:1px}
 .kv-hud .c2{right:14px;bottom:14px;border-bottom-width:1px;border-right-width:1px}
 .kv-hud .c3{left:14px;bottom:14px;border-bottom-width:1px;border-left-width:1px}
-.kv-read{position:absolute;right:16px;bottom:15px;font:500 10.5px/1 var(--f-mono);letter-spacing:.08em;color:rgba(247,248,248,.62);text-transform:uppercase}
+.kv-read{position:absolute;right:38px;bottom:15px;font:500 10.5px/1 var(--f-mono);letter-spacing:.08em;color:rgba(247,248,248,.62);text-transform:uppercase}
 /* fiche technique : traits de liaison entre chaque pièce et sa caractéristique */
 .kv-spec{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .kv-spec path{fill:none;stroke:rgba(247,248,248,.7);stroke-width:1.4}

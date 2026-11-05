@@ -32,9 +32,13 @@ function resolve(url) {
     const f = resolve(route.request().url());
     route.fulfill(fs.existsSync(f) ? { path: f, contentType: f.endsWith('.js') ? 'text/javascript' : undefined } : { status: 404, body: '' });
   });
-  await page.route(/^https?:\/\/(?!local\/)/, route => route.abort());
+  /* seules les polices Google passent, pour que le texte des vidéos soit rendu avec les polices du site */
+  await page.route(/^https?:\/\/(?!local\/|fonts\.googleapis\.com\/|fonts\.gstatic\.com\/)/, route => route.abort());
   await page.goto(`http://local/${SCENE}.html`);
   await page.waitForFunction(() => window.__ready, null, { timeout: 20000 });
+  await page.evaluate(() => document.fonts.ready);
+  const fonts = await page.evaluate(() => ['Inter', 'IBM Plex Mono'].map(f => f + ' : ' + document.fonts.check(`600 12px "${f}"`)));
+  console.log('Polices', fonts.join(', '));
   await page.evaluate(() => { window.__fleatFrozen = true; });
 
   const card = page.locator('.kv');
