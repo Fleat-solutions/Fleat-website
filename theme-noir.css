@@ -143,7 +143,12 @@ body.theme-noir .site-footer { background: #08090a; border-top-color: var(--line
 body.theme-noir .footer-col h4 { color: var(--ink-4); }
 body.theme-noir .footer-col a, body.theme-noir .footer-bottom a { color: var(--ink-3); }
 body.theme-noir .footer-col a:hover, body.theme-noir .footer-bottom a:hover { color: var(--ink); }
-body.theme-noir #cookie-banner { background: rgba(14,15,17,.97); }
+body.theme-noir #cookie-banner { background: rgba(14,15,17,.97); border-top-color: var(--line); }
+body.theme-noir .ck-text { color: var(--ink-3); }
+body.theme-noir .ck-text a:hover { color: #fff; }
+body.theme-noir .ck-btn { font-family: var(--f-text); font-weight: 500; border-radius: 8px; }
+body.theme-noir .ck-accept { background: #f7f8f8; border-color: #f7f8f8; color: #08090a; }
+body.theme-noir .ck-accept:hover { background: #fff; color: #08090a; }
 
 /* Composants propres à certaines pages */
 body.theme-noir .hl, body.theme-noir .bg-dark .hl, body.theme-noir .hero .hl { background: none; padding: 0; }
@@ -191,3 +196,10 @@ body.theme-noir .fcc-vid-tabs button[aria-pressed="true"], body.theme-noir .fcc-
 body.theme-noir .fcc-sw input:checked + span { background: #f7f8f8; }
 body.theme-noir .fcc-sw input:checked + span::after { background: #08090a; }
 body.theme-noir .fcc-toast a { color: #f7f8f8; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Formulaire de contact : éléments sur fond d'accent (devenu blanc) */
+body.theme-noir .btn-submit { background: #f7f8f8; color: #08090a; }
+body.theme-noir .btn-submit:hover { background: #fff; color: #08090a; }
+body.theme-noir .form-step-indicator.done .step-bubble { color: #08090a; }
+body.theme-noir ::selection { color: #08090a; }
+body.theme-noir .btn-next { background: #f7f8f8; color: #08090a; }
