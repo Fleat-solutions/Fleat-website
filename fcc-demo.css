@@ -28,7 +28,8 @@
   --y: #f59e0b; --y-text: #fbbf24; --y-muted: rgba(245,158,11,.12);
   --r: #ef4444; --r-text: #f87171; --r-muted: rgba(239,68,68,.12);
   --info-muted: rgba(59,130,246,.12);
-  --drone: #ff6b35;
+  --drone: #22d3ee;
+  --drone-rgb: 34,211,238;
   --f-app: 'Inter', system-ui, -apple-system, sans-serif;
   --f-appmono: 'IBM Plex Mono', ui-monospace, monospace;
   --ctxw: 0px;
@@ -144,13 +145,13 @@
 .fcc-drone { position: absolute; z-index: 2; display: flex; flex-direction: column; align-items: center; padding: 0; border: 0; background: none; cursor: pointer; transform: translate(-50%, -17px) scale(calc(var(--ds, 1) / var(--cam))); transform-origin: 50% 17px; opacity: var(--do, 0); pointer-events: none; }
 .fcc[data-air="1"] .fcc-drone { pointer-events: auto; }
 .fcc-arrow { position: relative; width: 34px; height: 34px; display: grid; place-items: center; }
-.fcc-arrow::before { content: ""; position: absolute; inset: 1px; border-radius: 50%; background: rgba(255,107,53,.18); border: 1px solid rgba(255,107,53,.35); }
+.fcc-arrow::before { content: ""; position: absolute; inset: 1px; border-radius: 50%; background: rgba(var(--drone-rgb),.18); border: 1px solid rgba(var(--drone-rgb),.35); }
 .fcc[data-air="1"] .fcc-arrow::before { animation: fcc-gps 2s ease-out infinite; }
 @keyframes fcc-gps { 0% { transform: scale(.7); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
 .fcc-arrow svg { position: relative; width: 24px; height: 24px; transform: rotate(var(--hd, 0deg)); transition: transform .25s linear; filter: drop-shadow(0 1px 3px rgba(0,0,0,.6)); }
 .fcc-arrow path { fill: var(--drone); stroke: #fff; stroke-width: 1.8; stroke-linejoin: round; }
-.fcc-drone-l { border-color: rgba(255,107,53,.35); font-family: var(--f-appmono); font-weight: 700; }
-.fcc-drone-a { margin-top: 3px; min-width: 40px; padding: 1px 6px; border: 1px solid rgba(255,107,53,.28); border-radius: 5px; background: rgba(255,107,53,.16); color: rgba(255,219,204,.96); font-family: var(--f-appmono); font-size: 9px; font-weight: 700; text-align: center; }
+.fcc-drone-l { border-color: rgba(var(--drone-rgb),.35); font-family: var(--f-appmono); font-weight: 700; }
+.fcc-drone-a { margin-top: 3px; min-width: 40px; padding: 1px 6px; border: 1px solid rgba(var(--drone-rgb),.28); border-radius: 5px; background: rgba(var(--drone-rgb),.16); color: #fff; font-family: var(--f-appmono); font-size: 9px; font-weight: 700; text-align: center; }
 
 @keyframes fcc-hover { 0%,100% { transform: translate(0,0); } 50% { transform: translate(2px,-2px); } }
 
