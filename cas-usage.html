@@ -177,12 +177,19 @@ main .muted{color:var(--ink-2)}
 .cu-vol-row .val{font-family:var(--f-mono);font-size:13px;color:var(--on-dark)}
 
 /* Trajectoire drone (réagir) */
-.cu-traj{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--dark-line)}
-.cu-traj img{width:100%;display:block;filter:brightness(.66) saturate(.8)}
-.cu-traj svg{position:absolute;inset:0;width:100%;height:100%}
-.cu-traj .path-dash{stroke-dasharray:4 5;animation:dashmove 3s linear infinite}
-@keyframes dashmove{to{stroke-dashoffset:-36}}
-@media(prefers-reduced-motion:reduce){.cu-traj .path-dash{animation:none}}
+.cu-traj{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--dark-line);aspect-ratio:3/2;background:#0b0c0e}
+.cu-traj svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cu-traj .rx-zone{fill:rgba(239,68,68,.14);stroke:#f87171;stroke-width:1.6px;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.cu-traj .rx-route{fill:none;stroke:#22d3ee;stroke-width:1.8px;vector-effect:non-scaling-stroke;stroke-dasharray:5 6;animation:dashmove 3s linear infinite}
+.cu-traj .rx-st path{fill:none;stroke:#fff;stroke-width:2.2;stroke-linejoin:miter}
+.cu-traj .rx-st text{font:600 15px var(--f-text);letter-spacing:.07em;fill:#fff;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.8);stroke-width:4px}
+.cu-traj .rx-br{fill:none;stroke:#f87171;stroke-width:2.4}
+.cu-traj .rx-dia{fill:rgba(248,113,113,.25);stroke:#f87171;stroke-width:2}
+.cu-traj .rx-ping{fill:none;stroke:#f87171;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:rxping 1.8s ease-out infinite}
+.cu-traj .rx-lbl{font:700 15px var(--f-text);letter-spacing:.06em;fill:#f87171;paint-order:stroke;stroke:rgba(0,0,0,.8);stroke-width:4px}
+.cu-traj .rx-drone path{fill:#22d3ee;stroke:#fff;stroke-width:1.6;stroke-linejoin:round}
+@keyframes rxping{from{transform:scale(.8);opacity:.9}to{transform:scale(2.4);opacity:0}}
+@media(prefers-reduced-motion:reduce){.cu-traj .rx-route,.cu-traj .rx-ping{animation:none}}
 
 /* Capacités transversales */
 .cu-caps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-top:clamp(26px,3vw,36px)}
@@ -489,23 +496,25 @@ main .muted{color:var(--ink-2)}
     <div data-detail class="cu-split" style="margin-top:clamp(28px,3vw,40px);">
       <div class="reveal">
         <div class="cu-traj">
-          <img src="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&q=72&w=1600" srcset="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=72&amp;w=640 640w, https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=72&amp;w=1024 1024w, https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=72&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'une plateforme logistique : quais, remorques et parking" loading="lazy">
-          <svg viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
-            <path id="traj-path" d="M92 318C180 250 300 268 400 176" fill="none" stroke="#5b8def" stroke-width="2" stroke-opacity=".85" class="path-dash"/>
-            <rect x="74" y="302" width="34" height="30" rx="4" fill="rgba(10,26,61,.8)" stroke="#8fb0f7" stroke-width="1.3"/>
-            <text x="91" y="352" text-anchor="middle" fill="#cfdcff" font-family="IBM Plex Mono, monospace" font-size="11">Base</text>
-            <g>
-              <circle cx="418" cy="164" r="26" fill="rgba(217,138,43,.14)" stroke="#e7a64e" stroke-width="1.4"/>
-              <text x="418" y="124" text-anchor="middle" fill="#e7a64e" font-family="IBM Plex Mono, monospace" font-size="11">ZONE 4 · ALERTE</text>
+          <svg viewBox="600 250 800 533" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <image href="assets/carto-site.webp" x="0" y="0" width="1530" height="1020"/>
+            <rect x="600" y="250" width="800" height="533" fill="rgba(0,0,0,.18)"/>
+            <polygon class="rx-zone" points="925.6,15.5 683.1,119.5 667.7,138.1 747.7,276.1 806.8,252.6 938.8,510 1023.5,722.3 1008.1,863.4 1073.5,1018.1 1301.5,890 1027.1,209.4 925.6,15.5"/>
+            <path id="traj-path" class="rx-route" d="M875 490C940 535 1030 620 1096 682"/>
+            <g class="rx-st" transform="translate(875 490)"><path d="M-13 1h26v10h-26z M-12 1l12-8 12 8 M-4 6h8"/><text y="32">STATION 01</text></g>
+            <g class="rx-tgt" transform="translate(1096 682)">
+              <circle class="rx-ping" r="16"/>
+              <path class="rx-br" d="M-18 -10v-8h8M10 -18h8v8M18 10v8h-8M-10 18h-8v-8"/>
+              <rect class="rx-dia" x="-5" y="-5" width="10" height="10" transform="rotate(45)"/>
+              <text class="rx-lbl" x="26" y="-14">INTRUSION · ZONE C</text>
             </g>
-            <g>
-              <circle r="6" fill="#fff"/>
-              <circle r="13" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.2"/>
-              <animateMotion dur="5.2s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.62;1" calcMode="linear"><mpath href="#traj-path"/></animateMotion>
+            <g class="rx-drone">
+              <path d="M12 0L-9 -8L-4 0L-9 8Z"/>
+              <animateMotion dur="6s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;0.6;1" calcMode="spline" keySplines=".45 0 .4 1;0 0 1 1"><mpath href="#traj-path"/></animateMotion>
             </g>
           </svg>
         </div>
-        <p class="muted" style="font-size:13.5px;margin-top:14px;">Schéma de principe.</p>
+        <p class="muted" style="font-size:13.5px;margin-top:14px;">Illustration sur un site réel · orthophotographie © IGN. Trajet direct de la station vers la zone en alerte.</p>
       </div>
       <div class="reveal" data-d="1">
         <h3 class="h3" style="color:var(--on-dark);">Mission immédiate</h3>
