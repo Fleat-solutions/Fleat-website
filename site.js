@@ -54,6 +54,34 @@
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
 
+  /* Vidéos d'illustration : chargées et lues seulement quand elles sont visibles.
+     Si la lecture automatique est impossible (animations réduites, mode économie d'énergie), un bouton permet de la lancer. */
+  var videos = document.querySelectorAll('video[data-autoplay]');
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  videos.forEach(function (v) {
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'vid-play'; btn.hidden = true;
+    btn.setAttribute('aria-label', "Lire l'animation");
+    btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>';
+    v.parentNode.appendChild(btn);
+    btn.addEventListener('click', function () { v.dataset.manual = '1'; var p = v.play(); if (p && p.catch) p.catch(function () {}); });
+    v.addEventListener('playing', function () { btn.hidden = true; });
+    v.addEventListener('pause', function () { if (v.dataset.manual || reduceMotion) btn.hidden = false; });
+    v.__offer = function () { btn.hidden = false; };
+  });
+  if (videos.length && !reduceMotion && 'IntersectionObserver' in window) {
+    var vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () { v.__offer(); }); }
+        else v.pause();
+      });
+    }, { threshold: 0.25 });
+    videos.forEach(function (v) { vio.observe(v); });
+  } else {
+    videos.forEach(function (v) { v.__offer(); });
+  }
+
   /* FAQ accordéon */
   document.querySelectorAll('.faq-q').forEach(function (q) {
     q.addEventListener('click', function () {

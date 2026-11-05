@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>Drone FLEAT · 3D</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="/styles.css">
+<style>
+body{background:var(--paper);padding:40px;font-family:var(--f-text)}
+.demo{width:420px}
+/* pas de bordure ni d'arrondi dans le rendu : la carte du site fournit le cadre */
+.kv{position:relative;overflow:hidden;aspect-ratio:4/3;background:#08090a}
+.kv canvas{display:block;width:100%!important;height:100%!important}
+/* pastille d'état aux couleurs du thème noir du site */
+.kv-chip{position:absolute;left:14px;top:12px;display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;background:rgba(8,9,10,.82);border:1px solid rgba(255,255,255,.14);border-radius:999px;font:600 12.5px/1 var(--f-text);color:#f7f8f8}
+.kv-chip i{width:7px;height:7px;border-radius:50%;background:#f7f8f8}
+/* repères de visée fins, style capteur */
+.kv-hud{position:absolute;inset:0;pointer-events:none}
+.kv-hud b{position:absolute;width:14px;height:14px;border-color:rgba(255,255,255,.45);border-style:solid;border-width:0}
+.kv-hud .c1{right:14px;top:14px;border-top-width:1px;border-right-width:1px}
+.kv-hud .c2{right:14px;bottom:14px;border-bottom-width:1px;border-right-width:1px}
+.kv-hud .c3{left:14px;bottom:14px;border-bottom-width:1px;border-left-width:1px}
+.kv-read{position:absolute;right:16px;bottom:15px;font:500 10.5px/1 var(--f-mono);letter-spacing:.08em;color:rgba(247,248,248,.62);text-transform:uppercase}
+/* fiche technique : traits de liaison entre chaque pièce et sa caractéristique */
+.kv-spec{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.kv-spec path{fill:none;stroke:rgba(247,248,248,.7);stroke-width:1.4}
+.kv-spec circle{fill:#f7f8f8}
+.kv-spec .k{font:500 15px var(--f-mono);letter-spacing:.08em;fill:rgba(247,248,248,.62);text-transform:uppercase}
+.kv-spec .v{font:600 27px var(--f-text);fill:#f7f8f8}
+</style>
+<script type="importmap">{"imports":{"three":"/three/three.module.js","three/addons/":"/three/addons/"}}</script>
+</head>
+<body>
+<div class="demo"><div class="kv" id="kv">
+<div class="kv-hud"><b class="c1"></b><b class="c2"></b><b class="c3"></b></div>
+<span class="kv-chip"><i></i><span id="chipTxt">Caméra visible · jour</span></span>
+<span class="kv-read" id="read">VIS</span>
+<svg class="kv-spec" id="spec" viewBox="0 0 840 630" aria-hidden="true"></svg>
+</div></div>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { makeDrone } from './drone.js';
+
+/* Carte « Le drone » : vol stationnaire, caméra visible de jour, bascule thermique, puis visible de nuit. Unités en mètres. */
+const host = document.getElementById('kv');
+const W = 840, H = 630;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+host.prepend(renderer.domElement);
+
+const BG = new THREE.Color('#08090a');
+const scene = new THREE.Scene();
+scene.background = BG.clone();
+scene.fog = new THREE.Fog('#08090a', 2.6, 7.5);
+const cam = new THREE.PerspectiveCamera(30, W / H, .05, 40);
+const AT = new THREE.Vector3(0, .42, 0), ALT = .55;
+
+/* Lumières : ciel faible, lumière principale dure, contre-jour pour détacher la silhouette */
+const hemi = new THREE.HemisphereLight('#e9edf2', '#0c0d0f', .9); scene.add(hemi);
+const key = new THREE.DirectionalLight('#ffffff', 2.8);
+key.position.set(-2, 4.5, 2.2); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 4; key.shadow.bias = -.0005;
+Object.assign(key.shadow.camera, { left: -2, right: 2, top: 2, bottom: -2, near: .5, far: 12 });
+scene.add(key);
+const rim = new THREE.DirectionalLight('#ffffff', 1.8); rim.position.set(1.2, 1.6, -3); scene.add(rim);
+
+const M = (c, o = {}) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: .7, metalness: 0 }, o));
+function mesh(geo, mat, x = 0, y = 0, z = 0, parent = scene) { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; parent.add(m); return m; }
+
+/* Sol : même enrobé noir que la carte de la station */
+function asphalt() {
+  const c = document.createElement('canvas'); c.width = c.height = 1024; const g = c.getContext('2d');
+  g.fillStyle = '#1b1e23'; g.fillRect(0, 0, 1024, 1024);
+  for (let i = 0; i < 9000; i++) { const v = 34 + Math.random() * 26; g.fillStyle = `rgba(${v},${v + 2},${v + 5},.5)`; g.fillRect(Math.random() * 1024, Math.random() * 1024, 2, 2); }
+  g.strokeStyle = 'rgba(90,98,112,.5)'; g.lineWidth = 2;
+  for (let k = 0; k <= 1024; k += 128) { g.beginPath(); g.moveTo(k, 0); g.lineTo(k, 1024); g.stroke(); g.beginPath(); g.moveTo(0, k); g.lineTo(1024, k); g.stroke(); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(5, 5); t.anisotropy = 4; return t;
+}
+const ground = mesh(new THREE.PlaneGeometry(30, 30), M('#ffffff', { map: asphalt(), roughness: .95 }));
+ground.rotation.x = -Math.PI / 2; ground.castShadow = false; ground.userData.heat = .3;
+/* arrière-plan discret : clôture et cuves, noyées dans le brouillard */
+const steel = M('#8f9aab', { metalness: .5, roughness: .45 });
+for (let x = -6; x <= 6.01; x += 1.2) mesh(new THREE.CylinderGeometry(.025, .025, 1.8, 8), steel, x, .9, -3.2).userData.heat = .1;
+mesh(new THREE.CylinderGeometry(.016, .016, 12, 6), steel, 0, 1.78, -3.2).rotation.z = Math.PI / 2;
+const tankMat = M('#e9ecf1', { metalness: .2, roughness: .45 });
+[[2.4, -2.4], [3.6, -1.7]].forEach(([x, z]) => { mesh(new THREE.CylinderGeometry(.55, .55, 2, 40), tankMat, x, 1, z).userData.heat = .32; });
+
+/* Emprise de la caméra au sol : cercle fin et réticule */
+const lineMat = new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: .5, depthWrite: false });
+const foot = new THREE.Group(); scene.add(foot);
+const ring = new THREE.Mesh(new THREE.RingGeometry(.3, .306, 96), lineMat); ring.rotation.x = -Math.PI / 2; foot.add(ring);
+[[.07, .0025, -.36, 0], [.07, .0025, .36, 0], [.0025, .07, 0, -.36], [.0025, .07, 0, .36]].forEach(([w, d, x, z]) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), lineMat); m.rotation.x = -Math.PI / 2; m.position.set(x, 0, z); foot.add(m); });
+foot.position.y = .004; foot.traverse(o => { o.userData.heat = .55; });
+
+/* Drone : modèle partagé avec la carte de la station, phare d'atterrissage pour la nuit */
+const D4 = makeDrone(THREE, RoundedBoxGeometry);
+const drone = D4.group; scene.add(drone);
+const spot = new THREE.SpotLight('#ffffff', 0, 3, .55, .6, 1.2); spot.castShadow = false;
+drone.add(spot); spot.position.set(.02, .015, 0); spot.target.position.set(.15, -1, 0); drone.add(spot.target);
+
+/* Vue thermique « blanc chaud » : chaque objet prend un gris selon userData.heat (froid sombre, chaud blanc) */
+const visMats = new Map(), irMats = new Map();
+scene.traverse(o => {
+  if (!o.isMesh) return;
+  visMats.set(o, o.material);
+  let h = o.userData.heat;
+  if (h === undefined) { let p = o.parent; while (p && p.userData.heat === undefined) p = p.parent; h = p ? p.userData.heat : (o.material.emissive && o.material.emissiveIntensity > 1 ? .85 : .62); }
+  /* gris affichés tels quels (sans traitement de couleur) pour garder une image thermique lisible */
+  const v = Math.round(30 + h * 225);
+  irMats.set(o, new THREE.MeshBasicMaterial({ color: new THREE.Color(`rgb(${v},${v},${v})`).convertSRGBToLinear(), toneMapped: false, fog: o !== drone && !drone.getObjectById(o.id), transparent: o.material.transparent, opacity: o.material.transparent ? Math.max(o.material.opacity, .5) : 1, side: o.material.side, depthWrite: o.material.depthWrite }));
+});
+const setView = ir => { (ir ? irMats : visMats).forEach((m, o) => { o.material = m; }); };
+
+/* ---------- Chronologie (12 s) ---------- */
+const T = 16, ease = p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+const seg = (t, a, b) => t <= a ? 0 : t >= b ? 1 : ease((t - a) / (b - a)), lerp = (a, b, p) => a + (b - a) * p;
+const txt = document.getElementById('chipTxt'), read = document.getElementById('read');
+/* caractéristiques du Matrice 4TD (fiche constructeur) ; at : point d'ancrage sur le drone, lx et ly : position du libellé */
+const SPECS = [
+  { k: 'Caméra thermique', v: '640 × 512', at: [.16, .04, .02], lx: 800, ly: 330, side: 'end' },
+  { k: 'Télémètre laser', v: '1 800 m', at: [.162, .006, .014], lx: 800, ly: 480, side: 'end' },
+  { k: 'Autonomie', v: "Jusqu'à 54 min", at: [-.03, .07, .03], lx: 40, ly: 380, side: 'start' },
+  { k: 'Vent', v: '12 m/s · IP55', at: [-.155, .13, .19], lx: 40, ly: 500, side: 'start' }
+].map(c => {
+  const NS = 'http://www.w3.org/2000/svg', g = document.createElementNS(NS, 'g'), el = (n, a) => { const e = document.createElementNS(NS, n); Object.entries(a).forEach(([k, v]) => e.setAttribute(k, v)); g.appendChild(e); return e; };
+  const line = el('path', { pathLength: 1, 'stroke-dasharray': 1 }), dot = el('circle', { r: 3.5 });
+  const txt = document.createElementNS(NS, 'g'); g.appendChild(txt);
+  const anchor = c.side, dx = 0;
+  txt.innerHTML = `<text class="k" x="${c.lx + dx}" y="${c.ly - 12}" text-anchor="${anchor}">${c.k}</text><text class="v" x="${c.lx + dx}" y="${c.ly + 26}" text-anchor="${anchor}">${c.v}</text>`;
+  document.getElementById('spec').appendChild(g);
+  return Object.assign(c, { at: new THREE.Vector3(...c.at), g, line, dot, txt });
+});
+function render(t) {
+  t = ((t % T) + T) % T;
+  const w = 2 * Math.PI * t / T;
+  /* vol stationnaire : léger balancement, cap qui oscille ; boucle sans saut */
+  drone.position.set(.02 * Math.sin(w * 2), ALT + .018 * Math.sin(w * 3), .02 * Math.cos(w));
+  drone.rotation.set(.025 * Math.sin(w * 2), .22 * Math.sin(w), .02 * Math.cos(w * 3));
+  D4.setSpin(1, t); D4.setLights(Math.floor(t * 2) % 2 === 0);
+  foot.position.x = drone.position.x + .05; foot.position.z = drone.position.z;
+  foot.rotation.y = -w * .5;
+  /* caméra : travelling circulaire lent autour du drone, aller et retour */
+  const az = .62 + .32 * Math.sin(w), r = 1.7;
+  cam.position.set(AT.x + r * Math.cos(az), AT.y + .95 + .05 * Math.sin(w * 2), AT.z + r * Math.sin(az)); cam.lookAt(AT);
+  /* lumière : jour, la nuit tombe pendant la vue thermique (5 à 7,5 s), le jour revient en fin de boucle */
+  const night = seg(t, 5, 7.5) * (1 - seg(t, 10.8, 12));
+  hemi.intensity = lerp(.9, .05, night); key.intensity = lerp(2.8, .06, night); rim.intensity = lerp(1.8, .6, night);
+  spot.intensity = lerp(0, 9, night);
+  scene.background.copy(BG); scene.fog.color.copy(BG);
+  lineMat.opacity = lerp(.5, .28, night);
+  /* bascule thermique par balayage de gauche à droite, retour en visible de la même façon */
+  const wipeIn = seg(t, 3.6, 4.1), wipeOut = seg(t, 7.8, 8.3);
+  renderer.setScissorTest(false); setView(false); renderer.render(scene, cam);
+  const a = Math.round(W * wipeIn), b = Math.round(W * wipeOut);
+  if (a > b) { renderer.setScissorTest(true); renderer.setScissor(b, 0, a - b, H); setView(true); renderer.render(scene, cam); renderer.setScissorTest(false); setView(false); }
+  const ir = t >= 3.85 && t < 8.05;
+  txt.textContent = ir ? 'Caméra thermique' : night > .5 ? 'Caméra visible · nuit' : 'Caméra visible · jour';
+  read.textContent = ir ? 'IR · blanc chaud' : 'VIS';
+  /* fiche technique (12 à 16 s) : les traits se tracent l'un après l'autre et suivent le drone */
+  const shown = 1 - seg(t, 15.3, 15.9);
+  if (t >= 12) { txt.textContent = 'Fiche technique'; read.textContent = 'SPEC'; }
+  drone.updateMatrixWorld(true); cam.updateMatrixWorld(true);
+  SPECS.forEach((c, i) => {
+    const p = seg(t, 12.2 + i * .45, 12.9 + i * .45) * shown;
+    c.g.setAttribute('opacity', p > 0 ? 1 : 0);
+    if (p <= 0) return;
+    const v = c.at.clone().applyMatrix4(drone.matrixWorld).project(cam);
+    const ax = (v.x + 1) / 2 * W, ay = (1 - v.y) / 2 * H, sg = c.lx < ax ? -1 : 1;
+    const ex = ax + sg * Math.min(Math.abs(c.ly - ay), Math.abs(c.lx - ax) - 20);
+    c.line.setAttribute('d', `M${ax} ${ay}L${ex} ${c.ly}L${c.lx} ${c.ly}`);
+    c.line.style.strokeDashoffset = 1 - Math.min(1, p * 1.25);
+    c.dot.setAttribute('cx', ax); c.dot.setAttribute('cy', ay);
+    c.txt.setAttribute('opacity', seg(p, .7, 1));
+  });
+}
+window.fleatRender = render;
+if (matchMedia('(prefers-reduced-motion: reduce)').matches) render(14.6);
+else { const t0 = performance.now(); (function loop(now) { if (window.__fleatFrozen === undefined) render((now - t0) / 1000); requestAnimationFrame(loop); })(t0); }
+window.__ready = true;
+</script>
+</body></html>

@@ -889,3 +889,14 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   .uh .collapse-toggle { margin-top: 0; }
   .is-collapsed [data-clamp] { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 }
+
+/* Bouton de lecture des vidéos d'illustration, affiché quand la lecture automatique est impossible */
+.vid-play {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+  background: rgba(8,9,10,.72); border: 1px solid rgba(255,255,255,.22); color: #f7f8f8; cursor: pointer;
+}
+.vid-play[hidden] { display: none; }
+.vid-play svg { width: 24px; height: 24px; margin-left: 3px; }
+.vid-play:hover { background: rgba(8,9,10,.88); }
+.vid-play:focus-visible { outline: 2px solid #f7f8f8; outline-offset: 3px; }
