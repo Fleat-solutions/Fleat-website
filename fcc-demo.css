@@ -474,3 +474,121 @@
   .fcc *, .fcc *::before, .fcc *::after { animation: none !important; transition: none !important; }
   .fcc .fcc-hint { box-shadow: 0 0 0 2px rgba(255,255,255,.9); }
 }
+
+/* ============================================================
+   Variante tactique (?ui=tactique) : panneaux denses, coins vifs,
+   codes couleur sémantiques. Jaune : à qualifier. Cyan : nos moyens.
+   Rouge : menace. Violet : zone sensible.
+   ============================================================ */
+.fcc:not(.fcc-tac) .fcc-tac-only { display: none !important; }
+.fcc.fcc-tac g.fcc-tac-only { display: inline; }
+.fcc.fcc-tac .fcc-cam.fcc-tac-only, .fcc.fcc-tac .fcc-pintag.fcc-tac-only, .fcc.fcc-tac .fcc-cls.fcc-tac-only { display: flex; }
+.fcc.fcc-tac {
+  --y-tac: #f2d21b; --c-tac: #22d3ee; --r-tac: #ff4d4d; --v-tac: #8b6cf0; --o-tac: #f59e0b;
+  --panel: rgba(12,13,14,.92);
+  --drone: #22d3ee; --drone-rgb: 34,211,238;
+  border-radius: 6px; font-feature-settings: "tnum";
+}
+.fcc.fcc-tac * { letter-spacing: 0; }
+
+/* Barre du haut et rail : plus serrés, coins vifs */
+.fcc.fcc-tac .fcc-top { height: 40px; background: #0b0c0d; }
+.fcc.fcc-tac .fcc-search, .fcc.fcc-tac .fcc-replay-top, .fcc.fcc-tac .fcc-ri, .fcc.fcc-tac .fcc-bell, .fcc.fcc-tac .fcc-user { border-radius: 3px; }
+.fcc.fcc-tac .fcc-rail { background: #0b0c0d; }
+.fcc.fcc-tac .fcc-ri.on { box-shadow: inset 2px 0 0 var(--y-tac); }
+
+/* Carte : imagerie légèrement éteinte, symbologie nette */
+.fcc.fcc-tac .fcc-ortho { filter: saturate(.7) brightness(.78) contrast(1.05); }
+.fcc.fcc-tac .fcc-zone { fill: rgba(28,24,8,.42); stroke: rgba(214,180,72,.95); stroke-width: 2; stroke-dasharray: none; }
+.fcc.fcc-tac .fcc-zone-c { fill: rgba(139,108,240,.16); stroke: rgba(139,108,240,.9); }
+.fcc.fcc-tac[data-zalert="1"] .fcc-zone-c { fill: rgba(139,108,240,.2); stroke: var(--v-tac); animation: none; }
+.fcc.fcc-tac .fcc-zl { background: none; padding: 0; font: 600 10px var(--f-app); text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.85); text-shadow: 0 1px 2px rgba(0,0,0,.9); }
+.fcc.fcc-tac .fcc-zl b { font-weight: 700; }
+.fcc.fcc-tac .fcc-cone { fill: rgba(96,120,255,.32); stroke: rgba(130,150,255,.55); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.fcc.fcc-tac .fcc-cone-ax { stroke: rgba(242,210,27,.9); stroke-width: 1.4; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+.fcc.fcc-tac .fcc-route { stroke: rgba(34,211,238,.75); stroke-dasharray: 2 5; }
+.fcc.fcc-tac .fcc-trail { stroke: var(--c-tac); stroke-width: 1.6; }
+.fcc-cam { position: absolute; transform: translate(-50%, -50%) scale(calc(1 / var(--cam))); color: var(--c-tac); display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+.fcc-cam svg { width: 18px; height: 18px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.9)); }
+.fcc-cam em { font: 600 9px var(--f-app); font-style: normal; letter-spacing: .06em; color: var(--c-tac); text-shadow: 0 1px 2px #000; }
+
+/* Station : glyphe cyan, sans pastille */
+.fcc.fcc-tac .fcc-dock-pin { background: rgba(0,0,0,.55); border: 1.5px solid var(--c-tac); color: var(--c-tac); border-radius: 2px; width: 22px; height: 22px; }
+.fcc.fcc-tac[data-dock="open"] .fcc-dock-pin { background: rgba(34,211,238,.18); }
+.fcc.fcc-tac .fcc-dock-l, .fcc.fcc-tac .fcc-drone-l { border-radius: 2px; background: rgba(10,11,12,.85); border-color: rgba(255,255,255,.12); font-size: 10px; }
+.fcc.fcc-tac .fcc-drone-a { border-radius: 2px; }
+
+/* Cible : équerres jaunes et chevron, à qualifier */
+.fcc.fcc-tac .fcc-pin span { width: 24px; height: 24px; border: 0; border-radius: 0; animation: none; box-shadow: none;
+  background:
+    linear-gradient(var(--y-tac), var(--y-tac)) 0 0 / 7px 1.5px, linear-gradient(var(--y-tac), var(--y-tac)) 0 0 / 1.5px 7px,
+    linear-gradient(var(--y-tac), var(--y-tac)) 100% 0 / 7px 1.5px, linear-gradient(var(--y-tac), var(--y-tac)) 100% 0 / 1.5px 7px,
+    linear-gradient(var(--y-tac), var(--y-tac)) 0 100% / 7px 1.5px, linear-gradient(var(--y-tac), var(--y-tac)) 0 100% / 1.5px 7px,
+    linear-gradient(var(--y-tac), var(--y-tac)) 100% 100% / 7px 1.5px, linear-gradient(var(--y-tac), var(--y-tac)) 100% 100% / 1.5px 7px;
+  background-repeat: no-repeat; position: relative; }
+.fcc.fcc-tac .fcc-pin span::after { content: ""; position: absolute; left: 7px; top: 6px; width: 10px; height: 12px; background: var(--y-tac); clip-path: polygon(50% 0, 100% 100%, 50% 72%, 0 100%); }
+.fcc-pintag { position: absolute; transform: translate(0, -100%) scale(calc(1 / var(--cam))); transform-origin: 0 100%; display: flex; flex-direction: column; gap: 1px; padding: 5px 8px 6px; background: rgba(10,11,12,.88); border-left: 2px solid var(--y-tac); pointer-events: none; white-space: nowrap; }
+.fcc-pintag small { font: 700 9px var(--f-app); letter-spacing: .08em; text-transform: uppercase; color: var(--y-tac); }
+.fcc-pintag b { font: 600 12.5px var(--f-app); color: #fff; }
+.fcc-pintag > span { font: 500 10.5px var(--f-app); color: rgba(255,255,255,.65); font-variant-numeric: tabular-nums; }
+.fcc.fcc-tac[data-nal="0"] .fcc-pintag.fcc-tac-only { display: none; }
+
+/* Panneaux flottants : fond quasi noir, coins vifs */
+.fcc.fcc-tac .fcc-posture, .fcc.fcc-tac .fcc-bar { border-radius: 4px; background: var(--panel); box-shadow: 0 6px 24px rgba(0,0,0,.6); }
+.fcc.fcc-tac .fcc-bar-b, .fcc.fcc-tac .fcc-site { border-radius: 3px; }
+.fcc.fcc-tac .fcc-layers-t, .fcc.fcc-tac .fcc-layers-t button { border-radius: 3px; }
+.fcc.fcc-tac .fcc-pop, .fcc.fcc-tac .fcc-vid, .fcc.fcc-tac .fcc-hud, .fcc.fcc-tac .fcc-toast, .fcc.fcc-tac .fcc-drop { border-radius: 4px; background: var(--panel); }
+
+/* Bannière d'alerte : carte jaune « à qualifier » */
+.fcc.fcc-tac .fcc-crit { background: rgba(12,13,14,.95); border: 1px solid var(--y-tac); border-radius: 4px; box-shadow: 0 10px 32px rgba(0,0,0,.6); }
+.fcc.fcc-tac .fcc-crit-pulse { display: none; }
+.fcc.fcc-tac .fcc-crit-ico, .fcc.fcc-tac .fcc-crit-t small, .fcc.fcc-tac .fcc-crit-m { color: var(--y-tac); }
+.fcc.fcc-tac .fcc-btn-ack, .fcc.fcc-tac .fcc-btn-go { border-radius: 3px; }
+.fcc.fcc-tac .fcc-btn-go { background: #f4f4f5; color: #0b0c0d; box-shadow: none; }
+
+/* Fiche d'alerte : grille dense type fiche de piste */
+.fcc.fcc-tac .fcc-ctx { background: rgba(10,11,12,.96); box-shadow: -12px 0 40px rgba(0,0,0,.55); }
+.fcc.fcc-tac .fcc-ctx-h { margin: 12px 12px 0; padding: 12px 12px 10px; border: 1px solid var(--y-tac); border-bottom: 0; border-radius: 4px 4px 0 0; background: rgba(242,210,27,.04); }
+.fcc.fcc-tac[data-st="closed"] .fcc-ctx-h { border-color: var(--c-tac); background: rgba(34,211,238,.04); }
+.fcc.fcc-tac .fcc-ctx-t { display: flex; align-items: center; gap: 8px; color: var(--y-tac); font-size: 15px; margin-bottom: 8px; }
+.fcc.fcc-tac .fcc-ctx-t::before { content: ""; width: 11px; height: 11px; background: currentColor; clip-path: polygon(50% 0, 100% 100%, 50% 72%, 0 100%); }
+.fcc.fcc-tac[data-st="closed"] .fcc-ctx-t { color: var(--c-tac); }
+.fcc.fcc-tac .fcc-x { top: 18px; right: 18px; border-radius: 3px; }
+.fcc.fcc-tac .fcc-sev, .fcc.fcc-tac .fcc-st { border-radius: 2px; height: 18px; font-size: 9.5px; }
+.fcc.fcc-tac .fcc-sev { color: var(--y-tac); border-color: rgba(242,210,27,.45); background: rgba(242,210,27,.08); }
+.fcc.fcc-tac .fcc-st { color: rgba(255,255,255,.8); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); }
+.fcc-cls { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding-top: 9px; border-top: 1px solid rgba(255,255,255,.08); }
+.fcc-cls span { font: 600 9.5px var(--f-app); letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.fcc-cls b { font: 600 12.5px var(--f-app); color: var(--y-tac); }
+.fcc.fcc-tac[data-st="closed"] .fcc-cls b { color: var(--c-tac); }
+.fcc.fcc-tac .fcc-ctx-b { margin: 0 12px; padding: 4px 12px 12px; border: 1px solid var(--y-tac); border-top: 0; border-radius: 0 0 4px 4px; background: rgba(242,210,27,.02); flex: none; gap: 12px; }
+.fcc.fcc-tac[data-st="closed"] .fcc-ctx-b { border-color: var(--c-tac); background: rgba(34,211,238,.02); }
+.fcc.fcc-tac .fcc-grid { gap: 12px 16px; }
+.fcc.fcc-tac .fcc-field, .fcc.fcc-tac .fcc-desc { padding: 0; background: none; border: 0; }
+.fcc.fcc-tac .fcc-field span, .fcc.fcc-tac .fcc-desc span { font-size: 9.5px; letter-spacing: .08em; color: rgba(255,255,255,.45); margin-bottom: 2px; }
+.fcc.fcc-tac .fcc-field strong { font-size: 15px; color: #fff; font-weight: 600; }
+.fcc.fcc-tac .fcc-desc p { font-size: 12.5px; color: rgba(255,255,255,.72); }
+.fcc.fcc-tac .fcc-ctx-a { margin-top: auto; border-top-color: rgba(255,255,255,.08); }
+.fcc.fcc-tac .fcc-a { border-radius: 3px; justify-content: flex-start; padding: 9px 12px; }
+.fcc.fcc-tac .fcc-a-ack { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.14); color: #fff; }
+.fcc.fcc-tac .fcc-a-go { background: #f4f4f5; border-color: #f4f4f5; color: #0b0c0d; }
+.fcc.fcc-tac .fcc-a-close { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.14); color: rgba(255,255,255,.8); }
+
+/* Bandeau de mission : file d'actions avec minuteur encadré et arrêt rouge */
+.fcc.fcc-tac .fcc-hud { gap: 8px; padding: 10px 12px; }
+.fcc.fcc-tac .fcc-hud-n { font-size: 13px; }
+.fcc.fcc-tac .fcc-hud-b { border-radius: 2px; background: rgba(34,211,238,.12); color: var(--c-tac); }
+.fcc.fcc-tac .fcc-hud-st small { font-size: 9.5px; letter-spacing: .08em; color: rgba(255,255,255,.4); }
+.fcc.fcc-tac .fcc-hud-st b { font-size: 14px; color: #fff; }
+.fcc.fcc-tac [data-f="eta"] { font-family: var(--f-appmono); padding: 0 6px; border: 1px solid rgba(255,255,255,.3); border-radius: 2px; }
+.fcc.fcc-tac .fcc-prog { height: 3px; border-radius: 0; }
+.fcc.fcc-tac .fcc-prog span { background: var(--c-tac); border-radius: 0; }
+.fcc.fcc-tac .fcc-hud-btn { border-radius: 3px; height: 26px; }
+.fcc.fcc-tac .fcc-hud-btn-d { background: #e5383b; border-color: #e5383b; color: #fff; }
+.fcc.fcc-tac .fcc-hud-btn-d:hover:not(:disabled) { background: #f04447; color: #fff; }
+
+/* Vidéo, modales, guidage */
+.fcc.fcc-tac .fcc-vid-tabs button, .fcc.fcc-tac .fcc-tag, .fcc.fcc-tac .fcc-vid-o > span, .fcc.fcc-tac .fcc-vid-tc { border-radius: 2px; }
+.fcc.fcc-tac .fcc-modal-c, .fcc.fcc-tac .fcc-end-c { border-radius: 4px; background: #0e0f10; }
+.fcc.fcc-tac .fcc-motifs button, .fcc.fcc-tac .fcc-ta, .fcc.fcc-tac .fcc-warn, .fcc.fcc-tac .fcc-m-ok, .fcc.fcc-tac .fcc-m-cancel, .fcc.fcc-tac .fcc-replay { border-radius: 3px; }
+.fcc.fcc-tac .fcc-coach { border-radius: 4px; }

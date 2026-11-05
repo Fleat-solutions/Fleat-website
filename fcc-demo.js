@@ -5,6 +5,9 @@
   var root = document.getElementById('fcc');
   if (!root) return;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Variante d'interface tactique : ?ui=tactique */
+  var tac = /[?&]ui=tactique\b/.test(location.search);
+  if (tac) root.classList.add('fcc-tac');
   var stacked = window.matchMedia('(max-width: 900px)');
 
   var F = {};
@@ -72,7 +75,7 @@
     set('state', 'idle'); set('st', 'new'); set('hudst', 'run'); set('dock', 'closed'); set('src', 'drone'); set('pop', ''); set('modal', '');
     setDrone(0, 0, 0, .55);
     drawTrail(0);
-    txt('fly', '0'); txt('nmis', '0'); txt('nal', '0'); txt('bellN', '0'); txt('status', 'Nouvelle');
+    txt('fly', '0'); txt('nmis', '0'); txt('nal', '0'); txt('bellN', '0'); txt('status', 'Nouvelle'); txt('cls', 'À qualifier');
     txt('dockSt', 'Drone à bord'); txt('hudStT', 'En cours'); hudVals(DIST, ETA_TOTAL, 'Préparation', 0, 98);
     txt('pauseBtn', 'Pause'); F.pauseBtn.disabled = false;
     F.followBtn.setAttribute('aria-pressed', 'false');
@@ -101,7 +104,8 @@
   }
   function hudVals(rem, eta, act, pct, bat) {
     txt('rem', Math.max(0, Math.round(rem)) + ' m');
-    txt('eta', Math.max(0, Math.ceil(eta)) + ' s');
+    var e = Math.max(0, Math.ceil(eta));
+    txt('eta', tac ? pad(Math.floor(e / 60)) + ':' + pad(e % 60) : e + ' s');
     txt('act', act);
     txt('pct', Math.round(pct) + ' %'); F.progBar.style.width = pct + '%';
     txt('alt2', Math.round(S ? S.alt : 0) + ' m');
@@ -258,6 +262,7 @@
   function confirmClose() {
     set('modal', '');
     S.st = 'closed'; set('st', 'closed'); txt('status', 'Clôturée'); txt('motif', S.motif);
+    txt('cls', S.motifShort ? S.motifShort.charAt(0).toUpperCase() + S.motifShort.slice(1) : 'Clôturée');
     set('nal', '0'); set('banner', '0'); set('zalert', '0'); txt('nal', '0'); txt('bellN', '0');
     S.t3 = S.sim;
     if (S.m && S.m.phase !== 'rth' && S.m.phase !== 'land') startRth();
@@ -425,7 +430,7 @@
     if (m && !paused && PH[m.phase]) rate = PH[m.phase].sim / PH[m.phase].ms;
     if (S.state !== 'idle' && S.state !== 'done') {
       S.sim += dt * rate;
-      txt('age', Math.max(1, Math.floor(S.sim)) + ' s');
+      txt('age', Math.max(1, Math.floor(S.sim)) + ' s'); txt('tagAge', Math.max(1, Math.floor(S.sim)) + ' s');
       txt('tc', clock(S.sim));
     }
     if (m && !paused && m.phase !== 'onsite') {
