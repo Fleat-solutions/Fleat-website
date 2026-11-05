@@ -85,7 +85,11 @@
   }
 
   function setDrone(f, alt, op, sc) {
-    var p = at(f);
+    var p = at(f), q = S.dp;
+    /* Cap GPS : orienté selon le déplacement, conservé à l'arrêt */
+    if (q && Math.hypot(p[0] - q[0], p[1] - q[1]) > 0.4) S.hd = Math.atan2(p[1] - q[1], p[0] - q[0]) * 180 / Math.PI + 90;
+    else if (S.hd === undefined || f === 0 && !op) { var t0 = at(0), t1 = at(0.03); S.hd = Math.atan2(t1[1] - t0[1], t1[0] - t0[0]) * 180 / Math.PI + 90; }
+    drone.style.setProperty('--hd', S.hd.toFixed(1) + 'deg');
     S.pos = f; S.alt = alt; S.dp = p;
     drone.style.left = (p[0] / IW * 100) + '%';
     drone.style.top = (p[1] / IH * 100) + '%';

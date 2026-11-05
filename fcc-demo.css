@@ -141,14 +141,17 @@
 @keyframes fcc-ping { 0% { box-shadow: 0 0 0 0 rgba(239,68,68,.6); } 100% { box-shadow: 0 0 0 16px rgba(239,68,68,0); } }
 
 /* Drone */
-.fcc-drone { position: absolute; z-index: 2; display: flex; flex-direction: column; align-items: center; padding: 0; border: 0; background: none; cursor: pointer; transform: translate(-50%, calc(-17px - var(--lift, 0px))) scale(calc(var(--ds, 1) / var(--cam))); transform-origin: 50% 17px; opacity: var(--do, 0); pointer-events: none; }
+.fcc-drone { position: absolute; z-index: 2; display: flex; flex-direction: column; align-items: center; padding: 0; border: 0; background: none; cursor: pointer; transform: translate(-50%, -17px) scale(calc(var(--ds, 1) / var(--cam))); transform-origin: 50% 17px; opacity: var(--do, 0); pointer-events: none; }
 .fcc[data-air="1"] .fcc-drone { pointer-events: auto; }
-.fcc-drone::before { content: ""; position: absolute; left: 50%; top: 17px; width: 2px; height: var(--lift, 0px); margin-left: -1px; background: linear-gradient(rgba(255,107,53,.9), rgba(255,107,53,.2)); z-index: -1; }
-.fcc-drone::after { content: ""; position: absolute; left: 50%; top: calc(17px + var(--lift, 0px)); width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: rgba(255,107,53,.65); border: 1px solid rgba(255,255,255,.75); z-index: -1; }
-.fcc-drone svg { width: 34px; height: 34px; color: var(--drone); filter: drop-shadow(0 0 7px rgba(255,107,53,.65)); }
+.fcc-arrow { position: relative; width: 34px; height: 34px; display: grid; place-items: center; }
+.fcc-arrow::before { content: ""; position: absolute; inset: 1px; border-radius: 50%; background: rgba(255,107,53,.18); border: 1px solid rgba(255,107,53,.35); }
+.fcc[data-air="1"] .fcc-arrow::before { animation: fcc-gps 2s ease-out infinite; }
+@keyframes fcc-gps { 0% { transform: scale(.7); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
+.fcc-arrow svg { position: relative; width: 24px; height: 24px; transform: rotate(var(--hd, 0deg)); transition: transform .25s linear; filter: drop-shadow(0 1px 3px rgba(0,0,0,.6)); }
+.fcc-arrow path { fill: var(--drone); stroke: #fff; stroke-width: 1.8; stroke-linejoin: round; }
 .fcc-drone-l { border-color: rgba(255,107,53,.35); font-family: var(--f-appmono); font-weight: 700; }
 .fcc-drone-a { margin-top: 3px; min-width: 40px; padding: 1px 6px; border: 1px solid rgba(255,107,53,.28); border-radius: 5px; background: rgba(255,107,53,.16); color: rgba(255,219,204,.96); font-family: var(--f-appmono); font-size: 9px; font-weight: 700; text-align: center; }
-.fcc[data-hover="1"] .fcc-drone svg { animation: fcc-hover 2.4s ease-in-out infinite; }
+
 @keyframes fcc-hover { 0%,100% { transform: translate(0,0); } 50% { transform: translate(2px,-2px); } }
 
 /* ── Posture, barre d'actions, couches ─────────────────── */
