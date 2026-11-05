@@ -122,12 +122,13 @@
       if (get('ctx') === '1') right = mw - $('.fcc-ctx').offsetWidth;
       if (get('video') === '1') left = Math.min(right - 200, $('.fcc-vid').offsetWidth + 12);
     }
-    var s = S.follow ? 1.9 : 1;
-    var fx = S.follow ? S.dp[0] : 1300, fy = S.follow ? S.dp[1] : 600;
+    /* Vue d'ensemble légèrement dézoomée ; l'orthophoto déborde de 25 % autour du plan */
+    var s = S.follow ? 1.6 : (stacked.matches ? 0.86 : 0.78);
+    var fx = S.follow ? S.dp[0] : 1220, fy = S.follow ? S.dp[1] : 600;
     var tx = (left + right) / 2 - fx / IW * cw * s;
     var ty = mh / 2 - fy / IH * ch * s;
-    tx = Math.min(0, Math.max(mw - cw * s, tx));
-    ty = Math.min(0, Math.max(mh - ch * s, ty));
+    tx = Math.min(0.25 * cw * s, Math.max(mw - 1.25 * cw * s, tx));
+    ty = Math.min(0.25 * ch * s, Math.max(mh - 1.25 * ch * s, ty));
     canvas.style.transition = instant ? 'none' : '';
     canvas.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) scale(' + s + ')';
     root.style.setProperty('--cam', s);

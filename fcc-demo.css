@@ -109,7 +109,9 @@
 .fcc-stage { position: relative; flex: 1; min-width: 0; overflow: hidden; }
 .fcc-mapwrap { position: absolute; inset: 0; overflow: hidden; container-type: size; background: #10151d; }
 .fcc-canvas { position: absolute; left: 0; top: 0; width: max(100cqw, calc(100cqh * 2.2)); aspect-ratio: 2376 / 1080; transform-origin: 0 0; transition: transform .45s cubic-bezier(.3,.6,.3,1); }
-.fcc-ortho, .fcc-plan { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fcc-plan { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Orthophoto élargie : 150 % de l'emprise du plan, centrée, pour pouvoir dézoomer sans bord vide */
+.fcc-ortho { position: absolute; left: -25%; top: -25%; width: 150%; height: 150%; max-width: none; }
 .fcc-ortho { object-fit: cover; filter: saturate(.85) brightness(.82); transition: filter .3s; }
 .fcc[data-layer="tac"] .fcc-ortho { filter: grayscale(1) brightness(.38) contrast(1.25); }
 .fcc-zone { fill: rgba(74,143,190,.14); stroke: rgba(126,200,240,.95); stroke-width: 1.6; stroke-dasharray: 6 4; stroke-linejoin: round; vector-effect: non-scaling-stroke; transition: fill .3s, stroke .3s; }
