@@ -70,7 +70,7 @@
 
   var S;
   function reset() {
-    S = { state: 'idle', st: 'new', sim: 0, m: null, pos: 0, alt: 0, dp: at(0), motif: '', t2: null, t3: null, dispatched: false, follow: false, userActed: false, prev: null, aborted: false };
+    S = { state: 'idle', st: 'new', sim: 0, m: null, pos: 0, alt: 0, dp: at(0), pan: { x: 0, y: 0 }, motif: '', t2: null, t3: null, dispatched: false, follow: false, userActed: false, prev: null, aborted: false };
     ['ctx', 'video', 'hud', 'flown', 'zoom', 'hover', 'nal', 'banner', 'zalert', 'air', 'paused', 'toast', 'notifs', 'rail', 'vlive'].forEach(function (k) { set(k, '0'); });
     set('state', 'idle'); set('st', 'new'); set('hudst', 'run'); set('dock', 'closed'); set('src', 'drone'); set('pop', ''); set('modal', '');
     setDrone(0, 0, 0, .55);
@@ -135,8 +135,12 @@
     if (!S.follow && top) s = Math.min(s, (mh - top - 16) / (1014 / IH * ch));
     var tx = (left + right) / 2 - fx / IW * cw * s;
     var ty = (top + mh) / 2 - fy / IH * ch * s;
+    /* Déplacement manuel (glisser à la souris), borné à l'orthophoto */
+    var bx = tx, by = ty;
+    tx += S.pan.x; ty += S.pan.y;
     tx = Math.min(0.25 * cw * s, Math.max(mw - 1.25 * cw * s, tx));
     ty = Math.min(0.25 * ch * s, Math.max(mh - 1.25 * ch * s, ty));
+    S.pan.x = tx - bx; S.pan.y = ty - by;
     canvas.style.transition = instant ? 'none' : '';
     canvas.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) scale(' + s + ')';
     root.style.setProperty('--cam', s);
@@ -512,6 +516,30 @@
   } else { visible = true; run(); started = true; alertIn(); }
   document.addEventListener('visibilitychange', function () { if (document.hidden) halt(); else run(); });
   window.addEventListener('resize', function () { layout(true); placeCoach(); });
+
+  /* Glisser la carte au clic gauche (souris uniquement, le tactile garde le défilement de la page) */
+  var drag = null;
+  mapwrap.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('button, a')) return;
+    drag = { x: e.clientX, y: e.clientY, px: S.pan.x, py: S.pan.y, moved: false, id: e.pointerId };
+  });
+  mapwrap.addEventListener('pointermove', function (e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 4) return;
+    if (!drag.moved) { drag.moved = true; mapwrap.setPointerCapture(e.pointerId); root.setAttribute('data-drag', '1'); if (S.follow) toggleFollow(false); }
+    S.pan.x = drag.px + dx; S.pan.y = drag.py + dy;
+    layout(true); placeCoach();
+    e.preventDefault();
+  });
+  function endDrag() { if (drag) { drag = null; root.removeAttribute('data-drag'); } }
+  mapwrap.addEventListener('pointerup', endDrag);
+  mapwrap.addEventListener('pointercancel', endDrag);
+  /* Double-clic : recentrer */
+  mapwrap.addEventListener('dblclick', function (e) {
+    if (e.target.closest('button, a')) return;
+    S.pan.x = 0; S.pan.y = 0; layout();
+  });
   var img = $('.fcc-ortho');
   if (img && !img.complete) img.addEventListener('load', function () { layout(true); });
 })();

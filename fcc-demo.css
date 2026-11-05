@@ -109,6 +109,7 @@
 /* ── Scène + carte ─────────────────────────────────────── */
 .fcc-stage { position: relative; flex: 1; min-width: 0; overflow: hidden; }
 .fcc-mapwrap { position: absolute; inset: 0; overflow: hidden; container-type: size; background: #10151d; }
+@media (pointer: fine) { .fcc-mapwrap { cursor: grab; } .fcc[data-drag="1"] .fcc-mapwrap { cursor: grabbing; user-select: none; } .fcc[data-drag="1"] .fcc-canvas { transition: none !important; } }
 .fcc-canvas { position: absolute; left: 0; top: 0; width: max(100cqw, calc(100cqh * 2.2)); aspect-ratio: 2376 / 1080; transform-origin: 0 0; transition: transform .45s cubic-bezier(.3,.6,.3,1); }
 .fcc-plan { position: absolute; inset: 0; width: 100%; height: 100%; }
 /* Orthophoto élargie : 150 % de l'emprise du plan, centrée, pour pouvoir dézoomer sans bord vide */
