@@ -1,4 +1,5 @@
-/* FLEAT · thème noir (page solution, en test avant extension au site).
+/* FLEAT · thème noir, désactivé pour l'instant. Pour l'activer sur une page :
+   charger ce fichier après styles.css et ajouter la classe theme-noir au body.
    Inspiration : interfaces sobres type Linear et Anduril. Fond quasi noir,
    texte blanc et gris, filets fins, boutons blancs, aucune couleur d'accent. */
 
@@ -127,13 +128,10 @@ body.theme-noir .fcc-end-a .btn-primary { background: #f7f8f8; color: #08090a; }
 body.theme-noir .fcc-end-a .btn-primary:hover { background: #fff; color: #08090a; }
 body.theme-noir .fcc-note { color: var(--ink-4); font-size: 12.5px; }
 
-/* Points forts sous la démo : trois colonnes, filet, index discret */
-.op-pts { margin-top: clamp(56px, 7vw, 88px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); }
-.op-pt { border-top: 1px solid var(--line-2); padding-top: 22px; }
-.op-pt small { display: block; font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; color: var(--ink-4); }
-.op-pt h3 { margin-top: 14px; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
-.op-pt p { margin-top: 8px; font-size: 15px; line-height: 1.6; color: var(--ink-3); }
-@media (max-width: 820px) { .op-pts { grid-template-columns: 1fr; gap: 28px; } }
+/* Points forts sous la démo (structure définie dans solution.html) */
+body.theme-noir .op-pt { border-top-color: var(--line-2); }
+body.theme-noir .op-pt small { color: var(--ink-4); }
+body.theme-noir .op-pt p { color: var(--ink-3); }
 
 /* Bande d'appel finale */
 body.theme-noir .cta-band::before { background: radial-gradient(60% 100% at 50% 0%, rgba(255,255,255,.07), transparent 65%); }
