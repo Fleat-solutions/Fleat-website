@@ -3,7 +3,7 @@
   'use strict';
 
   /* Navigation : page en cours mise en évidence automatiquement */
-  var page = decodeURIComponent(location.pathname.split('/').pop() || 'index.html');
+  var page = '/' + decodeURIComponent(location.pathname.split('/').pop()).replace(/\.html$/, '').replace(/^index$/, '');
   document.querySelectorAll('.nav-main a, .mobile-menu a.m-link').forEach(function (a) {
     var on = a.getAttribute('href') === page;
     a.classList.toggle('active', on);
