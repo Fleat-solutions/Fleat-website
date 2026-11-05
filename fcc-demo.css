@@ -479,6 +479,24 @@
   .fcc-end { align-items: flex-start; padding-top: 40px; }
   .fcc-coach { max-width: min(260px, calc(100% - 20px)); }
 }
+/* Téléphone : la démo tient dans un écran. La carte reste fixée en haut,
+   la bannière d'alerte (déplacée sous la carte par le script) et les panneaux défilent dessous. */
+@media (max-width: 640px) {
+  .fcc { display: flex; flex-direction: column; height: clamp(540px, calc(100svh - 104px), 760px); }
+  .fcc-top { flex-shrink: 0; }
+  .fcc-body { flex: 1 1 auto; min-height: 0; height: auto; }
+  .fcc-stage { height: 100%; overflow-y: auto; overscroll-behavior: contain; scroll-padding-top: calc(52% + 10px); scroll-padding-bottom: 10px; }
+  .fcc-mapwrap { position: sticky; top: 0; z-index: 20; flex: 0 0 52%; height: 52%; aspect-ratio: auto; border-bottom: 1px solid var(--border-strong); }
+  .fcc-stage > * { flex-shrink: 0; }
+  .fcc-stage > .fcc-crit { position: static; order: 0; transform: none; width: auto; max-width: none; margin: 10px 10px 0; }
+  /* bilan de fin par-dessus toute la démo : il se rattache au corps de la démo, pas à la zone qui défile */
+  .fcc-stage { position: static; }
+  .fcc-end { z-index: 30; align-items: center; padding: 16px; }
+  /* Pendant le vol, le flux puis le suivi de mission passent avant le détail de l'alerte */
+  .fcc[data-state="flight"] .fcc-ctx, .fcc[data-state="onsite"] .fcc-ctx { order: 5; }
+  .fcc[data-state="flight"] .fcc-vid, .fcc[data-state="onsite"] .fcc-vid { order: 1; }
+  .fcc[data-state="flight"] .fcc-hud, .fcc[data-state="onsite"] .fcc-hud { order: 2; }
+}
 @media (prefers-reduced-motion: reduce) {
   .fcc *, .fcc *::before, .fcc *::after { animation: none !important; transition: none !important; }
   .fcc .fcc-hint { box-shadow: 0 0 0 2px rgba(255,255,255,.9); }
