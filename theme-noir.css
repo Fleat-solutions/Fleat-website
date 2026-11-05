@@ -143,3 +143,21 @@ body.theme-noir .footer-col h4 { color: var(--ink-4); }
 body.theme-noir .footer-col a, body.theme-noir .footer-bottom a { color: var(--ink-3); }
 body.theme-noir .footer-col a:hover, body.theme-noir .footer-bottom a:hover { color: var(--ink); }
 body.theme-noir #cookie-banner { background: rgba(14,15,17,.97); }
+
+/* Composants propres à certaines pages */
+body.theme-noir .hl, body.theme-noir .bg-dark .hl, body.theme-noir .hero .hl { background: none; padding: 0; }
+body.theme-noir .btn-dark { background: #f7f8f8; color: #08090a; }
+body.theme-noir .btn-dark:hover { background: #fff; color: #08090a; }
+body.theme-noir .skip-link { background: #f7f8f8; color: #08090a; }
+body.theme-noir .cu-subnav, body.theme-noir .sector-subnav { background: rgba(8,9,10,.82); border-bottom-color: var(--line); }
+body.theme-noir .cu-tab { background: transparent; border-color: var(--line); color: var(--ink-3); font-weight: 500; }
+body.theme-noir .cu-tab:hover { color: var(--ink); border-color: var(--line-2); }
+body.theme-noir .cu-tab.active { background: #f7f8f8; border-color: #f7f8f8; color: #08090a; }
+body.theme-noir .cu-tab.active i, body.theme-noir .cu-tab-alt.active svg { color: #62666d; }
+body.theme-noir .subnav-link:hover { background: rgba(255,255,255,.05); }
+body.theme-noir .subnav-link.active { color: var(--ink); background: rgba(255,255,255,.06); border-color: var(--line-2); }
+body.theme-noir .in-who.is-team { background: rgba(255,255,255,.08); color: var(--ink); }
+body.theme-noir .ab-now, body.theme-noir .in-core, body.theme-noir .b-big { background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)); border: 1px solid var(--line); }
+body.theme-noir input, body.theme-noir select, body.theme-noir textarea { background: rgba(255,255,255,.03); border-color: var(--line-2); color: var(--ink); }
+body.theme-noir input::placeholder, body.theme-noir textarea::placeholder { color: var(--ink-4); }
+body.theme-noir .faq-item, body.theme-noir .faq-q { border-color: var(--line); }
