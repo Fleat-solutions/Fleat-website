@@ -1,8 +1,10 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><title>Station FLEAT · 3D</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <link rel="stylesheet" href="/styles.css">
 <style>
+/* mêmes polices que le thème noir du site (Inter) */
+:root{--f-text:'Inter',system-ui,sans-serif;--f-display:'Inter',system-ui,sans-serif}
 body{background:var(--paper);padding:40px;font-family:var(--f-text)}
 .demo{width:420px}
 /* pas de bordure ni d'arrondi dans le rendu : la carte du site fournit le cadre */
@@ -11,6 +13,8 @@ body{background:var(--paper);padding:40px;font-family:var(--f-text)}
 /* pastille d'état aux couleurs du thème noir du site */
 .kv-chip{position:absolute;left:14px;top:12px;display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;background:rgba(8,9,10,.82);border:1px solid rgba(255,255,255,.14);border-radius:999px;font:600 12.5px/1 var(--f-text);color:#f7f8f8}
 .kv-chip i{width:9px;height:9px;border-radius:50%;background:var(--ok)}
+/* texte abaissé de 1 px : le centre des majuscules tombe sur le centre du point */
+.kv-chip>span{position:relative;top:1px}
 </style>
 <script type="importmap">{"imports":{"three":"/three/three.module.js","three/addons/":"/three/addons/"}}</script>
 </head>
