@@ -54,6 +54,20 @@
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
 
+  /* Vidéos d'illustration : chargées et lues seulement quand elles sont visibles, image fixe si l'utilisateur limite les animations */
+  var videos = document.querySelectorAll('video[data-autoplay]');
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (videos.length && !reduceMotion && 'IntersectionObserver' in window) {
+    var vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        else v.pause();
+      });
+    }, { threshold: 0.25 });
+    videos.forEach(function (v) { vio.observe(v); });
+  }
+
   /* FAQ accordéon */
   document.querySelectorAll('.faq-q').forEach(function (q) {
     q.addEventListener('click', function () {
