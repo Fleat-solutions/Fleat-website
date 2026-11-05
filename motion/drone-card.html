@@ -120,7 +120,7 @@ const txt = document.getElementById('chipTxt'), read = document.getElementById('
 const SPECS = [
   { k: 'Caméra thermique', v: '640 × 512', at: [.16, .04, .02], lx: 800, ly: 330, side: 'end' },
   { k: 'Télémètre laser', v: '1 800 m', at: [.162, .006, .014], lx: 800, ly: 480, side: 'end' },
-  { k: 'Autonomie', v: '54 min de vol', at: [-.03, .07, .03], lx: 40, ly: 380, side: 'start' },
+  { k: 'Autonomie', v: "Jusqu'à 54 min", at: [-.03, .07, .03], lx: 40, ly: 380, side: 'start' },
   { k: 'Vent', v: '12 m/s · IP55', at: [-.155, .13, .19], lx: 40, ly: 500, side: 'start' }
 ].map(c => {
   const NS = 'http://www.w3.org/2000/svg', g = document.createElementNS(NS, 'g'), el = (n, a) => { const e = document.createElementNS(NS, n); Object.entries(a).forEach(([k, v]) => e.setAttribute(k, v)); g.appendChild(e); return e; };
