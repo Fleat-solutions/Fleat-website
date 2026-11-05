@@ -864,7 +864,6 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   div.m-rail::-webkit-scrollbar { display: none; }
   div.m-rail > * { flex: 0 0 78%; scroll-snap-align: start; }
   div.m-rail .reveal, div.m-rail.reveal { opacity: 1; transform: none; }
-  div.op-feats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 /* Onglets mobiles ([data-tabs]) : un seul bloc affiché à la fois, choisi dans une barre d'onglets */
