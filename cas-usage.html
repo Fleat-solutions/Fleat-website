@@ -22,12 +22,12 @@
 <meta name="twitter:image" content="https://fleat-solutions.com/assets/og-fleat.jpg">
 <meta name="robots" content="index, follow">
 <meta name="author" content="FLEAT">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FLEAT","url":"https://fleat-solutions.com","logo":"https://fleat-solutions.com/assets/fleat-logo-dark.png","description":"Rondes de surveillance automatisées par drone en station autonome, pour sites industriels, logistiques et infrastructures critiques.","contactPoint":{"@type":"ContactPoint","email":"contact@fleat-solutions.com","contactType":"customer service","areaServed":"FR","availableLanguage":"French"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FLEAT","url":"https://fleat-solutions.com","logo":"https://fleat-solutions.com/assets/fleat-logo-transparent.png","description":"Rondes de surveillance automatisées par drone en station autonome, pour sites industriels, logistiques et infrastructures critiques.","contactPoint":{"@type":"ContactPoint","email":"contact@fleat-solutions.com","contactType":"customer service","areaServed":"FR","availableLanguage":"French"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
 <link rel="icon" type="image/png" href="assets/fleat-mark.png">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#08090a">
 <link rel="stylesheet" href="styles.css">
 <style>
 /* Rythme vertical de la page (textes courts = sections compactes) */
@@ -145,16 +145,27 @@ main .muted{color:var(--ink-2)}
 .bg-dark .cmp-cap{color:var(--on-dark-2)}
 
 /* Carte / calques */
-.cu-map{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--dark-line);background:#0a1020}
-.cu-map>img{width:100%;display:block;filter:saturate(.72) brightness(.78) contrast(1.06)}
+.cu-map{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--dark-line);background:#0b0c0e;aspect-ratio:3/2}
+.cu-map>img{width:100%;height:100%;object-fit:cover;display:block}
 .cu-map svg{position:absolute;inset:0;width:100%;height:100%}
 .cu-map .lyr{opacity:0;transition:opacity .35s ease}
 .cu-map .lyr.on{opacity:1}
+.cu-map [data-lyr="bat"] polygon{fill:rgba(255,255,255,.14);stroke:#fff;stroke-width:1.5px;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.cu-map [data-lyr="sen"] polygon{fill:rgba(214,180,72,.18);stroke:rgb(226,192,84);stroke-width:1.8px;vector-effect:non-scaling-stroke;stroke-dasharray:6 4;stroke-linejoin:round}
+.cu-map [data-lyr="sen"] text{font:600 30px var(--f-text);fill:rgb(236,206,110);paint-order:stroke;stroke:rgba(0,0,0,.75);stroke-width:5px}
+.cu-map [data-lyr="pts"] circle{fill:rgba(8,10,12,.85);stroke:#22d3ee;stroke-width:1.6px;vector-effect:non-scaling-stroke}
+.cu-map [data-lyr="pts"] text{font:700 17px var(--f-text);fill:#22d3ee;text-anchor:middle}
+.cu-map [data-lyr="mes"] path{stroke:#fff;stroke-width:1.6px;vector-effect:non-scaling-stroke;fill:none}
+.cu-map [data-lyr="mes"] text{font:600 30px var(--f-mono);fill:#fff;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.8);stroke-width:5px}
 .cu-layers{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .cu-layers button{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;padding:8px 13px;border-radius:999px;border:1px solid var(--dark-line-2);background:rgba(255,255,255,.04);color:var(--on-dark-2);transition:.15s}
 .cu-layers button:hover{color:var(--on-dark)}
 .cu-layers button .sw{width:9px;height:9px;border-radius:2px;background:currentColor;opacity:.35}
-.cu-layers button.on{background:rgba(91,141,239,.16);border-color:rgba(91,141,239,.45);color:#cfdcff}
+.cu-layers button[data-target="bat"] .sw{background:#fff}
+.cu-layers button[data-target="sen"] .sw{background:rgb(226,192,84)}
+.cu-layers button[data-target="pts"] .sw{background:#22d3ee;border-radius:50%}
+.cu-layers button[data-target="mes"] .sw{background:#fff;height:2px;width:11px}
+.cu-layers button.on{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);color:#fff}
 .cu-layers button.on .sw{opacity:1}
 
 /* Volumétrie */
@@ -166,12 +177,19 @@ main .muted{color:var(--ink-2)}
 .cu-vol-row .val{font-family:var(--f-mono);font-size:13px;color:var(--on-dark)}
 
 /* Trajectoire drone (réagir) */
-.cu-traj{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--dark-line)}
-.cu-traj img{width:100%;display:block;filter:brightness(.66) saturate(.8)}
-.cu-traj svg{position:absolute;inset:0;width:100%;height:100%}
-.cu-traj .path-dash{stroke-dasharray:4 5;animation:dashmove 3s linear infinite}
-@keyframes dashmove{to{stroke-dashoffset:-36}}
-@media(prefers-reduced-motion:reduce){.cu-traj .path-dash{animation:none}}
+.cu-traj{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--dark-line);aspect-ratio:3/2;background:#0b0c0e}
+.cu-traj svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cu-traj .rx-zone{fill:rgba(239,68,68,.14);stroke:#f87171;stroke-width:1.6px;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.cu-traj .rx-route{fill:none;stroke:#22d3ee;stroke-width:1.8px;vector-effect:non-scaling-stroke;stroke-dasharray:5 6;animation:dashmove 3s linear infinite}
+.cu-traj .rx-st path{fill:none;stroke:#fff;stroke-width:2.2;stroke-linejoin:miter}
+.cu-traj .rx-st text{font:600 15px var(--f-text);letter-spacing:.07em;fill:#fff;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.8);stroke-width:4px}
+.cu-traj .rx-br{fill:none;stroke:#f87171;stroke-width:2.4}
+.cu-traj .rx-dia{fill:rgba(248,113,113,.25);stroke:#f87171;stroke-width:2}
+.cu-traj .rx-ping{fill:none;stroke:#f87171;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:rxping 1.8s ease-out infinite}
+.cu-traj .rx-lbl{font:700 15px var(--f-text);letter-spacing:.06em;fill:#f87171;paint-order:stroke;stroke:rgba(0,0,0,.8);stroke-width:4px}
+.cu-traj .rx-drone path{fill:#22d3ee;stroke:#fff;stroke-width:1.6;stroke-linejoin:round}
+@keyframes rxping{from{transform:scale(.8);opacity:.9}to{transform:scale(2.4);opacity:0}}
+@media(prefers-reduced-motion:reduce){.cu-traj .rx-route,.cu-traj .rx-ping{animation:none}}
 
 /* Capacités transversales */
 .cu-caps{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-top:clamp(26px,3vw,36px)}
@@ -189,14 +207,15 @@ main .muted{color:var(--ink-2)}
 .cu-aside{border-left:2px solid var(--accent);padding-left:18px;font-size:15.5px;color:var(--ink-2);max-width:52ch}
 .bg-dark .cu-aside{border-color:var(--accent-400);color:var(--on-dark-2)}
 </style>
+<link rel="stylesheet" href="theme-noir.css">
 </head>
-<body>
+<body class="theme-noir">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="FLEAT · accueil">
-      <img class="brand-logo" src="assets/fleat-logo-dark.png" alt="fleat · accueil">
+      <img class="brand-logo" src="assets/fleat-logo-transparent.png" alt="fleat · accueil">
     </a>
     <nav class="nav-main" aria-label="Navigation principale">
       <a href="solution.html">Solution</a>
@@ -389,12 +408,12 @@ main .muted{color:var(--ink-2)}
     <div data-detail class="cu-split" style="margin-top:clamp(28px,3vw,40px);align-items:start;">
       <div class="reveal">
         <div class="cu-map" id="cu-map">
-          <img src="https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&fit=crop&q=72&w=1600" srcset="https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=72&amp;w=640 640w, https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=72&amp;w=1024 1024w, https://images.unsplash.com/photo-1703332156054-2f196bfe5932?auto=format&amp;fit=crop&amp;q=72&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'une zone industrielle : bâtiments, voiries et zones de stockage" loading="lazy">
-          <svg viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
-<g class="lyr on" data-lyr="bat" fill="rgba(91,141,239,.2)" stroke="#8fb0f7" stroke-width="1.2" stroke-linejoin="round"><polygon points="204.7,303.3 220,287 223,285.8 250,270 252,267.3 265,260.8 320.8,285 321.3,288 339.7,296.3 340.3,307.5 326.7,313 314.7,308.3 314.2,318 300.8,329.7 287,327 269.2,337.5 263.3,337 247.5,329.7 220.8,318.3 207.5,310.8 204.7,305"/><polygon points="194.2,323.3 221.7,322.5 253.3,355.3 249.7,360 249.7,381.7 233.3,382.5 195,350"/><polygon points="360.9,340.9 379.1,315.5 418.2,317 430,328.4 440.5,337.5 477.3,345.5 501.1,356.4 505,363.6 501.8,386.4 497.7,400 381.8,400 381.8,390.9 396.6,360.9 360.2,357.3"/><polygon points="445.5,296.6 468.2,293.2 484.5,284.1 513.2,285.9 526.1,295 525.5,301.8 510.2,310.2 492,320.9 479.5,315.9 459.1,311.8 445.5,305.7"/><polygon points="386.8,269.1 399.5,256.8 437.5,265.5 436.8,276.8 418.2,279.5 398.9,284.1 386.4,281.4"/><polygon points="529.1,309.5 543.6,303.4 586.4,317.7 586.4,323.2 545.5,333 535.9,329.5 529.1,324.5"/><polygon points="540.5,334.1 571.6,322.3 600,328.4 600,368.2 568.2,373.9 542,358.6"/><polygon points="575.8,183.7 600,184.7 600,191.7 586.7,192 575.8,190"/><polygon points="551.1,278.4 568.2,270.5 600,277.3 600,297.7 586.4,296.6 552.3,284.1"/><polygon points="488,163.3 490,156.7 600,161.3 600,179.7 488.3,170.8"/><polygon points="498.7,173 530.8,175.3 531.3,180 556.7,183.7 563.3,190 564.2,198.3 551.7,200 540,200.3 518.3,196.7 488.3,195 488.3,186.7 490,181.7 498.3,181.7"/><polygon points="476.3,199.7 478.3,194.2 493.3,193.7 494.2,199.2 510.8,203.7 511.3,210 481.7,205.3 476.3,202"/><polygon points="482.5,213 484.2,208.7 498.7,210.3 497,217 482,215.3"/><polygon points="440.8,236.7 443.3,230.8 460,230 468.3,228.3 482.5,229.2 496.7,233.3 498.3,236.7 507.5,240.8 506.7,246.7 495,250 494.2,255 475.8,255 464.2,246.7 455,245 440.8,240"/></g>
-<g class="lyr" data-lyr="sen" fill="rgba(217,138,43,.16)" stroke="#e7a64e" stroke-width="1.4" stroke-linejoin="round"><polygon points="223.3,321.7 250,330 270,337.5 287.5,327.5 296.7,330 295,343.3 283.3,356.7 273.3,366.7 263.3,368.3 250,366.7 253.3,355 236.7,340 223.3,328.3"/><polygon points="312,192 340,183 372,190 374,203 352,214 320,210"/></g>
-<g class="lyr" data-lyr="pts" fill="#5b8def" stroke="#0a1a3d" stroke-width="1.2"><circle cx="268" cy="298" r="5"/><circle cx="222" cy="345" r="5"/><circle cx="486" cy="302" r="5"/><circle cx="412" cy="270" r="5"/><circle cx="570" cy="345" r="5"/><circle cx="440" cy="357" r="5"/><circle cx="527" cy="186" r="5"/><circle cx="470" cy="242" r="5"/></g>
-<g class="lyr" data-lyr="mes" fill="#cfdcff" stroke="#cfdcff" stroke-width="1.2" font-family="IBM Plex Mono, monospace" font-size="11"><path d="M267.8 254.4L323.6 278.6M269 251.6L266.6 257.2M324.8 275.8L322.4 281.4" stroke-opacity=".9"/><text x="294" y="261" text-anchor="middle" stroke="none" transform="rotate(23.4 294 261)">84,6 m</text><path d="M484.5 278L513.2 279.8M484.7 275L484.3 281M513.4 276.8L513 282.8" stroke-opacity=".9"/><text x="499" y="273" text-anchor="middle" stroke="none" transform="rotate(3.6 499 273)">52,0 m</text></g>
+          <img src="assets/carto-site.webp" srcset="assets/carto-site-800.webp 800w, assets/carto-site.webp 1530w" sizes="(max-width: 900px) 100vw, 50vw" width="1530" height="1020" alt="Vue aérienne d'un site industriel : bâtiment, cour de stockage et centrale photovoltaïque" loading="lazy" decoding="async">
+<svg viewBox="0 0 1530 1020" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<g class="lyr on" data-lyr="bat"><polygon points="310.8,95.9 333.6,85 342.8,107.7 320.9,117.4 310.8,95.9"/><polygon points="44.5,996.4 49.6,1008 26,1018.6 20.7,1008 44.5,996.4"/><polygon points="621.4,444.7 626.3,454.1 616.9,458 622.7,469.6 532.9,511 521.8,488.6 620.3,442 621.4,444.7"/><polygon points="308.7,91.3 320.9,117.4 301.9,126.4 289.4,100.1 308.7,91.3"/><polygon points="23.9,3.8 28.3,13.4 39.6,36.6 73.1,21.1 57.9,-11.7 23.9,3.8"/><polygon points="1280,-23.8 1272,-47.6 1253.6,-43.8 1262.2,-18.1 1280,-23.8"/><polygon points="309.9,45.8 264.9,66.9 275,89.8 319.8,68.3 309.9,45.8"/><polygon points="726.6,933.1 782.1,908.4 793.5,932.1 737.9,957.3 726.6,933.1"/><polygon points="429.2,912.3 415.1,918.5 416.9,922.8 408.7,927 407.1,924.4 402.1,924 397.7,925.2 394.8,928 393.1,931.6 392.1,935.6 392.5,939.9 394.8,944.8 399.1,947.2 404.5,947.8 410.1,945.5 413.2,941.7 414.3,937.4 422.2,933.9 424.1,937.6 438.7,931.1 429.2,912.3"/><polygon points="28.3,13.4 17.5,18.8 28.8,41.5 39.6,36.6 28.3,13.4"/><polygon points="1303.3,245.8 1318.9,290.9 1410.2,258.6 1392.8,209.1 1359.2,221.5 1361.6,230.2 1315,246.5 1313.4,242.4 1303.3,245.8"/><polygon points="62,-17.4 109.2,-39.4 124.2,-6.8 125.3,-3.2 91.4,12.5 84.9,-1.2 71.7,4.3 62,-17.4"/><polygon points="155.1,77.6 154.8,77.8 154.8,78 154.8,78.8 154.8,79 154.6,79.7 154.6,80.4 154.3,80.7 154.1,81.4 153.6,82.1 153.3,82.3 153.3,82.6 153.1,82.6 152.8,83 152.6,83.3 152.4,83.5 152.4,83.8 152.1,83.8 151.9,84 151.6,84.2 150.9,84.7 150.7,84.9 150.2,85.2 149.9,85.2 149.7,85.4 149.5,85.4 149.2,85.6 149,85.6 148.3,85.9 147.5,86.1 147.3,86.1 146.6,86.1 145.9,86.1 145.6,86 145.4,86 145.1,86 144.7,86 144.2,85.8 142.5,85.3 142.3,85 141.8,84.8 141.6,84.8 141.3,84.5 140.9,84.3 140.4,83.8 140.2,83.6 139.7,83.3 139.7,83.1 139.5,82.8 139,82.3 138.8,82.1 138.8,81.9 138.5,81.6 138.1,80.9 138.1,80.2 137.8,79.4 137.6,79.4 137.6,79 137.6,78.7 137.4,77.8 137.4,77.5 137.4,77.3 137.4,76.8 137.4,76.6 137.4,76.3 137.7,75.1 137.9,74.9 137.9,74.7 138.2,73.9 138.2,73.7 138.4,73.5 138.9,72.5 139.4,71.8 140.1,71.1 140.4,70.6 140.6,70.6 141.6,69.7 141.8,69.7 142.1,69.7 142.3,69.5 143.3,69 144.2,68.8 144.5,68.8 144.7,68.8 145.4,68.5 146.1,68.6 146.9,68.6 147.1,68.6 147.3,68.6 148.1,68.6 148.5,68.8 148.8,68.8 149.5,69.1 149.7,69.3 150,69.3 150.7,69.8 151.1,70.1 151.6,70.3 152.3,70.8 152.6,71.1 152.5,71.3 152.8,71.3 153,71.8 153.5,72.3 153.5,72.5 153.7,73 154.2,73.7 154.6,74.7 154.6,75.2 154.6,75.4 154.9,75.6 154.9,76.4 154.8,76.8 155.1,77.6"/><polygon points="1295.5,35.5 1248.7,52.2 1254.8,68.4 1255.3,68.4 1302.6,56.9 1295.5,35.5"/><polygon points="1514.6,711.6 1550.4,697.1 1565.9,733.7 1529.3,748.5 1514.6,711.6"/><polygon points="264.9,66.9 309.9,45.8 300.7,24.6 277.6,35.9 270.2,20.5 248.8,30.4 253.1,40.8 264.9,66.9"/><polygon points="1295.5,35.5 1302.6,56.9 1321.8,110.7 1337.3,155.5 1361.8,146.6 1354.9,128.7 1351.9,121 1347.6,109.7 1341.6,111.2 1329.7,81.1 1321.6,61.1 1309.2,30.4 1295.5,35.5"/><polygon points="621.4,444.7 678.5,419.2 687.5,439 761.4,404.5 773.1,430.6 784.9,425.5 796,450.4 785.4,454.8 825.8,543.4 858.1,612.9 862.2,622.8 871.4,618.4 880.4,637.7 871.5,642.1 917.6,742.1 954.3,821.3 961.8,818.1 974.1,842.7 965.6,846.4 968.6,852.7 881.3,892.5 794.1,933.5 793.5,932.1 782.1,908.4 726.6,933.1 684.8,842.3 657.3,783.9 641.1,748.6 554,788.7 524.7,725.4 489.6,649.4 468.8,604.4 461.4,589.2 444.4,552 456.9,546.2 446.3,523.5 521.8,488.6 532.9,511 622.7,469.6 616.9,458 626.3,454.1 621.4,444.7"/><polygon points="1337.3,155.5 1321.8,110.7 1302.6,56.9 1255.3,68.4 1254.8,68.4 1295,171.1 1337.3,155.5"/><polygon points="85.2,901.6 40.9,922 97.7,1044.9 142,1024.6 85.2,901.6"/><polygon points="444.4,552 461.4,589.2 412.4,611.7 396.2,574.7 444.4,552"/></g>
+<g class="lyr" data-lyr="sen"><polygon points="925.6,15.5 683.1,119.5 667.7,138.1 747.7,276.1 806.8,252.6 938.8,510 1023.5,722.3 1008.1,863.4 1073.5,1018.1 1301.5,890 1027.1,209.4 925.6,15.5"/><polygon points="484.1,946.9 473.3,922.6 375.9,709.8 350,653.3 324.2,597.8 321.1,582.6 321.7,574.7 326.9,563.8 335.1,555.3 346.9,549.3 674.1,394.5 678.5,419.2 621.4,444.7 621.4,444.7 626.3,454.1 616.9,458 622.7,469.6 532.9,511 521.8,488.6 446.3,523.5 456.9,546.2 444.4,552 396.2,574.7 412.4,611.7 468.8,604.4 489.6,649.4 524.7,725.4 554,788.7 641.1,748.6 657.3,783.9 684.8,842.3 726.6,933.1 737.9,957.3"/><polygon points="769,293 817,293 817,335 769,335"/><text x="960" y="600">Centrale PV · 3,9 ha</text><text x="250" y="660">Cour de stockage</text><text x="793" y="278" text-anchor="middle">Poste</text></g>
+<g class="lyr" data-lyr="pts"><g transform="translate(493 933)"><circle r="16"/><text y="6">1</text></g><g transform="translate(1100 949)"><circle r="16"/><text y="6">2</text></g><g transform="translate(626 466)"><circle r="16"/><text y="6">3</text></g><g transform="translate(793 313)"><circle r="16"/><text y="6">4</text></g><g transform="translate(766 926)"><circle r="16"/><text y="6">5</text></g><g transform="translate(320 566)"><circle r="16"/><text y="6">6</text></g><g transform="translate(926 60)"><circle r="16"/><text y="6">7</text></g></g>
+<g class="lyr" data-lyr="mes"><path d="M816 412L993 804M827 407L805 416M1004 799L982 809"/><text x="932" y="606" transform="rotate(65.8 932 596)">180 m</text><path d="M962 -0L1338 874M973 -5L951 4M1349 869L1327 879"/><text x="1178" y="435" transform="rotate(66.7 1178 425)">398 m</text></g>
 </svg>
         </div>
         <div class="cu-layers" id="cu-layers">
@@ -403,7 +422,7 @@ main .muted{color:var(--ink-2)}
           <button type="button" data-target="pts" aria-pressed="false"><span class="sw"></span>Points de contrôle</button>
           <button type="button" data-target="mes" aria-pressed="false"><span class="sw"></span>Mesures</button>
         </div>
-        <p class="muted" style="font-size:13.5px;margin-top:14px;">Schéma de principe · calques issus des captures de mission.</p>
+        <p class="muted" style="font-size:13.5px;margin-top:14px;">Illustration sur un site réel · orthophotographie et contours © IGN. Calques et mesures issus des données de vol.</p>
       </div>
       <div class="reveal" data-d="1">
         <h3 class="h3" style="color:var(--on-dark);">Des images, puis des données</h3>
@@ -477,23 +496,25 @@ main .muted{color:var(--ink-2)}
     <div data-detail class="cu-split" style="margin-top:clamp(28px,3vw,40px);">
       <div class="reveal">
         <div class="cu-traj">
-          <img src="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&q=72&w=1600" srcset="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=72&amp;w=640 640w, https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=72&amp;w=1024 1024w, https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&amp;fit=crop&amp;q=72&amp;w=1600 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'une plateforme logistique : quais, remorques et parking" loading="lazy">
-          <svg viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
-            <path id="traj-path" d="M92 318C180 250 300 268 400 176" fill="none" stroke="#5b8def" stroke-width="2" stroke-opacity=".85" class="path-dash"/>
-            <rect x="74" y="302" width="34" height="30" rx="4" fill="rgba(10,26,61,.8)" stroke="#8fb0f7" stroke-width="1.3"/>
-            <text x="91" y="352" text-anchor="middle" fill="#cfdcff" font-family="IBM Plex Mono, monospace" font-size="11">Base</text>
-            <g>
-              <circle cx="418" cy="164" r="26" fill="rgba(217,138,43,.14)" stroke="#e7a64e" stroke-width="1.4"/>
-              <text x="418" y="124" text-anchor="middle" fill="#e7a64e" font-family="IBM Plex Mono, monospace" font-size="11">ZONE 4 · ALERTE</text>
+          <svg viewBox="600 250 800 533" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <image href="assets/carto-site.webp" x="0" y="0" width="1530" height="1020"/>
+            <rect x="600" y="250" width="800" height="533" fill="rgba(0,0,0,.18)"/>
+            <polygon class="rx-zone" points="925.6,15.5 683.1,119.5 667.7,138.1 747.7,276.1 806.8,252.6 938.8,510 1023.5,722.3 1008.1,863.4 1073.5,1018.1 1301.5,890 1027.1,209.4 925.6,15.5"/>
+            <path id="traj-path" class="rx-route" d="M875 490C940 535 1030 620 1096 682"/>
+            <g class="rx-st" transform="translate(875 490)"><path d="M-13 1h26v10h-26z M-12 1l12-8 12 8 M-4 6h8"/><text y="32">STATION 01</text></g>
+            <g class="rx-tgt" transform="translate(1096 682)">
+              <circle class="rx-ping" r="16"/>
+              <path class="rx-br" d="M-18 -10v-8h8M10 -18h8v8M18 10v8h-8M-10 18h-8v-8"/>
+              <rect class="rx-dia" x="-5" y="-5" width="10" height="10" transform="rotate(45)"/>
+              <text class="rx-lbl" x="26" y="-14">INTRUSION · ZONE C</text>
             </g>
-            <g>
-              <circle r="6" fill="#fff"/>
-              <circle r="13" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.2"/>
-              <animateMotion dur="5.2s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.62;1" calcMode="linear"><mpath href="#traj-path"/></animateMotion>
+            <g class="rx-drone">
+              <path d="M12 0L-9 -8L-4 0L-9 8Z"/>
+              <animateMotion dur="6s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;0.6;1" calcMode="spline" keySplines=".45 0 .4 1;0 0 1 1"><mpath href="#traj-path"/></animateMotion>
             </g>
           </svg>
         </div>
-        <p class="muted" style="font-size:13.5px;margin-top:14px;">Schéma de principe.</p>
+        <p class="muted" style="font-size:13.5px;margin-top:14px;">Illustration sur un site réel · orthophotographie © IGN. Trajet direct de la station vers la zone en alerte.</p>
       </div>
       <div class="reveal" data-d="1">
         <h3 class="h3" style="color:var(--on-dark);">Mission immédiate</h3>
