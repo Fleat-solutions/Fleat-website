@@ -35,6 +35,13 @@ a{color:var(--accent)}a:hover{color:var(--accent-600)}
 .sol-sec{scroll-margin-top:84px}
 .kit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,32px);margin-top:48px}
 .kit-item .ph{aspect-ratio:4/3;min-height:0}
+.kit-shot{position:relative;display:block;aspect-ratio:4/3;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:#0a0a0a}
+.kit-shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.kit-shot:hover img{transform:scale(1.03)}
+.kit-shot-cta{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:8px;background:rgba(10,11,13,.82);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(8px);color:#fff;font-size:13.5px;font-weight:600;transition:background .2s}
+.kit-shot-cta svg{width:15px;height:15px}
+.kit-shot:hover .kit-shot-cta{background:rgba(10,11,13,.95)}
+a.kit-shot-link{color:inherit}a.kit-shot-link:hover{text-decoration:underline;text-underline-offset:4px}
 .kit-item h3{font-size:1.25rem;margin-top:20px}
 .kit-item ul{display:grid;gap:8px;margin-top:12px}
 .kit-item li{color:var(--ink-2);font-size:15.5px;padding-left:16px;position:relative;text-wrap:pretty}
@@ -151,8 +158,8 @@ a{color:var(--accent)}a:hover{color:var(--accent-600)}
 <div><h3>Le drone</h3><ul><li>Caméra visible et caméra thermique.</li><li>Vols de jour comme de nuit.</li><li>Jusqu'à 40&nbsp;ha couverts par vol, selon le site.</li></ul></div>
 </div>
 <div class="kit-item reveal" data-d="2">
-<div class="ph"><span class="ph-tag">Capture bientôt disponible</span></div>
-<div><h3>La plateforme</h3><ul><li>Carte du site et suivi du vol en direct.</li><li>Flux vidéo transmis au PC sécurité.</li><li>Historique de chaque mission.</li></ul></div>
+<a class="kit-shot" href="#operateur" aria-label="Voir l'interface FLEAT Control Center en démonstration"><img src="assets/plateforme-apercu.webp" srcset="assets/plateforme-apercu-640.webp 640w, assets/plateforme-apercu.webp 1200w" sizes="(max-width: 860px) 200px, 33vw" width="1200" height="900" alt="Interface FLEAT Control Center : carte du site, flux thermique du drone et suivi de mission" loading="lazy" decoding="async"><span class="kit-shot-cta">Essayer l'interface <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
+<div><h3><a class="kit-shot-link" href="#operateur">La plateforme</a></h3><ul><li>Carte du site et suivi du vol en direct.</li><li>Flux vidéo transmis au PC sécurité.</li><li>Historique de chaque mission.</li></ul></div>
 </div>
 </div>
 </div>
