@@ -124,9 +124,17 @@
     }
     /* Vue d'ensemble légèrement dézoomée ; l'orthophoto déborde de 25 % autour du plan */
     var s = S.follow ? 1.6 : (stacked.matches ? 0.86 : 0.78);
-    var fx = S.follow ? S.dp[0] : 1220, fy = S.follow ? S.dp[1] : 600;
+    var fx = S.follow ? S.dp[0] : 1220, fy = S.follow ? S.dp[1] : 597;
+    /* Réserve le haut de la carte quand la bannière d'alerte et sa bulle sont affichées */
+    var top = 0;
+    if (!stacked.matches && get('banner') === '1') {
+      var cb = $('.fcc-crit').getBoundingClientRect(), mb = mapwrap.getBoundingClientRect();
+      top = Math.max(0, cb.bottom - mb.top) + (F.coach.classList.contains('on') && F.coach.getAttribute('data-side') !== 'right' ? F.coach.offsetHeight + 16 : 14);
+    }
+    /* Le site (y 90 à 1104 du plan) doit tenir entre la réserve haute et le bas de la carte */
+    if (!S.follow && top) s = Math.min(s, (mh - top - 16) / (1014 / IH * ch));
     var tx = (left + right) / 2 - fx / IW * cw * s;
-    var ty = mh / 2 - fy / IH * ch * s;
+    var ty = (top + mh) / 2 - fy / IH * ch * s;
     tx = Math.min(0.25 * cw * s, Math.max(mw - 1.25 * cw * s, tx));
     ty = Math.min(0.25 * ch * s, Math.max(mh - 1.25 * ch * s, ty));
     canvas.style.transition = instant ? 'none' : '';
@@ -187,7 +195,10 @@
     var cw = c.offsetWidth, ch = c.offsetHeight, gap = 12, m = 8;
     var cx = r.left + r.width / 2 - R.left, side, x, y;
     var inCtx = !stacked.matches && el.closest('.fcc-ctx'), inModal = el.closest('.fcc-modal');
-    if (inModal && r.top - R.top - gap - ch > m) {
+    var inBanner = !stacked.matches && el.closest('.fcc-crit');
+    if (inBanner && R.right - r.right > cw + gap + m) {
+      side = 'right'; x = r.right - R.left + gap; y = r.top - R.top + r.height / 2 - ch / 2;
+    } else if (inModal && r.top - R.top - gap - ch > m) {
       side = 'top'; x = cx - cw / 2; y = r.top - R.top - gap - ch;
     } else if (inCtx && r.left - R.left > cw + 20) {
       side = 'left'; x = r.left - R.left - cw - gap; y = r.top - R.top + r.height / 2 - ch / 2;
@@ -202,6 +213,7 @@
     c.style.setProperty('--ax', Math.max(14, Math.min(cw - 14, cx - x)) + 'px');
     c.style.setProperty('--ay', Math.max(14, Math.min(ch - 14, r.top - R.top + r.height / 2 - y)) + 'px');
     c.style.left = Math.round(x) + 'px'; c.style.top = Math.round(y) + 'px';
+    if (c.getAttribute('data-prev') !== side) { c.setAttribute('data-prev', side); if (get('banner') === '1') layout(); }
   }
 
   function go(state) { S.state = state; set('state', state); guide(); }
@@ -212,6 +224,7 @@
     set('nal', '1'); set('banner', '1'); set('zalert', '1');
     txt('nal', '1'); txt('bellN', '1'); txt('recv', clock(0)); txt('t1', clock(0));
     go('alert');
+    setTimeout(function () { layout(); }, 60);
   }
 
   /* ── Actions opérateur ── */
@@ -224,11 +237,11 @@
   function closeCtx() { set('ctx', '0'); layout(); guide(); }
   function ack() {
     if (S.st === 'new') { S.st = 'ack'; set('st', 'ack'); txt('status', 'Acquittée'); set('banner', '0'); }
-    openCtx();
+    openCtx(); layout();
   }
   function dispatch() {
     S.dispatched = true; S.aborted = false;
-    S.st = 'dispatched'; set('st', 'dispatched'); txt('status', 'Mission lancée'); set('banner', '0');
+    S.st = 'dispatched'; set('st', 'dispatched'); txt('status', 'Mission lancée'); set('banner', '0'); setTimeout(function () { layout(); }, 0);
     set('hud', '1'); set('flown', '1'); set('dock', 'open'); set('hudst', 'run'); set('paused', '0');
     txt('dockSt', 'Ouverture…'); txt('fly', '0'); txt('nmis', '1'); txt('msLiveS', 'En cours · Drone 01');
     F.pauseBtn.disabled = false; txt('pauseBtn', 'Pause');

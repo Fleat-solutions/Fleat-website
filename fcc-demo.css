@@ -403,6 +403,7 @@
 .fcc-coach[data-side="bottom"] .fcc-coach-ar { top: -5px; left: var(--ax, 50%); margin-left: -5px; }
 .fcc-coach[data-side="top"] .fcc-coach-ar { bottom: -5px; left: var(--ax, 50%); margin-left: -5px; }
 .fcc-coach[data-side="left"] .fcc-coach-ar { right: -5px; top: var(--ay, 50%); margin-top: -5px; }
+.fcc-coach[data-side="right"] .fcc-coach-ar { left: -5px; top: var(--ay, 50%); margin-top: -5px; }
 .fcc .fcc-hint { animation: fcc-hint 1.8s ease-in-out infinite; }
 @keyframes fcc-hint { 0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,0), 0 0 0 2px rgba(255,255,255,.9); } 50% { box-shadow: 0 0 0 6px rgba(255,255,255,.14), 0 0 0 2px rgba(255,255,255,.9); } }
 
