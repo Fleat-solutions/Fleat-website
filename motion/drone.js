@@ -2,6 +2,7 @@
 // bras longs relevés en V, grosse nacelle caméra à l'avant, feux sur les moteurs).
 // Unités en mètres. L'avant pointe vers +x, le haut vers +y, la droite vers +z.
 // makeDrone(THREE, RoundedBoxGeometry, options) renvoie { group, setSpin(0..1, t), setLights(on) }.
+// Les pièces chaudes portent userData.heat, utilisé par les vues thermiques.
 
 export function makeDrone(THREE, RoundedBoxGeometry, opts = {}) {
   const o = Object.assign({ body: '#c9ced5', dark: '#2b2f35', accent: '#e6e9ee' }, opts);
@@ -24,7 +25,7 @@ export function makeDrone(THREE, RoundedBoxGeometry, opts = {}) {
   dome.scale.set(1.3, .55, 1);
   add(new RoundedBoxGeometry(.05, .016, .06, 1, .003), light, -.075, .068, 0);
   /* dessous : radiateur sombre et phare d'atterrissage */
-  add(new RoundedBoxGeometry(.13, .01, .05, 1, .002), dark, -.01, .022, 0);
+  add(new RoundedBoxGeometry(.13, .01, .05, 1, .002), dark, -.01, .022, 0).userData.heat = .7;
   for (let i = 0; i < 6; i++) add(new THREE.BoxGeometry(.11, .002, .002), M('#1c1f24'), -.01, .016, -.02 + i * .008);
   const landing = new THREE.MeshStandardMaterial({ color: '#ffffff', emissive: '#ffffff', emissiveIntensity: 1.6 });
   add(new THREE.BoxGeometry(.012, .003, .008), landing, .02, .016, 0);
@@ -67,8 +68,9 @@ export function makeDrone(THREE, RoundedBoxGeometry, opts = {}) {
     /* antenne verticale à mi-bras sur les bras arrière */
     if (!front) { const m = a.clone().lerp(b, .45); add(new RoundedBoxGeometry(.006, .03, .014, 1, .002), shell, m.x, m.y + .018, m.z); }
     /* nacelle moteur et cloche */
-    add(new THREE.CylinderGeometry(.015, .016, .028, 16), shell, b.x, b.y + .002, b.z);
-    add(new THREE.CylinderGeometry(.01, .012, .006, 16), M('#9aa2ad', { metalness: .6, roughness: .3 }), b.x, b.y + .026, b.z);
+    /* userData.heat : intensité en vue thermique (0 froid, 1 chaud), les moteurs sont les pièces les plus chaudes */
+    add(new THREE.CylinderGeometry(.015, .016, .028, 16), shell, b.x, b.y + .002, b.z).userData.heat = .95;
+    add(new THREE.CylinderGeometry(.01, .012, .006, 16), M('#9aa2ad', { metalness: .6, roughness: .3 }), b.x, b.y + .026, b.z).userData.heat = 1;
     const nav = new THREE.MeshStandardMaterial(front ? { color: '#3ad07a', emissive: '#22c55e', emissiveIntensity: 2.6 } : { color: '#ff6b5f', emissive: '#ff3b30', emissiveIntensity: 2.2 });
     navMats.push(nav);
     /* bandeau lumineux en haut de la nacelle moteur */

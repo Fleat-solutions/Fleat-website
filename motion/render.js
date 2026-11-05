@@ -1,7 +1,9 @@
-// Rendu de l'animation 3D de la station (motion/station.html) image par image, puis encodage vidéo.
+// Rendu d'une animation 3D (motion/<scène>.html) image par image, puis encodage vidéo.
+// Scène choisie par la variable SCENE : station (par défaut) ou drone-card.
 // Usage :
 //   node render.js sheet 0.5 2.4 3.8   planche d'images clés aux instants donnés (secondes)
-//   node render.js video               boucle complète : out/station.mp4 et out/station-poster.webp
+//   node render.js video               boucle complète : out/<scène>.mp4 et out/<scène>-poster.webp
+//   SCENE=drone-card node render.js video
 // Un seul MP4 (H.264, lu partout) : le WebM ne pesait pas moins lourd sur cette scène.
 const { chromium } = require('playwright');
 const { execFileSync } = require('node:child_process');
@@ -10,7 +12,8 @@ const path = require('node:path');
 
 const HERE = __dirname, ROOT = path.join(HERE, '..'), OUT = path.join(HERE, 'out');
 const THREE = path.join(HERE, 'node_modules', 'three');
-const DURATION = 12, FPS = 24, POSTER_T = 3.8, WIDTH = 640;
+const SCENE = process.env.SCENE || 'station';
+const DURATION = { station: 12, 'drone-card': 16 }[SCENE], FPS = 24, POSTER_T = { station: 3.8, 'drone-card': 14.6 }[SCENE], WIDTH = 640;
 const [mode = 'video', ...times] = process.argv.slice(2);
 
 function resolve(url) {
@@ -30,12 +33,12 @@ function resolve(url) {
     route.fulfill(fs.existsSync(f) ? { path: f, contentType: f.endsWith('.js') ? 'text/javascript' : undefined } : { status: 404, body: '' });
   });
   await page.route(/^https?:\/\/(?!local\/)/, route => route.abort());
-  await page.goto('http://local/station.html');
+  await page.goto(`http://local/${SCENE}.html`);
   await page.waitForFunction(() => window.__ready, null, { timeout: 20000 });
   await page.evaluate(() => { window.__fleatFrozen = true; });
 
   const card = page.locator('.kv');
-  const at = t => page.evaluate(t => window.fleatStationRender(t), t);
+  const at = t => page.evaluate(t => (window.fleatRender || window.fleatStationRender)(t), t);
   fs.mkdirSync(OUT, { recursive: true });
 
   if (mode === 'sheet') {
@@ -52,8 +55,8 @@ function resolve(url) {
     }
     await at(POSTER_T); await card.screenshot({ path: path.join(OUT, 'poster.png') });
     const input = ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', path.join(frames, 'f-%04d.png')];
-    execFileSync('ffmpeg', [...input, '-vf', `scale=${WIDTH}:-2,format=yuv420p`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '24', '-tune', 'animation', '-movflags', '+faststart', path.join(OUT, 'station.mp4')]);
-    execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', path.join(OUT, 'poster.png'), '-vf', `scale=${WIDTH}:-2`, '-quality', '80', path.join(OUT, 'station-poster.webp')]);
+    execFileSync('ffmpeg', [...input, '-vf', `scale=${WIDTH}:-2,format=yuv420p`, '-c:v', 'libx264', '-preset', 'slow', '-crf', '24', '-tune', 'animation', '-movflags', '+faststart', path.join(OUT, `${SCENE}.mp4`)]);
+    execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', path.join(OUT, 'poster.png'), '-vf', `scale=${WIDTH}:-2`, '-quality', '80', path.join(OUT, `${SCENE}-poster.webp`)]);
     console.log(`Vidéo et image d'attente dans ${OUT}`);
   }
   await browser.close();
