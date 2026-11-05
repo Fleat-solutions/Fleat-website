@@ -29,6 +29,7 @@
   --r: #ef4444; --r-text: #f87171; --r-muted: rgba(239,68,68,.12);
   --info-muted: rgba(59,130,246,.12);
   --drone: #22d3ee;
+  --infra: #f2f4f7; /* infrastructure fixe (station, caméras) : blanc ; ce qui vole : cyan */
   --drone-rgb: 34,211,238;
   --f-app: 'Inter', system-ui, -apple-system, sans-serif;
   --f-appmono: 'IBM Plex Mono', ui-monospace, monospace;
@@ -128,14 +129,18 @@
 
 /* Station */
 .fcc-dock { position: absolute; display: flex; flex-direction: column; align-items: center; padding: 0; border: 0; background: none; cursor: pointer; transform: translate(-50%, -12px) scale(calc(1 / var(--cam))); transform-origin: 50% 12px; }
-.fcc-dock-pin { width: 24px; height: 24px; display: grid; place-items: center; border: 2px solid rgba(255,255,255,.85); border-radius: 5px; background: rgba(74,143,190,.92); color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.45); transition: background .3s, transform .15s; }
+.fcc-dock-pin { width: 22px; height: 22px; display: grid; place-items: center; color: var(--infra); filter: drop-shadow(0 0 1px #000) drop-shadow(0 1px 2px rgba(0,0,0,.9)); transition: transform .15s; }
 .fcc-dock:hover .fcc-dock-pin { transform: scale(1.1); }
-.fcc[data-dock="open"] .fcc-dock-pin { background: rgba(245,158,11,.95); }
-.fcc-dock-pin svg { width: 11px; height: 11px; }
+.fcc-dock-pin .lid-o { display: none; }
+.fcc[data-dock="open"] .fcc-dock-pin .lid-o { display: inline; }
+.fcc[data-dock="open"] .fcc-dock-pin .lid-c { display: none; }
+.fcc-dock-pin svg { width: 22px; height: 22px; }
 .fcc-dock-l, .fcc-drone-l { margin-top: 4px; padding: 2px 6px; border: 1px solid var(--border-stronger); border-radius: 5px; background: var(--overlay-tactical); color: var(--text-secondary); font-size: 10px; font-weight: 600; white-space: nowrap; display: flex; flex-direction: column; align-items: center; line-height: 1.25; }
 .fcc[data-atdock="1"] .fcc-dock-l { visibility: hidden; }
+.fcc .fcc-dock .fcc-dock-l { margin-top: 2px; padding: 0; border: 0; background: none; font: 600 9.5px var(--f-app); letter-spacing: .07em; text-transform: uppercase; color: var(--infra); text-shadow: 0 0 2px #000, 0 1px 3px #000; align-items: center; }
+.fcc .fcc-dock .fcc-dock-l em { font-size: 9px; font-weight: 500; letter-spacing: .02em; text-transform: none; color: rgba(255,255,255,.75); }
 .fcc-dock-l em { font-style: normal; font-size: 9px; font-weight: 500; color: var(--text-muted); }
-.fcc[data-dock="open"] .fcc-dock-l em { color: var(--y-text); }
+
 
 /* Pin d'alerte */
 .fcc-pin { position: absolute; width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; transform: translate(-50%, -50%) scale(calc(1 / var(--cam))); }
@@ -510,13 +515,11 @@
 .fcc.fcc-tac .fcc-route { stroke: rgba(34,211,238,.75); stroke-dasharray: 2 5; }
 .fcc.fcc-tac .fcc-trail { stroke: var(--c-tac); stroke-width: 1.6; }
 .fcc-cam { position: absolute; transform: translate(-50%, -6px) scale(calc(1 / var(--cam))); transform-origin: 50% 6px; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; }
-.fcc-cam i { width: 12px; height: 12px; border-radius: 50%; background: #0b0c0d; border: 2px solid var(--c-tac); box-shadow: 0 0 0 2px rgba(0,0,0,.45); }
+.fcc-cam i { width: 12px; height: 12px; border-radius: 50%; background: #0b0c0d; border: 2px solid var(--infra); box-shadow: 0 0 0 2px rgba(0,0,0,.45); }
 .fcc-cam em { padding: 1px 5px; border-radius: 4px; background: rgba(10,11,12,.85); border: 1px solid rgba(255,255,255,.12); font: 600 9.5px var(--f-app); font-style: normal; color: rgba(255,255,255,.85); }
 
 /* Station : glyphe cyan, sans pastille */
-.fcc.fcc-tac .fcc-dock-pin { background: rgba(0,0,0,.55); border: 1.5px solid var(--c-tac); color: var(--c-tac); border-radius: 2px; width: 22px; height: 22px; }
-.fcc.fcc-tac[data-dock="open"] .fcc-dock-pin { background: rgba(34,211,238,.18); }
-.fcc.fcc-tac .fcc-dock-l, .fcc.fcc-tac .fcc-drone-l { border-radius: 2px; background: rgba(10,11,12,.85); border-color: rgba(255,255,255,.12); font-size: 10px; }
+.fcc.fcc-tac .fcc-drone-l { border-radius: 2px; background: rgba(10,11,12,.85); border-color: rgba(255,255,255,.12); font-size: 10px; }
 .fcc.fcc-tac .fcc-drone-a { border-radius: 2px; }
 
 /* Cible : équerres jaunes et chevron, à qualifier */

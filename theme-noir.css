@@ -177,8 +177,6 @@ body.theme-noir .fcc-ri.on { box-shadow: inset 2px 0 0 #f7f8f8; }
 body.theme-noir .fcc-zone { fill: rgba(255,255,255,.05); stroke: rgba(255,255,255,.7); }
 body.theme-noir .fcc-zone-c { fill: rgba(255,255,255,.04); stroke: rgba(255,255,255,.55); }
 body.theme-noir .fcc-route { stroke: rgba(255,255,255,.6); }
-body.theme-noir .fcc-dock-pin { background: #1a1b1f; border-color: rgba(255,255,255,.85); }
-body.theme-noir .fcc[data-dock="open"] .fcc-dock-pin { background: #b7791f; }
 body.theme-noir .fcc-ms i { background: #62666d; }
 body.theme-noir .fcc-ms i.run { background: var(--g); }
 body.theme-noir .fcc[data-st="dispatched"] .fcc-st { color: #f7f8f8; border-color: rgba(255,255,255,.2); }
