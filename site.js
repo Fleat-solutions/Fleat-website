@@ -97,6 +97,13 @@
     });
   });
 
+  /* Email masqué : reconstruit au chargement, absent du HTML pour les robots collecteurs */
+  document.querySelectorAll('.js-mail').forEach(function (a) {
+    var addr = a.dataset.u + '@' + a.dataset.d;
+    a.href = 'mailto:' + addr;
+    a.textContent = addr;
+  });
+
   /* Envoi des formulaires vers Web3Forms (clé publique dans data-w3f-key) */
   window.fleatSendForm = function (form, onSuccess) {
     var btn = form.querySelector('button[type="submit"]');
