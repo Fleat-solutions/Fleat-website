@@ -406,9 +406,13 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .hero-copy { max-width: 660px; }
 .hero-copy .display { text-wrap: balance; }
 .hero-sectors { margin-top: clamp(40px,5vw,56px); }
-/* Accueil desktop : hero compact pour laisser apparaître la section suivante au-dessus de la ligne de flottaison */
-.hero-home { min-height: min(64vh, 620px); padding: clamp(72px,7vw,96px) 0 clamp(64px,6vw,84px); }
-.hero-home + .section { padding-top: clamp(64px,6vw,88px); }
+/* Accueil desktop : la hauteur du hero se déduit de l'écran.
+   Hauteur visible sous le header, moins la portion de la section suivante qui doit rester visible
+   (marge haute + titre SEO + eyebrow + première ligne du h2, soit 172px mesurés).
+   Si l'écran est trop court, le contenu du hero impose sa propre hauteur. */
+:root { --header-h: 73px; --home-next-pad: clamp(64px,6vw,88px); --home-peek: calc(var(--home-next-pad) + 172px); }
+.hero-home { min-height: calc(100vh - var(--header-h) - var(--home-peek)); min-height: calc(100svh - var(--header-h) - var(--home-peek)); padding: clamp(72px,7vw,96px) 0 clamp(64px,6vw,84px); }
+.hero-home + .section { padding-top: var(--home-next-pad); }
 @media (max-width: 900px) {
   .hero-night { min-height: 0; padding: clamp(76px,11vw,100px) 0 clamp(48px,7vw,64px); }
   .hero-night .hero-photo img { object-position: 50% 52%; }
