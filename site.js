@@ -49,7 +49,13 @@
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-    reveals.forEach(function (el) { io.observe(el); });
+    /* Ce qui dépasse déjà dans l'écran au chargement s'affiche tout de suite,
+       sinon la section qui suit le hero reste invisible dans la zone d'aperçu. */
+    var vh = window.innerHeight;
+    reveals.forEach(function (el) {
+      if (el.getBoundingClientRect().top < vh) { el.classList.add('in'); }
+      else { io.observe(el); }
+    });
   } else {
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
