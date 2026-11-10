@@ -406,6 +406,9 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .hero-copy { max-width: 660px; }
 .hero-copy .display { text-wrap: balance; }
 .hero-sectors { margin-top: clamp(40px,5vw,56px); }
+/* Accueil desktop : hero compact pour laisser apparaître la section suivante au-dessus de la ligne de flottaison */
+.hero-home { min-height: min(64vh, 620px); padding: clamp(72px,7vw,96px) 0 clamp(64px,6vw,84px); }
+.hero-home + .section { padding-top: clamp(64px,6vw,88px); }
 @media (max-width: 900px) {
   .hero-night { min-height: 0; padding: clamp(76px,11vw,100px) 0 clamp(48px,7vw,64px); }
   .hero-night .hero-photo img { object-position: 50% 52%; }
