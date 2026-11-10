@@ -6,6 +6,8 @@ name: CI
 on:
   pull_request:
     branches: [dev, staging, main]
+    # edited : relance le contrôle quand la branche cible d'une PR change.
+    types: [opened, synchronize, reopened, edited]
   push:
     branches: [dev, staging, main]
 
