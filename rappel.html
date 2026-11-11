@@ -90,11 +90,11 @@
         <form id="rappel-form" class="js-contact-form" data-form-name="rappel" data-w3f-key="8e154353-b93c-42eb-8f2b-ad0d4fd7d3be" data-w3f-subject="Nouvelle demande de rappel" novalidate>
           <input type="checkbox" name="botcheck" class="hp" tabindex="-1" aria-hidden="true">
           <div class="field-row">
-            <div class="field"><label for="r-prenom">Prénom <span class="req">*</span></label><input id="r-prenom" name="prenom" type="text" autocomplete="given-name" required><span class="err-msg">Champ requis</span></div>
-            <div class="field"><label for="r-nom">Nom <span class="req">*</span></label><input id="r-nom" name="nom" type="text" autocomplete="family-name" required><span class="err-msg">Champ requis</span></div>
+            <div class="field"><label for="r-prenom">Prénom <span class="req">*</span></label><input id="r-prenom" name="prenom" type="text" autocomplete="given-name" required data-rule="nom" minlength="2" maxlength="50"><span class="err-msg">Champ requis</span></div>
+            <div class="field"><label for="r-nom">Nom <span class="req">*</span></label><input id="r-nom" name="nom" type="text" autocomplete="family-name" required data-rule="nom" minlength="2" maxlength="50"><span class="err-msg">Champ requis</span></div>
           </div>
           <div class="field-row" style="margin-top:16px;">
-            <div class="field"><label for="r-tel">Téléphone <span class="req">*</span></label><input id="r-tel" name="tel" type="tel" autocomplete="tel" required><span class="err-msg">Numéro requis</span></div>
+            <div class="field"><label for="r-tel">Téléphone <span class="req">*</span></label><input id="r-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" required data-rule="tel" maxlength="20" placeholder="06 12 34 56 78"><span class="err-msg">Numéro requis</span></div>
             <div class="field"><label for="r-creneau">Créneau préféré</label>
               <select id="r-creneau" name="creneau">
                 <option value="">Indifférent</option>
@@ -104,7 +104,7 @@
               </select>
             </div>
           </div>
-          <div class="field" style="margin-top:16px;"><label for="r-entreprise">Entreprise</label><input id="r-entreprise" name="entreprise" type="text" autocomplete="organization"></div>
+          <div class="field" style="margin-top:16px;"><label for="r-entreprise">Entreprise</label><input id="r-entreprise" name="entreprise" type="text" autocomplete="organization" data-rule="texte" maxlength="80"><span class="err-msg">Saisie invalide</span></div>
           <div class="consent" style="margin-top:20px;">
             <input id="r-consent" name="consent" type="checkbox" required>
             <label for="r-consent">J'accepte d'être recontacté(e) au sujet de ma demande, conformément à la <a href="/confidentialite" style="color:var(--accent-600); font-weight:600;">politique de confidentialité</a>. <span class="req">*</span></label>

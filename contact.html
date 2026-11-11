@@ -450,31 +450,33 @@
             <div class="field-grid">
               <div class="field-group">
                 <label for="prenom">Prénom <span class="req">*</span></label>
-                <input id="prenom" name="prenom" type="text" autocomplete="given-name" required placeholder="Jean">
+                <input id="prenom" name="prenom" type="text" autocomplete="given-name" required data-rule="nom" minlength="2" maxlength="50" placeholder="Jean">
                 <span class="err-msg">Champ requis</span>
               </div>
               <div class="field-group">
                 <label for="nom">Nom <span class="req">*</span></label>
-                <input id="nom" name="nom" type="text" autocomplete="family-name" required placeholder="Dupont">
+                <input id="nom" name="nom" type="text" autocomplete="family-name" required data-rule="nom" minlength="2" maxlength="50" placeholder="Dupont">
                 <span class="err-msg">Champ requis</span>
               </div>
               <div class="field-group">
                 <label for="entreprise">Entreprise <span class="req">*</span></label>
-                <input id="entreprise" name="entreprise" type="text" autocomplete="organization" required placeholder="Société SAS">
+                <input id="entreprise" name="entreprise" type="text" autocomplete="organization" required data-rule="texte" minlength="2" maxlength="80" placeholder="Société SAS">
                 <span class="err-msg">Champ requis</span>
               </div>
               <div class="field-group">
                 <label for="fonction">Fonction</label>
-                <input id="fonction" name="fonction" type="text" autocomplete="organization-title" placeholder="Responsable sécurité">
+                <input id="fonction" name="fonction" type="text" autocomplete="organization-title" data-rule="texte" maxlength="80" placeholder="Responsable sécurité">
+                <span class="err-msg">Saisie invalide</span>
               </div>
               <div class="field-group">
                 <label for="email">Email professionnel <span class="req">*</span></label>
-                <input id="email" name="email" type="email" spellcheck="false" autocomplete="email" required placeholder="jean@societe.fr">
+                <input id="email" name="email" type="email" spellcheck="false" autocapitalize="off" autocomplete="email" required data-rule="email" maxlength="254" placeholder="jean@societe.fr">
                 <span class="err-msg">Email valide requis</span>
               </div>
               <div class="field-group">
                 <label for="tel">Téléphone</label>
-                <input id="tel" name="tel" type="tel" autocomplete="tel" placeholder="+33 6 00 00 00 00">
+                <input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" data-rule="tel" maxlength="20" placeholder="06 12 34 56 78">
+                <span class="err-msg">Numéro invalide</span>
               </div>
             </div>
             <div class="form-nav">
@@ -609,7 +611,8 @@
               </div>
               <div class="field-group field-full">
                 <label for="message">Message complémentaire</label>
-                <textarea id="message" name="message" placeholder="Précisez vos enjeux, contraintes, ou toute information utile à l'analyse de votre site…"></textarea>
+                <textarea id="message" name="message" data-rule="message" maxlength="2000" placeholder="Précisez vos enjeux, contraintes, ou toute information utile à l'analyse de votre site…"></textarea>
+                <span class="err-msg">Message invalide</span>
               </div>
             </div>
             <div class="consent-row">
@@ -756,18 +759,12 @@
     const step = document.querySelector(`[data-step="${n}"]`);
     let valid = true;
 
-    // Required text/email inputs
-    const required = step.querySelectorAll('input[required]:not([type="radio"]):not([type="checkbox"])');
-    required.forEach(input => {
-      const group = input.closest('.field-group');
-      const isEmpty = !input.value.trim();
-      const isInvalidEmail = input.type === 'email' && input.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
-      if (isEmpty || isInvalidEmail) {
-        group.classList.add('has-error');
-        valid = false;
-      } else {
-        group.classList.remove('has-error');
-      }
+    // Champs texte : obligatoires et règles de saisie (data-rule, définies dans site.js)
+    const fields = step.querySelectorAll('input[required]:not([type="radio"]):not([type="checkbox"]), input[data-rule], textarea[data-rule]');
+    fields.forEach(input => {
+      const msg = window.fleatFieldError(input);
+      window.fleatShowError(input, input.closest('.field-group'), 'has-error', msg);
+      if (msg) valid = false;
     });
 
     // Required radio groups
@@ -844,11 +841,16 @@
     });
   });
 
-  // Live validation on input
-  document.querySelectorAll('.field-group input, .field-group select').forEach(el => {
+  // Validation en direct : l'erreur disparaît à la saisie, la règle est vérifiée à la sortie du champ
+  document.querySelectorAll('.field-group input, .field-group select, .field-group textarea').forEach(el => {
+    if (el.type === 'radio' || el.type === 'checkbox') return;
+    const group = el.closest('.field-group');
+    el.addEventListener('input', () => window.fleatShowError(el, group, 'has-error', ''));
     el.addEventListener('change', function() {
-      const group = this.closest('.field-group');
-      if (group && this.value.trim()) group.classList.remove('has-error');
+      if (el.tagName === 'SELECT' && this.value.trim()) window.fleatShowError(el, group, 'has-error', '');
+    });
+    el.addEventListener('blur', () => {
+      if (el.value.trim()) window.fleatShowError(el, group, 'has-error', window.fleatFieldError(el));
     });
   });
 })();
