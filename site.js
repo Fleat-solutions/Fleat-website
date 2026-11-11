@@ -135,30 +135,84 @@
       });
   };
 
+  /* Règles des champs de formulaire (attribut data-rule).
+     Renvoie un message d'erreur, ou une chaîne vide si la valeur est acceptée.
+     Un champ facultatif vide est accepté ; s'il est rempli, la règle s'applique. */
+  var FIELD_RULES = {
+    nom: function (v) {
+      if (v.length < 2) return 'Au moins 2 lettres';
+      if (v.length > 50) return '50 caractères maximum';
+      if (!/^\p{L}[\p{L}'’ -]*\p{L}$/u.test(v)) return 'Lettres, espaces, tirets et apostrophes uniquement';
+      if (/[ '’-]{2}/.test(v)) return 'Saisie invalide';
+      return '';
+    },
+    texte: function (v) {
+      if (v.length < 2) return 'Au moins 2 caractères';
+      if (v.length > 80) return '80 caractères maximum';
+      if (!/\p{L}/u.test(v)) return 'Saisie invalide';
+      if (!/^[\p{L}\p{N} &'’.,()/+-]+$/u.test(v)) return 'Caractères spéciaux non acceptés';
+      return '';
+    },
+    email: function (v) {
+      if (v.length > 254) return 'Adresse trop longue';
+      if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/.test(v) || /\.\./.test(v) || /^\.|\.@/.test(v)) {
+        return 'Adresse e-mail invalide (ex. jean@societe.fr)';
+      }
+      return '';
+    },
+    tel: function (v) {
+      if (/[^\d\s.+()-]/.test(v)) return 'Chiffres uniquement (ex. 06 12 34 56 78)';
+      var n = v.replace(/[\s.()-]/g, '').replace(/^00/, '+');
+      var fr = /^0[1-9]\d{8}$/.test(n) || /^\+33[1-9]\d{8}$/.test(n);
+      var intl = /^\+(?!33)[1-9]\d{7,14}$/.test(n);
+      if (!fr && !intl) return 'Numéro invalide (ex. 06 12 34 56 78 ou +33 6 12 34 56 78)';
+      if (/^(?:0|\+33)(\d)\1{8}$/.test(n)) return 'Numéro invalide';
+      return '';
+    },
+    message: function (v) {
+      if (v.length > 2000) return '2000 caractères maximum';
+      if (/<[^>]*>/.test(v)) return 'Le code HTML n\'est pas accepté';
+      if ((v.match(/https?:\/\/|www\./gi) || []).length > 2) return 'Trop de liens dans le message';
+      return '';
+    }
+  };
+  window.fleatFieldError = function (el) {
+    if (el.type === 'checkbox') return el.required && !el.checked ? 'Requis' : '';
+    var v = el.value.replace(/\s+/g, ' ').trim();
+    if (!v) return el.required ? 'Champ requis' : '';
+    var rule = FIELD_RULES[el.dataset.rule];
+    return rule ? rule(v) : '';
+  };
+  /* Affiche ou retire le message d'erreur dans le conteneur du champ */
+  window.fleatShowError = function (el, wrap, errClass, msg) {
+    if (!wrap) return;
+    wrap.classList.toggle(errClass, !!msg);
+    el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    var box = wrap.querySelector('.err-msg');
+    if (box && msg) box.textContent = msg;
+  };
+
   /* Formulaires de contact : validation + état succès */
-  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  function setFieldError(field, on) {
-    var wrap = field.closest('.field') || field.closest('.consent');
-    if (wrap) wrap.classList.toggle('error', on);
+  function setFieldError(field, msg) {
+    window.fleatShowError(field, field.closest('.field') || field.closest('.consent'), 'error', msg);
   }
   document.querySelectorAll('.js-contact-form').forEach(function (form) {
     function validate() {
       var ok = true;
-      form.querySelectorAll('[required]').forEach(function (el) {
-        var valid = true;
-        if (el.type === 'checkbox') valid = el.checked;
-        else if (el.type === 'email') valid = emailRe.test(el.value.trim());
-        else valid = el.value.trim().length > 0;
-        setFieldError(el, !valid);
-        if (!valid && ok) { ok = false; }
+      form.querySelectorAll('[required], [data-rule]').forEach(function (el) {
+        var msg = window.fleatFieldError(el);
+        setFieldError(el, msg);
+        if (msg) ok = false;
       });
       return ok;
     }
 
     // efface l'erreur dès que le champ est corrigé
     form.querySelectorAll('input, select, textarea').forEach(function (el) {
-      el.addEventListener('input', function () { setFieldError(el, false); });
-      el.addEventListener('change', function () { setFieldError(el, false); });
+      el.addEventListener('input', function () { setFieldError(el, ''); });
+      el.addEventListener('change', function () { if (el.type === 'checkbox' || el.tagName === 'SELECT') setFieldError(el, ''); });
+      // à la sortie du champ, vérifie la saisie si elle n'est pas vide
+      el.addEventListener('blur', function () { if (el.value.trim() && el.type !== 'checkbox') setFieldError(el, window.fleatFieldError(el)); });
     });
 
     form.addEventListener('submit', function (e) {
