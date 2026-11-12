@@ -396,4 +396,12 @@
   document.querySelectorAll('.f-cookies').forEach(function (btn) {
     btn.addEventListener('click', window.resetCookieConsent);
   });
+
+  /* Comparateurs avant, après (cas d'usage, pages secteurs) */
+  document.querySelectorAll('.cmp').forEach(function (cmp) {
+    var r = cmp.querySelector('input[type=range]');
+    if (!r) return;
+    function apply() { cmp.style.setProperty('--p', r.value + '%'); }
+    r.addEventListener('input', apply); apply();
+  });
 })();

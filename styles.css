@@ -944,3 +944,63 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .cmp-before span { color: var(--ink-3); }
 .cmp-after { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--ink-2); }
 .cmp-after span { color: var(--ink); }
+
+/* Comparateur avant, après (cas d'usage, pages secteurs) */
+.cmp{position:relative;overflow:hidden;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--dark-2);--p:50%;touch-action:pan-y}
+.cmp.on-dark{border-color:var(--dark-line)}
+.cmp>img,.cmp .cmp-b img{display:block;width:100%;height:100%;object-fit:cover}
+.cmp>img.cmp-crop-j0{width:111.12%;height:105.27%;max-width:none;margin-left:-11.12%}
+.cmp .cmp-b{position:absolute;inset:0;clip-path:inset(0 0 0 var(--p))}
+.cmp-thermal{filter:grayscale(1) contrast(1.35) brightness(.9) sepia(1) hue-rotate(-28deg) saturate(2.6)}
+.cmp-night{filter:grayscale(1) contrast(1.22) brightness(.66) sepia(1) hue-rotate(168deg) saturate(1.35)}
+.cmp-cam{filter:brightness(.6) contrast(1.08)}
+.cmp-line{position:absolute;top:0;bottom:0;left:var(--p);width:2px;background:rgba(255,255,255,.85);pointer-events:none;box-shadow:0 0 0 1px rgba(8,20,48,.25)}
+.cmp-line::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 2px 10px rgba(8,20,48,.35)}
+.cmp-line::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;width:15px;height:9px;background:var(--dark);clip-path:polygon(0 50%,38% 0,38% 100%,100% 50%,62% 100%,62% 0)}
+.cmp input[type=range]{position:absolute;inset:auto 0 0 0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
+.cmp input[type=range]:focus-visible{opacity:1;outline:2px solid var(--accent-400);outline-offset:-3px}
+.cmp-tag{position:absolute;top:12px;font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;padding:6px 11px;border-radius:999px;background:rgba(6,14,32,.72);color:#fff;pointer-events:none;backdrop-filter:blur(3px)}
+.cmp-tag.l{left:12px}.cmp-tag.r{right:12px}
+.cmp-cap{margin-top:11px;font-family:var(--f-mono);font-size:12px;letter-spacing:.02em;line-height:1.45;color:var(--ink-2)}
+.bg-dark .cmp-cap{color:var(--on-dark-2)}
+
+/* Scénario d'alerte, format liste (pages secteurs) */
+.scn-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.scn-note { margin-top: 22px; font-size: 13.5px; color: var(--ink-3); }
+.scn { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.scn li { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.scn-meta { display: flex; flex-direction: column; gap: 6px; }
+.scn time { font-family: var(--f-mono); font-size: 13px; color: var(--ink-3); letter-spacing: .02em; }
+.scn-who { display: inline-flex; align-items: center; gap: 7px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.scn-who::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.scn-who.is-fleat { color: var(--ink-2); }
+.scn-who.is-team::before { background: var(--ok-on-dark); }
+.scn p { font-size: 16.5px; line-height: 1.5; color: var(--ink-2); }
+.scn li.is-alert time, .scn li.is-alert .scn-who { color: var(--warn-on-dark); }
+.scn li.is-decision p { color: var(--ink); font-weight: 600; }
+@media (max-width: 900px) {
+  .scn-grid { grid-template-columns: 1fr; }
+  .scn li { grid-template-columns: 1fr; gap: 8px; }
+  .scn-meta { flex-direction: row; align-items: center; gap: 14px; }
+}
+
+/* Relevé de ronde (page logistique) */
+.report { border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--paper-2); overflow: hidden; }
+.report-head, .report-foot { display: flex; justify-content: space-between; gap: 16px; padding: 14px 20px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.report-head { border-bottom: 1px solid var(--line); }
+.report-foot { border-top: 1px solid var(--line); text-transform: none; letter-spacing: .02em; }
+.report-rows { list-style: none; margin: 0; padding: 4px 20px; }
+.report-rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 13px 0; font-size: 15.5px; color: var(--ink-2); }
+.report-rows li + li { border-top: 1px solid var(--line); }
+.report-rows b { font-family: var(--f-mono); font-weight: 500; font-size: 15px; color: var(--ink); text-align: right; }
+.report-rows li.is-warn b { color: var(--warn-on-dark); }
+.report-rows li.is-ok b { color: var(--ink-3); }
+
+/* Couches de sécurité (page data center) */
+.layers { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.layers li { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--r); background: var(--paper-2); }
+.layers b { font-size: 16px; font-weight: 600; color: var(--ink); }
+.layers p { font-size: 14.5px; line-height: 1.5; color: var(--ink-3); }
+.layer-who { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.layers li.is-fleat { border-color: var(--ink-3); background: var(--paper-3); }
+.layers li.is-fleat .layer-who { color: var(--ink); }

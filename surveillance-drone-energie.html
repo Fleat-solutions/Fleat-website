@@ -114,17 +114,46 @@
 </div>
 </section>
 
-<section class="section bg-dark radar-bg" data-screen-label="Concrètement">
+<section class="section" data-screen-label="Thermique">
 <div class="container">
-<div class="section-head reveal"><span class="eyebrow">Exemple</span><h2 class="h2">Concrètement : une intrusion sur un parc solaire à 0 h 35.</h2><p class="lead">Ce qui se passe entre l'alerte et la décision, et qui agit à chaque étape.</p></div>
-<ol class="in-run reveal" data-d="1">
-<li class="is-alert"><time>00:35:00</time><span class="in-who is-site">Votre dispositif</span><p>Une caméra signale un mouvement entre les rangées de panneaux, côté sud.</p></li>
-<li><time>00:35:05</time><span class="in-who is-fleat">FLEAT</span><p>L'alerte arrive dans FLEAT. Le drone part de sa station, sur le parc.</p></li>
-<li><time>00:35:45</time><span class="in-who is-fleat">FLEAT</span><p>Le drone est sur zone en 40&nbsp;s environ, selon la configuration. L'image arrive au PC sécurité.</p></li>
-<li><time>00:36:30</time><span class="in-who is-team">Vos équipes</span><p>L'opérateur observe en thermique : deux personnes près d'un local technique.</p></li>
-<li class="is-done"><time>00:37:10</time><span class="in-who is-team">Vos équipes</span><p>Il alerte les forces de l'ordre et l'astreinte. Personne n'a roulé pour vérifier.</p></li>
+<div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);">
+<div class="reveal">
+<span class="eyebrow">Visible et thermique</span>
+<h2 class="h2 mt-s">Ce que la caméra thermique ajoute.</h2>
+<p class="lead mt-s">Sur un parc solaire, un écart de température est souvent le premier signe d'un défaut.</p>
+<p class="muted mt-s">Le drone emporte une caméra visible et une caméra thermique. La nuit, la thermique distingue aussi une présence humaine entre les rangées. Faites glisser pour comparer.</p>
+</div>
+<div class="reveal" data-d="1">
+<div class="cmp" style="aspect-ratio:4/3;">
+<img src="assets/photos/parc-photovoltaique-1600.webp" width="1600" height="1066" srcset="assets/photos/parc-photovoltaique-640.webp 640w, assets/photos/parc-photovoltaique-1024.webp 1024w, assets/photos/parc-photovoltaique-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'un parc de panneaux photovoltaïques">
+<div class="cmp-b"><img src="assets/thermique-parc-solaire.webp" width="1600" height="1066" srcset="assets/thermique-parc-solaire-800.webp 800w, assets/thermique-parc-solaire.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="La même zone observée avec un capteur thermique" loading="lazy"></div>
+<span class="cmp-tag l">Vision classique</span><span class="cmp-tag r">Vision thermique</span>
+<div class="cmp-line"></div>
+<input type="range" min="0" max="100" value="48" aria-label="Comparer la vision classique et la vision thermique">
+</div>
+<p class="cmp-cap">Même zone, vision classique et vision thermique.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section bg-paper-2" data-screen-label="Exemple">
+<div class="container">
+<div class="scn-grid">
+<div class="reveal">
+<span class="eyebrow">Exemple</span>
+<h2 class="h2 mt-s">Une intrusion sur un parc solaire, à 0 h 35.</h2>
+<p class="lead mt-s">Ce qui se passe entre l'alerte et la décision, et qui agit à chaque étape.</p>
+<p class="scn-note">Exemple d'illustration. Les délais réels dépendent du site et de la procédure retenue.</p>
+</div>
+<ol class="scn reveal" data-d="1">
+<li class="is-alert"><div class="scn-meta"><time>00:35:00</time><span class="scn-who is-site">Votre dispositif</span></div><p>Une caméra signale un mouvement entre les rangées de panneaux, côté sud.</p></li>
+<li><div class="scn-meta"><time>00:35:05</time><span class="scn-who is-fleat">FLEAT</span></div><p>L'alerte arrive dans FLEAT. Le drone part de sa station, sur le parc.</p></li>
+<li><div class="scn-meta"><time>00:35:45</time><span class="scn-who is-fleat">FLEAT</span></div><p>Le drone est sur zone, en 40&nbsp;s environ selon la configuration. L'image arrive au PC sécurité.</p></li>
+<li><div class="scn-meta"><time>00:36:30</time><span class="scn-who is-team">Vos équipes</span></div><p>L'opérateur observe en thermique : deux personnes près d'un local technique.</p></li>
+<li class="is-decision"><div class="scn-meta"><time>00:37:10</time><span class="scn-who is-team">Vos équipes</span></div><p>Il alerte les forces de l'ordre et l'astreinte. Personne n'a roulé pour vérifier.</p></li>
 </ol>
-<p class="in-caption reveal">Exemple d'illustration. Les délais réels dépendent du site et de la procédure retenue.</p>
+</div>
 </div>
 </section>
 

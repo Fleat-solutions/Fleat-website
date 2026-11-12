@@ -100,7 +100,28 @@
 </div>
 </section>
 
-<section class="section bg-paper-2" data-screen-label="Usages">
+<section class="section bg-paper-2" data-screen-label="Zones">
+<div class="container">
+<div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);">
+<div class="reveal">
+<span class="eyebrow">Sur la carte</span>
+<h2 class="h2 mt-s">Votre site, découpé en zones.</h2>
+<p class="lead mt-s">Chaque zone a ses priorités, ses horaires et ses trajectoires. Vous les fixez avec nous pendant l'étude.</p>
+<ul class="checklist mt-s">
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Zones à surveiller et zones à éviter</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Priorités par zone et par horaire</li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Station, drone et alertes sur la même carte</li>
+</ul>
+</div>
+<div class="reveal" data-d="1">
+<div class="photo photo-4x3 photo-frame"><img src="assets/plateforme-tactique.webp" srcset="assets/plateforme-tactique-640.webp 640w, assets/plateforme-tactique.webp 1200w" sizes="(max-width: 900px) 100vw, 50vw" width="1200" height="900" alt="Interface FLEAT : carte d'un site industriel découpé en zones, avec la station et le drone en mission" loading="lazy"></div>
+<p class="cmp-cap">Interface FLEAT · données de démonstration.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" data-screen-label="Usages">
 <div class="container">
 <div class="section-head reveal"><span class="eyebrow">Sur votre site</span><h2 class="h2">Ce que fait le drone sur un site industriel.</h2></div>
 <div class="grid g-3" style="margin-top:clamp(32px,4vw,48px);">
@@ -114,17 +135,23 @@
 </div>
 </section>
 
-<section class="section bg-dark radar-bg" data-screen-label="Concrètement">
+<section class="section bg-paper-2" data-screen-label="Exemple">
 <div class="container">
-<div class="section-head reveal"><span class="eyebrow">Exemple</span><h2 class="h2">Concrètement : une détection près d'un stock à 23 h 40.</h2><p class="lead">Ce qui se passe entre l'alerte et la décision, et qui agit à chaque étape.</p></div>
-<ol class="in-run reveal" data-d="1">
-<li class="is-alert"><time>23:40:00</time><span class="in-who is-site">Votre dispositif</span><p>Une caméra détecte un mouvement près du stock extérieur, en limite de clôture.</p></li>
-<li><time>23:40:05</time><span class="in-who is-fleat">FLEAT</span><p>L'alerte arrive dans FLEAT. Le drone part vers la zone, selon la procédure définie avec vous.</p></li>
-<li><time>23:40:45</time><span class="in-who is-fleat">FLEAT</span><p>Le drone est sur zone en 40&nbsp;s environ. L'image arrive au PC sécurité.</p></li>
-<li><time>23:41:30</time><span class="in-who is-team">Vos équipes</span><p>L'opérateur observe en visible ou en thermique. Personne, animal ou fausse alarme ?</p></li>
-<li class="is-done"><time>23:42:10</time><span class="in-who is-team">Vos équipes</span><p>Il classe l'alerte ou engage une intervention. L'événement est tracé, images à l'appui.</p></li>
+<div class="scn-grid">
+<div class="reveal">
+<span class="eyebrow">Exemple</span>
+<h2 class="h2 mt-s">Une détection près d'un stock, à 23 h 40.</h2>
+<p class="lead mt-s">Ce qui se passe entre l'alerte et la décision, et qui agit à chaque étape.</p>
+<p class="scn-note">Exemple d'illustration. Les délais réels dépendent du site et de la procédure retenue.</p>
+</div>
+<ol class="scn reveal" data-d="1">
+<li class="is-alert"><div class="scn-meta"><time>23:40:00</time><span class="scn-who is-site">Votre dispositif</span></div><p>Une caméra détecte un mouvement près du stock extérieur, en limite de clôture.</p></li>
+<li><div class="scn-meta"><time>23:40:05</time><span class="scn-who is-fleat">FLEAT</span></div><p>L'alerte arrive dans FLEAT. Le drone part vers la zone, selon la procédure définie avec vous.</p></li>
+<li><div class="scn-meta"><time>23:40:45</time><span class="scn-who is-fleat">FLEAT</span></div><p>Le drone est sur zone en 40&nbsp;s environ. L'image arrive au PC sécurité.</p></li>
+<li><div class="scn-meta"><time>23:41:30</time><span class="scn-who is-team">Vos équipes</span></div><p>L'opérateur observe en visible ou en thermique. Personne, animal ou fausse alarme ?</p></li>
+<li class="is-decision"><div class="scn-meta"><time>23:42:10</time><span class="scn-who is-team">Vos équipes</span></div><p>Il classe l'alerte ou engage une intervention. L'événement est tracé, images à l'appui.</p></li>
 </ol>
-<p class="in-caption reveal">Exemple d'illustration. Les délais réels dépendent du site et de la procédure retenue.</p>
+</div>
 </div>
 </section>
 

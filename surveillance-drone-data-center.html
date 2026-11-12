@@ -100,6 +100,48 @@
 </div>
 </section>
 
+<section class="section bg-paper-2" data-screen-label="Couches">
+<div class="container">
+<div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);">
+<div class="reveal">
+<span class="eyebrow">Défense en profondeur</span>
+<h2 class="h2 mt-s">Une couche mobile, en plus des couches fixes.</h2>
+<p class="lead mt-s">Le drone ne remplace aucune couche existante. Il ajoute un moyen de vérifier, indépendant des équipements fixes.</p>
+<p class="muted mt-s">Si une caméra ne couvre pas la zone de l'alerte, le drone y va. L'opérateur obtient un second point de vue avant de décider.</p>
+</div>
+<div class="reveal" data-d="1">
+<ol class="layers">
+<li><span class="layer-who">Votre dispositif</span><b>Clôture et détection périmétrique</b><p>Signale un franchissement ou une tentative.</p></li>
+<li><span class="layer-who">Votre dispositif</span><b>Caméras fixes</b><p>Voient ce qu'elles ont été prévues pour voir.</p></li>
+<li><span class="layer-who">Votre dispositif</span><b>Contrôle d'accès</b><p>Filtre les entrées et trace les passages.</p></li>
+<li class="is-fleat"><span class="layer-who">FLEAT</span><b>Drone en station</b><p>Va vérifier un point précis, sous l'angle utile, sur alerte ou en ronde.</p></li>
+</ol>
+
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" data-screen-label="Exemple">
+<div class="container">
+<div class="scn-grid">
+<div class="reveal">
+<span class="eyebrow">Exemple</span>
+<h2 class="h2 mt-s">Une alarme de clôture, à 4 h 10.</h2>
+<p class="lead mt-s">Ce qui se passe entre l'alerte et la décision, et qui agit à chaque étape.</p>
+<p class="scn-note">Exemple d'illustration. Les délais réels dépendent du site et de la procédure retenue.</p>
+</div>
+<ol class="scn reveal" data-d="1">
+<li class="is-alert"><div class="scn-meta"><time>04:10:00</time><span class="scn-who is-site">Votre dispositif</span></div><p>La détection périmétrique signale un événement sur la clôture nord.</p></li>
+<li><div class="scn-meta"><time>04:10:05</time><span class="scn-who is-fleat">FLEAT</span></div><p>L'alerte arrive dans FLEAT. Le drone part vers la clôture nord.</p></li>
+<li><div class="scn-meta"><time>04:10:45</time><span class="scn-who is-fleat">FLEAT</span></div><p>Le drone est sur zone en 40&nbsp;s environ. L'image arrive au PC sécurité.</p></li>
+<li><div class="scn-meta"><time>04:11:30</time><span class="scn-who is-team">Vos équipes</span></div><p>L'opérateur observe la clôture en thermique : un animal a déclenché la détection.</p></li>
+<li class="is-decision"><div class="scn-meta"><time>04:12:10</time><span class="scn-who is-team">Vos équipes</span></div><p>Il classe l'alerte. L'événement est tracé, images à l'appui, pour le rapport.</p></li>
+</ol>
+</div>
+</div>
+</section>
+
 <section class="section bg-paper-2" data-screen-label="Usages">
 <div class="container">
 <div class="section-head reveal"><span class="eyebrow">Sur votre site</span><h2 class="h2">Ce que fait le drone autour d'un data center.</h2></div>
@@ -111,20 +153,6 @@
 <div class="card reveal feature" data-d="1"><span class="step-num">05</span><h3>Contrôle des abords</h3><p>Clôtures, portails et voiries sont contrôlés à chaque ronde. Un changement apparaît d'un passage à l'autre.</p></div>
 <div class="card reveal feature" data-d="2"><span class="step-num">06</span><h3>Accès et rôles</h3><p>Comptes et rôles par utilisateur, journal des actions. Chaque consultation est tracée.</p></div>
 </div>
-</div>
-</section>
-
-<section class="section bg-dark radar-bg" data-screen-label="Concrètement">
-<div class="container">
-<div class="section-head reveal"><span class="eyebrow">Exemple</span><h2 class="h2">Concrètement : une alarme de clôture à 4 h 10.</h2><p class="lead">Ce qui se passe entre l'alerte et la décision, et qui agit à chaque étape.</p></div>
-<ol class="in-run reveal" data-d="1">
-<li class="is-alert"><time>04:10:00</time><span class="in-who is-site">Votre dispositif</span><p>La détection périmétrique signale un événement sur la clôture nord.</p></li>
-<li><time>04:10:05</time><span class="in-who is-fleat">FLEAT</span><p>L'alerte arrive dans FLEAT. Le drone part vers la clôture nord.</p></li>
-<li><time>04:10:45</time><span class="in-who is-fleat">FLEAT</span><p>Le drone est sur zone en 40&nbsp;s environ. L'image arrive au PC sécurité.</p></li>
-<li><time>04:11:30</time><span class="in-who is-team">Vos équipes</span><p>L'opérateur observe la clôture en thermique : un animal a déclenché la détection.</p></li>
-<li class="is-done"><time>04:12:10</time><span class="in-who is-team">Vos équipes</span><p>Il classe l'alerte. L'événement est tracé, images à l'appui, pour le rapport.</p></li>
-</ol>
-<p class="in-caption reveal">Exemple d'illustration. Les délais réels dépendent du site et de la procédure retenue.</p>
 </div>
 </section>
 

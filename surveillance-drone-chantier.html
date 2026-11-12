@@ -100,7 +100,23 @@
 </div>
 </section>
 
-<section class="section bg-paper-2" data-screen-label="Usages">
+<section class="section bg-paper-2" data-screen-label="Avant après">
+<div class="container">
+<div class="section-head reveal"><span class="eyebrow">Même point de vue, deux dates</span><h2 class="h2">Le chantier avance, le drone garde la mémoire.</h2><p class="lead">Le drone rejoue la même trajectoire à chaque passage. Faites glisser pour comparer deux dates.</p></div>
+<div class="reveal" style="margin-top:clamp(28px,3vw,40px);">
+<div class="cmp" style="aspect-ratio:21/9;">
+<img class="cmp-crop-j0" src="assets/photos/chantier-stockage-materiaux-2000.webp" width="2000" height="1125" srcset="assets/photos/chantier-stockage-materiaux-640.webp 640w, assets/photos/chantier-stockage-materiaux-1024.webp 1024w, assets/photos/chantier-stockage-materiaux-1600.webp 1600w, assets/photos/chantier-stockage-materiaux-2000.webp 2000w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'un chantier à un stade plus avancé">
+<div class="cmp-b"><img src="assets/photos/chantier-terrassement-2000.webp" width="2000" height="1125" srcset="assets/photos/chantier-terrassement-640.webp 640w, assets/photos/chantier-terrassement-1024.webp 1024w, assets/photos/chantier-terrassement-1600.webp 1600w, assets/photos/chantier-terrassement-2000.webp 2000w" sizes="(max-width: 900px) 100vw, 50vw" alt="Vue aérienne d'un chantier en phase de terrassement"></div>
+<span class="cmp-tag l">Mars · J0</span><span class="cmp-tag r">Septembre · J+180</span>
+<div class="cmp-line"></div>
+<input type="range" min="0" max="100" value="50" aria-label="Comparer deux dates de passage">
+</div>
+<p class="cmp-cap">Illustration sur deux vues aériennes de chantier.</p>
+</div>
+</div>
+</section>
+
+<section class="section" data-screen-label="Usages">
 <div class="container">
 <div class="section-head reveal"><span class="eyebrow">Sur votre site</span><h2 class="h2">Ce que fait le drone sur un chantier.</h2></div>
 <div class="grid g-3" style="margin-top:clamp(32px,4vw,48px);">
@@ -114,32 +130,27 @@
 </div>
 </section>
 
-<section class="section bg-dark radar-bg" data-screen-label="Concrètement">
+<section class="section bg-paper-2" data-screen-label="Exemple">
 <div class="container">
-<div class="section-head reveal"><span class="eyebrow">Exemple</span><h2 class="h2">Concrètement : un véhicule sur le chantier un samedi à 21 h 30.</h2><p class="lead">Ce qui se passe entre l'alerte et la décision, et qui agit à chaque étape.</p></div>
-<ol class="in-run reveal" data-d="1">
-<li class="is-alert"><time>21:30:00</time><span class="in-who is-site">Votre dispositif</span><p>Le contrôle d'accès signale l'ouverture du portail, hors horaires.</p></li>
-<li><time>21:30:05</time><span class="in-who is-fleat">FLEAT</span><p>L'alerte arrive dans FLEAT. Le drone part vers l'entrée du chantier.</p></li>
-<li><time>21:30:45</time><span class="in-who is-fleat">FLEAT</span><p>Le drone est sur zone en 40&nbsp;s environ. L'image arrive au PC sécurité.</p></li>
-<li><time>21:31:30</time><span class="in-who is-team">Vos équipes</span><p>L'opérateur voit un véhicule arrêté près du stock de matériel.</p></li>
-<li class="is-done"><time>21:32:10</time><span class="in-who is-team">Vos équipes</span><p>Il prévient les forces de l'ordre, images datées et localisées à l'appui.</p></li>
+<div class="scn-grid">
+<div class="reveal">
+<span class="eyebrow">Exemple</span>
+<h2 class="h2 mt-s">Un véhicule sur le chantier, un samedi à 21 h 30.</h2>
+<p class="lead mt-s">Ce qui se passe entre l'alerte et la décision, et qui agit à chaque étape.</p>
+<p class="scn-note">Exemple d'illustration. Les délais réels dépendent du site et de la procédure retenue.</p>
+</div>
+<ol class="scn reveal" data-d="1">
+<li class="is-alert"><div class="scn-meta"><time>21:30:00</time><span class="scn-who is-site">Votre dispositif</span></div><p>Le contrôle d'accès signale l'ouverture du portail, hors horaires.</p></li>
+<li><div class="scn-meta"><time>21:30:05</time><span class="scn-who is-fleat">FLEAT</span></div><p>L'alerte arrive dans FLEAT. Le drone part vers l'entrée du chantier.</p></li>
+<li><div class="scn-meta"><time>21:30:45</time><span class="scn-who is-fleat">FLEAT</span></div><p>Le drone est sur zone en 40&nbsp;s environ. L'image arrive au PC sécurité.</p></li>
+<li><div class="scn-meta"><time>21:31:30</time><span class="scn-who is-team">Vos équipes</span></div><p>L'opérateur voit un véhicule arrêté près du stock de matériel.</p></li>
+<li class="is-decision"><div class="scn-meta"><time>21:32:10</time><span class="scn-who is-team">Vos équipes</span></div><p>Il prévient les forces de l'ordre, images datées et localisées à l'appui.</p></li>
 </ol>
-<p class="in-caption reveal">Exemple d'illustration. Les délais réels dépendent du site et de la procédure retenue.</p>
-</div>
-</section>
-
-<section class="section" data-screen-label="Comparaison">
-<div class="container">
-<div class="section-head reveal"><span class="eyebrow">Avant, après</span><h2 class="h2">Ce qui change sur un chantier.</h2></div>
-<div class="grid g-3" style="margin-top:clamp(32px,4vw,48px);">
-<div class="card reveal cmp-card"><h3>Soirs et week-ends</h3><p class="cmp-before"><span>Aujourd'hui</span>Gardiennage physique, ou chantier laissé sans présence.</p><p class="cmp-after"><span>Avec le drone</span>Des rondes programmées hors activité, et une vérification à chaque alerte.</p></div>
-<div class="card reveal cmp-card" data-d="1"><h3>Un site qui évolue</h3><p class="cmp-before"><span>Aujourd'hui</span>Les caméras fixes sont à repositionner à chaque phase.</p><p class="cmp-after"><span>Avec le drone</span>Les trajectoires du drone évoluent avec le chantier.</p></div>
-<div class="card reveal cmp-card" data-d="2"><h3>Constats</h3><p class="cmp-before"><span>Aujourd'hui</span>Des photos ponctuelles, prises à pied.</p><p class="cmp-after"><span>Avec le drone</span>Des vues aériennes répétables, au même cadrage, à chaque passage.</p></div>
 </div>
 </div>
 </section>
 
-<section class="section bg-paper-2" data-screen-label="Étude">
+<section class="section" data-screen-label="Étude">
 <div class="container">
 <div class="grid g-2" style="align-items:start; gap:clamp(32px,5vw,72px);">
 <div class="reveal">
@@ -159,7 +170,7 @@
 </div>
 </section>
 
-<section class="section" data-screen-label="Questions">
+<section class="section bg-paper-2" data-screen-label="Questions">
 <div class="container container-narrow">
 <div class="section-head reveal"><span class="eyebrow">Vos questions</span><h2 class="h2">Les questions des responsables de chantier.</h2></div>
 <div data-faq-group style="margin-top:clamp(28px,4vw,40px);"><div class="faq-item open"><button class="faq-q" aria-expanded="true">Le dispositif suit-il l'évolution du chantier ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Oui. Les trajectoires de mission se reconfigurent à mesure que le chantier évolue. Le phasage est pris en compte dès l'étude.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Que fait le drone les soirs et week-ends ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Il fait des rondes programmées pendant les périodes d'inactivité. Après une alarme, il part sur la zone et y arrive en 40&nbsp;s environ, selon la configuration du site.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Et les grues ou les obstacles en hauteur ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Ils font partie de l'étude. Grues et obstacles sont pris en compte dans la conception des trajectoires.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Le drone remplace-t-il le gardiennage ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Non. Le drone renforce la capacité d'observation et accélère la levée de doute. Nous étudions vos besoins de gardiennage actuels pour définir le bon dispositif.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">L'usage d'un drone est-il autorisé sur notre chantier ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Cela dépend du site et de son environnement aéronautique. Nous préparons le scénario de vol selon le cadre applicable, avant tout engagement.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">La station a-t-elle besoin d'un raccordement électrique ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Oui, la station est posée et raccordée sur le site. Son emplacement est choisi pendant l'étude, en tenant compte des phases du chantier.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Les images peuvent-elles servir au suivi de travaux ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Oui. Les vues sont prises au même cadrage à chaque passage. L'avancement est documenté et partageable avec la maîtrise d'ouvrage.</p></div></div></div></div>

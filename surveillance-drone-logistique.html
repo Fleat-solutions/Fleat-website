@@ -106,7 +106,7 @@
 <div class="grid g-3" style="margin-top:clamp(32px,4vw,48px);">
 <div class="card reveal feature"><span class="step-num">01</span><h3>Rondes de périmètre</h3><p>Clôtures, parkings et quais sont contrôlés à intervalles réguliers, de jour comme de nuit.</p></div>
 <div class="card reveal feature" data-d="1"><span class="step-num">02</span><h3>Levée de doute</h3><p>Une détection en fond de parking : le drone est sur zone en 40&nbsp;s environ. Vous voyez la scène avant de déplacer un agent.</p></div>
-<div class="card reveal feature" data-d="2"><span class="step-num">03</span><h3>Vue d'ensemble</h3><p>La vue aérienne montre d'un coup d'œil les remorques, les accès et les véhicules présents. La situation se qualifie plus vite.</p></div>
+<div class="card reveal feature" data-d="2"><span class="step-num">03</span><h3>Vue d'ensemble</h3><p>La vue aérienne montre d'un coup d'œil les remorques, les accès et les véhicules présents. Chaque ronde donne un relevé.</p></div>
 <div class="card reveal feature"><span class="step-num">04</span><h3>Toitures et hauteurs</h3><p>Toitures et équipements en hauteur sont observés sans exposer personne.</p></div>
 <div class="card reveal feature" data-d="1"><span class="step-num">05</span><h3>Plusieurs plateformes</h3><p>Plusieurs sites se suivent depuis le même écran, dans une interface unique.</p></div>
 <div class="card reveal feature" data-d="2"><span class="step-num">06</span><h3>Historique</h3><p>Chaque passage est horodaté et conservé. L'état d'une zone se retrouve à une date donnée.</p></div>
@@ -114,32 +114,55 @@
 </div>
 </section>
 
-<section class="section bg-dark radar-bg" data-screen-label="Concrètement">
+<section class="section" data-screen-label="Relevé">
 <div class="container">
-<div class="section-head reveal"><span class="eyebrow">Exemple</span><h2 class="h2">Concrètement : une intrusion sur le parking poids lourds à 1 h 50.</h2><p class="lead">Ce qui se passe entre l'alerte et la décision, et qui agit à chaque étape.</p></div>
-<ol class="in-run reveal" data-d="1">
-<li class="is-alert"><time>01:50:00</time><span class="in-who is-site">Votre dispositif</span><p>Le détecteur de clôture du parking poids lourds déclenche une alarme.</p></li>
-<li><time>01:50:05</time><span class="in-who is-fleat">FLEAT</span><p>L'alerte arrive dans FLEAT. Le drone part vers le fond du parking.</p></li>
-<li><time>01:50:45</time><span class="in-who is-fleat">FLEAT</span><p>Le drone est sur zone en 40&nbsp;s environ. L'image arrive au PC sécurité.</p></li>
-<li><time>01:51:30</time><span class="in-who is-team">Vos équipes</span><p>L'opérateur voit deux personnes près d'une remorque. Il suit la scène en thermique.</p></li>
-<li class="is-done"><time>01:52:10</time><span class="in-who is-team">Vos équipes</span><p>Il engage une intervention et prévient les forces de l'ordre. L'événement est tracé.</p></li>
+<div class="grid g-2" style="align-items:center; gap:clamp(32px,5vw,72px);">
+<div class="reveal">
+<span class="eyebrow">Après chaque ronde</span>
+<h2 class="h2 mt-s">Chaque ronde se termine par un relevé.</h2>
+<p class="lead mt-s">Le drone ne fait pas que filmer. Chaque passage donne un état des lieux de la plateforme.</p>
+<p class="muted mt-s">Véhicules présents, remorques à quai, portails, anomalies : les éléments à relever sont définis avec vous. Le relevé est horodaté et conservé dans l'historique.</p>
+</div>
+<div class="reveal" data-d="1">
+<div class="report">
+<div class="report-head"><span>Relevé de ronde</span><time>22:00</time></div>
+<ul class="report-rows">
+<li><span>Remorques à quai</span><b>18</b></li>
+<li><span>Remorques sur parking</span><b>34</b></li>
+<li><span>Poids lourds en attente</span><b>6</b></li>
+<li class="is-warn"><span>Portails</span><b>1 ouvert sur 4</b></li>
+<li class="is-ok"><span>Clôture</span><b>Aucune anomalie</b></li>
+<li class="is-ok"><span>Stockage extérieur</span><b>Aucune anomalie</b></li>
+</ul>
+<div class="report-foot">Ronde complète · 12 points de passage · images jointes</div>
+</div>
+<p class="cmp-cap">Valeurs d'illustration.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section bg-paper-2" data-screen-label="Exemple">
+<div class="container">
+<div class="scn-grid">
+<div class="reveal">
+<span class="eyebrow">Exemple</span>
+<h2 class="h2 mt-s">Une intrusion sur le parking poids lourds, à 1 h 50.</h2>
+<p class="lead mt-s">Ce qui se passe entre l'alerte et la décision, et qui agit à chaque étape.</p>
+<p class="scn-note">Exemple d'illustration. Les délais réels dépendent du site et de la procédure retenue.</p>
+</div>
+<ol class="scn reveal" data-d="1">
+<li class="is-alert"><div class="scn-meta"><time>01:50:00</time><span class="scn-who is-site">Votre dispositif</span></div><p>Le détecteur de clôture du parking poids lourds déclenche une alarme.</p></li>
+<li><div class="scn-meta"><time>01:50:05</time><span class="scn-who is-fleat">FLEAT</span></div><p>L'alerte arrive dans FLEAT. Le drone part vers le fond du parking.</p></li>
+<li><div class="scn-meta"><time>01:50:45</time><span class="scn-who is-fleat">FLEAT</span></div><p>Le drone est sur zone en 40&nbsp;s environ. L'image arrive au PC sécurité.</p></li>
+<li><div class="scn-meta"><time>01:51:30</time><span class="scn-who is-team">Vos équipes</span></div><p>L'opérateur voit deux personnes près d'une remorque. Il suit la scène en thermique.</p></li>
+<li class="is-decision"><div class="scn-meta"><time>01:52:10</time><span class="scn-who is-team">Vos équipes</span></div><p>Il engage une intervention et prévient les forces de l'ordre. L'événement est tracé.</p></li>
 </ol>
-<p class="in-caption reveal">Exemple d'illustration. Les délais réels dépendent du site et de la procédure retenue.</p>
-</div>
-</section>
-
-<section class="section" data-screen-label="Comparaison">
-<div class="container">
-<div class="section-head reveal"><span class="eyebrow">Avant, après</span><h2 class="h2">Ce qui change sur une plateforme logistique.</h2></div>
-<div class="grid g-3" style="margin-top:clamp(32px,4vw,48px);">
-<div class="card reveal cmp-card"><h3>Parkings</h3><p class="cmp-before"><span>Aujourd'hui</span>Le fond des parkings et les lignes de clôture sont peu vus par les caméras.</p><p class="cmp-after"><span>Avec le drone</span>Ils sont survolés à chaque ronde, de jour comme de nuit.</p></div>
-<div class="card reveal cmp-card" data-d="1"><h3>Alertes</h3><p class="cmp-before"><span>Aujourd'hui</span>Une alerte en fond de parking impose un trajet à pied ou en véhicule.</p><p class="cmp-after"><span>Avec le drone</span>La vérification se fait en image. L'agent se déplace sur les cas confirmés.</p></div>
-<div class="card reveal cmp-card" data-d="2"><h3>Rondes</h3><p class="cmp-before"><span>Aujourd'hui</span>Les rondes se font entre deux tâches, à des heures variables.</p><p class="cmp-after"><span>Avec le drone</span>Les rondes suivent un planning fixe. Chaque passage est tracé.</p></div>
 </div>
 </div>
 </section>
 
-<section class="section bg-paper-2" data-screen-label="Étude">
+<section class="section" data-screen-label="Étude">
 <div class="container">
 <div class="grid g-2" style="align-items:start; gap:clamp(32px,5vw,72px);">
 <div class="reveal">
@@ -159,7 +182,7 @@
 </div>
 </section>
 
-<section class="section" data-screen-label="Questions">
+<section class="section bg-paper-2" data-screen-label="Questions">
 <div class="container container-narrow">
 <div class="section-head reveal"><span class="eyebrow">Vos questions</span><h2 class="h2">Les questions des responsables sûreté logistique.</h2></div>
 <div data-faq-group style="margin-top:clamp(28px,4vw,40px);"><div class="faq-item open"><button class="faq-q" aria-expanded="true">Le drone peut-il voler pendant l'activité du site ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Les trajectoires sont définies avec vous. Elles tiennent compte des zones de circulation et des horaires d'exploitation. Le cadre précis est fixé pendant l'étude.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Fonctionne-t-il avec nos caméras et nos alarmes ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Oui, c'est le principe. Une alarme ou une détection caméra peut déclencher une mission. La compatibilité précise est confirmée pendant l'étude de votre site.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Le drone vole-t-il la nuit ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Oui. Il emporte une caméra visible et une caméra thermique, pour des vols de jour comme de nuit.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Quelle surface un vol peut-il couvrir ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Jusqu'à 40&nbsp;ha par vol, selon la configuration du site. Entre deux vols, le drone se recharge seul dans sa station.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Le drone remplace-t-il nos agents de sécurité ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Non. Le drone renforce la capacité d'observation et accélère la levée de doute. Vos équipes gardent la décision et interviennent quand c'est nécessaire.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Peut-on suivre plusieurs plateformes ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Oui. FLEAT centralise le suivi de plusieurs sites dans une interface unique.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Que se passe-t-il en cas de mauvaise météo ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Les conditions météo font partie des contraintes étudiées dès la conception. Les scénarios de mission en tiennent compte.</p></div></div></div></div>
