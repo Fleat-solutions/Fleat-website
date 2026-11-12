@@ -1125,8 +1125,11 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .rt-alert b { color: var(--ink); font-weight: 600; }
 @media (max-width: 900px) {
   .rl-grid { grid-template-columns: 1fr; }
-  .rl-photo { min-height: 0; aspect-ratio: 4 / 3; }
+  .rl-photo { min-height: 0; aspect-ratio: 1100 / 560; }
   .route { grid-template-columns: 1fr; gap: 18px; }
   .route::before { left: 7px; right: auto; top: 8px; bottom: 8px; border-top: 0; border-left: 2px dashed var(--line-2); }
   .route li { flex-direction: row; text-align: left; gap: 16px; }
 }
+.rl-mark { position: absolute; left: 55.9%; top: 67.9%; width: 46px; height: 46px; transform: translate(-50%, -50%); border: 2px solid var(--warn-on-dark); border-radius: 50%; box-shadow: 0 0 0 4px rgba(0,0,0,.25); animation: feedpulse 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .rl-mark { animation: none; } }
+@media (max-width: 900px) { .rl-mark { width: 30px; height: 30px; } }

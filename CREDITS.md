@@ -50,6 +50,7 @@ Correspondance fichier et photo source (identifiant Unsplash) :
 | `operateur-ecrans-supervision` | `photo-1708807472445-d33589e6b090` |
 | `parc-photovoltaique` | `photo-1641959166364-6c9b9898e804` |
 | `plateforme-logistique-quais` | `photo-1565891741441-64926e441838` |
+| `releve-quais` (recadrage de plateforme-logistique-quais) | `photo-1565891741441-64926e441838` |
 | `poste-electrique` | `photo-1693013112835-5f3128bb555f` |
 | `remorques-parking-poids-lourds` | `photo-1565793298595-6a879b1d9492` |
 | `salle-de-supervision` | `photo-1589186161289-9eb8898086df` |
