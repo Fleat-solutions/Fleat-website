@@ -30,10 +30,43 @@ Aucune image sous licence **Unsplash+** / Getty Images n'est utilisée
 
 ## Mise en œuvre technique
 
-Les images sont servies depuis le CDN Unsplash (`images.unsplash.com`),
-conformément aux recommandations d'Unsplash sur le hotlinking. Paramètres
-appliqués : `auto=format` (WebP/AVIF selon le navigateur), `q=70`,
-`w=1600`, `fit=crop`. Tous les visuels hors hero sont en `loading="lazy"`.
+Les photographies sont hébergées sur le site, dans `assets/photos/`, et non
+plus chargées depuis le CDN Unsplash. Chaque fichier est nommé d'après son
+sujet et décliné par largeur (`-640`, `-1024`, `-1600`, et `-2000` ou `-2400`
+pour les visuels plein écran), au format WebP, servi via `srcset`.
+Tous les visuels hors hero sont en `loading="lazy"`.
+
+Correspondance fichier et photo source (identifiant Unsplash) :
+
+| Fichier | Identifiant Unsplash |
+|---|---|
+| `acierie-nuit` | `photo-1761414500570-0b835cdcf3c8` |
+| `batiment-technique` | `photo-1715026323313-bb22cbe42381` |
+| `chantier-stockage-materiaux` | `photo-1762335799349-c7c4c8487432` |
+| `chantier-terrassement` | `photo-1723367194881-fe2e53534170` |
+| `chantier-voirie` | `photo-1723369962534-34866660b716` |
+| `cimenterie-bord-eau` | `photo-1666219462105-2909c2d72d01` |
+| `eolienne-brouillard` | `photo-1615209853186-e4bd66602508` |
+| `operateur-ecrans-supervision` | `photo-1708807472445-d33589e6b090` |
+| `parc-photovoltaique` | `photo-1641959166364-6c9b9898e804` |
+| `plateforme-logistique-quais` | `photo-1565891741441-64926e441838` |
+| `poste-electrique` | `photo-1693013112835-5f3128bb555f` |
+| `remorques-parking-poids-lourds` | `photo-1565793298595-6a879b1d9492` |
+| `salle-de-supervision` | `photo-1589186161289-9eb8898086df` |
+| `site-industriel-nuit` | `photo-1670689334799-cdc6777db8cc` |
+| `usine-installations-techniques` | `photo-1513257805917-a0da1146eb15` |
+| `usine-silos` | `photo-1729286283040-bc4b75550106` |
+| `zone-industrielle-stockage` | `photo-1703332156054-2f196bfe5932` |
+
+## Photos fournies par FLEAT (source à compléter)
+
+| Fichier | Usage | Source |
+|---|---|---|
+| `ferraille-quai` | Hero recyclage | À compléter (lien de la page photo) |
+| `acierie-ferraille` | Section recyclage de /secteurs | À compléter (lien de la page photo) |
+| `releve-plateforme` | Logistique · relevé de ronde (tournée d'un quart de tour, recadrée, marquages de transporteurs floutés) | À compléter (lien de la page photo) |
+| `ferraille-visible` | Recyclage · vue du drone à l'œil nu (photo du wagon recadrée) | À compléter (lien de la page photo) |
+| `ferraille-thermique` | Recyclage · vue du drone, rendu thermique simulé à partir de la photo du wagon (recadrée) | À compléter (lien de la page photo) |
 
 ## À remplacer par des visuels propriétaires
 
