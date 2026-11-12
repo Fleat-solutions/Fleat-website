@@ -75,17 +75,36 @@
 <div class="container">
 <div class="page-hero-inner hero-copy">
 <h1 class="seo-title hero-kicker">Surveillance de data centers par drone</h1>
-<p class="display">Votre périmètre est équipé.<br>Ajoutez un point de vue.</p>
+<p class="display">Votre périmètre est équipé.<br>Ajoutez un regard.</p>
 <p class="lead" style="margin-top:22px; max-width:46ch;">Un drone en station vérifie une alerte sous l'angle utile, avant tout déplacement.</p>
 <div class="cta-row" style="margin-top:34px;">
 <a class="btn btn-primary btn-lg" href="/contact">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-<a class="btn btn-ghost-light btn-lg" href="#couches">Voir où se place le drone</a>
+<a class="btn btn-ghost-light btn-lg" href="#nuit">Voir une nuit d'alertes</a>
 </div>
 </div>
 </div>
 </section>
 
-<section class="section bg-dark" id="couches" data-screen-label="Couches">
+<section class="section bg-dark" id="nuit" data-screen-label="Journal">
+<div class="container">
+<div class="reveal" style="max-width:760px;">
+<h2 class="h2">Une nuit, six alertes.<br>Une seule méritait un déplacement.</h2>
+<p class="lead mt-s">Le drone vérifie chaque alerte en image. Vos agents ne se déplacent que pour celle qui compte.</p>
+</div>
+<ol class="journal">
+<li class="reveal is-ok"><time>00:42</time><div class="jn-where"><b>Clôture nord</b><span>Détection périmétrique</span></div><p>Un animal longe la clôture</p><span class="jn-out">Classée</span></li>
+<li class="reveal is-ok" data-d="1"><time>01:58</time><div class="jn-where"><b>Parking visiteurs</b><span>Caméra 07</span></div><p>Véhicule de l'équipe d'astreinte</p><span class="jn-out">Classée</span></li>
+<li class="reveal is-ok" data-d="2"><time>02:37</time><div class="jn-where"><b>Clôture est</b><span>Détection périmétrique</span></div><p>Végétation agitée par le vent</p><span class="jn-out">Classée</span></li>
+<li class="reveal is-warn" data-d="3"><time>03:15</time><div class="jn-where"><b>Portail de livraison</b><span>Contrôle d'accès</span></div><p>Accès refusé, une personne sur zone</p><span class="jn-out">Intervention</span></li>
+<li class="reveal is-ok" data-d="3"><time>04:10</time><div class="jn-where"><b>Clôture nord</b><span>Détection périmétrique</span></div><p>Un animal, de nouveau</p><span class="jn-out">Classée</span></li>
+<li class="reveal is-ok" data-d="3"><time>05:20</time><div class="jn-where"><b>Groupes électrogènes</b><span>Ronde thermique</span></div><p>Aucune anomalie</p><span class="jn-out">Ronde</span></li>
+</ol>
+<div class="jn-sum reveal"><span>6 événements</span><span>5 classés en image</span><span class="is-warn">1 intervention</span></div>
+<p class="cmp-cap reveal">Exemple d'illustration. Chaque événement est horodaté et conservé dans l'historique.</p>
+</div>
+</section>
+
+<section class="section" id="couches" data-screen-label="Couches">
 <div class="container">
 <div class="grid g-2" style="align-items:center; gap:clamp(36px,5vw,80px);">
 <div class="reveal">
@@ -101,26 +120,6 @@
 </ol>
 </div>
 </div>
-</div>
-</section>
-
-<section class="section" data-screen-label="Usages">
-<div class="container">
-<div class="trio">
-<div class="reveal"><h2>Levée de doute</h2><p>Une alerte périmétrique, confirmée ou écartée en image.</p></div>
-<div class="reveal" data-d="1"><h2>Équipements</h2><p>Groupes électrogènes et transformateurs en thermique, à chaque ronde.</p></div>
-<div class="reveal" data-d="2"><h2>Traçabilité</h2><p>Missions, événements et décisions horodatés, prêts pour vos audits.</p></div>
-</div>
-</div>
-</section>
-
-<section class="section bg-dark radar-bg" data-screen-label="Exemple">
-<div class="container">
-<ol class="beats">
-<li class="reveal"><time>04:10</time><p>La détection signale un événement sur la clôture nord.</p></li>
-<li class="reveal" data-d="1"><time>04:11</time><p>Le drone est sur zone. Un animal longe la clôture.</p></li>
-<li class="reveal" data-d="2"><time>04:12</time><p>Vous classez l'alerte. <span>Personne ne s'est déplacé.</span></p></li>
-</ol>
 </div>
 </section>
 
