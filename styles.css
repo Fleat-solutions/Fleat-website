@@ -1155,3 +1155,18 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   .journal li.is-warn { padding-left: 12px; margin-left: -12px; }
 }
 @media (max-width: 900px) { .rl-photo .feed-tag { top: 10px; bottom: auto; } }
+
+/* Logistique : relevé interactif */
+.rl-boxes { position: absolute; inset: 0; pointer-events: none; }
+.rl-box { position: absolute; border: 2px solid #fff; border-radius: 4px; box-shadow: 0 0 0 1px rgba(0,0,0,.35), 0 0 12px rgba(255,255,255,.35); opacity: 0; transform: scale(1.15); transition: opacity .25s ease, transform .25s ease; }
+.rl-box.is-warn { border-color: var(--warn-on-dark); box-shadow: 0 0 0 1px rgba(0,0,0,.35), 0 0 14px rgba(217,138,43,.5); }
+.rl-box.is-zone { border-radius: 0; border-width: 2px 0 0; border-style: dashed; background: rgba(140,220,170,.22); box-shadow: none; }
+.rl-box.is-on { opacity: 1; transform: none; }
+.rl-box.is-warn.is-on { animation: feedpulse 2.4s ease-in-out infinite; }
+.rl-rows li { padding: 0 !important; }
+.rl-row { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 16px; padding: 13px 12px; margin: 0 -12px; width: calc(100% + 24px); background: none; border: 0; border-radius: 8px; font: inherit; color: inherit; text-align: left; cursor: pointer; transition: background .15s; }
+.rl-row:hover, .rl-row:focus-visible { background: rgba(255,255,255,.05); }
+.rl-row:focus-visible { outline: 2px solid var(--accent-400); outline-offset: -2px; }
+.rl-row.is-active { background: rgba(255,255,255,.08); }
+.rl-rows li.is-warn .rl-row.is-active { background: rgba(217,138,43,.1); }
+@media (prefers-reduced-motion: reduce) { .rl-box { transition: none; } .rl-box.is-warn.is-on { animation: none; } }

@@ -92,24 +92,37 @@
 <p class="lead mt-s">Le drone ne fait pas que filmer. Il fait l'état des lieux de la plateforme.</p>
 </div>
 <div class="rl-grid">
-<figure class="rl-photo reveal">
+<figure class="rl-photo reveal" id="rl-photo">
 <img src="assets/photos/releve-plateforme-769.webp" width="769" height="370" srcset="assets/photos/releve-plateforme-640.webp 640w, assets/photos/releve-plateforme-769.webp 769w" sizes="(max-width: 900px) 100vw, 60vw" alt="Façade de quais d'un entrepôt vue du dessus par le drone : poids lourds et remorques à quai, un tracteur seul, une voiture stationnée et des palettes stockées sur l'aire" loading="lazy">
-<span class="rl-mark is-zone" aria-hidden="true" style="left:70.2%; top:47.6%; width:6.1%; height:30.5%;"></span>
+<div class="rl-boxes" aria-hidden="true">
+<span class="rl-box" data-g="quai" style="left:1.0%; top:47.8%; width:3.3%; height:35.7%;"></span>
+<span class="rl-box" data-g="quai" style="left:8.8%; top:45.7%; width:2.9%; height:20.3%;"></span>
+<span class="rl-box" data-g="quai" style="left:16.5%; top:48.9%; width:2.7%; height:21.9%;"></span>
+<span class="rl-box" data-g="quai" style="left:35.8%; top:51.6%; width:3.1%; height:28.4%;"></span>
+<span class="rl-box" data-g="quai" style="left:43.8%; top:45.4%; width:3.4%; height:28.1%;"></span>
+<span class="rl-box" data-g="quai" style="left:60.1%; top:47.3%; width:3.6%; height:27.6%;"></span>
+<span class="rl-box" data-g="quai" style="left:80.2%; top:45.9%; width:3.9%; height:27.6%;"></span>
+<span class="rl-box" data-g="quai" style="left:87.1%; top:44.3%; width:4.3%; height:27.6%;"></span>
+<span class="rl-box" data-g="tracteur" style="left:27.8%; top:65.4%; width:3.0%; height:13.8%;"></span>
+<span class="rl-box" data-g="vl" style="left:21.1%; top:65.4%; width:5.1%; height:5.1%;"></span>
+<span class="rl-box is-warn" data-g="palettes" style="left:70.6%; top:50.0%; width:5.5%; height:28.4%;"></span>
+<span class="rl-box is-zone" data-g="voie" style="left:0.0%; top:80.5%; width:100.0%; height:19.5%;"></span>
+</div>
 <span class="feed-tag">Ronde de 07:30 · façade de quais</span>
 </figure>
 <div class="report rl-report reveal" data-d="1">
 <div class="report-head"><span>Relevé · façade de quais</span><time>07:30</time></div>
-<ul class="report-rows">
-<li><span>Poids lourds et remorques à quai</span><b data-count="8">8</b></li>
-<li><span>Tracteur sans remorque</span><b data-count="1">1</b></li>
-<li><span>Véhicule léger stationné</span><b data-count="1">1</b></li>
-<li class="is-warn"><span>Palettes stockées sur l'aire de quais</span><b>À vérifier</b></li>
-<li class="is-ok"><span>Voie de circulation</span><b>Dégagée</b></li>
+<ul class="report-rows rl-rows">
+<li><button type="button" class="rl-row" data-show="quai" aria-controls="rl-photo" aria-pressed="false"><span>Poids lourds et remorques à quai</span><b data-count="8">8</b></button></li>
+<li><button type="button" class="rl-row" data-show="tracteur" aria-controls="rl-photo" aria-pressed="false"><span>Tracteur sans remorque</span><b data-count="1">1</b></button></li>
+<li><button type="button" class="rl-row" data-show="vl" aria-controls="rl-photo" aria-pressed="false"><span>Véhicule léger stationné</span><b data-count="1">1</b></button></li>
+<li class="is-warn"><button type="button" class="rl-row is-active" data-show="palettes" aria-controls="rl-photo" aria-pressed="true"><span>Palettes stockées sur l'aire de quais</span><b>À vérifier</b></button></li>
+<li class="is-ok"><button type="button" class="rl-row" data-show="voie" aria-controls="rl-photo" aria-pressed="false"><span>Voie de circulation</span><b>Dégagée</b></button></li>
 </ul>
 <div class="report-foot">Point de passage 2 sur 5 · images jointes</div>
 </div>
 </div>
-<p class="cmp-cap reveal">Illustration. Les éléments relevés sont définis avec vous.</p>
+<p class="cmp-cap reveal">Sélectionnez une ligne du relevé pour la repérer sur l'image. Illustration, les éléments relevés sont définis avec vous.</p>
 </div>
 </section>
 

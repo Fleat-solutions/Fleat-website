@@ -419,6 +419,30 @@
     counters.forEach(function (c) { countIO.observe(c); });
   }
 
+  /* Relevé interactif : une ligne du relevé encadre ses éléments sur la photo */
+  document.querySelectorAll('.rl-rows').forEach(function (list) {
+    var rows = list.querySelectorAll('.rl-row');
+    var photo = document.getElementById(rows.length ? rows[0].getAttribute('aria-controls') : '');
+    if (!photo) return;
+    var pinned = list.querySelector('.rl-row.is-active');
+    function show(row) {
+      var g = row ? row.getAttribute('data-show') : '';
+      photo.querySelectorAll('.rl-box').forEach(function (b) { b.classList.toggle('is-on', b.getAttribute('data-g') === g); });
+      rows.forEach(function (r) { r.classList.toggle('is-active', r === row); });
+    }
+    rows.forEach(function (row) {
+      row.addEventListener('mouseenter', function () { show(row); });
+      row.addEventListener('focus', function () { show(row); });
+      row.addEventListener('click', function () {
+        pinned = row;
+        rows.forEach(function (r) { r.setAttribute('aria-pressed', r === row ? 'true' : 'false'); });
+        show(row);
+      });
+    });
+    list.addEventListener('mouseleave', function () { show(pinned); });
+    show(pinned);
+  });
+
   /* Comparateurs avant, après (cas d'usage, pages secteurs) */
   document.querySelectorAll('.cmp').forEach(function (cmp) {
     var r = cmp.querySelector('input[type=range]');
