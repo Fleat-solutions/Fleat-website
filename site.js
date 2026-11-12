@@ -397,6 +397,28 @@
     btn.addEventListener('click', window.resetCookieConsent);
   });
 
+  /* Compteurs : défilent jusqu'à leur valeur à l'apparition (data-count) */
+  var counters = document.querySelectorAll('[data-count]');
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (counters.length && !calm && 'IntersectionObserver' in window) {
+    var countIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        countIO.unobserve(e.target);
+        var el = e.target, end = parseInt(el.getAttribute('data-count'), 10), t0 = null;
+        function step(t) {
+          if (!t0) t0 = t;
+          var k = Math.min(1, (t - t0) / 1200);
+          el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3)));
+          if (k < 1) requestAnimationFrame(step);
+        }
+        el.textContent = '0';
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (c) { countIO.observe(c); });
+  }
+
   /* Comparateurs avant, après (cas d'usage, pages secteurs) */
   document.querySelectorAll('.cmp').forEach(function (cmp) {
     var r = cmp.querySelector('input[type=range]');

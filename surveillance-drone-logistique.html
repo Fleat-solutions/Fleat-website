@@ -70,7 +70,7 @@
 </header>
 <main id="contenu" tabindex="-1">
 <section class="hero hero-night" data-screen-label="Hero · Logistique">
-<div class="hero-photo" aria-hidden="true"><img src="assets/photos/remorques-parking-poids-lourds-1600.webp" width="1600" height="1066" srcset="assets/photos/remorques-parking-poids-lourds-640.webp 640w, assets/photos/remorques-parking-poids-lourds-1024.webp 1024w, assets/photos/remorques-parking-poids-lourds-1600.webp 1600w" sizes="100vw" alt="" loading="eager" fetchpriority="high"></div>
+<div class="hero-photo" aria-hidden="true"><img src="assets/photos/plateforme-logistique-quais-1600.webp" width="1600" height="1066" srcset="assets/photos/plateforme-logistique-quais-640.webp 640w, assets/photos/plateforme-logistique-quais-1024.webp 1024w, assets/photos/plateforme-logistique-quais-1600.webp 1600w" sizes="100vw" alt="" loading="eager" fetchpriority="high"></div>
 <div class="hero-grid-bg" aria-hidden="true"></div>
 <div class="container">
 <div class="page-hero-inner hero-copy">
@@ -87,47 +87,48 @@
 
 <section class="section bg-dark" id="releve" data-screen-label="Relevé">
 <div class="container">
-<div class="grid g-2" style="align-items:center; gap:clamp(36px,5vw,80px);">
-<div class="reveal">
+<div class="reveal" style="max-width:720px;">
 <h2 class="h2">Chaque ronde se termine par un relevé.</h2>
-<p class="lead mt-s">Remorques, poids lourds, portails, anomalies. Ce qu'il faut relever est défini avec vous.</p>
+<p class="lead mt-s">Le drone ne fait pas que filmer. Il fait l'état des lieux de la plateforme.</p>
 </div>
-<div class="reveal" data-d="1">
-<div class="report">
+<div class="rl-grid">
+<figure class="rl-photo reveal">
+<img src="assets/photos/remorques-parking-poids-lourds-1600.webp" width="1600" height="1066" srcset="assets/photos/remorques-parking-poids-lourds-640.webp 640w, assets/photos/remorques-parking-poids-lourds-1024.webp 1024w, assets/photos/remorques-parking-poids-lourds-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 60vw" alt="Remorques stationnées sur un parking poids lourds, vues du dessus par le drone" loading="lazy">
+<span class="feed-tag">Ronde de 22:00 · parking poids lourds</span>
+</figure>
+<div class="report rl-report reveal" data-d="1">
 <div class="report-head"><span>Relevé de ronde</span><time>22:00</time></div>
 <ul class="report-rows">
-<li><span>Remorques à quai</span><b>18</b></li>
-<li><span>Remorques sur parking</span><b>34</b></li>
-<li><span>Poids lourds en attente</span><b>6</b></li>
+<li><span>Remorques à quai</span><b data-count="18">18</b></li>
+<li><span>Remorques sur parking</span><b data-count="34">34</b></li>
+<li><span>Poids lourds en attente</span><b data-count="6">6</b></li>
 <li class="is-warn"><span>Portails</span><b>1 ouvert sur 4</b></li>
 <li class="is-ok"><span>Clôture</span><b>Aucune anomalie</b></li>
 <li class="is-ok"><span>Stockage extérieur</span><b>Aucune anomalie</b></li>
 </ul>
 <div class="report-foot">Ronde complète · images jointes</div>
 </div>
-<p class="cmp-cap">Valeurs d'illustration.</p>
 </div>
-</div>
-</div>
-</section>
-
-<section class="section" data-screen-label="Usages">
-<div class="container">
-<div class="trio">
-<div class="reveal"><h2>Parkings</h2><p>Le fond des parkings et les clôtures, survolés à chaque ronde.</p></div>
-<div class="reveal" data-d="1"><h2>Levée de doute</h2><p>Une alarme au fond du parking. Vous voyez la scène avant d'envoyer quelqu'un.</p></div>
-<div class="reveal" data-d="2"><h2>Multisite</h2><p>Plusieurs plateformes suivies depuis le même écran.</p></div>
-</div>
+<p class="cmp-cap reveal">Valeurs d'illustration. Les éléments relevés sont définis avec vous.</p>
 </div>
 </section>
 
-<section class="section bg-dark radar-bg" data-screen-label="Exemple">
+<section class="section" data-screen-label="Trajet">
 <div class="container">
-<ol class="beats">
-<li class="reveal"><time>01:50</time><p>Une alarme se déclenche au fond du parking poids lourds.</p></li>
-<li class="reveal" data-d="1"><time>01:51</time><p>Le drone est sur zone. Deux personnes près d'une remorque.</p></li>
-<li class="reveal" data-d="2"><time>01:52</time><p>Vous décidez. <span>Intervention engagée, images à l'appui.</span></p></li>
+<div class="reveal" style="max-width:720px;">
+<h2 class="h2">Le même trajet, à chaque ronde.</h2>
+<p class="lead mt-s">Chaque point de passage est filmé et horodaté. Les rondes suivent un planning fixe, de jour comme de nuit.</p>
+</div>
+<ol class="route reveal" data-d="1" aria-label="Exemple de trajet de ronde">
+<li class="is-base"><span class="rt-dot"></span><span class="rt-name">Station</span></li>
+<li><span class="rt-dot"></span><span class="rt-name">Portail nord</span></li>
+<li><span class="rt-dot"></span><span class="rt-name">Quais</span></li>
+<li><span class="rt-dot"></span><span class="rt-name">Parking poids lourds</span></li>
+<li><span class="rt-dot"></span><span class="rt-name">Clôture est</span></li>
+<li><span class="rt-dot"></span><span class="rt-name">Stockage extérieur</span></li>
+<li class="is-base"><span class="rt-dot"></span><span class="rt-name">Station</span></li>
 </ol>
+<p class="rt-alert reveal" data-d="2"><b>Une alarme entre deux rondes ?</b> Le drone part directement sur la zone. Vous voyez la scène avant d'envoyer quelqu'un.</p>
 </div>
 </section>
 
