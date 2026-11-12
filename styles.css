@@ -1049,3 +1049,26 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   .wk-legend .wk-note { margin-left: 0; }
   .cmp-bleed { aspect-ratio: 4 / 3; }
 }
+
+/* Page recyclage : vue du drone, verbes, deux risques */
+.feed { position: relative; margin: clamp(32px, 4vw, 52px) 0 0; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--dark-line); }
+.feed img { width: 100%; height: auto; display: block; }
+.feed-tag { position: absolute; top: 12px; left: 12px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .05em; padding: 6px 11px; border-radius: 999px; background: rgba(0,0,0,.66); color: #fff; }
+.feed-tag::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: #e5484d; vertical-align: 1px; }
+.feed-box { position: absolute; left: 61%; top: 16%; width: 11%; height: 62%; border: 2px solid var(--warn-on-dark); border-radius: 4px; box-shadow: 0 0 0 4000px rgba(0,0,0,.18); animation: feedpulse 2.4s ease-in-out infinite; }
+.feed-box span { position: absolute; bottom: calc(100% + 8px); left: -2px; white-space: nowrap; font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .04em; padding: 4px 9px; border-radius: 4px; background: var(--warn-on-dark); color: #111; }
+@keyframes feedpulse { 0%, 100% { border-color: var(--warn-on-dark); } 50% { border-color: rgba(255,255,255,.9); } }
+@media (prefers-reduced-motion: reduce) { .feed-box { animation: none; } }
+.verbs { list-style: none; margin: clamp(32px, 4vw, 48px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+.verbs b { display: block; font-family: var(--f-display); font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 700; letter-spacing: -0.025em; color: var(--on-dark); }
+.verbs li:last-child b { color: var(--warn-on-dark); }
+.verbs span { display: block; margin-top: 8px; font-size: 15.5px; line-height: 1.5; color: var(--on-dark-2); }
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 6vw, 96px); }
+.duo h2 { font-size: clamp(3rem, 7vw, 5.4rem); line-height: 1; letter-spacing: -0.04em; }
+.duo p { margin-top: 18px; font-size: 1.1rem; line-height: 1.55; color: var(--ink-3); max-width: 40ch; }
+@media (max-width: 900px) {
+  .feed img { aspect-ratio: 16 / 10; object-fit: cover; object-position: 66% 50%; }
+  .feed-box { left: 52%; width: 22%; top: 24%; height: 50%; }
+  .verbs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .duo { grid-template-columns: 1fr; }
+}

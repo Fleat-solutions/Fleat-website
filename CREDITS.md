@@ -58,6 +58,13 @@ Correspondance fichier et photo source (identifiant Unsplash) :
 | `usine-silos` | `photo-1729286283040-bc4b75550106` |
 | `zone-industrielle-stockage` | `photo-1703332156054-2f196bfe5932` |
 
+## Photos fournies par FLEAT (source à compléter)
+
+| Fichier | Usage | Source |
+|---|---|---|
+| `ferraille-quai` | Hero recyclage | À compléter (lien de la page photo) |
+| `ferraille-vue-drone` | Recyclage · vue du drone (recadrée) | À compléter (lien de la page photo) |
+
 ## À remplacer par des visuels propriétaires
 
 Ces photographies illustrent des environnements comparables à ceux des
