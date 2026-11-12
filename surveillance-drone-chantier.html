@@ -70,7 +70,7 @@
 </header>
 <main id="contenu" tabindex="-1">
 <section class="hero hero-night" data-screen-label="Hero · BTP">
-<div class="hero-photo" aria-hidden="true"><img src="assets/photos/chantier-terrassement-2000.webp" width="2000" height="1125" srcset="assets/photos/chantier-terrassement-640.webp 640w, assets/photos/chantier-terrassement-1024.webp 1024w, assets/photos/chantier-terrassement-1600.webp 1600w, assets/photos/chantier-terrassement-2000.webp 2000w" sizes="100vw" alt="" loading="eager" fetchpriority="high"></div>
+<div class="hero-photo" aria-hidden="true"><img src="assets/photos/chantier-voirie-1600.webp" width="1600" height="900" srcset="assets/photos/chantier-voirie-640.webp 640w, assets/photos/chantier-voirie-1024.webp 1024w, assets/photos/chantier-voirie-1600.webp 1600w" sizes="100vw" alt="" loading="eager" fetchpriority="high"></div>
 <div class="hero-grid-bg" aria-hidden="true"></div>
 <div class="container">
 <div class="page-hero-inner hero-copy">
@@ -79,47 +79,58 @@
 <p class="lead" style="margin-top:22px; max-width:46ch;">Grands chantiers BTP. Rondes les soirs et week-ends, missions qui suivent l'avancement.</p>
 <div class="cta-row" style="margin-top:34px;">
 <a class="btn btn-primary btn-lg" href="/contact">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-<a class="btn btn-ghost-light btn-lg" href="#avant-apres">Comparer deux passages</a>
+<a class="btn btn-ghost-light btn-lg" href="#semaine">Voir une semaine de chantier</a>
 </div>
 </div>
 </div>
 </section>
 
-<section class="section bg-dark" id="avant-apres" data-screen-label="Avant après">
+<section class="section" id="semaine" data-screen-label="Semaine">
 <div class="container">
-<div class="reveal" style="max-width:720px;">
-<h2 class="h2">Le chantier avance. Le drone garde la mémoire.</h2>
-<p class="lead mt-s">Même trajectoire à chaque passage. Faites glisser pour comparer.</p>
+<div class="wk-grid">
+<div class="reveal">
+<h2 class="h2">Le drone prend le relais quand le chantier ferme.</h2>
+<p class="lead mt-s">Soirs, nuits et week-ends, selon votre planning. Engins, câbles et matériaux sont contrôlés à chaque passage.</p>
 </div>
-<div class="cmp cmp-wide on-dark reveal" data-d="1" style="margin-top:clamp(32px,4vw,52px);">
-<img class="cmp-crop-j0" src="assets/photos/chantier-stockage-materiaux-2000.webp" width="2000" height="1125" srcset="assets/photos/chantier-stockage-materiaux-640.webp 640w, assets/photos/chantier-stockage-materiaux-1024.webp 1024w, assets/photos/chantier-stockage-materiaux-1600.webp 1600w, assets/photos/chantier-stockage-materiaux-2000.webp 2000w" sizes="100vw" alt="Vue aérienne d'un chantier en phase de terrassement" loading="lazy">
-<div class="cmp-b"><img src="assets/photos/chantier-terrassement-2000.webp" width="2000" height="1125" srcset="assets/photos/chantier-terrassement-640.webp 640w, assets/photos/chantier-terrassement-1024.webp 1024w, assets/photos/chantier-terrassement-1600.webp 1600w, assets/photos/chantier-terrassement-2000.webp 2000w" sizes="100vw" alt="Vue aérienne d'un chantier à un stade plus avancé" loading="lazy"></div>
-<span class="cmp-tag l">Passage 1</span><span class="cmp-tag r">Passage 2</span>
-<div class="cmp-line"></div>
-<input type="range" min="0" max="100" value="50" aria-label="Comparer deux passages du drone">
+<div class="reveal" data-d="1">
+<ol class="week" aria-label="Exemple de planning sur une semaine">
+<li class="wk-labels" aria-hidden="true"><span class="wk-day">&nbsp;</span><span class="wk-row">Jour</span><span class="wk-row">Soir, nuit</span></li>
+<li><span class="wk-day">Lun</span><span class="wk-slot is-team"></span><span class="wk-slot is-drone"></span></li>
+<li><span class="wk-day">Mar</span><span class="wk-slot is-team"></span><span class="wk-slot is-drone"></span></li>
+<li><span class="wk-day">Mer</span><span class="wk-slot is-team"></span><span class="wk-slot is-drone"></span></li>
+<li><span class="wk-day">Jeu</span><span class="wk-slot is-team"></span><span class="wk-slot is-drone"></span></li>
+<li><span class="wk-day">Ven</span><span class="wk-slot is-team"></span><span class="wk-slot is-drone"></span></li>
+<li class="is-off"><span class="wk-day">Sam</span><span class="wk-slot is-drone"></span><span class="wk-slot is-drone"></span></li>
+<li class="is-off"><span class="wk-day">Dim</span><span class="wk-slot is-drone"></span><span class="wk-slot is-drone"></span></li>
+</ol>
+<div class="wk-legend"><span class="is-team">Équipes sur site</span><span class="is-drone">Rondes du drone</span><span class="wk-note">Exemple de planning</span></div>
 </div>
-<p class="cmp-cap reveal">Illustration sur deux vues aériennes de chantier.</p>
-</div>
-</section>
-
-<section class="section" data-screen-label="Usages">
-<div class="container">
-<div class="trio">
-<div class="reveal"><h2>Soirs et week-ends</h2><p>Des rondes programmées quand le chantier est fermé.</p></div>
-<div class="reveal" data-d="1"><h2>Matériel et stocks</h2><p>Engins, câbles et matériaux contrôlés à chaque passage.</p></div>
-<div class="reveal" data-d="2"><h2>Avancement</h2><p>Même cadrage à chaque vol. Un suivi partageable avec la maîtrise d'ouvrage.</p></div>
 </div>
 </div>
 </section>
 
 <section class="section bg-dark radar-bg" data-screen-label="Exemple">
 <div class="container">
-<ol class="beats">
-<li class="reveal"><time>21:30</time><p>Le portail s'ouvre, un samedi soir.</p></li>
-<li class="reveal" data-d="1"><time>21:31</time><p>Le drone est sur zone. Un véhicule près du stock de matériel.</p></li>
-<li class="reveal" data-d="2"><time>21:32</time><p>Vous décidez. <span>Les forces de l'ordre reçoivent des images datées.</span></p></li>
-</ol>
+<p class="statement reveal">Samedi, 21 h 30.<br>Le portail s'ouvre.</p>
+<p class="lead statement-follow reveal" data-d="1">Le drone part vers l'entrée. L'opérateur voit un véhicule près du stock de matériel. Il prévient les forces de l'ordre, images datées et localisées à l'appui.</p>
 </div>
+</section>
+
+<section class="section bg-dark" id="memoire" data-screen-label="Mémoire">
+<div class="container">
+<div class="reveal" style="max-width:720px;">
+<h2 class="h2">Le chantier avance. Le drone garde la mémoire.</h2>
+<p class="lead mt-s">Même trajectoire à chaque passage. Faites glisser pour comparer.</p>
+</div>
+</div>
+<div class="cmp cmp-bleed reveal" data-d="1">
+<img class="cmp-crop-j0" src="assets/photos/chantier-stockage-materiaux-2000.webp" width="2000" height="1125" srcset="assets/photos/chantier-stockage-materiaux-640.webp 640w, assets/photos/chantier-stockage-materiaux-1024.webp 1024w, assets/photos/chantier-stockage-materiaux-1600.webp 1600w, assets/photos/chantier-stockage-materiaux-2000.webp 2000w" sizes="100vw" alt="Vue aérienne d'un chantier en phase de terrassement" loading="lazy">
+<div class="cmp-b"><img src="assets/photos/chantier-terrassement-2000.webp" width="2000" height="1125" srcset="assets/photos/chantier-terrassement-640.webp 640w, assets/photos/chantier-terrassement-1024.webp 1024w, assets/photos/chantier-terrassement-1600.webp 1600w, assets/photos/chantier-terrassement-2000.webp 2000w" sizes="100vw" alt="Vue aérienne d'un chantier à un stade plus avancé" loading="lazy"></div>
+<span class="cmp-tag l">Passage 1</span><span class="cmp-tag r">Passage 2</span>
+<div class="cmp-line"></div>
+<input type="range" min="0" max="100" value="50" aria-label="Comparer deux passages du drone">
+</div>
+<div class="container"><p class="cmp-cap reveal">Illustration sur deux vues aériennes de chantier. Un suivi partageable avec la maîtrise d'ouvrage.</p></div>
 </section>
 
 <section class="section" data-screen-label="Questions">
