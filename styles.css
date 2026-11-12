@@ -1004,3 +1004,21 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .layer-who { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
 .layers li.is-fleat { border-color: var(--ink-3); background: var(--paper-3); }
 .layers li.is-fleat .layer-who { color: var(--ink); }
+
+/* Pages secteurs, format épuré */
+.hero-kicker { margin-bottom: 18px; color: var(--on-dark-2); }
+.cmp-wide { aspect-ratio: 21 / 9; }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(28px, 4vw, 64px); }
+.trio > div { padding-top: 22px; border-top: 1px solid var(--line-2); }
+.trio h2 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing: -0.025em; }
+.trio p { margin-top: 12px; font-size: 1.05rem; line-height: 1.55; color: var(--ink-3); max-width: 34ch; }
+.beats { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(28px, 4vw, 48px); max-width: 980px; }
+.beats li { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 24px; align-items: baseline; }
+.beats time { font-family: var(--f-mono); font-size: 15px; color: var(--on-dark-3); letter-spacing: .04em; }
+.beats p { font-family: var(--f-display); font-size: clamp(1.6rem, 3.4vw, 2.7rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.025em; color: var(--on-dark); text-wrap: balance; }
+.beats p span { display: block; margin-top: 8px; color: var(--on-dark-3); }
+@media (max-width: 900px) {
+  .cmp-wide { aspect-ratio: 4 / 3; }
+  .trio { grid-template-columns: 1fr; }
+  .beats li { grid-template-columns: 1fr; gap: 8px; }
+}
