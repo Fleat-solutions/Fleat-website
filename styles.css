@@ -1170,3 +1170,37 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .rl-row.is-active { background: rgba(255,255,255,.08); }
 .rl-rows li.is-warn .rl-row.is-active { background: rgba(217,138,43,.1); }
 @media (prefers-reduced-motion: reduce) { .rl-box { transition: none; } .rl-box.is-warn.is-on { animation: none; } }
+
+/* Page industrie : visite guidée de l'interface, bandeau inspection */
+.tour { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); align-items: center; margin-top: clamp(32px, 4vw, 52px); }
+.tour-screen { position: relative; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--dark-line); }
+.tour-screen img { display: block; width: 100%; height: auto; }
+.tour-pin { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; padding: 0; border-radius: 50%; border: 2px solid #fff; background: rgba(0,0,0,.72); color: #fff; font-family: var(--f-mono); font-size: 13px; font-weight: 600; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+.tour-pin span { display: block; line-height: 30px; }
+.tour-pin:hover, .tour-pin:focus-visible { transform: scale(1.12); }
+.tour-pin:focus-visible { outline: 2px solid var(--accent-400); outline-offset: 3px; }
+.tour-pin.is-active { background: #fff; color: #111; box-shadow: 0 0 0 6px rgba(255,255,255,.18); }
+.tour-pin.is-active::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 2px solid rgba(255,255,255,.6); animation: tourping 1.8s ease-out infinite; }
+@keyframes tourping { from { transform: scale(.8); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+.tour-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.tour-step { padding: 14px 16px; border-radius: var(--r); border-left: 2px solid transparent; cursor: pointer; transition: background .2s, border-color .2s; }
+.tour-step b { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 600; color: var(--on-dark-3); transition: color .2s; }
+.tour-step b span { font-family: var(--f-mono); font-size: 12px; font-weight: 500; width: 22px; height: 22px; line-height: 20px; text-align: center; border-radius: 50%; border: 1px solid var(--dark-line-2); flex: none; }
+.tour-step p { display: none; margin: 8px 0 0 34px; font-size: 15px; line-height: 1.5; color: var(--on-dark-2); }
+.tour-step.is-active { background: rgba(255,255,255,.05); border-left-color: #fff; }
+.tour-step.is-active b { color: var(--on-dark); }
+.tour-step.is-active b span { background: #fff; color: #111; border-color: #fff; }
+.tour-step.is-active p { display: block; }
+.ind-band { position: relative; overflow: hidden; display: flex; align-items: flex-end; min-height: min(78vh, 720px); padding: clamp(64px, 8vw, 110px) 0; background: #000; }
+.ind-band > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .8; }
+.ind-band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.1) 0%, rgba(0,0,0,.5) 45%, rgba(0,0,0,.95) 100%), linear-gradient(90deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,0) 65%); }
+.ind-band > .container { position: relative; z-index: 1; }
+.ind-band-copy { max-width: 640px; }
+.ind-band-copy .h2 { color: var(--on-dark); }
+@media (prefers-reduced-motion: reduce) { .tour-pin.is-active::after { animation: none; } }
+@media (max-width: 900px) {
+  .tour { grid-template-columns: 1fr; }
+  .tour-pin { width: 26px; height: 26px; margin: -13px 0 0 -13px; font-size: 11px; }
+  .tour-pin span { line-height: 22px; }
+  .ind-band { min-height: 72svh; }
+}

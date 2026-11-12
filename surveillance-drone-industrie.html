@@ -79,42 +79,46 @@
 <p class="lead" style="margin-top:22px; max-width:46ch;">Usines, aciéries, cimenteries. Un drone en station sur place, suivi depuis votre PC sécurité.</p>
 <div class="cta-row" style="margin-top:34px;">
 <a class="btn btn-primary btn-lg" href="/contact">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-<a class="btn btn-ghost-light btn-lg" href="#zones">Voir l'interface</a>
+<a class="btn btn-ghost-light btn-lg" href="#interface">Voir l'interface</a>
 </div>
 </div>
 </div>
 </section>
 
-<section class="section bg-dark" id="zones" data-screen-label="Zones">
+<section class="section bg-dark" id="interface" data-screen-label="Interface">
 <div class="container">
 <div class="reveal" style="max-width:720px;">
-<h2 class="h2">Votre site, découpé en zones.</h2>
-<p class="lead mt-s">Zones à surveiller, zones à éviter, priorités par horaire. Le drone sait où aller.</p>
+<h2 class="h2">Tout le site sur un écran.</h2>
+<p class="lead mt-s">Ce que voit l'opérateur au PC sécurité, pendant une levée de doute.</p>
 </div>
-<div class="reveal" data-d="1" style="margin-top:clamp(32px,4vw,52px);">
-<div class="photo photo-frame" style="aspect-ratio:4/3;"><img src="assets/plateforme-tactique.webp" srcset="assets/plateforme-tactique-640.webp 640w, assets/plateforme-tactique.webp 1200w" sizes="(max-width: 1200px) 100vw, 1200px" width="1200" height="900" alt="Interface FLEAT : carte d'un site industriel découpé en zones, avec la station et le drone en mission" loading="lazy"></div>
-<p class="cmp-cap">Interface FLEAT · données de démonstration.</p>
+<div class="tour reveal" data-d="1" data-tour>
+<div class="tour-screen">
+<img src="assets/plateforme-tactique.webp" srcset="assets/plateforme-tactique-640.webp 640w, assets/plateforme-tactique.webp 1200w" sizes="(max-width: 900px) 100vw, 64vw" width="1200" height="900" alt="Interface FLEAT : carte d'un site industriel découpé en zones, station, drone en mission et panneau de levée de doute" loading="lazy">
+<button type="button" class="tour-pin is-active" style="left:30%; top:16.5%;" data-i="0" aria-pressed="true" aria-label="1. État du site"><span>1</span></button>
+<button type="button" class="tour-pin" style="left:62%; top:63%;" data-i="1" aria-pressed="false" aria-label="2. Zones"><span>2</span></button>
+<button type="button" class="tour-pin" style="left:71%; top:39.5%;" data-i="2" aria-pressed="false" aria-label="3. Station"><span>3</span></button>
+<button type="button" class="tour-pin" style="left:88.5%; top:57%;" data-i="3" aria-pressed="false" aria-label="4. Drone en mission"><span>4</span></button>
+<button type="button" class="tour-pin" style="left:15%; top:84%;" data-i="4" aria-pressed="false" aria-label="5. Levée de doute"><span>5</span></button>
 </div>
-</div>
-</section>
-
-<section class="section" data-screen-label="Usages">
-<div class="container">
-<div class="trio">
-<div class="reveal"><h2>Rondes</h2><p>Stocks extérieurs, accès et zones sensibles contrôlés selon votre planning, de jour comme de nuit.</p></div>
-<div class="reveal" data-d="1"><h2>Levée de doute</h2><p>Une alarme se déclenche. Vous voyez la scène avant de déplacer un agent.</p></div>
-<div class="reveal" data-d="2"><h2>Zones électriques</h2><p>Armoires et transformateurs en thermique, pour repérer un échauffement avant la panne.</p></div>
-</div>
-</div>
-</section>
-
-<section class="section bg-dark radar-bg" data-screen-label="Exemple">
-<div class="container">
-<ol class="beats">
-<li class="reveal"><time>23:40</time><p>Une caméra détecte un mouvement près d'un stock.</p></li>
-<li class="reveal" data-d="1"><time>23:41</time><p>Le drone est sur zone. L'image arrive au PC sécurité.</p></li>
-<li class="reveal" data-d="2"><time>23:42</time><p>Fausse alarme. <span>L'agent reste au poste.</span></p></li>
+<ol class="tour-steps" aria-live="polite">
+<li class="tour-step is-active" data-i="0"><b><span>1</span>État du site</b><p>Drones en vol, alertes en cours, état de la liaison. Tout le site en une ligne.</p></li>
+<li class="tour-step" data-i="1"><b><span>2</span>Zones</b><p>Bâtiment, cour, centrale : chaque zone a ses priorités et ses horaires de ronde.</p></li>
+<li class="tour-step" data-i="2"><b><span>3</span>Station</b><p>Le drone y attend et s'y recharge seul, entre deux missions.</p></li>
+<li class="tour-step" data-i="3"><b><span>4</span>Drone en mission</b><p>Sa position et son altitude en direct, sur l'image réelle du site.</p></li>
+<li class="tour-step" data-i="4"><b><span>5</span>Levée de doute</b><p>La mission en cours : progression, observation, et la main pour l'opérateur.</p></li>
 </ol>
+</div>
+<p class="cmp-cap reveal">Interface FLEAT · données de démonstration. Orthophotographie © IGN.</p>
+</div>
+</section>
+
+<section class="ind-band" data-screen-label="Inspection">
+<img src="assets/photos/usine-installations-techniques-1600.webp" srcset="assets/photos/usine-installations-techniques-640.webp 640w, assets/photos/usine-installations-techniques-1024.webp 1024w, assets/photos/usine-installations-techniques-1600.webp 1600w, assets/photos/usine-installations-techniques-2400.webp 2400w" sizes="100vw" width="1600" height="1067" alt="Installations techniques d'une usine vues du dessus : réseaux de tuyauteries, groupes de refroidissement et équipements en toiture" loading="lazy">
+<div class="container">
+<div class="ind-band-copy reveal">
+<h2 class="h2">Ce qu'un agent ne voit pas depuis le sol.</h2>
+<p class="lead mt-s">Toitures, réseaux, armoires électriques. Le drone les observe à chaque ronde, en visible et en thermique, sans exposer personne en hauteur.</p>
+</div>
 </div>
 </section>
 

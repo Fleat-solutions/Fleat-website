@@ -443,6 +443,34 @@
     show(pinned);
   });
 
+  /* Visite guidée : repères sur une capture, défilement automatique jusqu'à la première interaction */
+  document.querySelectorAll('[data-tour]').forEach(function (tour) {
+    var pins = tour.querySelectorAll('.tour-pin'), steps = tour.querySelectorAll('.tour-step');
+    if (!pins.length) return;
+    var cur = 0, timer = null;
+    var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function go(i) {
+      cur = i;
+      pins.forEach(function (p, k) { p.classList.toggle('is-active', k === i); p.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+      steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function pick(i) { stop(); go(i); }
+    pins.forEach(function (p, k) { p.addEventListener('click', function () { pick(k); }); });
+    steps.forEach(function (s, k) { s.addEventListener('click', function () { pick(k); }); });
+    if (!still && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && !timer && tour.dataset.touched !== '1') {
+            timer = setInterval(function () { go((cur + 1) % pins.length); }, 4000);
+          } else if (!e.isIntersecting) { stop(); }
+        });
+      }, { threshold: 0.4 });
+      io.observe(tour);
+      tour.addEventListener('click', function () { tour.dataset.touched = '1'; });
+    }
+  });
+
   /* Comparateurs avant, après (cas d'usage, pages secteurs) */
   document.querySelectorAll('.cmp').forEach(function (cmp) {
     var r = cmp.querySelector('input[type=range]');
