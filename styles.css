@@ -992,7 +992,7 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .report-rows { list-style: none; margin: 0; padding: 4px 20px; }
 .report-rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 13px 0; font-size: 15.5px; color: var(--ink-2); }
 .report-rows li + li { border-top: 1px solid var(--line); }
-.report-rows b { font-family: var(--f-mono); font-weight: 500; font-size: 15px; color: var(--ink); text-align: right; }
+.report-rows b { font-family: var(--f-mono); font-weight: 500; font-size: 15px; color: var(--ink); text-align: right; white-space: nowrap; }
 .report-rows li.is-warn b { color: var(--warn-on-dark); }
 .report-rows li.is-ok b { color: var(--ink-3); }
 
@@ -1131,8 +1131,9 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   .route li { flex-direction: row; text-align: left; gap: 16px; }
 }
 .rl-mark { position: absolute; left: 55.9%; top: 67.9%; width: 46px; height: 46px; transform: translate(-50%, -50%); border: 2px solid var(--warn-on-dark); border-radius: 50%; box-shadow: 0 0 0 4px rgba(0,0,0,.25); animation: feedpulse 2.4s ease-in-out infinite; }
+.rl-mark.is-zone { transform: none; border-radius: 6px; }
 @media (prefers-reduced-motion: reduce) { .rl-mark { animation: none; } }
-@media (max-width: 900px) { .rl-mark { width: 30px; height: 30px; } }
+@media (max-width: 900px) { .rl-mark:not(.is-zone) { width: 30px; height: 30px; } }
 
 /* Page data center : journal d'une nuit */
 .journal { list-style: none; margin: clamp(32px, 4vw, 52px) 0 0; padding: 0; border-top: 1px solid var(--dark-line); }
