@@ -1108,8 +1108,8 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 }
 
 /* Page logistique : relevé de ronde et trajet */
-.rl-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(16px, 2vw, 24px); margin-top: clamp(32px, 4vw, 52px); align-items: stretch; }
-.rl-photo { position: relative; margin: 0; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--dark-line); min-height: 320px; }
+.rl-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(16px, 2vw, 24px); margin-top: clamp(32px, 4vw, 52px); align-items: start; }
+.rl-photo { position: relative; margin: 0; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--dark-line); aspect-ratio: 769 / 370; }
 .rl-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .rl-report { display: flex; flex-direction: column; }
 .rl-report .report-rows { flex: 1; }
@@ -1125,7 +1125,6 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
 .rt-alert b { color: var(--ink); font-weight: 600; }
 @media (max-width: 900px) {
   .rl-grid { grid-template-columns: 1fr; }
-  .rl-photo { min-height: 0; aspect-ratio: 1100 / 560; }
   .route { grid-template-columns: 1fr; gap: 18px; }
   .route::before { left: 7px; right: auto; top: 8px; bottom: 8px; border-top: 0; border-left: 2px dashed var(--line-2); }
   .route li { flex-direction: row; text-align: left; gap: 16px; }
@@ -1155,3 +1154,4 @@ body.menu-open .mobile-menu { transform: none; opacity: 1; visibility: visible; 
   .jn-out { grid-column: 3; grid-row: 1; }
   .journal li.is-warn { padding-left: 12px; margin-left: -12px; }
 }
+@media (max-width: 900px) { .rl-photo .feed-tag { top: 10px; bottom: auto; } }
