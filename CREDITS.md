@@ -62,7 +62,8 @@ Correspondance fichier et photo source (identifiant Unsplash) :
 
 | Fichier | Usage | Source |
 |---|---|---|
-| `ferraille-quai` | Hero recyclage · section recyclage de /secteurs | À compléter (lien de la page photo) |
+| `ferraille-quai` | Hero recyclage | À compléter (lien de la page photo) |
+| `acierie-ferraille` | Section recyclage de /secteurs | À compléter (lien de la page photo) |
 | `ferraille-visible` | Recyclage · vue du drone à l'œil nu (photo du wagon recadrée) | À compléter (lien de la page photo) |
 | `ferraille-thermique` | Recyclage · vue du drone, rendu thermique simulé à partir de la photo du wagon (recadrée) | À compléter (lien de la page photo) |
 
