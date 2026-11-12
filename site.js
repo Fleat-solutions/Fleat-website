@@ -443,31 +443,29 @@
     show(pinned);
   });
 
-  /* Visite guidée : repères sur une capture, défilement automatique jusqu'à la première interaction */
+  /* Visite guidée : un cadre met en évidence un élément de la capture, défilement automatique jusqu'à la première interaction */
   document.querySelectorAll('[data-tour]').forEach(function (tour) {
-    var pins = tour.querySelectorAll('.tour-pin'), steps = tour.querySelectorAll('.tour-step');
-    if (!pins.length) return;
+    var steps = tour.querySelectorAll('.tour-step'), spot = tour.querySelector('.tour-spot'), num = spot && spot.querySelector('.tour-num');
+    if (!steps.length || !spot) return;
     var cur = 0, timer = null;
     var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function go(i) {
       cur = i;
-      pins.forEach(function (p, k) { p.classList.toggle('is-active', k === i); p.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
-      steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+      var r = steps[i].getAttribute('data-r').split(',');
+      spot.style.left = r[0] + '%'; spot.style.top = r[1] + '%'; spot.style.width = r[2] + '%'; spot.style.height = r[3] + '%';
+      if (num) num.textContent = i + 1;
+      steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); s.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
     }
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
-    function pick(i) { stop(); go(i); }
-    pins.forEach(function (p, k) { p.addEventListener('click', function () { pick(k); }); });
-    steps.forEach(function (s, k) { s.addEventListener('click', function () { pick(k); }); });
+    steps.forEach(function (s, k) { s.addEventListener('click', function () { tour.dataset.touched = '1'; stop(); go(k); }); });
     if (!still && 'IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (entries) {
+      new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           if (e.isIntersecting && !timer && tour.dataset.touched !== '1') {
-            timer = setInterval(function () { go((cur + 1) % pins.length); }, 4000);
+            timer = setInterval(function () { go((cur + 1) % steps.length); }, 4000);
           } else if (!e.isIntersecting) { stop(); }
         });
-      }, { threshold: 0.4 });
-      io.observe(tour);
-      tour.addEventListener('click', function () { tour.dataset.touched = '1'; });
+      }, { threshold: 0.4 }).observe(tour);
     }
   });
 
