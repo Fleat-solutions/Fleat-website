@@ -396,4 +396,84 @@
   document.querySelectorAll('.f-cookies').forEach(function (btn) {
     btn.addEventListener('click', window.resetCookieConsent);
   });
+
+  /* Compteurs : défilent jusqu'à leur valeur à l'apparition (data-count) */
+  var counters = document.querySelectorAll('[data-count]');
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (counters.length && !calm && 'IntersectionObserver' in window) {
+    var countIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        countIO.unobserve(e.target);
+        var el = e.target, end = parseInt(el.getAttribute('data-count'), 10), t0 = null;
+        function step(t) {
+          if (!t0) t0 = t;
+          var k = Math.min(1, (t - t0) / 1200);
+          el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3)));
+          if (k < 1) requestAnimationFrame(step);
+        }
+        el.textContent = '0';
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (c) { countIO.observe(c); });
+  }
+
+  /* Relevé interactif : une ligne du relevé encadre ses éléments sur la photo */
+  document.querySelectorAll('.rl-rows').forEach(function (list) {
+    var rows = list.querySelectorAll('.rl-row');
+    var photo = document.getElementById(rows.length ? rows[0].getAttribute('aria-controls') : '');
+    if (!photo) return;
+    var pinned = list.querySelector('.rl-row.is-active');
+    function show(row) {
+      var g = row ? row.getAttribute('data-show') : '';
+      photo.querySelectorAll('.rl-box').forEach(function (b) { b.classList.toggle('is-on', b.getAttribute('data-g') === g); });
+      rows.forEach(function (r) { r.classList.toggle('is-active', r === row); });
+    }
+    rows.forEach(function (row) {
+      row.addEventListener('mouseenter', function () { show(row); });
+      row.addEventListener('focus', function () { show(row); });
+      row.addEventListener('click', function () {
+        pinned = row;
+        rows.forEach(function (r) { r.setAttribute('aria-pressed', r === row ? 'true' : 'false'); });
+        show(row);
+      });
+    });
+    list.addEventListener('mouseleave', function () { show(pinned); });
+    show(pinned);
+  });
+
+  /* Visite guidée : un cadre met en évidence un élément de la capture, défilement automatique jusqu'à la première interaction */
+  document.querySelectorAll('[data-tour]').forEach(function (tour) {
+    var steps = tour.querySelectorAll('.tour-step'), spot = tour.querySelector('.tour-spot'), num = spot && spot.querySelector('.tour-num');
+    if (!steps.length || !spot) return;
+    var cur = 0, timer = null;
+    var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function go(i) {
+      cur = i;
+      var r = steps[i].getAttribute('data-r').split(',');
+      spot.style.left = r[0] + '%'; spot.style.top = r[1] + '%'; spot.style.width = r[2] + '%'; spot.style.height = r[3] + '%';
+      if (num) num.textContent = i + 1;
+      steps.forEach(function (s, k) { s.classList.toggle('is-active', k === i); s.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    steps.forEach(function (s, k) { s.addEventListener('click', function () { tour.dataset.touched = '1'; stop(); go(k); }); });
+    if (!still && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && !timer && tour.dataset.touched !== '1') {
+            timer = setInterval(function () { go((cur + 1) % steps.length); }, 4000);
+          } else if (!e.isIntersecting) { stop(); }
+        });
+      }, { threshold: 0.4 }).observe(tour);
+    }
+  });
+
+  /* Comparateurs avant, après (cas d'usage, pages secteurs) */
+  document.querySelectorAll('.cmp').forEach(function (cmp) {
+    var r = cmp.querySelector('input[type=range]');
+    if (!r) return;
+    function apply() { cmp.style.setProperty('--p', r.value + '%'); }
+    r.addEventListener('input', apply); apply();
+  });
 })();
