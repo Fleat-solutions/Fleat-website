@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surveillance de plateformes logistiques par drone · FLEAT</title>
+<meta name="description" content="Entrepôts, parkings poids lourds, quais : rondes par drone sur les emprises extérieures, levée de doute sur alerte et suivi depuis votre PC sécurité.">
+<link rel="canonical" href="https://fleat-solutions.com/surveillance-drone-logistique">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FLEAT">
+<meta property="og:title" content="Surveillance de plateformes logistiques par drone · FLEAT">
+<meta property="og:description" content="Entrepôts, parkings poids lourds, quais : rondes par drone sur les emprises extérieures, levée de doute sur alerte et suivi depuis votre PC sécurité.">
+<meta property="og:url" content="https://fleat-solutions.com/surveillance-drone-logistique">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://fleat-solutions.com/assets/og-fleat.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo FLEAT">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Surveillance de plateformes logistiques par drone · FLEAT">
+<meta name="twitter:description" content="Entrepôts, parkings poids lourds, quais : rondes par drone sur les emprises extérieures, levée de doute sur alerte et suivi depuis votre PC sécurité.">
+<meta name="twitter:image" content="https://fleat-solutions.com/assets/og-fleat.jpg">
+<meta name="robots" content="index, follow">
+<meta name="author" content="FLEAT">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FLEAT","url":"https://fleat-solutions.com","logo":"https://fleat-solutions.com/assets/fleat-logo.png","description":"Rondes de surveillance automatisées par drone en station autonome, pour sites industriels, logistiques et infrastructures critiques.","contactPoint":{"@type":"ContactPoint","email":"contact@fleat-solutions.com","contactType":"customer service","areaServed":"FR","availableLanguage":"French"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Que contient le relevé de ronde ?","acceptedAnswer":{"@type":"Answer","text":"Les éléments à relever sont définis avec vous : remorques à quai, véhicules présents, état des portails, anomalies. Le relevé est horodaté et conservé dans l'historique."}},{"@type":"Question","name":"Le drone peut-il voler pendant l'activité du site ?","acceptedAnswer":{"@type":"Answer","text":"Les trajectoires sont définies avec vous. Elles tiennent compte des zones de circulation et des horaires d'exploitation. Le cadre précis est fixé pendant l'étude."}},{"@type":"Question","name":"Fonctionne-t-il avec nos caméras et nos alarmes ?","acceptedAnswer":{"@type":"Answer","text":"Oui, c'est le principe. Une alarme ou une détection caméra peut déclencher une mission. La compatibilité précise est confirmée pendant l'étude de votre site."}},{"@type":"Question","name":"Le drone vole-t-il la nuit ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Il emporte une caméra visible et une caméra thermique, pour des vols de jour comme de nuit."}},{"@type":"Question","name":"Quelle surface un vol peut-il couvrir ?","acceptedAnswer":{"@type":"Answer","text":"Jusqu'à 40 ha par vol, selon la configuration du site. Entre deux vols, le drone se recharge seul dans sa station."}},{"@type":"Question","name":"Le drone remplace-t-il nos agents de sécurité ?","acceptedAnswer":{"@type":"Answer","text":"Non. Le drone renforce la capacité d'observation et accélère la levée de doute. Vos équipes gardent la décision et interviennent quand c'est nécessaire."}},{"@type":"Question","name":"Peut-on suivre plusieurs plateformes ?","acceptedAnswer":{"@type":"Answer","text":"Oui. FLEAT centralise le suivi de plusieurs sites dans une interface unique."}},{"@type":"Question","name":"Que se passe-t-il en cas de mauvaise météo ?","acceptedAnswer":{"@type":"Answer","text":"Les conditions météo font partie des contraintes étudiées dès la conception. Les scénarios de mission en tiennent compte."}},{"@type":"Question","name":"Qu'étudiez-vous avant d'installer ?","acceptedAnswer":{"@type":"Answer","text":"Nous regardons notamment : emprise des parkings et zones de stockage, flux de véhicules et horaires d'exploitation, points d'accès et lignes de clôture, emplacement possible de la station, dispositifs de détection existants. Un drone ne s'installe pas partout : la faisabilité est étudiée avant tout engagement."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://fleat-solutions.com/"},{"@type":"ListItem","position":2,"name":"Secteurs","item":"https://fleat-solutions.com/secteurs"},{"@type":"ListItem","position":3,"name":"Logistique","item":"https://fleat-solutions.com/surveillance-drone-logistique"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#08090a">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="theme-noir.css">
+</head>
+<body class="theme-noir">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="/" aria-label="FLEAT · accueil"><img class="brand-logo" src="assets/fleat-logo-blanc.png" alt="fleat · accueil"></a>
+<nav class="nav-main" aria-label="Navigation principale">
+<a href="/solution">Solution</a>
+<a href="/cas-usage">Cas d'usage</a>
+<a class="active" href="/secteurs">Secteurs</a>
+<a href="/integrations">Intégrations</a>
+<a href="/faq">FAQ</a>
+<a href="/about">À propos</a>
+</nav>
+<div class="header-cta">
+<a class="btn btn-ghost" href="/rappel">Être rappelé</a>
+<a class="btn btn-primary" href="/contact">Étudier mon site</a>
+</div>
+<button type="button" class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile"><span></span></button>
+</div>
+<div class="mobile-menu" id="menu-mobile">
+<a class="m-link" href="/solution">Solution</a>
+<a class="m-link" href="/cas-usage">Cas d'usage</a>
+<a class="m-link active" href="/secteurs">Secteurs</a>
+<a class="m-link" href="/integrations">Intégrations</a>
+<a class="m-link" href="/faq">FAQ</a>
+<a class="m-link" href="/about">À propos</a>
+<a class="m-link" href="/contact">Contact</a>
+<div class="m-cta">
+<a class="btn btn-ghost btn-block" href="/rappel">Être rappelé</a>
+<a class="btn btn-primary btn-block" href="/contact">Étudier mon site</a>
+</div>
+</div>
+</header>
+<main id="contenu" tabindex="-1">
+<section class="hero hero-night" data-screen-label="Hero · Logistique">
+<div class="hero-photo" aria-hidden="true"><img src="assets/photos/remorques-parking-poids-lourds-1600.webp" width="1600" height="1066" srcset="assets/photos/remorques-parking-poids-lourds-640.webp 640w, assets/photos/remorques-parking-poids-lourds-1024.webp 1024w, assets/photos/remorques-parking-poids-lourds-1600.webp 1600w" sizes="100vw" alt="" loading="eager" fetchpriority="high"></div>
+<div class="hero-grid-bg" aria-hidden="true"></div>
+<div class="container">
+<div class="page-hero-inner hero-copy">
+<h1 class="seo-title hero-kicker">Surveillance de plateformes logistiques par drone</h1>
+<p class="display">La valeur stationne dehors.<br>Le drone fait le tour.</p>
+<p class="lead" style="margin-top:22px; max-width:46ch;">Entrepôts, parcs poids lourds, quais. Un drone en station sur place, suivi depuis votre PC sécurité.</p>
+<div class="cta-row" style="margin-top:34px;">
+<a class="btn btn-primary btn-lg" href="/contact">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="btn btn-ghost-light btn-lg" href="#releve">Voir un relevé de ronde</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section bg-dark" id="releve" data-screen-label="Relevé">
+<div class="container">
+<div class="reveal" style="max-width:720px;">
+<h2 class="h2">Chaque ronde se termine par un relevé.</h2>
+<p class="lead mt-s">Le drone ne fait pas que filmer. Il fait l'état des lieux de la plateforme.</p>
+</div>
+<div class="rl-grid">
+<figure class="rl-photo reveal" id="rl-photo">
+<img src="assets/photos/releve-plateforme-769.webp" width="769" height="370" srcset="assets/photos/releve-plateforme-640.webp 640w, assets/photos/releve-plateforme-769.webp 769w" sizes="(max-width: 900px) 100vw, 60vw" alt="Façade de quais d'un entrepôt vue du dessus par le drone : poids lourds et remorques à quai, un tracteur seul, une voiture stationnée et des palettes stockées sur l'aire" loading="lazy">
+<div class="rl-boxes" aria-hidden="true">
+<span class="rl-box" data-g="quai" style="left:1.0%; top:47.8%; width:3.3%; height:35.7%;"></span>
+<span class="rl-box" data-g="quai" style="left:8.8%; top:45.7%; width:2.9%; height:20.3%;"></span>
+<span class="rl-box" data-g="quai" style="left:16.5%; top:48.9%; width:2.7%; height:21.9%;"></span>
+<span class="rl-box" data-g="quai" style="left:35.8%; top:51.6%; width:3.1%; height:28.4%;"></span>
+<span class="rl-box" data-g="quai" style="left:43.8%; top:45.4%; width:3.4%; height:28.1%;"></span>
+<span class="rl-box" data-g="quai" style="left:60.1%; top:47.3%; width:3.6%; height:27.6%;"></span>
+<span class="rl-box" data-g="quai" style="left:80.2%; top:45.9%; width:3.9%; height:27.6%;"></span>
+<span class="rl-box" data-g="quai" style="left:87.1%; top:44.3%; width:4.3%; height:27.6%;"></span>
+<span class="rl-box" data-g="tracteur" style="left:27.8%; top:65.4%; width:3.0%; height:13.8%;"></span>
+<span class="rl-box" data-g="vl" style="left:21.1%; top:65.4%; width:5.1%; height:5.1%;"></span>
+<span class="rl-box is-warn" data-g="palettes" style="left:70.6%; top:50.0%; width:5.5%; height:28.4%;"></span>
+<span class="rl-box is-zone" data-g="voie" style="left:0.0%; top:80.5%; width:100.0%; height:19.5%;"></span>
+</div>
+<span class="feed-tag">Ronde de 07:30 · façade de quais</span>
+</figure>
+<div class="report rl-report reveal" data-d="1">
+<div class="report-head"><span>Relevé · façade de quais</span><time>07:30</time></div>
+<ul class="report-rows rl-rows">
+<li><button type="button" class="rl-row" data-show="quai" aria-controls="rl-photo" aria-pressed="false"><span>Poids lourds et remorques à quai</span><b data-count="8">8</b></button></li>
+<li><button type="button" class="rl-row" data-show="tracteur" aria-controls="rl-photo" aria-pressed="false"><span>Tracteur sans remorque</span><b data-count="1">1</b></button></li>
+<li><button type="button" class="rl-row" data-show="vl" aria-controls="rl-photo" aria-pressed="false"><span>Véhicule léger stationné</span><b data-count="1">1</b></button></li>
+<li class="is-warn"><button type="button" class="rl-row is-active" data-show="palettes" aria-controls="rl-photo" aria-pressed="true"><span>Palettes stockées sur l'aire de quais</span><b>À vérifier</b></button></li>
+<li class="is-ok"><button type="button" class="rl-row" data-show="voie" aria-controls="rl-photo" aria-pressed="false"><span>Voie de circulation</span><b>Dégagée</b></button></li>
+</ul>
+<div class="report-foot">Point de passage 2 sur 5 · images jointes</div>
+</div>
+</div>
+<p class="cmp-cap reveal">Sélectionnez une ligne du relevé pour la repérer sur l'image. Illustration, les éléments relevés sont définis avec vous.</p>
+</div>
+</section>
+
+<section class="section" data-screen-label="Trajet">
+<div class="container">
+<div class="reveal" style="max-width:720px;">
+<h2 class="h2">Le même trajet, à chaque ronde.</h2>
+<p class="lead mt-s">Chaque point de passage est filmé et horodaté. Les rondes suivent un planning fixe, de jour comme de nuit.</p>
+</div>
+<ol class="route reveal" data-d="1" aria-label="Exemple de trajet de ronde">
+<li class="is-base"><span class="rt-dot"></span><span class="rt-name">Station</span></li>
+<li><span class="rt-dot"></span><span class="rt-name">Portail nord</span></li>
+<li><span class="rt-dot"></span><span class="rt-name">Quais</span></li>
+<li><span class="rt-dot"></span><span class="rt-name">Parking poids lourds</span></li>
+<li><span class="rt-dot"></span><span class="rt-name">Clôture est</span></li>
+<li><span class="rt-dot"></span><span class="rt-name">Stockage extérieur</span></li>
+<li class="is-base"><span class="rt-dot"></span><span class="rt-name">Station</span></li>
+</ol>
+<p class="rt-alert reveal" data-d="2"><b>Une alarme entre deux rondes ?</b> Le drone part directement sur la zone. Vous voyez la scène avant d'envoyer quelqu'un.</p>
+</div>
+</section>
+
+<section class="section" data-screen-label="Questions">
+<div class="container container-narrow">
+<h2 class="h2 reveal">Vos questions.</h2>
+<div data-faq-group style="margin-top:clamp(24px,3vw,36px);"><div class="faq-item"><button class="faq-q" aria-expanded="false">Que contient le relevé de ronde ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Les éléments à relever sont définis avec vous : remorques à quai, véhicules présents, état des portails, anomalies. Le relevé est horodaté et conservé dans l'historique.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Le drone peut-il voler pendant l'activité du site ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Les trajectoires sont définies avec vous. Elles tiennent compte des zones de circulation et des horaires d'exploitation. Le cadre précis est fixé pendant l'étude.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Fonctionne-t-il avec nos caméras et nos alarmes ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Oui, c'est le principe. Une alarme ou une détection caméra peut déclencher une mission. La compatibilité précise est confirmée pendant l'étude de votre site.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Le drone vole-t-il la nuit ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Oui. Il emporte une caméra visible et une caméra thermique, pour des vols de jour comme de nuit.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Quelle surface un vol peut-il couvrir ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Jusqu'à 40&nbsp;ha par vol, selon la configuration du site. Entre deux vols, le drone se recharge seul dans sa station.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Le drone remplace-t-il nos agents de sécurité ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Non. Le drone renforce la capacité d'observation et accélère la levée de doute. Vos équipes gardent la décision et interviennent quand c'est nécessaire.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Peut-on suivre plusieurs plateformes ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Oui. FLEAT centralise le suivi de plusieurs sites dans une interface unique.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Que se passe-t-il en cas de mauvaise météo ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Les conditions météo font partie des contraintes étudiées dès la conception. Les scénarios de mission en tiennent compte.</p></div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Qu'étudiez-vous avant d'installer ?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><div><p>Nous regardons notamment : emprise des parkings et zones de stockage, flux de véhicules et horaires d'exploitation, points d'accès et lignes de clôture, emplacement possible de la station, dispositifs de détection existants. Un drone ne s'installe pas partout : la faisabilité est étudiée avant tout engagement.</p></div></div></div></div>
+</div>
+</section>
+
+<section class="section bg-dark cta-band radar-bg">
+<div class="container text-center" style="position:relative; max-width:760px;">
+<div class="reveal">
+<span class="eyebrow" style="justify-content:center;">Passons à votre site</span>
+<h2 class="h2 mt-s">Étudions votre site.</h2>
+<p class="lead mt-s mx-auto" style="max-width:52ch;">Décrivez-nous votre site et vos enjeux. Nous évaluons la faisabilité d'un dispositif adapté à vos contraintes.</p>
+<div class="cta-row" style="justify-content:center; margin-top:34px;">
+<a class="btn btn-primary btn-lg" href="/contact">Étudier mon site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="btn btn-ghost-light btn-lg" href="/rappel">Être rappelé</a>
+</div>
+<p class="mt-s" style="margin-top:28px;"><a class="btn-link" href="/secteurs" style="color:var(--on-dark-2);">Voir les autres secteurs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="site-footer">
+<div class="container">
+<div class="footer-top">
+<div class="footer-brand">
+<a class="brand" href="/" aria-label="FLEAT · accueil"><img class="brand-logo" src="assets/fleat-logo-blanc.png" alt="fleat"></a>
+<p>L'autonomie sous contrôle · technologies de supervision autonome pour sites physiques.</p>
+</div>
+<div class="footer-col">
+<h4>Produit</h4>
+<a href="/solution">Solution</a>
+<a href="/cas-usage">Cas d'usage</a>
+<a href="/integrations">Intégrations</a>
+<a href="/secteurs">Secteurs</a>
+</div>
+<div class="footer-col">
+<h4>Ressources</h4>
+<a href="/faq">FAQ</a>
+<a href="/about">À propos</a>
+<a href="/contact">Contact</a>
+</div>
+<div class="footer-col">
+<h4>Contact</h4>
+<a href="mailto:contact@fleat-solutions.com">contact@fleat-solutions.com</a>
+<a href="/rappel">Être rappelé</a>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© <span data-year>2026</span> FLEAT. Tous droits réservés.</span>
+<span class="f-legal">
+<a href="/mentions-legales">Mentions légales</a>
+<a href="/confidentialite">Politique de confidentialité</a>
+<button type="button" class="f-cookies">Cookies</button>
+</span>
+</div>
+</div>
+</footer>
+
+<div id="cookie-banner" role="dialog" aria-label="Gestion des cookies">
+<p class="ck-text">Nous utilisons des cookies de mesure d'audience pour améliorer votre expérience. <a href="/confidentialite">En savoir plus</a>.</p>
+<div class="ck-actions">
+<button type="button" id="cookie-refuse" class="ck-btn ck-refuse">Refuser</button>
+<button type="button" id="cookie-accept" class="ck-btn ck-accept">Accepter</button>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/motion@14.0.0/dist/motion.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
