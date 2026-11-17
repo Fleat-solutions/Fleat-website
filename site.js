@@ -126,10 +126,17 @@
       .then(function (res) { return res.json(); })
       .then(function (json) {
         if (!json.success) throw new Error(json.message);
-        window.fleatTrack('generate_lead', { form_name: form.dataset.formName });
+        var leadSite = form.querySelector('input[name="type-site"]:checked');
+        var leadNeed = form.querySelector('input[name="besoin"]:checked');
+        window.fleatTrack('generate_lead', {
+          form_name: form.dataset.formName,
+          site_type: leadSite ? leadSite.value : undefined,
+          need: leadNeed ? leadNeed.value : undefined
+        });
         onSuccess();
       })
       .catch(function () {
+        window.fleatTrack('form_submit_error', { form_name: form.dataset.formName });
         if (btn) { btn.disabled = false; btn.innerHTML = btnHtml; }
         if (errBox) { errBox.hidden = false; errBox.focus(); }
       });
@@ -336,12 +343,14 @@
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag('js', new Date());
     window.gtag('config', GA_ID, { cookie_expires: 34128000 }); // 13 mois, durée maximale recommandée par la CNIL
+    trackQueue.splice(0).forEach(function (ev) { window.gtag('event', ev[0], ev[1]); });
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
     document.head.appendChild(s);
   }
   function stopAnalytics() {
+    trackQueue.length = 0;
     window['ga-disable-' + GA_ID] = true;
     document.cookie.split(';').forEach(function (c) {
       var name = c.split('=')[0].trim();
@@ -351,9 +360,143 @@
       });
     });
   }
+  /* Événements émis avant le chargement de GA4 : gardés en mémoire, envoyés seulement si le consentement est donné */
+  var trackQueue = [];
   window.fleatTrack = function (name, params) {
-    if (window.gtag && !window['ga-disable-' + GA_ID]) window.gtag('event', name, params);
+    if (window['ga-disable-' + GA_ID]) return;
+    if (window.gtag) window.gtag('event', name, params);
+    else if (isProduction && trackQueue.length < 50) trackQueue.push([name, params]);
   };
+
+  /* Suivi des interactions (GA4, via fleatTrack : rien n'est envoyé sans consentement).
+     Aucune donnée personnelle : seuls des libellés de boutons, de sections et de modules. */
+  (function () {
+    var track = window.fleatTrack;
+    var path = location.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/';
+    var once = {};
+    function first(key) { if (once[key]) return false; once[key] = true; return true; }
+    function txt(el) { return (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80); }
+    function where(el) {
+      var sec = el.closest('[data-screen-label]');
+      if (sec) return sec.getAttribute('data-screen-label');
+      var any = el.closest('section');
+      if (any) { var h = any.querySelector('h2, h1, .display'); if (h) return txt(h).slice(0, 60); if (any.id) return any.id; }
+      if (el.closest('.mobile-menu')) return 'Menu mobile';
+      if (el.closest('.site-header')) return 'En-tête';
+      if (el.closest('.site-footer')) return 'Pied de page';
+      if (el.closest('.cta-band')) return 'Appel à l’action final';
+      return 'Autre';
+    }
+
+    /* Clics : appels à l'action, contact direct, liens secteurs, navigation, liens sortants */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href]');
+      if (!a) return;
+      var href = a.getAttribute('href');
+      var loc = where(a);
+      if (/^\/contact(#|$)/.test(href)) track('cta_click', { cta_type: 'etudier_site', cta_text: txt(a), cta_location: loc });
+      else if (/^\/rappel(#|$)/.test(href)) track('cta_click', { cta_type: 'rappel', cta_text: txt(a), cta_location: loc });
+      else if (/^mailto:/.test(href)) track('contact_click', { method: 'email', cta_location: loc });
+      else if (/^tel:/.test(href)) track('contact_click', { method: 'telephone', cta_location: loc });
+      else if (/^https?:\/\//.test(href) && a.hostname !== location.hostname) track('outbound_click', { link_domain: a.hostname, link_url: href.slice(0, 100), cta_location: loc });
+      if (/^\/surveillance-drone-/.test(href)) track('sector_click', { sector: href.replace('/surveillance-drone-', '').split('#')[0], cta_location: loc });
+      if (a.closest('.nav-main, .mobile-menu, .site-footer') && !/^(mailto|tel):/.test(href)) track('nav_click', { link_text: txt(a), cta_location: loc });
+      if (a.classList.contains('cu-tab')) track('module_interact', { module: 'onglets_cas_usage', detail: txt(a).replace(/^\d+\s*/, '') });
+    });
+
+    /* Menu mobile */
+    var navToggle = document.querySelector('.nav-toggle');
+    if (navToggle) navToggle.addEventListener('click', function () {
+      if (navToggle.getAttribute('aria-expanded') !== 'true') track('menu_open', {});
+    });
+
+    /* FAQ : question ouverte */
+    document.querySelectorAll('.faq-q').forEach(function (q) {
+      q.addEventListener('click', function () {
+        if (q.getAttribute('aria-expanded') === 'true') track('faq_open', { question: txt(q), cta_location: where(q) });
+      });
+    });
+
+    /* Modules interactifs */
+    document.querySelectorAll('.cmp input[type=range]').forEach(function (r) {
+      r.addEventListener('input', function () {
+        if (first('cmp:' + r.getAttribute('aria-label'))) track('module_interact', { module: 'comparateur', detail: r.getAttribute('aria-label'), cta_location: where(r) });
+      });
+    });
+    document.querySelectorAll('.rl-row').forEach(function (row) {
+      row.addEventListener('click', function () { track('module_interact', { module: 'releve_ronde', detail: row.getAttribute('data-show') }); });
+    });
+    document.querySelectorAll('.tour-step').forEach(function (s, k) {
+      s.addEventListener('click', function () { track('module_interact', { module: 'visite_guidee', detail: (k + 1) + '. ' + txt(s.querySelector('b')).replace(/^\d+/, '') }); });
+    });
+    var fcc = document.getElementById('fcc');
+    if (fcc) fcc.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-act]');
+      if (b) track('module_interact', { module: 'demo_interface', detail: b.getAttribute('data-act') });
+    });
+
+    /* Vues : sections, modules, vidéos, profondeur de lecture */
+    if ('IntersectionObserver' in window) {
+      var seen = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          seen.unobserve(en.target);
+          var t = en.target;
+          if (t.hasAttribute('data-track-module')) track('module_view', { module: t.getAttribute('data-track-module') });
+          else track('section_view', { section: t.getAttribute('data-screen-label') || where(t) });
+        });
+      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+      document.querySelectorAll('main section').forEach(function (s) { if (!s.parentElement.closest('section')) seen.observe(s); });
+      var MODULES = [['.cmp', 'comparateur'], ['.feed-scan', 'balayage_thermique'], ['.rl-grid', 'releve_ronde'], ['[data-tour]', 'visite_guidee'],
+        ['.journal', 'journal_alertes'], ['.week', 'semaine_chantier'], ['.route', 'trajet_ronde'], ['#fcc', 'demo_interface'], ['.layers', 'couches_securite']];
+      MODULES.forEach(function (m) {
+        document.querySelectorAll(m[0]).forEach(function (el) { el.setAttribute('data-track-module', m[1]); seen.observe(el); });
+      });
+    }
+    document.querySelectorAll('video').forEach(function (v) {
+      v.addEventListener('play', function () {
+        var name = (v.getAttribute('aria-label') || (v.currentSrc || '').split('/').pop() || 'video').slice(0, 60);
+        if (first('video:' + name)) track('video_start', { video: name });
+      });
+    });
+    var marks = [25, 50, 75, 100], scrollTick = false;
+    window.addEventListener('scroll', function () {
+      if (scrollTick || !marks.length) return;
+      scrollTick = true;
+      requestAnimationFrame(function () {
+        scrollTick = false;
+        var max = document.documentElement.scrollHeight - innerHeight;
+        var pct = max > 0 ? Math.round(scrollY / max * 100) : 100;
+        while (marks.length && pct >= marks[0]) track('scroll_depth', { percent: marks.shift() });
+      });
+    }, { passive: true });
+
+    /* Formulaires : début, étapes, erreurs de saisie */
+    document.querySelectorAll('form[data-form-name]').forEach(function (form) {
+      var name = form.dataset.formName;
+      form.addEventListener('focusin', function () { if (first('start:' + name)) track('form_start', { form_name: name }); });
+      form.querySelectorAll('[data-step]').forEach(function (step) {
+        new MutationObserver(function () {
+          if (step.classList.contains('active')) track('form_step', { form_name: name, step: Number(step.getAttribute('data-step')) });
+        }).observe(step, { attributes: true, attributeFilter: ['class'] });
+      });
+      form.addEventListener('click', function (e) {
+        if (!e.target.closest('.btn-next, button[type="submit"]')) return;
+        setTimeout(function () {
+          var fields = Array.prototype.map.call(form.querySelectorAll('[aria-invalid="true"]'), function (i) { return i.name || i.id; });
+          form.querySelectorAll('[id^="err-"]').forEach(function (el) { if (el.offsetParent !== null && getComputedStyle(el).display !== 'none') fields.push(el.id.replace(/^err-/, '')); });
+          var c = form.querySelector('#consent'); if (c && c.style.outline) fields.push('consent');
+          fields = fields.filter(function (f, k) { return f && fields.indexOf(f) === k; });
+          if (!fields.length) return;
+          var active = form.querySelector('[data-step].active');
+          track('form_validation_error', { form_name: name, step: active ? Number(active.getAttribute('data-step')) : 1, fields: fields.join(',').slice(0, 100) });
+        }, 60);
+      });
+    });
+
+    /* Page introuvable */
+    if (document.title.indexOf('Page introuvable') === 0) track('page_not_found', { missing_path: path, referrer_domain: document.referrer ? new URL(document.referrer).hostname : '(direct)' });
+  })();
 
   /* Bannière cookies RGPD */
   var banner = document.getElementById('cookie-banner');
