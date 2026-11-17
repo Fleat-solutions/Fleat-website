@@ -253,6 +253,7 @@
   });
 
   /* Accordéons mobiles : [data-collapse] résume la section, [data-detail] se déplie au toucher */
+  var openCollapsed = null;
   var collapsibles = document.querySelectorAll('[data-collapse]');
   if (collapsibles.length) {
     var mobile = window.matchMedia('(max-width: 600px)');
@@ -272,13 +273,17 @@
       anchor.insertAdjacentElement('afterend', btn);
       btn.addEventListener('click', function () { setOpen(sec, sec.classList.contains('is-collapsed')); });
     });
+    openCollapsed = function (target) {
+      if (!mobile.matches) return;
+      var sec = target.closest('[data-collapse]');
+      if (sec && sec.classList.contains('is-collapsed')) setOpen(sec, true);
+    };
     var openTarget = function (rescroll) {
       var target = location.hash && document.getElementById(location.hash.slice(1));
       if (!target || !mobile.matches) return;
-      var sec = target.closest('[data-collapse]');
-      if (sec) setOpen(sec, true);
+      openCollapsed(target);
       /* au chargement, les sections repliées au-dessus ont décalé l'ancre : on la rejoint */
-      if (rescroll) requestAnimationFrame(function () { target.scrollIntoView(); });
+      if (rescroll) requestAnimationFrame(function () { scrollToAnchor(target, false); });
     };
     var applyMode = function (rescroll) {
       collapsibles.forEach(function (sec) {
@@ -611,6 +616,76 @@
       }, { threshold: 0.4 }).observe(tour);
     }
   });
+
+  /* Ancres internes : la section arrive juste sous l'en-tête et la sous-navigation collante.
+     Le haut de section (padding) est sauté, sinon le titre tombe loin sous l'en-tête. */
+  function anchorBars(target, pad) {
+    var h = 0, tTop = target.getBoundingClientRect().top + pad;
+    document.querySelectorAll('.site-header, .cu-subnav, .sector-subnav').forEach(function (el) {
+      var cs = getComputedStyle(el);
+      if (cs.position !== 'sticky' && cs.position !== 'fixed') return;
+      /* une barre collante placée sous la cible ne la recouvre pas */
+      if (cs.position === 'sticky' && el.getBoundingClientRect().top > tTop) return;
+      h = Math.max(h, (parseFloat(cs.top) || 0) + el.offsetHeight);
+    });
+    return h;
+  }
+  function anchorY(target) {
+    var pad = parseFloat(getComputedStyle(target).paddingTop) || 0;
+    var gap = window.innerWidth <= 600 ? 20 : 32;
+    var y = target.getBoundingClientRect().top + window.scrollY + pad - gap - anchorBars(target, pad);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    return Math.round(Math.max(0, Math.min(y, max)));
+  }
+  var anchorRun = 0;
+  function scrollToAnchor(target, smooth) {
+    if (openCollapsed) openCollapsed(target);
+    var run = ++anchorRun, calmAnchor = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var go = function (anim) {
+      var y = anchorY(target);
+      if (anim && !calmAnchor) { window.scrollTo({ top: y, behavior: 'smooth' }); return; }
+      var root = document.documentElement, prev = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, y);
+      root.style.scrollBehavior = prev;
+    };
+    go(smooth);
+    /* fin du défilement : on recale si la mise en page a bougé entre temps (images, accordéons) */
+    var settle = function () {
+      window.removeEventListener('scrollend', settle);
+      if (run !== anchorRun) return;
+      if (Math.abs(window.scrollY - anchorY(target)) > 3) go(false);
+    };
+    if ('onscrollend' in window && smooth && !calmAnchor) window.addEventListener('scrollend', settle);
+    else setTimeout(settle, smooth && !calmAnchor ? 900 : 60);
+  }
+  /* un geste de l'utilisateur annule le recalage */
+  ['wheel', 'touchstart', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { anchorRun++; }, { passive: true });
+  });
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a[href*="#"]');
+    if (!a || a.classList.contains('skip-link') || a.target === '_blank') return;
+    if (a.hostname !== location.hostname || a.pathname.replace(/\.html$/, '') !== location.pathname.replace(/\.html$/, '')) return;
+    var id = decodeURIComponent(a.hash.slice(1));
+    var target = id && document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+    scrollToAnchor(target, true);
+  });
+  /* arrivée sur la page avec une ancre (lien depuis une autre page) */
+  if (location.hash.length > 1) {
+    var landing = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (landing && !landing.closest('.fcc-wrap')) {
+      requestAnimationFrame(function () { scrollToAnchor(landing, false); });
+      window.addEventListener('load', function () {
+        var y = anchorY(landing);
+        if (Math.abs(window.scrollY - y) > 3 && window.scrollY < y + window.innerHeight) scrollToAnchor(landing, false);
+      });
+    }
+  }
 
   /* Comparateurs avant, après (cas d'usage, pages secteurs) */
   document.querySelectorAll('.cmp').forEach(function (cmp) {
